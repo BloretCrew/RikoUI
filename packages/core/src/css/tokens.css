@@ -1,0 +1,221 @@
+/* ==========================================================================
+   Riko UI · 设计变量（tokens）
+   浅色为默认；<html data-theme="dark"> 切换为深色。
+   组件只使用语义变量（--riko-color-*），调色板变量（--riko-palette-*）仅供此处映射。
+   ========================================================================== */
+@layer riko.tokens {
+  :root,
+  [data-theme] {
+    /* ---- 调色板（浅色） ---- */
+    --riko-palette-cream: #FBF5EA;
+    --riko-palette-paper: #FFFDF8;
+    --riko-palette-beige: #F3E7D3;
+    --riko-palette-tan: #DDBF9C;
+    --riko-palette-brown: #A0704C;
+    --riko-palette-cocoa: #5E3D2B;
+    --riko-palette-ink: #4A3326;
+    --riko-palette-ice: #E2F1F6;
+    --riko-palette-ice-deep: #A8D2E2;
+    --riko-palette-star: #F2994A;
+    --riko-palette-star-soft: #FCE3CB;
+
+    /* ---- 语义颜色 ---- */
+    --riko-color-bg: var(--riko-palette-cream);
+    --riko-color-surface: var(--riko-palette-paper);
+    --riko-color-surface-sunken: var(--riko-palette-cream);
+    --riko-color-surface-muted: var(--riko-palette-beige);
+    --riko-color-surface-glass: rgba(251, 245, 234, .82);
+    --riko-color-fg: var(--riko-palette-ink);
+    --riko-color-fg-strong: var(--riko-palette-cocoa);
+    --riko-color-fg-muted: #765E4F;
+    --riko-color-fg-subtle: #A08A79;
+    --riko-color-border: rgba(160, 112, 76, .28);
+    --riko-color-border-strong: rgba(160, 112, 76, .5);
+    --riko-color-stitch: rgba(160, 112, 76, .35);
+    --riko-color-primary: var(--riko-palette-cocoa);
+    --riko-color-primary-fg: var(--riko-palette-paper);
+    --riko-color-primary-shade: var(--riko-palette-brown);
+    --riko-color-brown: var(--riko-palette-brown);
+    --riko-color-tan: var(--riko-palette-tan);
+    --riko-color-accent: var(--riko-palette-star);
+    --riko-color-accent-soft: var(--riko-palette-star-soft);
+    --riko-color-accent-fg: #3B2416;
+    --riko-color-accent-ink: #A2521A;
+    --riko-color-accent-shade: #C9733A;
+    --riko-color-ice: var(--riko-palette-ice-deep);
+    --riko-color-ice-soft: var(--riko-palette-ice);
+    --riko-color-ice-strong: #6FB3CC;
+    --riko-color-ice-ink: #2F6F87;
+    --riko-color-success: #6FAF7B;
+    --riko-color-success-soft: #E4F2E3;
+    --riko-color-success-ink: #2F6B3D;
+    --riko-color-warning: #E8B04B;
+    --riko-color-warning-soft: #FBF0D6;
+    --riko-color-warning-ink: #835512;
+    --riko-color-danger: #DE6B61;
+    --riko-color-danger-soft: #FBE4E0;
+    --riko-color-danger-ink: #A3352C;
+    --riko-color-info: var(--riko-color-ice-strong);
+    --riko-color-info-soft: var(--riko-color-ice-soft);
+    --riko-color-info-ink: var(--riko-color-ice-ink);
+    --riko-color-overlay: rgba(60, 40, 28, .38);
+    --riko-color-focus: #C0652A;
+    --riko-color-mark: var(--riko-palette-star-soft);
+    --riko-color-selection: rgba(242, 153, 74, .28);
+
+    /* ---- 背景纹理 ---- */
+    --riko-plaid-a: rgba(160, 112, 76, .055);
+    --riko-plaid-b: rgba(160, 112, 76, .035);
+    --riko-glow-a: var(--riko-palette-ice);
+    --riko-glow-b: var(--riko-palette-star-soft);
+
+    /* ---- 阴影 ---- */
+    --riko-shadow-sm: 0 4px 14px -8px rgba(94, 61, 43, .3);
+    --riko-shadow-md: 0 10px 30px -12px rgba(94, 61, 43, .28);
+    --riko-shadow-lg: 0 22px 50px -18px rgba(94, 61, 43, .38);
+    --riko-shadow-inset: inset 0 2px 4px rgba(94, 61, 43, .08);
+
+    color-scheme: light;
+  }
+
+  [data-theme="dark"] {
+    --riko-palette-cream: #211915;
+    --riko-palette-paper: #2B211C;
+    --riko-palette-beige: #372A23;
+    --riko-palette-tan: #6E5240;
+    --riko-palette-brown: #D7AF8A;
+    --riko-palette-cocoa: #F1DFCB;
+    --riko-palette-ink: #EFE2D3;
+    --riko-palette-ice: #22343B;
+    --riko-palette-ice-deep: #3D6676;
+    --riko-palette-star: #F6A85E;
+    --riko-palette-star-soft: #4A3424;
+
+    --riko-color-surface-glass: rgba(33, 25, 21, .82);
+    --riko-color-fg-muted: #BCA694;
+    --riko-color-fg-subtle: #937C6B;
+    --riko-color-border: rgba(215, 175, 138, .2);
+    --riko-color-border-strong: rgba(215, 175, 138, .38);
+    --riko-color-stitch: rgba(215, 175, 138, .28);
+    --riko-color-primary-fg: #2B211C;
+    --riko-color-accent-fg: #2A1A10;
+    --riko-color-accent-ink: #F8B877;
+    --riko-color-accent-shade: #B86F33;
+    --riko-color-ice-strong: #5B9BB3;
+    --riko-color-ice-ink: #9ED0E2;
+    --riko-color-success: #7DBB88;
+    --riko-color-success-soft: #243829;
+    --riko-color-success-ink: #A6D9AE;
+    --riko-color-warning: #E5B65E;
+    --riko-color-warning-soft: #3F321A;
+    --riko-color-warning-ink: #F2D08E;
+    --riko-color-danger: #EC8B81;
+    --riko-color-danger-soft: #45231F;
+    --riko-color-danger-ink: #F6ADA5;
+    --riko-color-overlay: rgba(10, 6, 4, .6);
+    --riko-color-selection: rgba(246, 168, 94, .32);
+    --riko-color-focus: var(--riko-palette-star);
+
+    --riko-plaid-a: rgba(215, 175, 138, .04);
+    --riko-plaid-b: rgba(215, 175, 138, .025);
+
+    --riko-shadow-sm: 0 4px 14px -8px rgba(0, 0, 0, .6);
+    --riko-shadow-md: 0 10px 30px -12px rgba(0, 0, 0, .55);
+    --riko-shadow-lg: 0 22px 50px -18px rgba(0, 0, 0, .7);
+    --riko-shadow-inset: inset 0 2px 4px rgba(0, 0, 0, .25);
+
+    color-scheme: dark;
+  }
+
+  /* ---- 与主题无关的变量 ---- */
+  :root {
+    /* 间距 */
+    --riko-space-0: 0;
+    --riko-space-1: 4px;
+    --riko-space-2: 8px;
+    --riko-space-3: 12px;
+    --riko-space-4: 16px;
+    --riko-space-5: 20px;
+    --riko-space-6: 24px;
+    --riko-space-7: 32px;
+    --riko-space-8: 40px;
+    --riko-space-9: 48px;
+    --riko-space-10: 64px;
+
+    /* 圆角：wobble 系列为手绘不规则圆角 */
+    --riko-radius-xs: 6px;
+    --riko-radius-sm: 10px;
+    --riko-radius-md: 14px;
+    --riko-radius-lg: 20px;
+    --riko-radius-xl: 28px;
+    --riko-radius-pill: 999px;
+    --riko-radius-wobble-sm: 16px 13px 17px 12px / 12px 17px 13px 16px;
+    --riko-radius-wobble: 26px 22px 28px 20px / 20px 28px 22px 26px;
+    --riko-radius-wobble-lg: 34px 28px 36px 26px / 26px 36px 28px 34px;
+
+    /* 按钮"实体阴影"（底部 3px 色块） */
+    --riko-shadow-press: 0 3px 0 var(--riko-color-border);
+    --riko-shadow-press-hover: 0 5px 0 var(--riko-color-accent-soft);
+    --riko-shadow-press-primary: 0 4px 0 var(--riko-color-primary-shade);
+    --riko-shadow-press-accent: 0 4px 0 var(--riko-color-accent-shade);
+
+    /* 字体 */
+    --riko-font-title: "ZCOOL XiaoWei", "Noto Serif SC", "Songti SC", "STSong", serif;
+    --riko-font-body: "Noto Sans SC", system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --riko-font-read: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+    --riko-font-hand: "Caveat", "Segoe Print", "Bradley Hand", "ZCOOL XiaoWei", "Noto Serif SC", "Songti SC", cursive;
+    --riko-font-mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+    --riko-text-xs: .75rem;
+    --riko-text-sm: .875rem;
+    --riko-text-md: 1rem;
+    --riko-text-lg: 1.125rem;
+    --riko-text-xl: 1.25rem;
+    --riko-text-2xl: 1.5rem;
+    --riko-text-3xl: 2rem;
+    --riko-text-4xl: 2.6rem;
+    --riko-text-5xl: clamp(2.6rem, 6vw, 4.2rem);
+
+    --riko-weight-normal: 400;
+    --riko-weight-medium: 500;
+    --riko-weight-bold: 700;
+
+    --riko-leading-tight: 1.3;
+    --riko-leading-normal: 1.75;
+    --riko-leading-relaxed: 1.9;
+    --riko-leading-read: 2.05;
+
+    /* 动效 */
+    --riko-ease-out: cubic-bezier(.22, .8, .3, 1);
+    --riko-ease-bounce: cubic-bezier(.34, 1.56, .64, 1);
+    --riko-ease-linear: linear;
+    --riko-duration-fast: .18s;
+    --riko-duration-base: .28s;
+    --riko-duration-slow: .5s;
+
+    /* 层级 */
+    --riko-z-base: 1;
+    --riko-z-sticky: 50;
+    --riko-z-dropdown: 60;
+    --riko-z-overlay: 80;
+    --riko-z-modal: 90;
+    --riko-z-toast: 100;
+    --riko-z-tooltip: 110;
+
+    /* 控件 */
+    --riko-control-h-sm: 34px;
+    --riko-control-h-md: 44px;
+    --riko-control-h-lg: 52px;
+    --riko-border-width: 2px;
+
+    /* 焦点环 */
+    --riko-focus-ring: 3px dashed var(--riko-color-focus);
+    --riko-focus-offset: 3px;
+
+    /* 布局 */
+    --riko-container: 1120px;
+    --riko-container-wide: 1320px;
+    --riko-container-narrow: 760px;
+    --riko-header-h: 72px;
+  }
+}

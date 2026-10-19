@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>布局与装饰 · Riko UI</title>
+<meta name="theme-color" content="#FBF5EA">
+<script src="../packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="../packages/core/dist/riko-ui.css">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+
+<header class="docs-header">
+  <div class="docs-header__inner">
+    <button type="button" class="riko-btn riko-btn--icon riko-btn--ghost docs-menu-btn" aria-label="打开导航"><i data-lucide="menu"></i></button>
+    <a class="docs-brand" href="index.html">
+      <span class="docs-brand__mark"><span class="riko-star" aria-hidden="true"></span></span>
+      <span><span class="docs-brand__name">Riko UI</span><span class="docs-brand__sub">little star ui kit</span></span>
+    </a>
+    <span class="docs-header__spacer"></span>
+    <div class="riko-theme-picker riko-theme-picker--compact" data-riko="theme-picker"></div>
+  </div>
+</header>
+
+<div class="docs-layout">
+  <aside class="docs-sidebar" aria-label="文档导航"></aside>
+  <main class="docs-main">
+    <div class="docs-hero">
+      <h1>布局与装饰</h1>
+      <p>布局原语帮你排好版面，装饰元素带来温馨手绘的童话感。</p>
+    </div>
+
+    <section class="docs-section" id="page">
+      <h2>页面外壳 <small>Page</small></h2>
+      <p>整页纵向布局，内容少时页脚也贴在底部。配合 &lt;body class="riko-plaid"&gt; 与 riko-glow 获得招牌背景。</p>
+      <div class="docs-demo">
+        <div class="riko-page" style="min-height: 260px; border: 2px dashed var(--riko-color-border); border-radius: var(--riko-radius-lg);">
+          <div class="docs-box">页头 header</div>
+          <main class="riko-page__main riko-center">主体 main（占满剩余高度）</main>
+          <div class="docs-box">页脚 footer</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="hero">
+      <h2>主视觉 / 页头 <small>Hero</small></h2>
+      <p>页面最上方的主视觉：手写引导语、大标题、手写副标、波浪线、导语、操作按钮，可在右侧放插画或拍立得。</p>
+      <h3>首页主视觉（左文右图）</h3>
+      <div class="docs-demo" data-riko-ignore="multiple-h1">
+        <section class="riko-hero riko-hero--split">
+          <div class="riko-hero__text">
+            <p class="riko-hero__eyebrow"><span class="riko-star" aria-hidden="true"></span>a small star in ordinary days</p>
+            <h1 class="riko-hero__title">《络的世界》</h1>
+            <p class="riko-hero__sub">Welcome to RikoLand</p>
+            <span class="riko-squiggle" aria-hidden="true"></span>
+            <p class="riko-hero__desc">欢迎来到络可的童话小镇呀！这里藏着好多五彩斑斓的画稿和奇思妙想。</p>
+            <div class="riko-hero__actions">
+              <a class="riko-btn riko-btn--primary riko-btn--lg" href="#read"><i data-lucide="book-open"></i>开始阅读</a>
+              <span class="riko-tag riko-tag--accent">预计 2027 年继续更新！</span>
+            </div>
+          </div>
+          <div class="riko-hero__art">
+            <figure class="riko-polaroid">
+              <span class="riko-tape" aria-hidden="true"></span>
+              <img src="https://riko.land/assets/logo.jpg" alt="《络的世界》封面插画">
+              <figcaption class="riko-polaroid__caption">Riko's World ✦</figcaption>
+            </figure>
+          </div>
+        </section>
+      </div>
+      <h3>内页页头</h3>
+      <div class="docs-demo" data-riko-ignore="multiple-h1">
+        <header class="riko-hero riko-hero--center riko-hero--sm">
+          <div class="riko-hero__text">
+            <h1 class="riko-hero__title"><span class="riko-star" aria-hidden="true"></span> 角色设定集</h1>
+            <p class="riko-hero__sub">who's who in riko's world</p>
+            <p class="riko-hero__desc">《络的世界》中已登场的人物与地点整理。建议先读完已更新章节再翻阅哦。</p>
+          </div>
+        </header>
+      </div>
+    </section>
+
+    <section class="docs-section" id="container">
+      <h2>容器 <small>Container</small></h2>
+      <p>水平居中并限制最大宽度：默认 1120px，--wide 1320px，--narrow 760px（阅读宽度）。</p>
+      <div class="docs-demo">
+        <div class="riko-stack riko-stack--sm">
+          <div class="riko-container riko-container--narrow"><div class="docs-box">riko-container--narrow</div></div>
+          <div class="riko-container"><div class="docs-box">riko-container</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="section">
+      <h2>版块 <small>Section</small></h2>
+      <p>版块上下留白（48px），--sm 24px，--lg 64px+。</p>
+      <div class="docs-demo">
+        <section class="riko-section riko-section--sm"><div class="docs-box">riko-section--sm</div></section>
+      </div>
+    </section>
+
+    <section class="docs-section" id="stack">
+      <h2>纵向堆叠 <small>Stack</small></h2>
+      <p>子元素纵向排列并保持统一间距，默认 16px。</p>
+      <div class="docs-demo">
+        <div class="riko-grid riko-grid--cols-3">
+          <div class="riko-stack riko-stack--sm"><div class="docs-box">sm</div><div class="docs-box">sm</div><div class="docs-box">sm</div></div>
+          <div class="riko-stack"><div class="docs-box">默认</div><div class="docs-box">默认</div><div class="docs-box">默认</div></div>
+          <div class="riko-stack riko-stack--lg"><div class="docs-box">lg</div><div class="docs-box">lg</div><div class="docs-box">lg</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="cluster">
+      <h2>横向排列 <small>Cluster</small></h2>
+      <p>横向排列、自动换行、垂直居中，适合按钮组、标签组与工具栏。</p>
+      <h3>默认</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster"><div class="docs-box">星星酥</div><div class="docs-box">河豚</div><div class="docs-box">贝雷帽</div><div class="docs-box">画笔</div></div>
+      </div>
+      <h3>两端对齐</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--between"><div class="docs-box">左边</div><div class="docs-box">右边</div></div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="grid">
+      <h2>栅格 <small>Grid</small></h2>
+      <p>默认按最小列宽 240px 自动排列；--cols-2/3/4/6 固定列数，小屏自动减少。</p>
+      <h3>自适应</h3>
+      <div class="docs-demo">
+        <div class="riko-grid"><div class="docs-box">1</div><div class="docs-box">2</div><div class="docs-box">3</div><div class="docs-box">4</div><div class="docs-box">5</div></div>
+      </div>
+      <h3>固定三列</h3>
+      <div class="docs-demo">
+        <div class="riko-grid riko-grid--cols-3"><div class="docs-box">1</div><div class="docs-box">2</div><div class="docs-box">3</div></div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="split">
+      <h2>侧栏布局 <small>Split</small></h2>
+      <p>固定宽度侧栏（吸顶）+ 主区，窄屏自动变为上下排列。阅读器、文档、后台都用它。</p>
+      <div class="docs-demo">
+        <div class="riko-split" style="--riko-split-aside: 180px;">
+          <aside class="riko-split__aside"><div class="docs-box">侧栏 aside</div></aside>
+          <main class="riko-split__main"><div class="docs-box">主区 main</div></main>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="section-head">
+      <h2>版块标题 <small>Section Head</small></h2>
+      <p>大标题 + 手写副标 + 说明 + 右侧操作区。</p>
+      <h3>完整</h3>
+      <div class="docs-demo">
+        <div class="riko-section-head">
+          <div class="riko-section-head__text">
+            <h2 class="riko-section-head__title"><span class="riko-star" aria-hidden="true"></span>小说目录</h2>
+            <span class="riko-section-head__sub">table of contents</span>
+            <p class="riko-section-head__desc">点击目录中的章节可以直接跳转到对应的剧情内容。</p>
+          </div>
+          <div class="riko-section-head__actions">
+            <button type="button" class="riko-btn riko-btn--sm">全部展开</button>
+          </div>
+        </div>
+      </div>
+      <h3>居中</h3>
+      <div class="docs-demo">
+        <div class="riko-section-head riko-section-head--center">
+          <div class="riko-section-head__text">
+            <h2 class="riko-section-head__title"><span class="riko-star" aria-hidden="true"></span>其他内容<span class="riko-star" aria-hidden="true"></span></h2>
+            <span class="riko-section-head__sub">more little things</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="divider">
+      <h2>分割线 <small>Divider</small></h2>
+      <p>虚线、波浪线、星星与文字分割，以及行内的竖向分隔。</p>
+      <div class="docs-demo">
+        <div class="riko-divider" role="separator"></div>
+        <div class="riko-divider" role="separator">或者</div>
+        <div class="riko-divider riko-divider--squiggle" role="separator"></div>
+        <div class="riko-divider riko-divider--stars" role="separator"><span class="riko-star" aria-hidden="true"></span></div>
+        <p class="riko-cluster">小说阅读器<span class="riko-divider riko-divider--vertical" role="separator"></span>Wiki<span class="riko-divider riko-divider--vertical" role="separator"></span>联系我们</p>
+      </div>
+    </section>
+
+    <section class="docs-section" id="layout-helpers">
+      <h2>居中与占位 <small>Center &amp; Spacer</small></h2>
+      <p>riko-center 让内容水平垂直居中；riko-spacer 在 flex 行中推开两侧。</p>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--nowrap">
+          <strong>《络的世界》</strong>
+          <span class="riko-spacer"></span>
+          <button type="button" class="riko-btn riko-btn--sm">设置</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="plaid">
+      <h2>格纹背景 <small>Plaid</small></h2>
+      <p>络可裙摆般的淡格纹，通常加在 &lt;body&gt; 上（本文档页就是）。</p>
+      <div class="docs-demo">
+        <div class="riko-plaid" style="height: 140px; border-radius: var(--riko-radius-lg); background-color: var(--riko-color-bg);"></div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="glow">
+      <h2>柔光背景 <small>Glow</small></h2>
+      <p>页面角落的冰蓝与暖橙柔光，fixed 定位、不影响布局。每个页面放一个即可（本页右上角与左下角就是）。</p>
+      <div class="docs-demo" data-docs-nocode>
+        <p class="riko-text riko-text--muted">&lt;div class="riko-glow" aria-hidden="true"&gt;&lt;/div&gt;</p>
+      </div>
+    </section>
+
+    <section class="docs-section" id="sky">
+      <h2>漂浮星星 <small>Sky</small></h2>
+      <p>背景中缓慢闪烁的小星星（fixed），最多 7 颗预设位置。</p>
+      <div class="docs-demo" data-docs-nocode>
+        <p class="riko-text riko-text--muted">&lt;div class="riko-sky" aria-hidden="true"&gt;&lt;span class="riko-star"&gt;&lt;/span&gt; ×5&lt;/div&gt;</p>
+      </div>
+    </section>
+
+    <section class="docs-section" id="stitched">
+      <h2>缝线内框 <small>Stitched</small></h2>
+      <p>在有背景的块内画一圈虚线缝线，像布艺的走线。</p>
+      <div class="docs-demo">
+        <div class="riko-stitched" style="padding: var(--riko-space-7); background: var(--riko-color-surface); border-radius: var(--riko-radius-wobble); box-shadow: var(--riko-shadow-md);">
+          <h3 class="riko-h4">络可的手作卡片</h3>
+          <p class="riko-text riko-text--muted">虚线缝线让卡片像一块小布贴。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="tape">
+      <h2>胶带 <small>Tape</small></h2>
+      <p>贴在卡片或照片顶部的半透明条纹胶带，父元素需 position: relative。</p>
+      <div class="docs-demo">
+        <div class="riko-grid riko-grid--cols-3">
+          <div style="position: relative; padding: var(--riko-space-7) var(--riko-space-5) var(--riko-space-5); background: var(--riko-color-surface); border-radius: var(--riko-radius-md); box-shadow: var(--riko-shadow-md);">
+            <span class="riko-tape" aria-hidden="true"></span>顶部胶带
+          </div>
+          <div style="position: relative; padding: var(--riko-space-7) var(--riko-space-5) var(--riko-space-5); background: var(--riko-color-surface); border-radius: var(--riko-radius-md); box-shadow: var(--riko-shadow-md);">
+            <span class="riko-tape riko-tape--left riko-tape--accent" aria-hidden="true"></span>左上角橙色
+          </div>
+          <div style="position: relative; padding: var(--riko-space-7) var(--riko-space-5) var(--riko-space-5); background: var(--riko-color-surface); border-radius: var(--riko-radius-md); box-shadow: var(--riko-shadow-md);">
+            <span class="riko-tape riko-tape--right" aria-hidden="true"></span>右上角
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="squiggle">
+      <h2>波浪下划线 <small>Squiggle</small></h2>
+      <p>大标题下方的手绘波浪线。</p>
+      <div class="docs-demo">
+        <h2 class="riko-h1">《络的世界》</h2>
+        <span class="riko-squiggle" aria-hidden="true"></span>
+        <span class="riko-squiggle riko-squiggle--ice riko-squiggle--center riko-u-mt-4" aria-hidden="true"></span>
+      </div>
+    </section>
+
+    <section class="docs-section" id="scallop">
+      <h2>扇贝花边 <small>Scallop</small></h2>
+      <p>色块顶边（或底边）的圆弧花边，页脚就是这样做的。</p>
+      <div class="docs-demo">
+        <div class="riko-scallop" style="margin-top: var(--riko-space-5); padding: var(--riko-space-7); text-align: center; background: var(--riko-color-surface-muted); color: var(--riko-color-fg-muted);">© 2021–2026 Bloret · 《络的世界》项目组</div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="notebook">
+      <h2>笔记本纸 <small>Notebook</small></h2>
+      <p>左侧装订孔与橙色页边线，--lined 增加横线格。</p>
+      <div class="docs-demo">
+        <div class="riko-grid riko-grid--cols-2">
+          <div class="riko-notebook">
+            <h3 class="riko-h4">络可的笔记本</h3>
+            <p class="riko-text riko-text--muted">这里记下了世界的设定。</p>
+          </div>
+          <div class="riko-notebook riko-notebook--lined">
+            <p>今天学会了画海豚。</p>
+            <p>明天想去村庄看看。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="sticker">
+      <h2>贴纸 <small>Sticker</small></h2>
+      <p>倾斜的手写体小贴纸。</p>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--lg">
+          <span class="riko-sticker">Hello!</span>
+          <span class="riko-sticker riko-sticker--accent"><span class="riko-star" aria-hidden="true"></span>NEW!</span>
+          <span class="riko-sticker riko-sticker--ice">little star</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="note">
+      <h2>便利贴 <small>Note</small></h2>
+      <p>温馨提示、作者的话。</p>
+      <div class="docs-demo">
+        <div class="riko-grid riko-grid--cols-3">
+          <aside class="riko-note">记得先读完第一幕再翻笔记本哦～</aside>
+          <aside class="riko-note riko-note--ice">今天的星星酥是特价！</aside>
+          <aside class="riko-note riko-note--accent">预计 2027 年继续更新！</aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="tilt">
+      <h2>轻微倾斜 <small>Tilt</small></h2>
+      <p>微微倾斜，悬停时回正。</p>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--lg">
+          <div class="riko-tilt docs-box" style="padding: var(--riko-space-6);">向右</div>
+          <div class="riko-tilt riko-tilt--left docs-box" style="padding: var(--riko-space-6);">向左</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="assets/manifest.js"></script>
+<script src="assets/docs.js"></script>
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="../packages/core/dist/riko-ui.js"></script>
+</body>
+</html>

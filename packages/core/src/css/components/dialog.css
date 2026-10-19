@@ -1,0 +1,117 @@
+/* ==========================================================================
+   dialog · 对话框（原生 <dialog>）
+   <button type="button" class="riko-btn" data-riko-open="hello-dialog">打开</button>
+   <dialog class="riko-dialog" id="hello-dialog" data-riko="dialog" aria-labelledby="hello-dialog-title">
+     <header class="riko-dialog__header">
+       <h2 class="riko-dialog__title" id="hello-dialog-title"><span class="riko-star" aria-hidden="true"></span>你好呀</h2>
+       <button type="button" class="riko-dialog__close" data-riko-close aria-label="关闭"></button>
+     </header>
+     <div class="riko-dialog__body">…</div>
+     <footer class="riko-dialog__footer">…</footer>
+   </dialog>
+   尺寸 --sm --lg --full（窄屏全屏）· 色调 --info --success --warning --danger（影响 __icon）· 打开/关闭为线性动画
+   ========================================================================== */
+@layer riko.components {
+  .riko-dialog {
+    --riko-dialog-w: 480px;
+    width: min(var(--riko-dialog-w), calc(100% - 2 * var(--riko-space-4)));
+    max-width: none;
+    max-height: min(86dvh, 860px);
+    padding: 0;
+    color: var(--riko-color-fg);
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble);
+    box-shadow: var(--riko-shadow-lg);
+    overflow: hidden;
+  }
+  .riko-dialog[open] { display: flex; flex-direction: column; animation: riko-dialog-in .26s linear; }
+  .riko-dialog::backdrop,
+  .riko-drawer::backdrop {
+    background: var(--riko-color-overlay);
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+  }
+  .riko-dialog[open]::backdrop, .riko-drawer[open]::backdrop { animation: riko-fade-in .26s linear; }
+  .riko-dialog[data-state="closing"] { animation: riko-dialog-out .2s linear forwards; }
+  .riko-dialog[data-state="closing"]::backdrop, .riko-drawer[data-state="closing"]::backdrop { animation: riko-fade-out .2s linear forwards; }
+
+  .riko-dialog--sm { --riko-dialog-w: 380px; }
+  .riko-dialog--lg { --riko-dialog-w: 760px; }
+  .riko-dialog--full { --riko-dialog-w: 1100px; max-height: calc(100dvh - 2 * var(--riko-space-6)); }
+  @media (max-width: 768px) {
+    .riko-dialog--full {
+      width: 100%; height: 100dvh; max-height: none; margin: 0; inset: 0;
+      border: 0; border-radius: 0;
+    }
+  }
+
+  /* ---- 部件（dialog 与 drawer 共用外观） ---- */
+  .riko-dialog__header, .riko-drawer__header {
+    flex: none; display: flex; align-items: center; justify-content: space-between; gap: var(--riko-space-3);
+    padding: var(--riko-space-6) var(--riko-space-6) var(--riko-space-2);
+  }
+  .riko-dialog__title, .riko-drawer__title {
+    display: flex; align-items: center; gap: var(--riko-space-2);
+    margin: 0; min-width: 0;
+    font-family: var(--riko-font-title); font-weight: var(--riko-weight-normal);
+    font-size: var(--riko-text-2xl); line-height: var(--riko-leading-tight);
+    color: var(--riko-color-fg-strong);
+  }
+  .riko-dialog__title > .riko-star, .riko-drawer__title > .riko-star { --riko-star-size: .8em; }
+  .riko-dialog__close, .riko-drawer__close {
+    flex: none; display: grid; place-items: center;
+    width: 40px; height: 40px; padding: 0;
+    color: var(--riko-color-fg-strong);
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: 50%;
+    box-shadow: var(--riko-shadow-press);
+    transition: transform var(--riko-duration-fast) ease, border-color var(--riko-duration-fast) ease, box-shadow var(--riko-duration-fast) ease;
+  }
+  .riko-dialog__close::before, .riko-drawer__close::before {
+    content: ""; width: 18px; height: 18px; background: currentColor;
+    -webkit-mask: var(--riko-icon-x) center / contain no-repeat;
+    mask: var(--riko-icon-x) center / contain no-repeat;
+    transition: transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-dialog__close:hover, .riko-drawer__close:hover { transform: translateY(-2px); border-color: var(--riko-color-accent); box-shadow: var(--riko-shadow-press-hover); }
+  .riko-dialog__close:hover::before, .riko-drawer__close:hover::before { transform: rotate(90deg); }
+  .riko-dialog__body, .riko-drawer__body {
+    flex: 1 1 auto; min-height: 0; overflow: auto; overscroll-behavior: contain;
+    padding: var(--riko-space-2) var(--riko-space-6) var(--riko-space-5);
+    color: var(--riko-color-fg);
+  }
+  .riko-dialog__body > * + *, .riko-drawer__body > * + * { margin-top: var(--riko-space-3); }
+  .riko-dialog__desc { margin: 0; color: var(--riko-color-fg-muted); font-size: var(--riko-text-sm); }
+  .riko-dialog__footer, .riko-drawer__footer {
+    flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--riko-space-3);
+    margin: 0 var(--riko-space-6);
+    padding: var(--riko-space-4) 0 var(--riko-space-6);
+    border-top: var(--riko-border-width) dashed var(--riko-color-border);
+  }
+  /* 没有 footer 时 body 底部留白更足 */
+  .riko-dialog__body:last-child, .riko-drawer__body:last-child { padding-bottom: var(--riko-space-6); }
+
+  /* 确认框（Riko.confirm / Riko.alert 生成）：图标 + 文案居中 */
+  .riko-dialog--confirm .riko-dialog__header { justify-content: flex-start; }
+  .riko-dialog__icon {
+    flex: none; display: grid; place-items: center;
+    width: 40px; height: 40px; border-radius: 14px 11px 15px 10px;
+    color: var(--riko-color-accent-ink); background: var(--riko-color-accent-soft);
+    transform: rotate(-6deg);
+  }
+  .riko-dialog__icon::before {
+    content: ""; width: 22px; height: 22px; background: currentColor;
+    -webkit-mask: var(--riko-dialog-icon, var(--riko-icon-star)) center / contain no-repeat;
+    mask: var(--riko-dialog-icon, var(--riko-icon-star)) center / contain no-repeat;
+  }
+  .riko-dialog--danger .riko-dialog__icon { --riko-dialog-icon: var(--riko-icon-warning); color: var(--riko-color-danger-ink); background: var(--riko-color-danger-soft); }
+  .riko-dialog--info .riko-dialog__icon { --riko-dialog-icon: var(--riko-icon-info); color: var(--riko-color-ice-ink); background: var(--riko-color-ice-soft); }
+  .riko-dialog--success .riko-dialog__icon { --riko-dialog-icon: var(--riko-icon-success); color: var(--riko-color-success-ink); background: var(--riko-color-success-soft); }
+  .riko-dialog--warning .riko-dialog__icon { --riko-dialog-icon: var(--riko-icon-warning); color: var(--riko-color-warning-ink); background: var(--riko-color-warning-soft); }
+
+  @keyframes riko-dialog-in { from { opacity: 0; transform: translateY(18px) scale(.96); } }
+  @keyframes riko-dialog-out { to { opacity: 0; transform: translateY(14px) scale(.96); } }
+  @keyframes riko-fade-in { from { opacity: 0; } }
+  @keyframes riko-fade-out { to { opacity: 0; } }
+}

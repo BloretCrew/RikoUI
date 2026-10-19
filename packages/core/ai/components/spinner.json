@@ -1,0 +1,81 @@
+{
+  "name": "spinner",
+  "title": "加载中",
+  "titleEn": "Spinner",
+  "category": "feedback",
+  "summary": "旋转的品牌星星（或三颗跳动的小星星）加可读文字。",
+  "when": "等待时间不确定的短加载。已知布局的内容加载用 skeleton；有进度数值用 progress。",
+  "root": "riko-spinner",
+  "element": "span",
+  "parts": [
+    {
+      "class": "riko-spinner__label",
+      "desc": "可读文字（必需；只显示图标时加 riko-u-sr-only）",
+      "required": true
+    },
+    {
+      "class": "riko-spinner__dot",
+      "desc": "--dots 样式中的小星星，写三个"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-spinner--sm",
+      "desc": "小号",
+      "group": "size"
+    },
+    {
+      "class": "riko-spinner--lg",
+      "desc": "大号（图标在上，文字在下）",
+      "group": "size"
+    },
+    {
+      "class": "riko-spinner--dots",
+      "desc": "三颗跳动小星星",
+      "group": "variant"
+    },
+    {
+      "class": "riko-spinner--ice",
+      "desc": "冰蓝色",
+      "group": "tone"
+    }
+  ],
+  "states": [],
+  "js": null,
+  "a11y": [
+    "根元素加 role=\"status\"；必须包含 riko-spinner__label 文字。"
+  ],
+  "rules": [
+    "按钮内的加载状态用按钮自己的 aria-busy=\"true\"，不要在按钮里塞 spinner。"
+  ],
+  "avoid": [
+    "不要只放一个没有文字的 spinner。"
+  ],
+  "examples": [
+    {
+      "title": "样式与尺寸",
+      "html": "<div class=\"riko-cluster riko-cluster--lg\">\n  <span class=\"riko-spinner riko-spinner--sm\" role=\"status\"><span class=\"riko-spinner__label\">加载中…</span></span>\n  <span class=\"riko-spinner\" role=\"status\"><span class=\"riko-spinner__label\">正在翻页…</span></span>\n  <span class=\"riko-spinner riko-spinner--ice\" role=\"status\"><span class=\"riko-spinner__label riko-u-sr-only\">加载中</span></span>\n  <span class=\"riko-spinner riko-spinner--dots\" role=\"status\">\n    <span class=\"riko-spinner__dot\"></span><span class=\"riko-spinner__dot\"></span><span class=\"riko-spinner__dot\"></span>\n    <span class=\"riko-spinner__label\">络可正在画画…</span>\n  </span>\n</div>"
+    },
+    {
+      "title": "大号",
+      "html": "<span class=\"riko-spinner riko-spinner--lg\" role=\"status\"><span class=\"riko-spinner__label\">正在打开笔记本…</span></span>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-spinner",
+      "has": ".riko-spinner__label",
+      "message": "riko-spinner 需要 riko-spinner__label 文字（可加 riko-u-sr-only 隐藏）"
+    },
+    {
+      "selector": ".riko-spinner",
+      "attr": "role",
+      "message": "riko-spinner 需要 role=\"status\""
+    }
+  ],
+  "related": [
+    "skeleton",
+    "progress",
+    "button"
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "name": "drawer",
+  "title": "抽屉",
+  "titleEn": "Drawer",
+  "category": "feedback",
+  "summary": "从屏幕左/右/底部滑出的模态面板（原生 <dialog>），用法与对话框一致。",
+  "when": "移动端目录/导航、筛选条件、详情预览、分享面板。居中的确认/表单用 dialog。",
+  "root": "riko-drawer",
+  "element": "dialog",
+  "parts": [
+    {
+      "class": "riko-drawer__header",
+      "desc": "头部"
+    },
+    {
+      "class": "riko-drawer__title",
+      "desc": "标题（h2），id 供 aria-labelledby 引用",
+      "required": true
+    },
+    {
+      "class": "riko-drawer__close",
+      "desc": "关闭按钮：空 <button>，带 data-riko-close 与 aria-label"
+    },
+    {
+      "class": "riko-drawer__body",
+      "desc": "内容区（滚动）"
+    },
+    {
+      "class": "riko-drawer__footer",
+      "desc": "底部按钮区"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-drawer--left",
+      "desc": "从左侧滑出（默认右侧）",
+      "group": "layout"
+    },
+    {
+      "class": "riko-drawer--bottom",
+      "desc": "从底部滑出（带把手；桌面端居中限宽）",
+      "group": "layout"
+    },
+    {
+      "class": "riko-drawer--sm",
+      "desc": "窄（300px）",
+      "group": "size"
+    },
+    {
+      "class": "riko-drawer--lg",
+      "desc": "宽（560px）",
+      "group": "size"
+    }
+  ],
+  "states": [
+    {
+      "attr": "open",
+      "desc": "打开中（由 JS 维护）"
+    },
+    {
+      "attr": "data-state=\"closing\"",
+      "desc": "关闭动画中"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"drawer\"",
+    "options": [
+      {
+        "attr": "data-riko-open",
+        "values": "抽屉 id",
+        "desc": "写在触发按钮上"
+      },
+      {
+        "attr": "data-riko-close",
+        "values": "可选返回值",
+        "desc": "写在抽屉内的按钮上"
+      },
+      {
+        "attr": "data-riko-backdrop",
+        "values": "static",
+        "desc": "点击遮罩与 Esc 不关闭"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "el.riko.open() / el.riko.close() / el.riko.toggle()",
+        "desc": "实例方法；也可用 Riko.dialog.open(id)"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:drawer:open",
+        "detail": "{ id }",
+        "desc": "打开前派发，可取消"
+      },
+      {
+        "name": "riko:drawer:opened",
+        "detail": "{ id }",
+        "desc": "已打开"
+      },
+      {
+        "name": "riko:drawer:close",
+        "detail": "{ id, returnValue }",
+        "desc": "已关闭"
+      }
+    ]
+  },
+  "a11y": [
+    "必须是 <dialog>，并用 aria-labelledby 指向标题。",
+    "焦点锁定与返回由 JS 处理；关闭按钮需要 aria-label。"
+  ],
+  "rules": [
+    "部件类名用 riko-drawer__*（不要混用 riko-dialog__*）。",
+    "打开/关闭与 dialog 相同：data-riko-open / data-riko-close。"
+  ],
+  "avoid": [
+    "不要用 <div> 自己做抽屉和遮罩。",
+    "不要把 --left 与 --bottom 同时使用。"
+  ],
+  "examples": [
+    {
+      "title": "三个方向",
+      "html": "<div class=\"riko-cluster\">\n  <button type=\"button\" class=\"riko-btn\" data-riko-open=\"toc-drawer\"><i data-lucide=\"list\"></i>目录（左）</button>\n  <button type=\"button\" class=\"riko-btn\" data-riko-open=\"detail-drawer\"><i data-lucide=\"panel-right\"></i>详情（右）</button>\n  <button type=\"button\" class=\"riko-btn\" data-riko-open=\"share-drawer\"><i data-lucide=\"share-2\"></i>分享（底部）</button>\n</div>\n<dialog class=\"riko-drawer riko-drawer--left\" id=\"toc-drawer\" data-riko=\"drawer\" aria-labelledby=\"toc-drawer-title\">\n  <header class=\"riko-drawer__header\">\n    <h2 class=\"riko-drawer__title\" id=\"toc-drawer-title\"><span class=\"riko-star\" aria-hidden=\"true\"></span>小说目录</h2>\n    <button type=\"button\" class=\"riko-drawer__close\" data-riko-close aria-label=\"关闭目录\"></button>\n  </header>\n  <div class=\"riko-drawer__body\">\n    <p>序章 · 第一幕：沙滩上的画家</p>\n    <p>序章 · 第二幕：归途的微光</p>\n    <p>序章 · 第三幕：暗林深处</p>\n  </div>\n</dialog>\n<dialog class=\"riko-drawer\" id=\"detail-drawer\" data-riko=\"drawer\" aria-labelledby=\"detail-drawer-title\">\n  <header class=\"riko-drawer__header\">\n    <h2 class=\"riko-drawer__title\" id=\"detail-drawer-title\">角色卡 · 络可</h2>\n    <button type=\"button\" class=\"riko-drawer__close\" data-riko-close aria-label=\"关闭\"></button>\n  </header>\n  <div class=\"riko-drawer__body\">\n    <p>喜欢画画的小女孩，戴着缀有橙色星星的贝雷帽。最喜欢的点心是星星酥。</p>\n  </div>\n  <footer class=\"riko-drawer__footer\">\n    <button type=\"button\" class=\"riko-btn riko-btn--ghost\" data-riko-close>关闭</button>\n    <button type=\"button\" class=\"riko-btn riko-btn--primary\">查看笔记本</button>\n  </footer>\n</dialog>\n<dialog class=\"riko-drawer riko-drawer--bottom\" id=\"share-drawer\" data-riko=\"drawer\" aria-labelledby=\"share-drawer-title\">\n  <header class=\"riko-drawer__header\">\n    <h2 class=\"riko-drawer__title\" id=\"share-drawer-title\">分享这一节</h2>\n    <button type=\"button\" class=\"riko-drawer__close\" data-riko-close aria-label=\"关闭\"></button>\n  </header>\n  <div class=\"riko-drawer__body\">\n    <div class=\"riko-cluster\">\n      <button type=\"button\" class=\"riko-btn riko-btn--soft\" data-riko-toast=\"链接已复制\" data-riko-toast-tone=\"success\"><i data-lucide=\"link\"></i>复制链接</button>\n      <button type=\"button\" class=\"riko-btn riko-btn--soft\"><i data-lucide=\"image\"></i>生成卡片</button>\n    </div>\n  </div>\n</dialog>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-drawer",
+      "tag": "dialog",
+      "message": "riko-drawer 必须是 <dialog> 元素"
+    },
+    {
+      "selector": "dialog.riko-drawer",
+      "attr": "aria-labelledby|aria-label",
+      "message": "riko-drawer 需要 aria-labelledby 指向标题 id"
+    },
+    {
+      "selector": "dialog.riko-drawer",
+      "attr": "id",
+      "message": "riko-drawer 需要 id，供 data-riko-open 引用"
+    },
+    {
+      "selector": ".riko-drawer__close",
+      "attr": "aria-label|aria-labelledby",
+      "message": "riko-drawer__close 需要 aria-label"
+    }
+  ],
+  "related": [
+    "dialog"
+  ]
+}

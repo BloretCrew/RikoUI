@@ -1,0 +1,64 @@
+/* ==========================================================================
+   steps · 步骤条
+   <ol class="riko-steps">
+     <li class="riko-steps__item" data-status="done"><span class="riko-steps__marker">1</span><span class="riko-steps__body"><span class="riko-steps__title">选择角色</span><span class="riko-steps__desc">络可</span></span></li>
+     <li class="riko-steps__item" aria-current="step">…</li>
+     <li class="riko-steps__item">…</li>
+   </ol>
+   ========================================================================== */
+@layer riko.components {
+  .riko-steps { --riko-steps-marker: 36px; display: flex; margin: 0; padding: 0; list-style: none; counter-reset: riko-step; }
+  .riko-steps__item {
+    position: relative; flex: 1; min-width: 0;
+    display: flex; flex-direction: column; align-items: center; gap: var(--riko-space-2); text-align: center;
+  }
+  /* 连接线 */
+  .riko-steps__item + .riko-steps__item::before {
+    content: ""; position: absolute; top: calc(var(--riko-steps-marker) / 2 - 1px);
+    right: calc(50% + var(--riko-steps-marker) / 2 + 6px); left: calc(-50% + var(--riko-steps-marker) / 2 + 6px);
+    border-top: var(--riko-border-width) dashed var(--riko-color-border-strong);
+  }
+  .riko-steps__item[data-status="done"] + .riko-steps__item::before { border-top-style: solid; border-top-color: var(--riko-color-accent); }
+  .riko-steps__marker {
+    position: relative; z-index: 1; flex: none; display: grid; place-items: center;
+    width: var(--riko-steps-marker); height: var(--riko-steps-marker);
+    border: var(--riko-border-width) solid var(--riko-color-border-strong); border-radius: 13px 11px 14px 10px;
+    background: var(--riko-color-surface); color: var(--riko-color-fg-muted);
+    font-family: var(--riko-font-hand); font-weight: 700; font-size: 1.15rem; line-height: 1;
+    transition: background var(--riko-duration-base) ease, border-color var(--riko-duration-base) ease, transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-steps__item[aria-current="step"] .riko-steps__marker {
+    background: var(--riko-color-accent); border-color: var(--riko-color-accent); color: var(--riko-color-accent-fg);
+    transform: rotate(-6deg) scale(1.08); box-shadow: 0 0 0 5px var(--riko-color-accent-soft);
+  }
+  .riko-steps__item[data-status="done"] .riko-steps__marker { background: var(--riko-color-ice-soft); border-color: var(--riko-color-ice); color: transparent; }
+  .riko-steps__item[data-status="done"] .riko-steps__marker::after,
+  .riko-steps__item[data-status="error"] .riko-steps__marker::after {
+    content: ""; position: absolute; inset: 0; margin: auto; width: 18px; height: 18px; background: var(--riko-color-ice-ink);
+    -webkit-mask: var(--riko-icon-check) center / contain no-repeat; mask: var(--riko-icon-check) center / contain no-repeat;
+  }
+  .riko-steps__item[data-status="error"] .riko-steps__marker { background: var(--riko-color-danger-soft); border-color: var(--riko-color-danger); color: transparent; }
+  .riko-steps__item[data-status="error"] .riko-steps__marker::after { background: var(--riko-color-danger-ink); -webkit-mask-image: var(--riko-icon-x); mask-image: var(--riko-icon-x); }
+  .riko-steps__body { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding-inline: var(--riko-space-2); }
+  .riko-steps__title { font-weight: var(--riko-weight-bold); font-size: var(--riko-text-sm); color: var(--riko-color-fg-muted); }
+  .riko-steps__item:is([aria-current="step"], [data-status="done"]) .riko-steps__title { color: var(--riko-color-fg-strong); }
+  .riko-steps__item[data-status="error"] .riko-steps__title { color: var(--riko-color-danger-ink); }
+  .riko-steps__desc { font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted); }
+
+  .riko-steps--vertical { flex-direction: column; gap: var(--riko-space-5); }
+  .riko-steps--vertical .riko-steps__item { flex-direction: row; align-items: flex-start; text-align: left; gap: var(--riko-space-4); }
+  .riko-steps--vertical .riko-steps__item + .riko-steps__item::before { display: none; }
+  .riko-steps--vertical .riko-steps__item:not(:last-child)::after {
+    content: ""; position: absolute; left: calc(var(--riko-steps-marker) / 2 - 1px);
+    top: calc(var(--riko-steps-marker) + 4px); bottom: calc(-1 * var(--riko-space-5) + 4px);
+    border-left: var(--riko-border-width) dashed var(--riko-color-border-strong);
+  }
+  .riko-steps--vertical .riko-steps__item[data-status="done"]:not(:last-child)::after { border-left-style: solid; border-left-color: var(--riko-color-accent); }
+  .riko-steps--vertical .riko-steps__body { padding: 6px 0 0; }
+  .riko-steps--sm { --riko-steps-marker: 28px; }
+  .riko-steps--sm .riko-steps__marker { font-size: 1rem; }
+  @media (max-width: 520px) {
+    .riko-steps:not(.riko-steps--vertical) .riko-steps__desc { display: none; }
+    .riko-steps:not(.riko-steps--vertical) .riko-steps__title { font-size: var(--riko-text-xs); }
+  }
+}

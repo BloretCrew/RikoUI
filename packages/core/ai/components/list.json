@@ -1,0 +1,111 @@
+{
+  "name": "list",
+  "title": "列表",
+  "titleEn": "List",
+  "category": "data",
+  "summary": "一行一条信息的列表，支持图标、手写编号、说明、元信息与操作，可做成可点击列表或小卡片网格。",
+  "when": "消息、设置项、章节目录、文件列表等纵向条目。需要多列对比时用 table。",
+  "root": "riko-list",
+  "element": "ul / ol",
+  "parts": [
+    {
+      "class": "riko-list__item",
+      "desc": "一行（li，或可点击时 li 内的 a / button）"
+    },
+    {
+      "class": "riko-list__icon",
+      "desc": "左侧圆角图标"
+    },
+    {
+      "class": "riko-list__num",
+      "desc": "左侧手写编号（如章节号 001）"
+    },
+    {
+      "class": "riko-list__content",
+      "desc": "中间文字列"
+    },
+    {
+      "class": "riko-list__title",
+      "desc": "标题"
+    },
+    {
+      "class": "riko-list__desc",
+      "desc": "说明"
+    },
+    {
+      "class": "riko-list__meta",
+      "desc": "右侧元信息（时间、数量）"
+    },
+    {
+      "class": "riko-list__action",
+      "desc": "右侧操作按钮区"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-list--divided",
+      "desc": "行间虚线分隔",
+      "group": "layout"
+    },
+    {
+      "class": "riko-list--cards",
+      "desc": "小卡片网格（如章节目录）",
+      "group": "layout"
+    },
+    {
+      "class": "riko-list--interactive",
+      "desc": "每行可点击：悬停高亮右移、右侧箭头",
+      "group": "behavior"
+    }
+  ],
+  "states": [
+    {
+      "attr": "aria-current=\"page\"",
+      "on": "riko-list__item",
+      "desc": "可点击列表中的当前项（橙色高亮）"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "可点击列表中，可点击的是 li 内部的 <a class=\"riko-list__item\"> 或 <button class=\"riko-list__item\">，不要给 li 绑点击。",
+    "当前项用 aria-current=\"page\"（导航）或 aria-current=\"true\"。"
+  ],
+  "rules": [
+    "非交互列表：<li class=\"riko-list__item\">；交互列表：<li><a class=\"riko-list__item\" href>…</a></li>。",
+    "章节目录：riko-list--cards riko-list--interactive + __num。"
+  ],
+  "avoid": [
+    "--interactive 的行里不要再放其他按钮（会形成嵌套交互）；需要行内操作时不要加 --interactive，改用 __action。"
+  ],
+  "examples": [
+    {
+      "title": "基础列表",
+      "html": "<ul class=\"riko-list riko-list--divided\" style=\"max-width: 520px\">\n  <li class=\"riko-list__item\">\n    <span class=\"riko-list__icon\"><i data-lucide=\"mail\"></i></span>\n    <div class=\"riko-list__content\">\n      <span class=\"riko-list__title\">来自 111 的信</span>\n      <span class=\"riko-list__desc\">今晚的会议改到红石灯下开。</span>\n    </div>\n    <span class=\"riko-list__meta\">3 分钟前</span>\n  </li>\n  <li class=\"riko-list__item\">\n    <span class=\"riko-list__icon\"><i data-lucide=\"fish\"></i></span>\n    <div class=\"riko-list__content\">\n      <span class=\"riko-list__title\">钓鱼场</span>\n      <span class=\"riko-list__desc\">第一竿：皮革靴子，第二竿：俩荷叶……</span>\n    </div>\n    <div class=\"riko-list__action\">\n      <button type=\"button\" class=\"riko-btn riko-btn--sm riko-btn--ghost\">再试一竿</button>\n    </div>\n  </li>\n  <li class=\"riko-list__item\">\n    <span class=\"riko-list__icon\"><i data-lucide=\"cookie\"></i></span>\n    <div class=\"riko-list__content\">\n      <span class=\"riko-list__title\">甜品店</span>\n      <span class=\"riko-list__desc\">星星酥今日特价。</span>\n    </div>\n    <span class=\"riko-list__meta\">昨天</span>\n  </li>\n</ul>"
+    },
+    {
+      "title": "可点击列表",
+      "html": "<ul class=\"riko-list riko-list--interactive\" style=\"max-width: 420px\">\n  <li><a class=\"riko-list__item\" href=\"#list\"><span class=\"riko-list__num\">001</span><span class=\"riko-list__content\"><span class=\"riko-list__title\">沙滩上的画家</span></span></a></li>\n  <li><a class=\"riko-list__item\" href=\"#list\" aria-current=\"page\"><span class=\"riko-list__num\">002</span><span class=\"riko-list__content\"><span class=\"riko-list__title\">世界的边缘</span></span></a></li>\n  <li><a class=\"riko-list__item\" href=\"#list\"><span class=\"riko-list__num\">003</span><span class=\"riko-list__content\"><span class=\"riko-list__title\">熟悉的身影</span></span></a></li>\n</ul>"
+    },
+    {
+      "title": "小卡片网格",
+      "html": "<ul class=\"riko-list riko-list--cards riko-list--interactive\">\n  <li><a class=\"riko-list__item\" href=\"#list\"><span class=\"riko-list__num\">074</span><span class=\"riko-list__content\"><span class=\"riko-list__title\">夜出医庐，独巡残村</span></span></a></li>\n  <li><a class=\"riko-list__item\" href=\"#list\"><span class=\"riko-list__num\">075</span><span class=\"riko-list__content\"><span class=\"riko-list__title\">月下清辉，暗见净化</span></span></a></li>\n  <li><a class=\"riko-list__item\" href=\"#list\"><span class=\"riko-list__num\">076</span><span class=\"riko-list__content\"><span class=\"riko-list__title\">风过围垣，落星回响 <span class=\"riko-badge riko-badge--sm\">最新</span></span></span></a></li>\n</ul>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-list__item",
+      "parent": ".riko-list",
+      "message": "riko-list__item 必须位于 riko-list 之内"
+    },
+    {
+      "selector": ".riko-list__title,.riko-list__desc,.riko-list__num,.riko-list__icon,.riko-list__meta",
+      "parent": ".riko-list__item",
+      "message": "list 的部件必须位于 riko-list__item 之内"
+    }
+  ],
+  "related": [
+    "card",
+    "table",
+    "sidenav"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "backtop",
+  "title": "返回顶部",
+  "titleEn": "Back to Top",
+  "category": "navigation",
+  "summary": "页面右下角的橙色星形按钮，滚动一段后出现，点击平滑回到顶部。",
+  "when": "较长的页面（文章、目录、列表）。",
+  "root": "riko-backtop",
+  "element": "button",
+  "parts": [],
+  "modifiers": [
+    {
+      "class": "riko-backtop--static",
+      "desc": "不固定定位（用于演示或嵌入工具栏）",
+      "group": "layout"
+    }
+  ],
+  "states": [
+    {
+      "attr": "data-state=\"hidden|shown\"",
+      "desc": "是否显示（JS 维护）"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"backtop\"",
+    "options": [
+      {
+        "attr": "data-riko-offset",
+        "values": "像素",
+        "default": "400",
+        "desc": "滚动超过多少后出现"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "el.riko.update()",
+        "desc": "重新判断是否显示"
+      }
+    ],
+    "events": []
+  },
+  "a11y": [
+    "必须有 aria-label=\"返回顶部\"（JS 会补默认值）。",
+    "键盘触发时焦点会移到页面第一个可聚焦元素。"
+  ],
+  "rules": [
+    "按钮内容留空，星星和箭头由 CSS 绘制。",
+    "位置可用 --riko-backtop-right / --riko-backtop-bottom 调整。"
+  ],
+  "avoid": [
+    "不要在按钮里再放图标。"
+  ],
+  "examples": [
+    {
+      "title": "星形按钮",
+      "html": "<button type=\"button\" class=\"riko-backtop riko-backtop--static\" aria-label=\"返回顶部\"></button>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-backtop",
+      "attr": "aria-label|aria-labelledby",
+      "message": "返回顶部按钮需要 aria-label"
+    }
+  ],
+  "related": [
+    "reading-progress",
+    "toc"
+  ]
+}

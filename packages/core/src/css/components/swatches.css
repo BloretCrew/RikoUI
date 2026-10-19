@@ -1,0 +1,50 @@
+/* ==========================================================================
+   swatches · 色块选择（基于 radio）
+   <div class="riko-swatches" role="radiogroup" aria-label="主题色">
+     <label class="riko-swatches__item" style="--riko-swatch: var(--riko-color-accent)">
+       <input class="riko-swatches__input" type="radio" name="color" value="star" checked>
+       <span class="riko-swatches__color"></span>
+       <span class="riko-swatches__label">星星橙</span>
+     </label>
+   </div>
+   ========================================================================== */
+@layer riko.components {
+  .riko-swatches {
+    --riko-swatch-size: 36px;
+    display: flex; flex-wrap: wrap; gap: var(--riko-space-3);
+    margin: 0; padding: 0; border: 0;
+  }
+  .riko-swatches__item {
+    position: relative; display: inline-flex; flex-direction: column; align-items: center; gap: var(--riko-space-1);
+    cursor: pointer;
+  }
+  .riko-swatches__input { position: absolute; width: 1px; height: 1px; opacity: 0; margin: 0; pointer-events: none; }
+  .riko-swatches__color {
+    position: relative; display: grid; place-items: center;
+    width: var(--riko-swatch-size); height: var(--riko-swatch-size);
+    border-radius: 50%;
+    background: var(--riko-swatch, var(--riko-color-accent));
+    box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--riko-color-fg) 12%, transparent), 0 3px 0 var(--riko-color-border);
+    transition: transform var(--riko-duration-base) var(--riko-ease-bounce), box-shadow var(--riko-duration-fast) ease;
+  }
+  .riko-swatches__item:hover .riko-swatches__color { transform: translateY(-2px) scale(1.06); }
+  .riko-swatches__color::after {
+    content: ""; width: 55%; height: 55%;
+    background: var(--riko-color-surface);
+    -webkit-mask: var(--riko-icon-check) center / contain no-repeat; mask: var(--riko-icon-check) center / contain no-repeat;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .35));
+    transform: scale(0); transition: transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-swatches__input:checked + .riko-swatches__color {
+    box-shadow: 0 0 0 3px var(--riko-color-surface), 0 0 0 5px var(--riko-color-accent);
+  }
+  .riko-swatches__input:checked + .riko-swatches__color::after { transform: scale(1); }
+  .riko-swatches__input:focus-visible + .riko-swatches__color { outline: var(--riko-focus-ring); outline-offset: 7px; }
+  .riko-swatches__input:disabled + .riko-swatches__color { opacity: .4; cursor: not-allowed; }
+  .riko-swatches__label { font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted); }
+  .riko-swatches__input:checked ~ .riko-swatches__label { color: var(--riko-color-fg-strong); font-weight: var(--riko-weight-bold); }
+
+  .riko-swatches--sm { --riko-swatch-size: 26px; gap: var(--riko-space-2); }
+  .riko-swatches--lg { --riko-swatch-size: 48px; }
+  .riko-swatches--square .riko-swatches__color { border-radius: 12px 9px 13px 8px; }
+}

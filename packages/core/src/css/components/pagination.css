@@ -1,0 +1,41 @@
+/* ==========================================================================
+   pagination · 分页
+   <nav class="riko-pagination" aria-label="分页">
+     <a class="riko-pagination__item riko-pagination__prev" href="?p=1" aria-label="上一页"></a>
+     <a class="riko-pagination__item" href="?p=1">1</a>
+     <span class="riko-pagination__item" aria-current="page">2</span>
+     <span class="riko-pagination__ellipsis">…</span>
+     <a class="riko-pagination__item riko-pagination__next" href="?p=3" aria-label="下一页"></a>
+   </nav>
+   ========================================================================== */
+@layer riko.components {
+  .riko-pagination {
+    --riko-pagination-size: 40px;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+    font-size: var(--riko-text-sm); font-variant-numeric: tabular-nums;
+  }
+  .riko-pagination--sm { --riko-pagination-size: 32px; font-size: var(--riko-text-xs); gap: 4px; }
+  .riko-pagination--center { justify-content: center; }
+  .riko-pagination__item {
+    display: inline-grid; place-items: center; min-width: var(--riko-pagination-size); height: var(--riko-pagination-size);
+    padding: 0 8px; border: var(--riko-border-width) solid var(--riko-color-border); border-radius: 12px 10px 13px 9px;
+    background: var(--riko-color-surface); color: var(--riko-color-fg); font-weight: var(--riko-weight-medium);
+    text-decoration: none; box-shadow: var(--riko-shadow-press);
+    transition: transform var(--riko-duration-fast) ease, border-color var(--riko-duration-fast) ease, background var(--riko-duration-fast) ease, box-shadow var(--riko-duration-fast) ease;
+  }
+  :is(a, button).riko-pagination__item:hover { transform: translateY(-2px); border-color: var(--riko-color-accent); box-shadow: var(--riko-shadow-press-hover); }
+  .riko-pagination__item[aria-current="page"] {
+    background: var(--riko-color-accent); border-color: var(--riko-color-accent); color: var(--riko-color-accent-fg);
+    font-weight: var(--riko-weight-bold); box-shadow: var(--riko-shadow-press-accent); transform: rotate(-4deg);
+  }
+  .riko-pagination__item[aria-disabled="true"], .riko-pagination__item:disabled { opacity: .45; pointer-events: none; box-shadow: none; }
+  .riko-pagination__prev::before, .riko-pagination__next::before {
+    content: ""; width: 16px; height: 16px; background: currentColor;
+    -webkit-mask: var(--riko-icon-chevron-left) center / contain no-repeat; mask: var(--riko-icon-chevron-left) center / contain no-repeat;
+  }
+  .riko-pagination__next::before { -webkit-mask-image: var(--riko-icon-chevron-right); mask-image: var(--riko-icon-chevron-right); }
+  .riko-pagination__prev:not(:empty), .riko-pagination__next:not(:empty) { display: inline-flex; gap: 4px; padding: 0 12px; }
+  .riko-pagination__next:not(:empty) { flex-direction: row-reverse; }
+  .riko-pagination__ellipsis { min-width: 24px; text-align: center; color: var(--riko-color-fg-subtle); letter-spacing: 2px; }
+  .riko-pagination__info { margin-left: var(--riko-space-2); color: var(--riko-color-fg-muted); }
+}

@@ -1,0 +1,40 @@
+/* ==========================================================================
+   fieldset · 字段组
+   <fieldset class="riko-fieldset">
+     <legend class="riko-fieldset__legend">喜欢的点心</legend>
+     <p class="riko-fieldset__desc">可以多选哦</p>
+     …checkbox / radio / field…
+   </fieldset>
+   --card 卡片外框（缝线）· --inline 选项横排
+   ========================================================================== */
+@layer riko.components {
+  .riko-fieldset {
+    min-width: 0; margin: 0; padding: 0; border: 0;
+    display: flex; flex-direction: column; gap: var(--riko-space-3);
+  }
+  .riko-fieldset__legend {
+    display: flex; align-items: center; gap: 6px; padding: 0; margin-bottom: var(--riko-space-1);
+    font-family: var(--riko-font-title); font-size: var(--riko-text-xl); color: var(--riko-color-fg-strong); line-height: 1.3;
+  }
+  .riko-fieldset__legend + * { margin-top: 0; }
+  .riko-fieldset__desc { margin: -6px 0 0; font-size: var(--riko-text-sm); color: var(--riko-color-fg-muted); }
+  .riko-fieldset--inline { flex-flow: row wrap; align-items: center; column-gap: var(--riko-space-5); }
+  .riko-fieldset--inline > .riko-fieldset__legend, .riko-fieldset--inline > .riko-fieldset__desc { flex-basis: 100%; }
+  .riko-fieldset--card {
+    position: relative; isolation: isolate;
+    padding: var(--riko-space-6);
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble);
+    box-shadow: var(--riko-shadow-md);
+  }
+  .riko-fieldset--card::before {
+    content: ""; position: absolute; inset: 8px; z-index: -1; pointer-events: none;
+    border: var(--riko-border-width) dashed var(--riko-color-stitch);
+    border-radius: 20px 16px 22px 14px / 14px 22px 16px 20px;
+  }
+  /* legend 在 fieldset 卡片中会骑在边框上，这里让它回到卡片内部 */
+  .riko-fieldset--card > .riko-fieldset__legend { float: left; width: 100%; }
+  .riko-fieldset--card > .riko-fieldset__legend + * { clear: both; }
+  .riko-fieldset[disabled] { opacity: .6; }
+}

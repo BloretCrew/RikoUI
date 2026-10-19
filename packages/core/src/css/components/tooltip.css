@@ -1,0 +1,30 @@
+/* ==========================================================================
+   tooltip · 文字提示
+   <button class="riko-btn" data-riko="tooltip" data-riko-tooltip="把这一章加入书签">收藏</button>
+   浮层 .riko-tooltip 由 JS 生成（位于顶层），无需手写。
+   ========================================================================== */
+@layer riko.components {
+  .riko-tooltip {
+    position: fixed; inset: auto; margin: 0;
+    max-width: min(280px, calc(100vw - 16px)); width: max-content; height: auto;
+    padding: 6px 12px;
+    font: var(--riko-weight-medium) var(--riko-text-xs) / 1.55 var(--riko-font-body);
+    color: var(--riko-color-primary-fg); background: var(--riko-color-primary);
+    border: 0; border-radius: 12px 10px 13px 9px / 9px 13px 10px 12px;
+    box-shadow: var(--riko-shadow-md);
+    z-index: var(--riko-z-tooltip);
+    overflow: visible; pointer-events: none;
+    opacity: 0; transform: translateY(4px) scale(.96);
+    transition: opacity var(--riko-duration-fast) ease, transform var(--riko-duration-fast) var(--riko-ease-bounce),
+      display var(--riko-duration-fast) allow-discrete, overlay var(--riko-duration-fast) allow-discrete;
+  }
+  .riko-tooltip[data-state="open"] { opacity: 1; transform: none; }
+  @starting-style { .riko-tooltip[data-state="open"] { opacity: 0; transform: translateY(4px) scale(.96); } }
+  .riko-tooltip::after {
+    content: ""; position: absolute; width: 10px; height: 10px; background: inherit; border-radius: 2px;
+    left: calc(var(--riko-arrow-x, 50%) - 5px); bottom: -4px; transform: rotate(45deg);
+  }
+  .riko-tooltip[data-placement="bottom"]::after { bottom: auto; top: -4px; }
+  .riko-tooltip[data-placement="left"]::after { left: auto; right: -4px; bottom: auto; top: calc(var(--riko-arrow-y, 50%) - 5px); }
+  .riko-tooltip[data-placement="right"]::after { left: -4px; bottom: auto; top: calc(var(--riko-arrow-y, 50%) - 5px); }
+}

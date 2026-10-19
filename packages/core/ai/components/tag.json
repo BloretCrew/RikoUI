@@ -1,0 +1,150 @@
+{
+  "name": "tag",
+  "title": "标签",
+  "titleEn": "Tag",
+  "category": "data",
+  "summary": "胶囊形的小标签，表示分类、状态或关键词，可带图标、星星，或做成可移除。",
+  "when": "标注属性、状态、分类、关键词。数量提示用 badge；可编辑的标签输入用 tags-input。",
+  "root": "riko-tag",
+  "element": "span（可点击时 a）",
+  "parts": [
+    {
+      "class": "riko-tag__remove",
+      "desc": "移除按钮（配合 data-riko-dismiss）"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-tag--accent",
+      "desc": "暖橙（强调、最新）",
+      "group": "tone"
+    },
+    {
+      "class": "riko-tag--ice",
+      "desc": "冰蓝",
+      "group": "tone"
+    },
+    {
+      "class": "riko-tag--soft",
+      "desc": "米色无边",
+      "group": "tone"
+    },
+    {
+      "class": "riko-tag--success",
+      "desc": "成功",
+      "group": "tone"
+    },
+    {
+      "class": "riko-tag--warning",
+      "desc": "警告",
+      "group": "tone"
+    },
+    {
+      "class": "riko-tag--danger",
+      "desc": "危险",
+      "group": "tone"
+    },
+    {
+      "class": "riko-tag--primary",
+      "desc": "可可色实心",
+      "group": "tone"
+    },
+    {
+      "class": "riko-tag--outline",
+      "desc": "透明底",
+      "group": "decor"
+    },
+    {
+      "class": "riko-tag--dashed",
+      "desc": "虚线边框",
+      "group": "decor"
+    },
+    {
+      "class": "riko-tag--sm",
+      "desc": "小号",
+      "group": "size"
+    },
+    {
+      "class": "riko-tag--lg",
+      "desc": "大号",
+      "group": "size"
+    },
+    {
+      "class": "riko-tag--square",
+      "desc": "小圆角",
+      "group": "shape"
+    }
+  ],
+  "js": {
+    "attr": "data-riko-dismiss",
+    "options": [
+      {
+        "attr": "data-riko-dismiss",
+        "values": "空 | 选择器 | #id",
+        "default": "空",
+        "desc": "点击后移除：空=最近的组件根（如 .riko-tag / .riko-alert / .riko-card）；选择器=最近匹配的祖先；#id=指定元素。对任何组件通用。"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "Riko.dismiss(element)",
+        "desc": "以淡出动画移除元素（同样会派发 riko:dismiss）"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:dismiss",
+        "detail": "{ target, trigger }",
+        "desc": "移除前在目标上派发，可 preventDefault() 取消"
+      },
+      {
+        "name": "riko:dismissed",
+        "detail": "{ target }",
+        "desc": "移除后在原父元素上派发"
+      }
+    ]
+  },
+  "a11y": [
+    "__remove 是仅图标按钮，必须有 aria-label（如「移除 星星酥」）。",
+    "移除后焦点会自动移到相邻标签的移除按钮。"
+  ],
+  "rules": [
+    "图标或星星直接放在标签里：<span class=\"riko-tag\"><span class=\"riko-star\" aria-hidden=\"true\"></span>文字</span>。",
+    "可点击的标签用 <a class=\"riko-tag\" href>。",
+    "data-riko-dismiss 是全站通用的「关闭/移除」机制，alert、card 等也可使用。"
+  ],
+  "avoid": [
+    "不要用 tag 显示纯数字计数，改用 badge。",
+    "不要把 riko-tag__remove 放在 riko-tag 外面。"
+  ],
+  "examples": [
+    {
+      "title": "色调",
+      "html": "<div class=\"riko-cluster riko-cluster--sm\">\n  <span class=\"riko-tag\">默认</span>\n  <span class=\"riko-tag riko-tag--accent\"><span class=\"riko-star\" aria-hidden=\"true\"></span>敬请期待后续更新！</span>\n  <span class=\"riko-tag riko-tag--ice riko-tag--dashed\"><i data-lucide=\"pencil\"></i>设定集 · 未完成</span>\n  <span class=\"riko-tag riko-tag--soft\">米色</span>\n  <span class=\"riko-tag riko-tag--success\">已完结</span>\n  <span class=\"riko-tag riko-tag--warning\">修订中</span>\n  <span class=\"riko-tag riko-tag--danger\">含剧透</span>\n  <span class=\"riko-tag riko-tag--primary\">主线</span>\n</div>"
+    },
+    {
+      "title": "样式与尺寸",
+      "html": "<div class=\"riko-cluster riko-cluster--sm\">\n  <span class=\"riko-tag riko-tag--sm\">小号</span>\n  <span class=\"riko-tag riko-tag--lg\">大号</span>\n  <span class=\"riko-tag riko-tag--outline riko-tag--accent\">透明底</span>\n  <span class=\"riko-tag riko-tag--dashed\">虚线</span>\n  <span class=\"riko-tag riko-tag--square riko-tag--ice\">小圆角</span>\n  <a class=\"riko-tag\" href=\"#tag\"><i data-lucide=\"hash\"></i>可点击</a>\n</div>"
+    },
+    {
+      "title": "可移除",
+      "html": "<div class=\"riko-cluster riko-cluster--sm\">\n  <span class=\"riko-tag riko-tag--accent\">星星酥<button type=\"button\" class=\"riko-tag__remove\" data-riko-dismiss aria-label=\"移除 星星酥\"></button></span>\n  <span class=\"riko-tag riko-tag--accent\">流星项链<button type=\"button\" class=\"riko-tag__remove\" data-riko-dismiss aria-label=\"移除 流星项链\"></button></span>\n  <span class=\"riko-tag riko-tag--accent\">贝雷帽<button type=\"button\" class=\"riko-tag__remove\" data-riko-dismiss aria-label=\"移除 贝雷帽\"></button></span>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-tag__remove",
+      "attr": "aria-label|aria-labelledby",
+      "message": "riko-tag__remove 需要 aria-label（如「移除 星星酥」）"
+    },
+    {
+      "selector": ".riko-tag__remove",
+      "parent": ".riko-tag",
+      "message": "riko-tag__remove 必须位于 riko-tag 之内"
+    }
+  ],
+  "related": [
+    "badge",
+    "tags-input"
+  ]
+}

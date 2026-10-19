@@ -1,0 +1,44 @@
+/* ==========================================================================
+   stat · 统计数值
+   <div class="riko-stat">
+     <span class="riko-stat__icon"><i data-lucide="book-open"></i></span>
+     <span class="riko-stat__label">已更新小节</span>
+     <span class="riko-stat__value">76</span>
+     <span class="riko-stat__trend" data-trend="up">本月 +12</span>
+   </div>
+   ========================================================================== */
+@layer riko.components {
+  .riko-stat {
+    position: relative; display: flex; flex-direction: column; gap: 2px; min-width: 0;
+    padding: var(--riko-space-5);
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble);
+    box-shadow: var(--riko-shadow-sm);
+  }
+  .riko-stat__icon {
+    position: absolute; top: var(--riko-space-4); right: var(--riko-space-4);
+    display: grid; place-items: center; width: 40px; height: 40px; font-size: 1.15rem;
+    border-radius: 13px 11px 14px 10px; transform: rotate(-5deg);
+    background: var(--riko-color-ice-soft); color: var(--riko-color-ice-ink);
+  }
+  .riko-stat__label { font-size: var(--riko-text-sm); color: var(--riko-color-fg-muted); padding-right: 48px; }
+  .riko-stat__value {
+    font-family: var(--riko-font-hand); font-weight: 700; font-size: 2.8rem; line-height: 1.05;
+    color: var(--riko-color-fg-strong); font-variant-numeric: tabular-nums; letter-spacing: .01em;
+  }
+  .riko-stat__unit { font-family: var(--riko-font-body); font-size: var(--riko-text-sm); font-weight: var(--riko-weight-medium); color: var(--riko-color-fg-muted); margin-left: 4px; }
+  .riko-stat__trend { display: inline-flex; align-items: center; gap: 4px; font-size: var(--riko-text-xs); font-weight: var(--riko-weight-medium); color: var(--riko-color-fg-muted); }
+  .riko-stat__trend[data-trend]::before {
+    content: ""; width: 1.1em; height: 1.1em; background: currentColor;
+    -webkit-mask: var(--riko-icon-arrow-up) center / contain no-repeat;
+    mask: var(--riko-icon-arrow-up) center / contain no-repeat;
+  }
+  .riko-stat__trend[data-trend="up"] { color: var(--riko-color-success-ink); }
+  .riko-stat__trend[data-trend="down"] { color: var(--riko-color-danger-ink); }
+  .riko-stat__trend[data-trend="down"]::before { transform: rotate(180deg); }
+  .riko-stat--accent .riko-stat__icon { background: var(--riko-color-accent-soft); color: var(--riko-color-accent-ink); }
+  .riko-stat--accent { border-color: var(--riko-color-accent); }
+  .riko-stat--plain { padding: 0; background: transparent; border: 0; box-shadow: none; }
+  .riko-stat--plain .riko-stat__icon { top: 0; right: 0; }
+}

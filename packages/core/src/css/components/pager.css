@@ -1,0 +1,32 @@
+/* ==========================================================================
+   pager · 上一节 / 下一节
+   <nav class="riko-pager" aria-label="翻页">
+     <a class="riko-pager__prev" href="#"><span class="riko-pager__label">上一节</span><span class="riko-pager__title">001 沙滩上的画家</span></a>
+     <a class="riko-pager__next" href="#"><span class="riko-pager__label">下一节</span><span class="riko-pager__title">003 熟悉的身影</span></a>
+   </nav>
+   ========================================================================== */
+@layer riko.components {
+  .riko-pager { display: grid; grid-template-columns: 1fr 1fr; gap: var(--riko-space-4); }
+  .riko-pager__prev, .riko-pager__next {
+    display: flex; flex-direction: column; gap: 2px; min-width: 0;
+    padding: 14px 18px; border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble-sm); background: var(--riko-color-surface-sunken);
+    color: var(--riko-color-fg); text-decoration: none; text-align: left;
+    transition: transform var(--riko-duration-base) ease, border-color var(--riko-duration-base) ease, box-shadow var(--riko-duration-base) ease;
+  }
+  .riko-pager__next { grid-column: 2; align-items: flex-end; text-align: right; }
+  :is(a, button):is(.riko-pager__prev, .riko-pager__next):hover { transform: translateY(-3px); border-color: var(--riko-color-accent); box-shadow: var(--riko-shadow-md); }
+  :is(.riko-pager__prev, .riko-pager__next)[aria-disabled="true"], :is(.riko-pager__prev, .riko-pager__next):disabled { opacity: .5; pointer-events: none; }
+  .riko-pager__label { display: inline-flex; align-items: center; gap: 6px; font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted); }
+  .riko-pager__label::before, .riko-pager__next .riko-pager__label::after {
+    content: ""; width: 13px; height: 13px; background: currentColor;
+    -webkit-mask: var(--riko-icon-arrow-left) center / contain no-repeat; mask: var(--riko-icon-arrow-left) center / contain no-repeat;
+  }
+  .riko-pager__next .riko-pager__label::before { display: none; }
+  .riko-pager__next .riko-pager__label::after { -webkit-mask-image: var(--riko-icon-arrow-right); mask-image: var(--riko-icon-arrow-right); }
+  .riko-pager__title { font-family: var(--riko-font-read); font-weight: 600; color: var(--riko-color-fg-strong); overflow-wrap: anywhere; }
+  @media (max-width: 520px) {
+    .riko-pager { grid-template-columns: 1fr; }
+    .riko-pager__next { grid-column: auto; }
+  }
+}

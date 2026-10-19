@@ -1,0 +1,48 @@
+/* ==========================================================================
+   theme-picker · 主题选择器 / theme-toggle · 深浅色切换
+   <div class="riko-theme-picker" data-riko="theme-picker"></div>           （自动生成四个选项）
+   <div class="riko-theme-picker riko-theme-picker--compact" data-riko="theme-picker"></div>
+   <button class="riko-btn riko-btn--icon" data-riko="theme-toggle" aria-label="切换深浅色"></button>
+   ========================================================================== */
+@layer riko.components {
+  .riko-theme-picker { display: grid; gap: var(--riko-space-3); }
+  .riko-theme-picker__option {
+    display: flex; align-items: center; gap: var(--riko-space-4); width: 100%;
+    padding: var(--riko-space-3) var(--riko-space-4); text-align: left;
+    color: var(--riko-color-fg); background: transparent;
+    border: var(--riko-border-width) dashed var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble-sm);
+    transition: background var(--riko-duration-fast) linear, border-color var(--riko-duration-fast) linear, transform var(--riko-duration-fast) linear;
+  }
+  .riko-theme-picker__option:hover { background: var(--riko-color-surface-muted); transform: translateX(3px); }
+  .riko-theme-picker__option[aria-pressed="true"] { border-style: solid; border-color: var(--riko-color-accent); background: var(--riko-color-accent-soft); }
+  .riko-theme-picker__icon {
+    flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%;
+    background: var(--riko-color-ice-soft); color: var(--riko-color-ice-ink);
+    transition: background var(--riko-duration-fast) linear, color var(--riko-duration-fast) linear;
+  }
+  .riko-theme-picker__option[aria-pressed="true"] .riko-theme-picker__icon { background: var(--riko-color-accent); color: var(--riko-color-accent-fg); }
+  .riko-theme-picker__text { display: flex; flex-direction: column; min-width: 0; }
+  .riko-theme-picker__label { font-weight: var(--riko-weight-medium); }
+  .riko-theme-picker__desc { font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted); }
+
+  /* 紧凑：一行四个图标胶囊 */
+  .riko-theme-picker--compact {
+    display: inline-flex; width: fit-content; align-self: flex-start; gap: 2px; padding: 3px;
+    border: var(--riko-border-width) solid var(--riko-color-border); border-radius: var(--riko-radius-pill);
+    background: var(--riko-color-surface);
+  }
+  .riko-theme-picker--compact .riko-theme-picker__option {
+    width: auto; padding: 0; border: 0; border-radius: var(--riko-radius-pill); transform: none;
+  }
+  .riko-theme-picker--compact .riko-theme-picker__option:hover { transform: none; background: var(--riko-color-surface-muted); }
+  .riko-theme-picker--compact .riko-theme-picker__icon { width: 34px; height: 34px; background: transparent; color: var(--riko-color-fg-muted); }
+  .riko-theme-picker--compact .riko-theme-picker__option[aria-pressed="true"] { background: var(--riko-color-accent); }
+  .riko-theme-picker--compact .riko-theme-picker__text {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
+
+  .riko-theme-toggle .riko-theme-toggle__moon { display: none; }
+  .riko-theme-toggle[aria-pressed="true"] .riko-theme-toggle__sun { display: none; }
+  .riko-theme-toggle[aria-pressed="true"] .riko-theme-toggle__moon { display: inline-block; }
+}

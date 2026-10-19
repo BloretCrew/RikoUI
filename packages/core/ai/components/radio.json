@@ -1,0 +1,91 @@
+{
+  "name": "radio",
+  "title": "单选框",
+  "titleEn": "Radio",
+  "category": "form",
+  "summary": "原生 radio 美化：选中时中心弹出一颗橙色小星星，支持卡片样式。",
+  "when": "从 2–6 个互斥选项中选一个。选项很短且想要紧凑外观时用 segmented；选项多时用 select。",
+  "root": "riko-radio",
+  "element": "label",
+  "parts": [
+    {
+      "class": "riko-radio__text",
+      "desc": "标题 + 说明的文字容器"
+    },
+    {
+      "class": "riko-radio__desc",
+      "desc": "说明小字（放在 __text 内）"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-radio--sm",
+      "desc": "小号",
+      "group": "size"
+    },
+    {
+      "class": "riko-radio--lg",
+      "desc": "大号",
+      "group": "size"
+    },
+    {
+      "class": "riko-radio--card",
+      "desc": "可选卡片",
+      "group": "variant"
+    }
+  ],
+  "states": [
+    {
+      "attr": "checked",
+      "on": "input",
+      "desc": "选中"
+    },
+    {
+      "attr": "disabled",
+      "on": "input",
+      "desc": "禁用"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "同组单选框写相同 name，并放进 <fieldset> + <legend>。"
+  ],
+  "rules": [
+    "结构：<label class=\"riko-radio\"><input type=\"radio\" name=\"组名\" value=\"值\"> 文字</label>。"
+  ],
+  "avoid": [
+    "不要省略 name，否则无法互斥。"
+  ],
+  "examples": [
+    {
+      "title": "基础",
+      "html": "<fieldset class=\"riko-fieldset riko-fieldset--inline\">\n  <legend class=\"riko-fieldset__legend\">下午茶</legend>\n  <label class=\"riko-radio\"><input type=\"radio\" name=\"tea\" value=\"black\" checked> 热红茶</label>\n  <label class=\"riko-radio\"><input type=\"radio\" name=\"tea\" value=\"milk\"> 牛奶</label>\n  <label class=\"riko-radio\"><input type=\"radio\" name=\"tea\" value=\"soda\" disabled> 汽水（喝完啦）</label>\n</fieldset>"
+    },
+    {
+      "title": "卡片",
+      "html": "<fieldset class=\"riko-fieldset\">\n  <legend class=\"riko-fieldset__legend\">阅读方式</legend>\n  <div class=\"riko-grid riko-grid--sm\">\n    <label class=\"riko-radio riko-radio--card\"><input type=\"radio\" name=\"read-mode\" value=\"scroll\" checked><span class=\"riko-radio__text\">连续滚动<span class=\"riko-radio__desc\">像展开一卷长长的画</span></span></label>\n    <label class=\"riko-radio riko-radio--card\"><input type=\"radio\" name=\"read-mode\" value=\"page\"><span class=\"riko-radio__text\">分页翻阅<span class=\"riko-radio__desc\">一页一页慢慢看</span></span></label>\n  </div>\n</fieldset>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-radio",
+      "has": "input[type=\"radio\"]",
+      "message": "riko-radio 内需要直接放 <input type=\"radio\">"
+    },
+    {
+      "selector": ".riko-radio input[type=\"radio\"]",
+      "attr": "name",
+      "message": "单选框需要 name 属性才能成组互斥"
+    },
+    {
+      "selector": ".riko-radio",
+      "message": "riko-radio 必须用 <label> 元素",
+      "tag": "label"
+    }
+  ],
+  "related": [
+    "checkbox",
+    "segmented",
+    "fieldset"
+  ]
+}

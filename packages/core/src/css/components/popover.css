@@ -1,0 +1,40 @@
+/* ==========================================================================
+   popover · 气泡卡片
+   <button class="riko-btn" data-riko-toggle="pop-1">关于络可</button>
+   <div class="riko-popover" id="pop-1" data-riko="popover" popover>
+     <div class="riko-popover__header"><h3 class="riko-popover__title">络可</h3></div>
+     <div class="riko-popover__body">在沙滩上画画的小女孩。</div>
+   </div>
+   ========================================================================== */
+@layer riko.components {
+  .riko-popover {
+    position: fixed; inset: auto; margin: 0;
+    width: var(--riko-popover-w, 300px); max-width: calc(100vw - 16px); height: auto; max-height: calc(100vh - 16px);
+    padding: var(--riko-space-4) var(--riko-space-5);
+    overflow: auto;
+    color: var(--riko-color-fg); background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble-sm);
+    box-shadow: var(--riko-shadow-lg);
+    z-index: var(--riko-z-dropdown);
+    opacity: 0; transform: translateY(6px) scale(.97);
+    transition: opacity var(--riko-duration-fast) ease, transform var(--riko-duration-base) var(--riko-ease-bounce),
+      display var(--riko-duration-fast) allow-discrete, overlay var(--riko-duration-fast) allow-discrete;
+  }
+  .riko-popover:popover-open { opacity: 1; transform: none; }
+  @starting-style { .riko-popover:popover-open { opacity: 0; transform: translateY(6px) scale(.97); } }
+  .riko-popover[data-placement="top"] { transform-origin: bottom center; }
+  .riko-popover__header { display: flex; align-items: center; justify-content: space-between; gap: var(--riko-space-3); margin-bottom: var(--riko-space-2); }
+  .riko-popover__title { display: flex; align-items: center; gap: var(--riko-space-2); font-family: var(--riko-font-title); font-weight: var(--riko-weight-normal); font-size: var(--riko-text-lg); color: var(--riko-color-fg-strong); line-height: 1.3; }
+  .riko-popover__body { font-size: var(--riko-text-sm); color: var(--riko-color-fg-muted); }
+  .riko-popover__footer { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--riko-space-2); margin-top: var(--riko-space-4); }
+  .riko-popover__close {
+    flex: none; display: grid; place-items: center; width: 28px; height: 28px; padding: 0;
+    border: 0; border-radius: 50%; background: transparent; color: var(--riko-color-fg-muted);
+  }
+  .riko-popover__close::before { content: ""; width: 14px; height: 14px; background: currentColor; -webkit-mask: var(--riko-icon-x) center / contain no-repeat; mask: var(--riko-icon-x) center / contain no-repeat; }
+  .riko-popover__close:hover { background: var(--riko-color-surface-muted); color: var(--riko-color-fg-strong); }
+  .riko-popover--sm { --riko-popover-w: 220px; padding: var(--riko-space-3) var(--riko-space-4); }
+  .riko-popover--lg { --riko-popover-w: 400px; }
+  .riko-popover--ice { background: var(--riko-color-ice-soft); border-color: var(--riko-color-ice); }
+}

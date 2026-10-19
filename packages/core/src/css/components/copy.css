@@ -1,0 +1,19 @@
+/* ==========================================================================
+   copy · 复制按钮（任意元素加 data-riko="copy"）
+   <button type="button" class="riko-btn riko-btn--soft" data-riko="copy" data-riko-copy="RIKO-2026">复制邀请码</button>
+   按钮为空时自动放入复制图标；成功后 data-state="copied"（图标变为勾）。
+   ========================================================================== */
+@layer riko.components {
+  .riko-copy__icon {
+    display: inline-block; flex: none; width: 1.1em; height: 1.1em; background: currentColor;
+    -webkit-mask: var(--riko-icon-copy) center / contain no-repeat;
+    mask: var(--riko-icon-copy) center / contain no-repeat;
+  }
+  [data-riko~="copy"][data-state="copied"] .riko-copy__icon {
+    color: var(--riko-color-success-ink);
+    -webkit-mask-image: var(--riko-icon-check); mask-image: var(--riko-icon-check);
+    animation: riko-copy-pop .35s var(--riko-ease-bounce);
+  }
+  [data-riko~="copy"][data-state="copied"] { color: var(--riko-color-success-ink); }
+  @keyframes riko-copy-pop { from { transform: scale(.5); } }
+}

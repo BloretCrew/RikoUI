@@ -1,0 +1,85 @@
+/* ==========================================================================
+   command · 命令面板 / 全局搜索弹窗
+   <button class="riko-btn" data-riko-open="cmd">搜索</button>
+   <dialog class="riko-command" id="cmd" data-riko="command" data-riko-hotkey="k" aria-label="快速搜索">
+     <div class="riko-command__search">
+       <input class="riko-command__input" type="text" placeholder="搜索章节、设定…" aria-label="搜索">
+       <kbd class="riko-command__esc">Esc</kbd>
+     </div>
+     <div class="riko-command__list">
+       <div class="riko-command__group" aria-label="章节">
+         <p class="riko-command__group-label">章节</p>
+         <a class="riko-command__item" href="#001"><span class="riko-command__icon"><i data-lucide="book-open"></i></span><span class="riko-command__text">沙滩上的画家</span></a>
+       </div>
+     </div>
+     <p class="riko-command__empty" hidden>没有找到呢……换个关键词试试吧 ✦</p>
+     <div class="riko-command__footer">…</div>
+   </dialog>
+   ========================================================================== */
+@layer riko.components {
+  .riko-command {
+    width: min(620px, calc(100% - 32px)); max-height: min(72vh, 620px);
+    margin: 12vh auto auto; padding: 0; overflow: hidden;
+    flex-direction: column;
+    color: var(--riko-color-fg); background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border); border-radius: var(--riko-radius-wobble);
+    box-shadow: var(--riko-shadow-lg);
+  }
+  .riko-command[open] { display: flex; animation: riko-command-in .24s linear; }
+  .riko-command[open]::backdrop { animation: riko-command-fade .24s linear; }
+  .riko-command::backdrop { background: var(--riko-color-overlay); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+  .riko-command[data-state="closing"] { animation: riko-command-out .18s linear forwards; }
+  .riko-command[data-state="closing"]::backdrop { animation: riko-command-fade-out .18s linear forwards; }
+  @keyframes riko-command-in { from { opacity: 0; transform: translateY(-14px) scale(.97); } }
+  @keyframes riko-command-out { to { opacity: 0; transform: translateY(-10px) scale(.97); } }
+  @keyframes riko-command-fade { from { opacity: 0; } }
+  @keyframes riko-command-fade-out { to { opacity: 0; } }
+
+  .riko-command__search {
+    flex: none; display: flex; align-items: center; gap: var(--riko-space-3);
+    padding: 14px 18px; border-bottom: var(--riko-border-width) dashed var(--riko-color-border);
+  }
+  .riko-command__search::before {
+    content: ""; flex: none; width: 20px; height: 20px; background: var(--riko-color-accent);
+    -webkit-mask: var(--riko-icon-search) center / contain no-repeat; mask: var(--riko-icon-search) center / contain no-repeat;
+  }
+  .riko-command__input {
+    flex: 1; min-width: 0; height: 36px; border: 0; outline: 0; background: none;
+    color: var(--riko-color-fg); font-size: var(--riko-text-lg);
+  }
+  .riko-command__input::placeholder { color: var(--riko-color-fg-subtle); }
+  .riko-command__input:focus-visible { outline: none; }
+  .riko-command__esc, .riko-command__shortcut, .riko-command__footer kbd {
+    flex: none; padding: 0 6px; border: 1.5px solid var(--riko-color-border-strong); border-radius: var(--riko-radius-xs);
+    font: var(--riko-weight-bold) .72rem/1.7 var(--riko-font-body); color: var(--riko-color-fg-muted); background: var(--riko-color-surface);
+    box-shadow: 0 2px 0 var(--riko-color-border);
+  }
+  .riko-command__list { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 8px; }
+  .riko-command__group + .riko-command__group { margin-top: 6px; }
+  .riko-command__group-label { margin: 0; padding: 8px 12px 4px; font-size: var(--riko-text-xs); font-weight: var(--riko-weight-bold); letter-spacing: .12em; color: var(--riko-color-brown); }
+  .riko-command__item {
+    display: flex; align-items: center; gap: var(--riko-space-3); width: 100%;
+    padding: 10px 12px; border: var(--riko-border-width) solid transparent; border-radius: var(--riko-radius-wobble-sm);
+    background: none; color: var(--riko-color-fg); text-decoration: none; text-align: left; cursor: pointer;
+  }
+  .riko-command__item[aria-selected="true"] { background: var(--riko-color-accent-soft); border-color: var(--riko-color-accent); color: var(--riko-color-fg-strong); }
+  .riko-command__icon {
+    flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 11px 9px 12px 8px;
+    background: var(--riko-color-ice-soft); color: var(--riko-color-ice-ink);
+  }
+  .riko-command__item[aria-selected="true"] .riko-command__icon { background: var(--riko-color-accent); color: var(--riko-color-accent-fg); }
+  .riko-command__text { flex: 1; min-width: 0; display: block; line-height: 1.45; overflow-wrap: anywhere; }
+  .riko-command__desc { display: block; font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .riko-command__item mark { background: transparent; color: var(--riko-color-accent-ink); font-weight: var(--riko-weight-bold); box-shadow: inset 0 -2px 0 var(--riko-color-accent); }
+  .riko-command__empty { margin: 0; padding: var(--riko-space-8) var(--riko-space-5); text-align: center; color: var(--riko-color-fg-muted); font-size: var(--riko-text-sm); }
+  .riko-command__footer {
+    flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px;
+    padding: 10px 18px; border-top: var(--riko-border-width) dashed var(--riko-color-border);
+    background: var(--riko-color-surface-sunken); font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted);
+  }
+  .riko-command__footer span { display: inline-flex; align-items: center; gap: 4px; }
+  @media (max-width: 520px) {
+    .riko-command { margin-top: 8vh; max-height: 80vh; }
+    .riko-command__footer { display: none; }
+  }
+}

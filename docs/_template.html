@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>__TITLE__ · Riko UI</title>
+<meta name="theme-color" content="#FBF5EA">
+<script src="../packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="../packages/core/dist/riko-ui.css">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+
+<header class="docs-header">
+  <div class="docs-header__inner">
+    <button type="button" class="riko-btn riko-btn--icon riko-btn--ghost docs-menu-btn" aria-label="打开导航"><i data-lucide="menu"></i></button>
+    <a class="docs-brand" href="index.html">
+      <span class="docs-brand__mark"><span class="riko-star" aria-hidden="true"></span></span>
+      <span><span class="docs-brand__name">Riko UI</span><span class="docs-brand__sub">little star ui kit</span></span>
+    </a>
+    <span class="docs-header__spacer"></span>
+    <div class="riko-theme-picker riko-theme-picker--compact" data-riko="theme-picker"></div>
+  </div>
+</header>
+
+<div class="docs-layout">
+  <aside class="docs-sidebar" aria-label="文档导航"></aside>
+  <main class="docs-main">
+    <div class="docs-hero">
+      <h1>__TITLE__</h1>
+      <p>__DESC__</p>
+    </div>
+
+    <!-- 每个组件一节：id 与组件 name 一致；演示写在 .docs-demo 中（演示 HTML 会原样显示为代码） -->
+    <section class="docs-section" id="example">
+      <h2>示例 <small>Example</small></h2>
+      <p>一句话说明。</p>
+      <h3>基础用法</h3>
+      <div class="docs-demo">
+        <!-- 标准写法 -->
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="assets/manifest.js"></script>
+<script src="assets/docs.js"></script>
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="../packages/core/dist/riko-ui.js"></script>
+</body>
+</html>

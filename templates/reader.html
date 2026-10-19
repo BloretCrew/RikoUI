@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小说阅读器 · 《络的世界》RikoLand</title>
+<meta name="theme-color" content="#FBF5EA">
+<link rel="icon" href="https://riko.land/assets/logo.jpg" type="image/jpeg">
+<script src="../packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="../packages/fonts/riko-fonts.css">
+<link rel="stylesheet" href="../packages/core/dist/riko-ui.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+<div class="riko-reading-progress" data-riko="reading-progress" aria-hidden="true"></div>
+
+<div class="riko-page">
+  <header class="riko-navbar riko-navbar--wide">
+    <div class="riko-navbar__inner">
+      <a class="riko-navbar__brand" href="https://riko.land" aria-label="《络的世界》首页">
+        <img class="riko-navbar__logo" src="https://riko.land/assets/logo.jpg" alt="">
+        <span class="riko-navbar__text">
+          <span class="riko-navbar__title">《络的世界》</span>
+          <span class="riko-navbar__sub">RikoLand · 小说阅读器</span>
+        </span>
+      </a>
+      <div class="riko-search riko-u-hide-md" data-riko="search" id="search" style="flex: 1; max-width: 480px; margin-inline: auto;">
+        <input class="riko-search__input" type="search" placeholder="搜索小说内容，例如：星星酥" aria-label="搜索小说内容">
+        <kbd class="riko-search__hint">/</kbd>
+        <span class="riko-search__count"></span>
+        <span class="riko-search__nav">
+          <button type="button" class="riko-search__btn" data-step="prev" aria-label="上一处"></button>
+          <button type="button" class="riko-search__btn" data-step="next" aria-label="下一处"></button>
+        </span>
+      </div>
+      <div class="riko-navbar__actions">
+        <button type="button" class="riko-btn riko-btn--icon riko-u-only-mobile" data-riko-open="toc-drawer" aria-label="打开目录"><i data-lucide="list"></i></button>
+        <button type="button" class="riko-btn" data-riko-open="settings" aria-label="设置"><i data-lucide="settings"></i><span class="riko-u-hide-sm">设置</span></button>
+        <a class="riko-btn" href="https://riko.land" aria-label="返回主页"><i data-lucide="arrow-left"></i><span class="riko-u-hide-sm">返回主页</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 设置 -->
+  <dialog class="riko-dialog" id="settings" data-riko="dialog" aria-labelledby="settings-title">
+    <header class="riko-dialog__header">
+      <h2 class="riko-dialog__title" id="settings-title"><span class="riko-star" aria-hidden="true"></span>设置界面</h2>
+      <button type="button" class="riko-dialog__close" data-riko-close aria-label="关闭"></button>
+    </header>
+    <div class="riko-dialog__body riko-stack">
+      <p class="riko-dialog__desc">选择你喜欢的阅读外观，设置会自动保存</p>
+      <div class="riko-theme-picker" data-riko="theme-picker"></div>
+      <div class="riko-divider" role="separator"></div>
+      <div class="riko-field">
+        <div class="riko-cluster riko-cluster--between">
+          <label class="riko-field__label" for="font-size">正文字号</label>
+          <output class="riko-output" for="font-size">18px</output>
+        </div>
+        <input class="riko-range" id="font-size" type="range" min="15" max="24" value="18" data-riko="range" data-riko-suffix="px">
+      </div>
+    </div>
+  </dialog>
+
+  <!-- 窄屏目录 -->
+  <dialog class="riko-drawer riko-drawer--left" id="toc-drawer" data-riko="drawer" aria-labelledby="toc-drawer-title">
+    <header class="riko-drawer__header">
+      <h2 class="riko-drawer__title" id="toc-drawer-title"><span class="riko-star" aria-hidden="true"></span>小说目录</h2>
+      <button type="button" class="riko-drawer__close" data-riko-close aria-label="关闭目录"></button>
+    </header>
+    <div class="riko-drawer__body riko-stack">
+      <div class="riko-search riko-search--block" data-riko="search" data-riko-hotkey="none" id="search-mobile">
+        <input class="riko-search__input" type="search" placeholder="搜索小说内容" aria-label="搜索小说内容">
+        <span class="riko-search__count"></span>
+        <span class="riko-search__nav">
+          <button type="button" class="riko-search__btn" data-step="prev" aria-label="上一处"></button>
+          <button type="button" class="riko-search__btn" data-step="next" aria-label="下一处"></button>
+        </span>
+      </div>
+      <nav class="riko-sidenav" data-riko="sidenav" aria-label="小说目录（抽屉）" id="toc-mobile"></nav>
+    </div>
+  </dialog>
+
+  <div class="riko-page__main riko-container riko-container--wide riko-section riko-section--sm">
+    <div class="riko-split">
+      <aside class="riko-split__aside riko-u-hide-md">
+        <div class="riko-card riko-card--flat" style="max-height: calc(100vh - var(--riko-header-h) - var(--riko-space-8)); overflow: auto; padding: var(--riko-space-4);">
+          <div class="riko-progress riko-progress--sm">
+            <div class="riko-progress__head">
+              <span class="riko-progress__label" id="read-meta">已读 0 / 0 节</span>
+            </div>
+            <progress class="riko-progress__bar" id="read-bar" max="1" value="0" aria-labelledby="read-meta"></progress>
+          </div>
+          <nav class="riko-sidenav riko-u-mt-4" data-riko="sidenav" aria-label="小说目录" id="toc"></nav>
+        </div>
+      </aside>
+
+      <main class="riko-split__main">
+        <article class="riko-card riko-card--stitched" id="reader" aria-live="polite" style="padding: var(--riko-space-9) clamp(var(--riko-space-5), 6vw, var(--riko-space-10)) var(--riko-space-8);">
+          <span class="riko-tape" aria-hidden="true"></span>
+          <div class="riko-container riko-container--narrow riko-stack riko-stack--lg" id="reader-inner"></div>
+        </article>
+      </main>
+    </div>
+  </div>
+
+  <footer class="riko-footer">
+    <div class="riko-footer__stars"><span class="riko-star" aria-hidden="true"></span><span class="riko-star" aria-hidden="true"></span><span class="riko-star" aria-hidden="true"></span></div>
+    <nav class="riko-footer__nav" aria-label="页脚导航">
+      <a class="riko-footer__link" href="https://read.riko.land">小说阅读器</a>
+      <a class="riko-footer__link" href="https://wiki.riko.land">Wiki</a>
+      <a class="riko-footer__link" href="https://contact.riko.land">联系我们</a>
+    </nav>
+    <p class="riko-footer__copy">© 2021–2026 Bloret.All rights reserved.</p>
+    <p class="riko-footer__copy">《络的世界》项目组</p>
+  </footer>
+</div>
+
+<button type="button" class="riko-backtop" data-riko="backtop" aria-label="返回顶部"></button>
+
+<!-- 模板只内置前 6 节作为示例 -->
+<script type="application/json" id="novel-data">{"acts":[{"part":"序章","name":"第一幕：沙滩上的画家","from":1,"to":3},{"part":"序章","name":"第二幕：归途的微光","from":4,"to":6}],"sections":[{"n":1,"title":"沙滩上的画家","paras":["轻柔的海浪涌来，在微风的吹拂下散入金黄的沙滩。无垠的大海倒映着碧空，也消解了一部分太阳的热。正午的阳光在水面的反射下，映照在边界之地那亘古不变的蓝色屏障上，为这荒凉的地方带来些许暖意。在永恒的静谧中，不合时宜地出现了某种声音。","沙滩上，一个女孩哼着欢快的歌，挥动她的画笔，一道道鲜艳的色彩在画板上留下痕迹，逐渐勾勒出天空、大海、沙滩……不多时，一幅漂亮的海景图便出现在女孩眼前，天空是那么明澈，以至于没有一朵云会来破坏这绝妙的构图，海中腾跃的海豚，也在她的笔下栩栩如生。女孩从画板上取下画作，满意地点点头，随后拍了拍满是油墨的袖子，扶正了自己的贝雷帽，并将杰作收入了背包。","女孩名叫络可，自小在HV长大。那是一个美好的村子，聚集着大批志同道合的玩家。在那里，不只有冷峻的工业机器，也有建筑天才的旷世佳作，以及勇敢的冒险家们。但无一例外的，他们都宠爱络可。这个天真无邪的小女孩就是村子里的吉祥物，仿佛只要有她在，村子就永远洋溢着活力。她也在这样温馨的氛围下，一直成长到了十二岁。她永远不会忘记那个下午。","那一天，村中的许多玩家突然紧张了起来。未知的灾厄在这片大陆上蔓延，而所有玩家的游戏模式不知为何都被调为了极限模式。在灾厄中经过强化的怪物变得更富有攻击性，它们成群出现，一次又一次向各处的玩家聚落进行冲击。牺牲是难免的，有许多熟悉的面孔在这场灾厄中化为一缕白烟，消失不见。幸运的是，不久之后，在大家的共同努力下，他们艰难地将极限模式又回调至生存模式。","但奇怪的是，似乎有一种什么力量，将络可的游戏模式锁死在了极限。任何人，包括络可，都知道这不是什么好事，这意味着络可只能拥有一次生命。一旦死亡，就也会化为一缕白烟。为了防止这样的事情发生，HV的最高领导人，不得不下令把她的活动范围锁死在村内，并对她严加看管。","络可叹了口气，站起身来，环顾四周，除了沙滩背后的树林与面前无边的海，以及那道沉默的蓝色屏障，她什么也看不到。漫步在海边，络可又回想起自己是怎么到这个鬼地方来的：三天前，络可乘着没人看管的间隙，偷偷溜进了下界传送门，并在基岩上层发现了一台高大的机器。络可手脚并用地爬上去，并在机器的控制舱内发现了一本小册子。","“这台机器……可以通过将末影珍珠发射到很远的地方，来进行远距离传送？”络可兴奋了起来，她知道大家对她严加看管是为了她好，但现在，对自由的渴望已经压倒了一切念头。按册上所说，络可向一个小洞中投入了一颗末影珍珠，随后将传送距离设置到了最大值，最后，拉下拉杆。","“哥哥姐姐们，暂时再见咯！”络可兴奋地嚷道，同时不忘给自己穿上摔落缓冲IV的鞋子，并喷了一点神龟药水，防止撞得太猛。","数千个点燃的TNT汇聚到了一个点上，并被推到末影珍珠所在的位置，随后“轰”的一声巨响，珍珠在巨大的推力下向前飞去，眨眼间便消失不见。"],"ends":[],"act":0},{"n":2,"title":"世界的边缘","paras":["络可耐心地等了一会儿，随后眼前一黑，头撞到了什么坚硬的东西，从半空中摔了下来。万幸的是，在神龟药水与鞋子的共同作用下，她仅仅跌掉了几格饱食度，除此之外并无大碍。络可抬起晕乎乎的脑袋，伸手向前摸索，只碰到了一个坚硬的东西。","“这是什么？”络可回过神来，打量着眼前的蓝色屏障，又从背包里取出一把下界合金镐，对着屏障敲敲打打。","“好硬。这是不是无法破坏啊？”回应络可的只有沉默。","络可也不再想那么多，从背包中取出黑曜石与打火石。黑曜石从背包拿出的一瞬间便被赋予了其全部的重量……","“哇！”络可差点没被黑曜石压在地上。在经过一系列高强度的搭建后，她成功地制造了一个下界传送门。稍作休息，她便走了进去。","这一次的扭曲格外漫长，还伴随着一阵阵的反效果，走出传送门后，晕头转向的络可又一头撞在了同样的蓝色屏障上。","“怎么到处都是你？”络可还没从搬运黑曜石的怨气中走出来，又生起了这蓝色屏障的气。刚准备用下界合金镐狠狠地砸过去，她却突然想起：在 HV 的图书馆中，她好像看见过有关这种屏障的描述，并特意提到了出现这种屏障的情况。","一个念头在络可的脑海中轰然炸响：她来到了这个世界的“边界”。","恐惧淹没了获得自由的喜悦，但她没有哭，取而代之的是一种茫然。","“我还回得去吗？”依旧没有回应，在这刚刷新出来的鬼地方，不说怪物，连动物也看不到一只，而且，现在已经是下午三点了，如果不采取点什么措施，夜晚横行的怪物必定会让她从这个世界上彻底消失。想到这一点，络可着急地从背包中取出铲子和镐子，按照无昵曾教给她的技巧，开始打地穴，她要在太阳落山之前，把自己先隐蔽起来。","等到火把在洞中亮起，星星已经在半红半黑的天幕上眨眼了，听着上方怪物嘶吼的声音，络可拼尽全力往上一蹦，在一只僵尸掉进来之前彻底封严了洞口，随后她瘫坐在地上，清点着从背包中剩余的物资。","“……下界合金全套工具……三十二根金胡萝卜……十个金苹果……几根鱼……还有我的画板？”","络可突然高兴了起来，尽管不知道自己将会待在这里多久，但只要她的画笔和画板还在，她就不会孤单。但很快，她便又担心起自己未来该如何生存。","接下来的两天，络可白天在林子、海边穿梭，画画，夜晚就临时挖洞，躲避怪物的攻击。她不愿回到炙热的下界，也害怕里面出现什么可怕的怪物，于是她一边保持现在的生活，一边向远离传送门的方向走呀走。思绪回到现在，络可回头看看，传送门早已不知去向，这个世界宁静得仿佛只剩下了她。","傍晚，络可站在海边望着天际线，泪水第四次在眼眶中打转——再一次开始怀念 HV 的哥哥姐姐们。他们此时也许也在发了疯似的找自己呢！大家对她是那么关心……她却一声不吭地说溜就溜，或许再也见不到他们了……","“早知道不走那么远……”她在一块沙子上坐下，凝望着海那边的未知地区，心中充满懊悔。","突然，络可竖起耳朵，迅速擦干泪水，警觉地转过身来，似乎有什么东西正在向这边靠近，远处的天空传来一阵阵不同寻常的声音，声音越来越响，到最后，视野的尽头竟出现了一个小黑点。虽然不知道那个黑点究竟是什么，但就冲着黑点的势头，络可断定那绝对不是什么好东西！"],"ends":[],"act":0},{"n":3,"title":"熟悉的身影","paras":["络可取出三桶颜料桶和一把弓，看着那极速放大的黑点，已经准备好了与黑点决一死战！","这时，一阵劲风吹过，扬起的沙子糊掉了络可的视线。络可大叫一声，顾不上关注黑点，而是用手去护住眼睛。黑点的尖啸声越来越近，越来越响，最后从络可的头顶掠过，“扑通”一声撞进了海中。","络可刚恢复视野，就再次举起了弓，瞄准黑点坠落的那片水面，想等黑点浮出水面，先下手为强。很快，一大片阴影在海面上显现，水面下的东西正在逐渐变大，逐渐上浮......它的头刚浮出水面的一刹那，络可恶狠狠地向它的头射出了两箭！","只见一只鱿鱼漂浮在海面上。鱿鱼？络可感到愕然，虽然从海中看这玩意确实挺大的，但总不能就是这只鱿鱼一边飞一边发出尖啸声吧！如果自己真是被一只鱿鱼吓破了胆，说出去恐怕要被哥哥姐姐们笑话一辈子吧！","在络可还在面对着鱿鱼脑补千万种可能时，一双手突然从背后出现，蒙住了络可的眼睛！","“哇！”络可吓得一抖，浑身僵直半秒后，便开始剧烈地挣扎起来，她用手捶打着后面的家伙，但打到的只是一层坚硬的盔甲，发出清脆的敲击声，震得小手生疼。","“别打了，我的小祖宗！络可！你怎么跑到这里来了？你知道HV的大家有多着急吗？”一个熟悉的声音响起，带着几分抱怨与欣喜。络可一愣，随即挣脱那双手，转过身来一看，一瞬间，她的眼眶再次红了起来，她扑到来人的怀中，用因为喜悦而颤抖的声调喊了一声：“星星酥哥哥！”","Star给了络可一个大大的拥抱——或者说是络可冲上来扑进了他怀里，Star心里感慨万千。","“终于能跟111交差了......小祖宗！你要是真的没了，那我在HV也混不下去了！”","络可大哭了一段时间，最后抹了一把眼泪，恢复了正常的情绪。","“哥哥是怎么找到我的？”络可忍不住好奇地问道。","“你先看看你的背包呢？”Star反问道。络可被这一问问蒙了，但还是打开了背包，不久，她就在背包的夹层中发现了一个意想不到的东西——被绑定的磁石。Star从背包中掏出一个发着紫光的指南针，在络可的眼前晃了两晃。","“没有这个玩意儿，我挖九百个空置域都找不到你！得亏我在111那家伙刚宣布把你禁足的时候就找机会把磁石塞进你背包里，不然我上哪找你去！”","络可听得一愣一愣的，但这时，她又想到另一个问题。","“我们该怎么回去？”她盯着Star那双紫色的眼睛，尽管有一只深藏在眼罩之下，但她还是能看出他正在思考。","Star把目光投向远方，思绪穿过树林，翻过高山，飞跃海洋，最后定格在几千格外的某处地点。“走吧。”Star突然站起身来，说道。","络可赶紧凑上去，发出疑惑：“我们往哪个方向走？”","Star不语，在海边放下一艘樱花船，一边招手示意络可上船，一边眺望着远在天边的HV，若有所思，随即划起了桨，小船摇晃着向海对面的另一片树林驶去。他突然开口：","“家的方向。”"],"ends":["【序章 · 第一幕 完结】"],"act":0},{"n":4,"title":"变故","paras":["夜色已深，繁星在天幕上跳动着，与皎洁的月光一同将点点光亮撒在海面上。无风的大海是那样静谧，就连桨划水的声音都是那样清晰。在沉默的小船上，两个人怀着一颗归乡的心，在海上探索着出路。","络可早已在船舱中熟睡，这也难怪，在几天无依无靠的流浪状态下，她的身心早已透支，而现在，在Star带来的安全感下，她睡得那么沉稳，那么放松。Star摇着桨，一会儿看看地图，一会儿回头瞅瞅络可，时不时停下来掏出箭，给天上盘旋的幻翼来个迎头痛击，被射中的幻翼低声嘶叫着，坠落下来，沉入无底的深海。时钟指向了三点，Star干脆也不再划船，而是躺下休息。为了寻找络可，他已经几天没有睡觉了，那些被他射落的幻翼就是最好的证明。头躺在坚硬的木板上，Star又开始回忆他找到络可的全过程。","几天前，HV会议室内。","111猛地一拍桌子。“络可呢？”他几乎是咆哮着说出这三个字。桌上的众人面面相觑，但也是一脸茫然，这小家伙又溜到哪里去了？会议室一片鸦雀无声，111刚要发作，但余光瞥到了一个空荡荡的位置。“Star为什么没来？”他问道，语气中透出一点不爽。","“他呀。上次到我的钓鱼机那里，说是要拿点鱼，我就让他拿了，事后清点的时候发现少了一组河豚。这几天听说躺在床上起不来呢。好不容易过了中毒效果，脑子还没清醒呢，饱食度先空了，迷迷糊糊又咬了几口河豚，于是再次踏上轮回。”一旁的大山说道，声音逐渐变小且有点发抖，明显快绷不住了。其他人听到这里，一个个也都暗中用手死命地掐着大腿，好使自己不笑出声来。听完大山的汇报，111的脸肉眼可见地红温了起来，眼睛里几乎能喷出火来。最后冷笑一声，从背包中拎出一把飞刀，轰的一声夺门而出，怒吼声响彻整个HV。“假病！老子给你医！”","众人一听大事不好，赶紧顺着111的足迹追上去。","此时的Star还躺在床上，脑海中全是河豚毒素带来的无序与混沌，恍惚间，他好像听见络可正在叫他，他伸出手去，在空气中胡乱地摸索，随后，在他的视角里，络可站在远处，站在一束光的尽头，正在回头瞅他。“...络可？你怎么站在那里..很危险的..快回来...”","Star忽然起来，踉踉跄跄地向那个并不存在的络可走去，同时张开双臂，想把络可抱回来。“络可”盯了他一会，突然向Star的身后看去，同时打了个响指，坏笑着隐匿进了黑暗中。","Star突然感到背后发毛，他想转头看看是什么东西，但身体偏偏在这个时候僵直了一下，随后.....一把飞刀精准无比地刺中了他的屁股。","伴随着一阵惊天动地的惨叫声，Star从二楼摔到了一楼。","这一刀直接把Star打进了“圣祝”状态，他身上的中毒与混乱状态也随之清除，他跳起身来，刚想咒骂那个扔刀的家伙，一抬头，对上111阴沉的脸，即将喷出的芬芳又顺着嘴咽回了肚子里，转而换上一副委屈的表情。离门最近的雷达(Rhedar)看到这一幕后笑出了声：“瞧！还不是假病！病了会好好地从地上爬起来？一把飞刀就医好了。”","过了好一会儿，Star才生硬地开口：“发生什么事了？至于让你火火燎的跑进我家捅我一刀吗？”111紧盯着Star的眼睛，这使得Star预感到似乎真的发生了什么大事。“她不见了”，111一个字一个字地吐出来，而且村子里没有任何踪迹可循。”","Star瞳孔骤缩。“她。不见了？！”"],"ends":[],"act":1},{"n":5,"title":"Star的决心","paras":["Star 很清楚络可在村子中的消失意味着什么。“但她是极限模式啊！现在外面的怪物变得更加危险，一旦稍微松懈，那下场……”","“别在这种时候乌鸦嘴！”111 猛然打断 Star，“全 HV 的骨干员都在会议室里讨论该怎么办，你倒好，在家里啃起河豚来了！”","“如果我有办法把她找回来呢？”Star 突然镇静下来，反问道。","这一句话倒是噎住了 111，他半天说不出一句话来，只是用惊异的目光打量着衣衫不整的 Star。过了好半天，他才从震惊中回过神来：“你确定不是在开玩笑？”","Star 没有说话，只是拉下了一个墙壁上的拉杆，伴随着红石机关运作的轰声，一道通往地下的暗门赫然显现。他钻入门中，空气中只剩下回荡于一楼大厅的脚步声。","等到 Star 再次出现时，他俨然已经换成了战时的装束：一整套散发着附魔紫光的下界合金装甲，鞘翅别在胸背后，还插着一把锋利的下界合金剑，以及一把劲弩和一张引，最引人注目的是手上那个发光的指南针，似乎始终指向某个地方。","“你要怎么去找到络可？”即使是阅历丰富的 111，也忍不住好奇地发问。“等我好消息就行。”Star 只说了这么一句话，随后跨出门外，走向传送门。","看见 Star 的迷惑行为，众人皆是不解，只是愣愣地看着 Star 骂骂咧咧地走到传送门旁边，扔出了一大堆杂物，随后回过头对众人回以一个坚定的眼神，消失在一团扭曲之中。大山走过去，捡起那物，包含十三条河豚和一本书，书里赫然写着几个大字：“找不到络可，我就滚出 HV。”","大山叹了一口气，把书交给 111。111 也沉默了许久，然后转过身来，对着众人说道：“散会吧，回到各自的工作岗位上去，我有预感，这小子敢说出这种话来，说明他一定有他的底气，络可没准真能给他找回来。”他顿了一下，又说：“要不然，几年前灾厄刚开始的时候，他又是怎么在那样巨大的空间波动下还能安全回来的呢？那种波动，动辄能把一个玩家传送到几百到几千万格外的地方啊！”","111 说的没错，在当年的那次波动中，Star 营救一个被大批僵尸追杀的玩家时，不慎被卷入波动之中，不知被传送到了世界的哪个角落，数月无音讯，就在 111 即将决定将 Star 从幸存 HV 成员名单上除名时，他竟奇迹般地回到了 HV。从那以后，关于 Star 是如何幸存下来，并从遥远的某处回归 HV 的经历，成为了一个不解之谜。","Star 现在已经站在了传送装置的顶层控制台，并竭力寻找着一切蛛丝马迹。他并没有十足的把握。络可消失的那天，全村的红石电路突然出了故障，Star 刚好走进地下储鱼室，红石灯啪的一下就灭了，什么都看不见，结果从箱子里拿出了一组河豚。回家的时候天已经黑了下来，伸手不见五指，但借着传送门微小的光亮，他看见一个小小的人影蹿进了传送门中，但当时没有喷夜视药水的 Star 并未放在心上，认为是爆满的村民繁殖所中卡出来的一只小村民而已。现在想想，那极有可能是络可乘着全员抢修电路的间隙偷偷溜了进去。","当他检查到控制中心时，不由得全身一震，只见传送的所有数值都已经调到了最大值，遗留在拉杆上的，是几道已被高温烤干的颜料。就算是傻瓜也能看出，终可通过这个装置逃出了 HV。“唉，早就和那个工程师提醒过，不要给络可这种装置的权限，可他就是不听！”Star 咬牙切齿地咒骂着那个早魂飞魄散的工程师。可现在抱怨没有任何用处，当务之急是马上追回络可，于是 Star 一狠心，也投进一颗珍珠，并拉下了开关。“希望 XWCM 那家伙教给络可的战斗技巧有点作用……”Star 一边在心中默默祈祷，一边等待着珍珠落到地上。"],"ends":[],"act":1},{"n":6,"title":"重逢","paras":["轰的一声，Star 撞上了一个坚硬的东西。等他半昏半醒地爬起来一看，一个硕大的传送门静静地立于此处，更使 Star 感到吃惊的是，一道蓝色的屏障如巨人一般矗立在传送门的后方。“边界之地？”他实在是没想到络可居然会跑到这么远的地方，要是按常规的地毯式搜索，要找到这个小家伙比从银河系里找一根针还难。不过穿过传送门后，看到猛然转动的指南针，Star 也就放下心来，取出烟花火箭，向指南针的方向飞了过去。","回忆到此结束。但 Star 又想起了络可刚被找到的那会儿，他远远看见络可张弓对着他，心里一阵焦急，好在突然而来的一阵风糊掉了她的视野，他才借机在络可背后扔下一颗来影珍珠，在坠入海中的一瞬间又传送到岸上，完成了一次出色的恶作剧。想到这里，他又不由得轻笑几声，随即沉沉地睡了过去。","一睁眼，时间已经来到了中午时分。Star 慵懒地从木板上爬起来，刚张开嘴打了个哈欠，一条熟鳕鱼顿时塞满了口腔。“哥哥快吃！”一个悦耳的声音在背后响起。Star 回头一看，络可正在从熔炉中拿出新鲜的烤鱼，嘴里鼓鼓的，小船上充满了鱼的香味。","吃饱以后，Star 又拿出地图，络可也凑上去看。她指着地图上一个红色的叉叉，问道：“那就是我们的目的地吗？看起来还很远欸。”“是啊。”Star 随口应道，“还有上万格的距离呢，但那是我们回到 HV 的唯一希望。”听完这句话，络可虽然有些闷闷不乐，但回家的希望就摆在那里，她想不出别的法子，于是哼了一声，转过身去继续钓鱼。","这样的日子又过了几天，总算是看到了大陆的轮廓。船靠上岸之后，络可急切地蹦到了陆地上，一天三顿烤鱼的海上生活让她现在一闻到鱼的味道就想呕吐。于是，乘着 Star 整理船上物资的间隙，络可飞也似的蹿进橡树林，不一会儿便捧着一大堆苹果回来。Star 这边也已经准备完毕，两个人一前一后向着树林深处迸发而去。","尽管现在正值清晨，僵尸骷髅什么的不太可能会出现，但依然要小心蜘蛛和苦力怕。灾厄之后，即使白天蜘蛛也会主动攻击玩家，而苦力怕则更为凶险，万一出现了变异种的瞬爆苦力怕，借着林间的保护色，一旦缺少戒备，仅仅一只就足以造成极大威胁。Star 自己倒是无所谓，络可怎么办？深思熟虑之下，Star 把下界合金胸甲与头盔一并脱下来，按在了络可身上。这样，就算真的发生紧急情况，她也能有一定的自保能力了。Star 这样想着，心中也释然了几分。","柔和的阳光透过叶间的缝隙，洒在如茵的草地上，为树林增添了几分暖意。","这一片橡树林并不大，几十分钟就走到了头。剪开挡路的树叶，一片广袤的平原展现在了二人的面前。","“好大的草原！”络可惊叹出声，随即欢腾地跑上一个小坡，极目远眺，“村庄！星星酥哥哥！快来看！” Star 同样惊喜地跑了过来，顺着络可手指的方向看去，只见地平线的尽头处，几栋木头小屋零星地分散在空地上，炊烟从房顶飘出，一派祥和的生活气息让任何人都能感到宁静。","看来今晚暂时不用露宿野外了。","Star 看了看背包里的一组绿宝石块，正好缺吃的，可以搞点补给了，他想。于是和络可一同向村庄走去。"],"ends":[],"act":1}]}</script>
+<script src="../docs/assets/vendor/lucide.min.js"></script>
+<script src="../packages/core/dist/riko-ui.js"></script>
+<script>
+(function () {
+  'use strict';
+  var DATA = JSON.parse(document.getElementById('novel-data').textContent);
+  var SECS = DATA.sections, ACTS = DATA.acts;
+  var pad = function (n) { return String(n).padStart(3, '0'); };
+  var esc = Riko.escapeHtml;
+  var visited = Riko.store.getJSON('riko-reader-visited', []) || [];
+  var current = 0, query = '', hitCounts = {}, hl = null;
+
+  // ---- 目录（桌面侧栏 + 窄屏抽屉共用同一份 HTML） ----
+  var CN = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+  function tocHtml() {
+    return '<p class="riko-sidenav__heading">小说目录</p>' + ACTS.map(function (act, i) {
+      var list = SECS.filter(function (s) { return s.n >= act.from && s.n <= act.to; });
+      return '<div class="riko-sidenav__group">' +
+        '<button type="button" class="riko-sidenav__group-toggle">' +
+        '<span class="riko-sidenav__badge">' + act.name.charAt(1) + '</span>' +
+        '<span class="riko-sidenav__label"><small>' + esc(act.part) + '</small>' + esc(act.name) + '</span>' +
+        '<span class="riko-sidenav__count">' + list.length + ' 节</span></button>' +
+        '<div class="riko-sidenav__panel"><ul class="riko-sidenav__list">' + list.map(function (s) {
+          return '<li><a class="riko-sidenav__item" href="#' + pad(s.n) + '" data-n="' + s.n + '">' +
+            '<span class="riko-sidenav__num">' + pad(s.n) + '</span><span class="riko-sidenav__text">' + esc(s.title) + '</span>' +
+            '<span class="riko-sidenav__meta" hidden></span><span class="riko-sidenav__dot" aria-label="已读" hidden></span></a></li>';
+        }).join('') + '</ul></div></div>';
+    }).join('');
+  }
+  var navs = [document.getElementById('toc'), document.getElementById('toc-mobile')];
+  navs.forEach(function (nav) { nav.innerHTML = tocHtml(); Riko.init(nav); });
+
+  function syncNav() {
+    navs.forEach(function (nav) {
+      nav.querySelectorAll('.riko-sidenav__item').forEach(function (a) {
+        var n = +a.dataset.n;
+        if (n === current) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+        a.querySelector('.riko-sidenav__dot').hidden = visited.indexOf(n) < 0 || n === current;
+        var meta = a.querySelector('.riko-sidenav__meta');
+        meta.hidden = !hitCounts[n];
+        meta.textContent = hitCounts[n] || '';
+      });
+      if (nav.riko) nav.riko.setCurrent('#' + pad(current));
+    });
+    document.getElementById('read-meta').textContent = '已读 ' + visited.length + ' / ' + SECS.length + ' 节（示例）';
+    document.getElementById('read-bar').value = visited.length / SECS.length;
+  }
+
+  // ---- 正文 ----
+  var inner = document.getElementById('reader-inner');
+  function render() {
+    var s = SECS[current - 1];
+    var act = ACTS.filter(function (a) { return s.n >= a.from && s.n <= a.to; })[0];
+    var prev = SECS[current - 2], next = SECS[current];
+    var chars = s.paras.reduce(function (a, p) { return a + p.length; }, 0);
+    inner.innerHTML =
+      '<div class="riko-cluster riko-cluster--sm"><span class="riko-tag riko-tag--ice"><i data-lucide="book-open"></i>' + esc(act.part) + '</span>' +
+      '<span class="riko-text riko-text--sm riko-text--muted">' + esc(act.name) + '</span></div>' +
+      '<header class="riko-stack riko-stack--sm riko-stack--center">' +
+      '<p class="riko-hand riko-hand--accent"><span class="riko-star" aria-hidden="true"></span> No.' + pad(s.n) + ' <span class="riko-star" aria-hidden="true"></span></p>' +
+      '<h1 class="riko-h2 riko-text--read" id="sec-title">' + esc(s.title) + '</h1>' +
+      '<span class="riko-squiggle riko-squiggle--center" aria-hidden="true" style="--riko-squiggle-w: 180px;"></span>' +
+      '<p class="riko-caption">约 ' + chars.toLocaleString() + ' 字 · 预计阅读 ' + Math.max(1, Math.round(chars / 400)) + ' 分钟</p></header>' +
+      '<div class="riko-prose riko-prose--read riko-prose--wide" id="prose">' + s.paras.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') + '</div>' +
+      (s.ends.length ? '<p class="riko-cluster riko-cluster--center">' + s.ends.map(function (t) { return '<span class="riko-tag riko-tag--soft">✦ ' + esc(t) + ' ✦</span>'; }).join('') + '</p>' : '') +
+      '<div class="riko-divider" role="separator"></div>' +
+      '<nav class="riko-pager" aria-label="小节翻页">' +
+      (prev ? '<a class="riko-pager__prev" href="#' + pad(prev.n) + '"><span class="riko-pager__label">上一节</span><span class="riko-pager__title">' + pad(prev.n) + ' ' + esc(prev.title) + '</span></a>' : '') +
+      (next ? '<a class="riko-pager__next" href="#' + pad(next.n) + '"><span class="riko-pager__label">下一节</span><span class="riko-pager__title">' + pad(next.n) + ' ' + esc(next.title) + '</span></a>'
+            : '<a class="riko-pager__next" href="https://bbs.bloret.net/#section/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4"><span class="riko-pager__label">示例到此为止</span><span class="riko-pager__title">去论坛继续阅读</span></a>') +
+      '</nav>' +
+      '<p class="riko-caption riko-u-text-center">小提示：按 <kbd class="riko-kbd">←</kbd> <kbd class="riko-kbd">→</kbd> 切换小节，按 <kbd class="riko-kbd">/</kbd> 快速搜索</p>';
+    Riko.init(inner);
+    hl = query ? Riko.highlight('#reader-inner', query, { scroll: false }) : null;
+  }
+
+  function open(n, opts) {
+    opts = opts || {};
+    if (!SECS[n - 1]) return;
+    current = n;
+    if (visited.indexOf(n) < 0) { visited.push(n); Riko.store.setJSON('riko-reader-visited', visited); }
+    Riko.store.set('riko-reader-last', n);
+    render();
+    syncNav();
+    updateCount();
+    document.title = pad(n) + ' ' + SECS[n - 1].title + ' · 《络的世界》小说阅读器';
+    if (location.hash !== '#' + pad(n)) history.replaceState(null, '', '#' + pad(n));
+    var drawer = document.getElementById('toc-drawer');
+    if (drawer.open && drawer.riko) drawer.riko.close();
+    if (!opts.keepScroll) {
+      var top = document.getElementById('reader').getBoundingClientRect().top + scrollY - document.querySelector('.riko-navbar').offsetHeight - 16;
+      if (scrollY > top) scrollTo({ top: top, behavior: 'instant' in document.documentElement.style ? 'instant' : 'auto' });
+    }
+  }
+
+  // ---- 搜索：跨小节统计 + 当前小节高亮 + 上一处/下一处（到头后跳到下一个有结果的小节） ----
+  var boxes = [document.getElementById('search'), document.getElementById('search-mobile')];
+  function updateCount() {
+    var total = 0; for (var k in hitCounts) total += hitCounts[k];
+    boxes.forEach(function (b) {
+      if (!b.riko) return;
+      if (!query) return b.riko.setResult(null);
+      b.riko.setResult(hl && hl.count ? { current: hl.index + 1, total: hl.count, label: '本节 ' + (hl.index + 1) + ' / ' + hl.count + ' · 共 ' + total }
+        : { current: 0, total: total, label: total ? '本节无结果 · 共 ' + total : '没有找到' });
+    });
+  }
+  function runSearch(q) {
+    query = q;
+    hitCounts = {};
+    if (q) SECS.forEach(function (s) {
+      var text = (s.title + '\n' + s.paras.join('\n')).toLowerCase(), i = text.indexOf(q), c = 0;
+      while (i > -1) { c++; i = text.indexOf(q, i + q.length); }
+      if (c) hitCounts[s.n] = c;
+    });
+    hl = Riko.highlight('#reader-inner', q, { scroll: false });
+    if (hl.count) hl.go(0);
+    syncNav();
+    updateCount();
+  }
+  function step(dir) {
+    if (!query) return;
+    if (hl && hl.count && !((dir > 0 && hl.index === hl.count - 1) || (dir < 0 && hl.index === 0))) {
+      dir > 0 ? hl.next() : hl.prev();
+      return updateCount();
+    }
+    var ns = Object.keys(hitCounts).map(Number).sort(function (a, b) { return a - b; });
+    if (!ns.length) return;
+    var target = dir > 0 ? (ns.filter(function (n) { return n > current; })[0] || ns[0])
+                         : (ns.filter(function (n) { return n < current; }).pop() || ns[ns.length - 1]);
+    if (target !== current) open(target, { keepScroll: true });
+    if (hl && hl.count) hl.go(dir > 0 ? 0 : hl.count - 1);
+    updateCount();
+  }
+  boxes.forEach(function (b) {
+    b.addEventListener('riko:search:input', function (e) {
+      boxes.forEach(function (o) { if (o !== b) o.querySelector('input').value = b.querySelector('input').value; });
+      runSearch(e.detail.query);
+    });
+    b.addEventListener('riko:search:step', function (e) { step(e.detail.dir); });
+  });
+
+  // ---- 字号 ----
+  var fs = document.getElementById('font-size');
+  fs.value = parseInt(Riko.store.get('riko-reader-font'), 10) || 18;
+  function applyFont() { document.documentElement.style.setProperty('--riko-reading-size', fs.value + 'px'); }
+  applyFont();
+  fs.addEventListener('input', function () { applyFont(); Riko.store.set('riko-reader-font', fs.value); });
+
+  // ---- 键盘与链接 ----
+  document.addEventListener('keydown', function (e) {
+    if (/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (document.querySelector('dialog[open]')) return;
+    if (e.key === 'ArrowLeft') open(current - 1);
+    else if (e.key === 'ArrowRight') open(current + 1);
+  });
+  function fromHash() { var m = location.hash.match(/^#(\d{1,3})$/); return m ? parseInt(m[1], 10) : 0; }
+  window.addEventListener('hashchange', function () { var n = fromHash(); if (n && n !== current) open(n); });
+
+  var start = fromHash() || parseInt(Riko.store.get('riko-reader-last'), 10) || 1;
+  open(SECS[start - 1] ? start : 1, { keepScroll: true });
+  window.__reader = { open: open, runSearch: runSearch, step: step, get current() { return current; }, get hl() { return hl; }, hitCounts: function () { return hitCounts; } };
+})();
+</script>
+</body>
+</html>

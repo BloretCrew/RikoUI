@@ -1,0 +1,28 @@
+/* ==========================================================================
+   breadcrumb · 面包屑
+   <nav class="riko-breadcrumb" aria-label="面包屑">
+     <ol class="riko-breadcrumb__list">
+       <li class="riko-breadcrumb__item"><a class="riko-breadcrumb__link" href="/">首页</a></li>
+       <li class="riko-breadcrumb__item"><span class="riko-breadcrumb__link" aria-current="page">第一幕</span></li>
+     </ol>
+   </nav>
+   ========================================================================== */
+@layer riko.components {
+  .riko-breadcrumb { --riko-breadcrumb-sep: var(--riko-icon-chevron-right); font-size: var(--riko-text-sm); }
+  .riko-breadcrumb--stars { --riko-breadcrumb-sep: var(--riko-icon-star); }
+  .riko-breadcrumb__list { display: flex; flex-wrap: wrap; align-items: center; gap: var(--riko-space-1); margin: 0; padding: 0; list-style: none; }
+  .riko-breadcrumb__item { display: inline-flex; align-items: center; gap: var(--riko-space-1); min-width: 0; }
+  .riko-breadcrumb__item + .riko-breadcrumb__item::before {
+    content: ""; flex: none; width: 13px; height: 13px; margin-right: 2px;
+    background: var(--riko-color-tan);
+    -webkit-mask: var(--riko-breadcrumb-sep) center / contain no-repeat; mask: var(--riko-breadcrumb-sep) center / contain no-repeat;
+  }
+  .riko-breadcrumb--stars .riko-breadcrumb__item + .riko-breadcrumb__item::before { width: 9px; height: 9px; margin-inline: 3px 5px; background: var(--riko-color-accent); }
+  .riko-breadcrumb__link {
+    display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: var(--riko-radius-pill);
+    color: var(--riko-color-fg-muted); text-decoration: none; white-space: nowrap;
+    transition: background var(--riko-duration-fast) ease, color var(--riko-duration-fast) ease;
+  }
+  a.riko-breadcrumb__link:hover { background: var(--riko-color-surface-muted); color: var(--riko-color-fg-strong); }
+  .riko-breadcrumb__link[aria-current="page"] { color: var(--riko-color-ice-ink); background: var(--riko-color-ice-soft); font-weight: var(--riko-weight-medium); }
+}

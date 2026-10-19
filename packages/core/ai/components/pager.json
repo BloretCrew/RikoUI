@@ -1,0 +1,75 @@
+{
+  "name": "pager",
+  "title": "翻页",
+  "titleEn": "Pager",
+  "category": "navigation",
+  "summary": "「上一节 / 下一节」两张大卡片，显示前后内容的标题。",
+  "when": "小说章节、文档、教程等线性阅读内容的底部。多页列表用 pagination。",
+  "root": "riko-pager",
+  "element": "nav",
+  "parts": [
+    {
+      "class": "riko-pager__prev",
+      "desc": "上一项卡片（a / button）"
+    },
+    {
+      "class": "riko-pager__next",
+      "desc": "下一项卡片（a / button），总在右侧"
+    },
+    {
+      "class": "riko-pager__label",
+      "desc": "小字标签（上一节/下一节），箭头由 CSS 生成",
+      "required": true
+    },
+    {
+      "class": "riko-pager__title",
+      "desc": "前后内容的标题",
+      "required": true
+    }
+  ],
+  "modifiers": [],
+  "states": [
+    {
+      "attr": "aria-disabled=\"true\"",
+      "on": "riko-pager__prev",
+      "desc": "不可用（用于 span/a）"
+    },
+    {
+      "attr": "disabled",
+      "on": "riko-pager__next",
+      "desc": "不可用（用于 button）"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "<nav aria-label=\"…翻页\">。"
+  ],
+  "rules": [
+    "只有下一项时可以只写 __next，它会保持在右栏。",
+    "窄屏（≤520px）自动改为上下排列。"
+  ],
+  "avoid": [
+    "不要在 __label 里再手写箭头。"
+  ],
+  "examples": [
+    {
+      "title": "上一节 / 下一节",
+      "html": "<nav class=\"riko-pager\" aria-label=\"小节翻页\">\n  <a class=\"riko-pager__prev\" href=\"#001\"><span class=\"riko-pager__label\">上一节</span><span class=\"riko-pager__title\">001 沙滩上的画家</span></a>\n  <a class=\"riko-pager__next\" href=\"#003\"><span class=\"riko-pager__label\">下一节</span><span class=\"riko-pager__title\">003 熟悉的身影</span></a>\n</nav>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-pager__prev, .riko-pager__next",
+      "has": ".riko-pager__title",
+      "message": "翻页卡片内需要 riko-pager__title"
+    },
+    {
+      "selector": "nav.riko-pager",
+      "attr": "aria-label|aria-labelledby",
+      "message": "翻页 <nav> 需要 aria-label"
+    }
+  ],
+  "related": [
+    "pagination"
+  ]
+}

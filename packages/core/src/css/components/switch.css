@@ -1,0 +1,61 @@
+/* ==========================================================================
+   switch · 开关（原生 checkbox + role="switch"，无需 JS）
+   <label class="riko-switch"><input type="checkbox" role="switch" checked> 夜间提醒</label>
+   --sm / --lg · --end 文字在左、开关在右（设置列表常用）· disabled
+   ========================================================================== */
+@layer riko.components {
+  .riko-switch {
+    --riko-switch-w: 46px;
+    --riko-switch-h: 26px;
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: var(--riko-text-md); line-height: 1.5; color: var(--riko-color-fg);
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
+  }
+  .riko-switch > input {
+    position: relative; flex: none; appearance: none; -webkit-appearance: none; margin: 0;
+    width: var(--riko-switch-w); height: var(--riko-switch-h);
+    background: var(--riko-color-surface-muted);
+    border: var(--riko-border-width) solid var(--riko-color-border-strong);
+    border-radius: var(--riko-radius-pill);
+    box-shadow: var(--riko-shadow-inset);
+    cursor: inherit;
+    transition: background var(--riko-duration-base) ease, border-color var(--riko-duration-base) ease;
+  }
+  /* 圆钮 */
+  .riko-switch > input::before {
+    content: ""; position: absolute; top: 50%; left: 2px;
+    width: calc(var(--riko-switch-h) - 8px); height: calc(var(--riko-switch-h) - 8px);
+    border-radius: 50%;
+    background: var(--riko-color-surface);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .18), 0 0 0 1px var(--riko-color-border);
+    transform: translateY(-50%);
+    transition: left var(--riko-duration-base) var(--riko-ease-bounce), width var(--riko-duration-fast) ease;
+  }
+  /* 打开时圆钮里出现小星星 */
+  .riko-switch > input::after {
+    content: ""; position: absolute; top: 50%;
+    left: calc(var(--riko-switch-w) - var(--riko-switch-h) + 2px + (var(--riko-switch-h) - 8px) * .2);
+    width: calc((var(--riko-switch-h) - 8px) * .6); height: calc((var(--riko-switch-h) - 8px) * .6);
+    background: var(--riko-color-accent);
+    -webkit-mask: var(--riko-icon-star) center / contain no-repeat;
+    mask: var(--riko-icon-star) center / contain no-repeat;
+    transform: translateY(-50%) scale(0);
+    transition: transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-switch:hover > input:not(:disabled) { border-color: var(--riko-color-accent); }
+  .riko-switch > input:checked { background: var(--riko-color-accent); border-color: var(--riko-color-accent); }
+  .riko-switch > input:checked::before { left: calc(var(--riko-switch-w) - var(--riko-switch-h) + 2px); }
+  .riko-switch > input:checked::after { transform: translateY(-50%) scale(1); }
+  .riko-switch > input:active:not(:disabled)::before { width: calc(var(--riko-switch-h) - 2px); }
+  .riko-switch > input:checked:active:not(:disabled)::before { left: calc(var(--riko-switch-w) - var(--riko-switch-h) - 4px); }
+  .riko-switch > input:focus-visible { outline: var(--riko-focus-ring); outline-offset: var(--riko-focus-offset); }
+  .riko-switch:has(> input:disabled) { cursor: not-allowed; color: var(--riko-color-fg-muted); }
+  .riko-switch > input:disabled { opacity: .5; }
+
+  .riko-switch__text { display: flex; flex-direction: column; min-width: 0; }
+  .riko-switch__desc { font-size: var(--riko-text-sm); color: var(--riko-color-fg-muted); }
+
+  .riko-switch--sm { --riko-switch-w: 36px; --riko-switch-h: 20px; font-size: var(--riko-text-sm); }
+  .riko-switch--lg { --riko-switch-w: 58px; --riko-switch-h: 32px; font-size: var(--riko-text-lg); }
+  .riko-switch--end { display: flex; width: 100%; justify-content: space-between; flex-direction: row-reverse; }
+}

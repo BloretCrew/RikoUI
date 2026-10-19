@@ -1,0 +1,46 @@
+/* ==========================================================================
+   Riko UI · 工具类（riko-u-*）
+   只提供少量高频工具；颜色/阴影等请用组件或设计变量，不要堆工具类。
+   ========================================================================== */
+@layer riko.utilities {
+  .riko-u-sr-only {
+    position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  .riko-u-hidden { display: none !important; }
+  @media (max-width: 520px) { .riko-u-hide-sm { display: none !important; } }
+  @media (max-width: 768px) { .riko-u-hide-md { display: none !important; } }
+  @media (min-width: 769px) { .riko-u-only-mobile { display: none !important; } }
+
+  .riko-u-text-left { text-align: left; }
+  .riko-u-text-center { text-align: center; }
+  .riko-u-text-right { text-align: right; }
+  .riko-u-nowrap { white-space: nowrap; }
+  .riko-u-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .riko-u-clamp-2, .riko-u-clamp-3 { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+  .riko-u-clamp-2 { -webkit-line-clamp: 2; line-clamp: 2; }
+  .riko-u-clamp-3 { -webkit-line-clamp: 3; line-clamp: 3; }
+  .riko-u-tabular { font-variant-numeric: tabular-nums; }
+
+  .riko-u-w-full { width: 100%; }
+  .riko-u-flex-1 { flex: 1 1 0; min-width: 0; }
+  .riko-u-relative { position: relative; }
+  .riko-u-mx-auto { margin-inline: auto; }
+
+  .riko-u-mt-0 { margin-top: 0; }
+  .riko-u-mt-2 { margin-top: var(--riko-space-2); }
+  .riko-u-mt-4 { margin-top: var(--riko-space-4); }
+  .riko-u-mt-6 { margin-top: var(--riko-space-6); }
+  .riko-u-mt-8 { margin-top: var(--riko-space-8); }
+  .riko-u-mt-10 { margin-top: var(--riko-space-10); }
+  .riko-u-mb-0 { margin-bottom: 0; }
+  .riko-u-mb-2 { margin-bottom: var(--riko-space-2); }
+  .riko-u-mb-4 { margin-bottom: var(--riko-space-4); }
+  .riko-u-mb-6 { margin-bottom: var(--riko-space-6); }
+  .riko-u-mb-8 { margin-bottom: var(--riko-space-8); }
+  .riko-u-mb-10 { margin-bottom: var(--riko-space-10); }
+
+  /* 滚动进场动画（配合 data-riko="reveal"，无 JS 时直接显示） */
+  .riko-u-reveal { transition: opacity .7s var(--riko-ease-out), transform .7s var(--riko-ease-out); }
+  .riko-u-reveal[data-state="hidden"] { opacity: 0; transform: translateY(24px); }
+}

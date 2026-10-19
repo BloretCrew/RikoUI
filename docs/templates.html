@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>页面模板 · Riko UI</title>
+<meta name="theme-color" content="#FBF5EA">
+<script src="../packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="../packages/core/dist/riko-ui.css">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+
+<header class="docs-header">
+  <div class="docs-header__inner">
+    <button type="button" class="riko-btn riko-btn--icon riko-btn--ghost docs-menu-btn" aria-label="打开导航"><i data-lucide="menu"></i></button>
+    <a class="docs-brand" href="index.html">
+      <span class="docs-brand__mark"><span class="riko-star" aria-hidden="true"></span></span>
+      <span><span class="docs-brand__name">Riko UI</span><span class="docs-brand__sub">little star ui kit</span></span>
+    </a>
+    <span class="docs-header__spacer"></span>
+    <div class="riko-theme-picker riko-theme-picker--compact" data-riko="theme-picker"></div>
+  </div>
+</header>
+
+<div class="docs-layout">
+  <aside class="docs-sidebar" aria-label="文档导航"></aside>
+  <main class="docs-main">
+    <div class="docs-hero">
+      <h1>页面模板</h1>
+      <p>完全只用 Riko UI 的类与组件搭建的整页模板，可直接复制到项目中改造。每个模板都通过了 riko-ui check（0 错误 0 警告）。</p>
+    </div>
+
+    <section class="docs-section" id="tpl-landing" data-docs-noapi>
+      <h2>官网首页 <small>Landing</small></h2>
+      <p>《络的世界》官网：主视觉、两个大入口卡片、可折叠的 10 幕小说目录（含搜索与最新章节）、其他内容与页脚。</p>
+      <p class="riko-cluster riko-cluster--sm riko-u-mt-2"><span class="riko-text riko-text--sm riko-text--muted">用到：hero · card · accordion · list · search · dialog · theme-picker · footer</span><a class="riko-btn riko-btn--sm riko-btn--soft" href="../templates/landing.html" target="_blank" rel="noopener"><i data-lucide="external-link"></i>在新窗口打开</a></p>
+      <div class="docs-demo" data-docs-nocode style="padding: 0;">
+        <iframe src="../templates/landing.html" title="官网首页模板预览" loading="lazy" style="display: block; width: 100%; height: 520px; border: 0; border-radius: var(--riko-radius-lg);"></iframe>
+      </div>
+    </section>
+
+    <section class="docs-section" id="tpl-reader" data-docs-noapi>
+      <h2>小说阅读器 <small>Reader</small></h2>
+      <p>侧栏目录、衬线正文、跨小节搜索高亮与上一处/下一处、设置弹窗（主题与字号）、窄屏抽屉目录；记住上次阅读、#001 定位、←/→ 翻页。（模板内置前 6 节）</p>
+      <p class="riko-cluster riko-cluster--sm riko-u-mt-2"><span class="riko-text riko-text--sm riko-text--muted">用到：navbar · search + Riko.highlight · sidenav · prose--read · pager · dialog · drawer · range · reading-progress · backtop</span><a class="riko-btn riko-btn--sm riko-btn--soft" href="../templates/reader.html" target="_blank" rel="noopener"><i data-lucide="external-link"></i>在新窗口打开</a></p>
+      <div class="docs-demo" data-docs-nocode style="padding: 0;">
+        <iframe src="../templates/reader.html" title="小说阅读器模板预览" loading="lazy" style="display: block; width: 100%; height: 520px; border: 0; border-radius: var(--riko-radius-lg);"></iframe>
+      </div>
+    </section>
+
+    <section class="docs-section" id="tpl-login" data-docs-noapi>
+      <h2>登录 / 注册 <small>Login</small></h2>
+      <p>标签页切换登录与注册，原生约束校验、密码显示切换、邮箱验证码、第三方登录与验证码弹窗。</p>
+      <p class="riko-cluster riko-cluster--sm riko-u-mt-2"><span class="riko-text riko-text--sm riko-text--muted">用到：tabs · form-validate · field · input-group · password-toggle · otp · divider · dialog · toast</span><a class="riko-btn riko-btn--sm riko-btn--soft" href="../templates/login.html" target="_blank" rel="noopener"><i data-lucide="external-link"></i>在新窗口打开</a></p>
+      <div class="docs-demo" data-docs-nocode style="padding: 0;">
+        <iframe src="../templates/login.html" title="登录 / 注册模板预览" loading="lazy" style="display: block; width: 100%; height: 520px; border: 0; border-radius: var(--riko-radius-lg);"></iframe>
+      </div>
+    </section>
+
+    <section class="docs-section" id="tpl-dashboard" data-docs-noapi>
+      <h2>创作后台 <small>Dashboard</small></h2>
+      <p>侧栏导航、顶栏搜索与账户菜单、统计卡、可排序表格、进度目标、时间轴与留言列表。</p>
+      <p class="riko-cluster riko-cluster--sm riko-u-mt-2"><span class="riko-text riko-text--sm riko-text--muted">用到：sidenav · dropdown · stat · table-sort · tabs · progress · timeline · list · avatar · badge · toast</span><a class="riko-btn riko-btn--sm riko-btn--soft" href="../templates/dashboard.html" target="_blank" rel="noopener"><i data-lucide="external-link"></i>在新窗口打开</a></p>
+      <div class="docs-demo" data-docs-nocode style="padding: 0;">
+        <iframe src="../templates/dashboard.html" title="创作后台模板预览" loading="lazy" style="display: block; width: 100%; height: 520px; border: 0; border-radius: var(--riko-radius-lg);"></iframe>
+      </div>
+    </section>
+
+    <section class="docs-section" id="tpl-article" data-docs-noapi>
+      <h2>文章 / 设定集 <small>Article</small></h2>
+      <p>面包屑、文章头、长文排版、页内目录滚动高亮、便利贴、表格、代码块与上下篇。</p>
+      <p class="riko-cluster riko-cluster--sm riko-u-mt-2"><span class="riko-text riko-text--sm riko-text--muted">用到：breadcrumb · prose · toc · note · table · codeblock · copy · pager · reading-progress</span><a class="riko-btn riko-btn--sm riko-btn--soft" href="../templates/article.html" target="_blank" rel="noopener"><i data-lucide="external-link"></i>在新窗口打开</a></p>
+      <div class="docs-demo" data-docs-nocode style="padding: 0;">
+        <iframe src="../templates/article.html" title="文章 / 设定集模板预览" loading="lazy" style="display: block; width: 100%; height: 520px; border: 0; border-radius: var(--riko-radius-lg);"></iframe>
+      </div>
+    </section>
+
+    <section class="docs-section" id="tpl-settings" data-docs-noapi>
+      <h2>设置页 <small>Settings</small></h2>
+      <p>分组卡片式设置：资料表单、主题选择、分段选择、字号滑块、单选卡片、色板、开关与危险区确认。</p>
+      <p class="riko-cluster riko-cluster--sm riko-u-mt-2"><span class="riko-text riko-text--sm riko-text--muted">用到：split · fieldset · field · segmented · range · radio · swatches · switch · alert · Riko.confirm · toast</span><a class="riko-btn riko-btn--sm riko-btn--soft" href="../templates/settings.html" target="_blank" rel="noopener"><i data-lucide="external-link"></i>在新窗口打开</a></p>
+      <div class="docs-demo" data-docs-nocode style="padding: 0;">
+        <iframe src="../templates/settings.html" title="设置页模板预览" loading="lazy" style="display: block; width: 100%; height: 520px; border: 0; border-radius: var(--riko-radius-lg);"></iframe>
+      </div>
+    </section>
+
+    <section class="docs-section" id="tpl-404" data-docs-noapi>
+      <h2>404 页 <small>Not Found</small></h2>
+      <p>被海浪冲走的页面：结果页插画、操作按钮与漂浮星星。</p>
+      <p class="riko-cluster riko-cluster--sm riko-u-mt-2"><span class="riko-text riko-text--sm riko-text--muted">用到：result · sky · note</span><a class="riko-btn riko-btn--sm riko-btn--soft" href="../templates/404.html" target="_blank" rel="noopener"><i data-lucide="external-link"></i>在新窗口打开</a></p>
+      <div class="docs-demo" data-docs-nocode style="padding: 0;">
+        <iframe src="../templates/404.html" title="404 页模板预览" loading="lazy" style="display: block; width: 100%; height: 520px; border: 0; border-radius: var(--riko-radius-lg);"></iframe>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="assets/manifest.js"></script>
+<script src="assets/docs.js"></script>
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="../packages/core/dist/riko-ui.js"></script>
+</body>
+</html>

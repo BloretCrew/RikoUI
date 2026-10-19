@@ -1,0 +1,46 @@
+<!-- Riko UI v0.1.0 · 自动生成 · 通用规则见 ../../llms.txt -->
+# 链接 Link `link`
+
+带波浪下划线的文字链接，适合正文中跳转。
+
+**何时用**：正文或说明文字中的跳转。需要按钮外观时用 <a class="riko-btn">。未加类的 <a> 也会得到同样的基础样式。
+
+**根**：`riko-link`（推荐 `<a>`）
+
+**修饰**（同组互斥）：
+- variant：`riko-link--muted` 低调灰棕色；`riko-link--plain` 无下划线，悬停才出现
+- decor：`riko-link--external` 外链：末尾自动加外链图标
+
+**状态**：
+- `aria-current="page"` 当前页面
+- `aria-disabled="true"` 不可用（同时去掉 href）
+
+**无障碍**：
+- 链接文字要能独立说明去向，不要只写「点这里」。
+- 外链加 target="_blank" 时同时写 rel="noopener"。
+
+**要点**：
+- ✓ 外链写法：<a class="riko-link riko-link--external" href="…" target="_blank" rel="noopener">。
+
+**避免**：
+- ✗ 不要用链接触发 JS 操作（那是按钮的工作）。
+
+**示例 · 基础**
+
+```html
+<p>跟随络可，<a class="riko-link" href="#link">从沙滩上的第一幅画</a>开始读起吧。</p>
+```
+
+**示例 · 变体**
+
+```html
+<div class="riko-cluster riko-cluster--lg">
+  <a class="riko-link riko-link--muted" href="#link">低调链接</a>
+  <a class="riko-link riko-link--plain" href="#link">悬停才有下划线</a>
+  <a class="riko-link riko-link--external" href="https://riko.land" target="_blank" rel="noopener">络的世界官网</a>
+  <a class="riko-link" aria-current="page" href="#link">当前页面</a>
+  <a class="riko-link" aria-disabled="true">暂不可用</a>
+</div>
+```
+
+相关：[button](button.md)

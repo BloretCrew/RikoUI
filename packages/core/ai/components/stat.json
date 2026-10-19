@@ -1,0 +1,77 @@
+{
+  "name": "stat",
+  "title": "统计数值",
+  "titleEn": "Stat",
+  "category": "data",
+  "summary": "大号手写数字的指标卡，带标签、图标与涨跌趋势。",
+  "when": "仪表盘、个人主页的关键数字。",
+  "root": "riko-stat",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-stat__icon",
+      "desc": "右上角倾斜图标"
+    },
+    {
+      "class": "riko-stat__label",
+      "desc": "指标名称"
+    },
+    {
+      "class": "riko-stat__value",
+      "desc": "数值（大号手写体）"
+    },
+    {
+      "class": "riko-stat__unit",
+      "desc": "单位（放在 __value 内）"
+    },
+    {
+      "class": "riko-stat__trend",
+      "desc": "趋势说明，配合 data-trend=\"up|down\""
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-stat--accent",
+      "desc": "橙色描边与图标",
+      "group": "tone"
+    },
+    {
+      "class": "riko-stat--plain",
+      "desc": "去掉卡片外观（嵌在其他卡片里时）",
+      "group": "layout"
+    }
+  ],
+  "states": [
+    {
+      "attr": "data-trend=\"up|down\"",
+      "on": "riko-stat__trend",
+      "desc": "上升（绿）/ 下降（红），带箭头"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "趋势不要只靠颜色和箭头表达：文字里写明「增加 / 减少」或「+12 / -3」。"
+  ],
+  "rules": [
+    "多个 stat 用 riko-grid 排列。"
+  ],
+  "avoid": [
+    "__value 中不要放长文字。"
+  ],
+  "examples": [
+    {
+      "title": "指标卡",
+      "html": "<div class=\"riko-grid\" style=\"--riko-grid-min: 200px\">\n  <div class=\"riko-stat\">\n    <span class=\"riko-stat__icon\"><i data-lucide=\"book-open\"></i></span>\n    <span class=\"riko-stat__label\">已更新小节</span>\n    <span class=\"riko-stat__value\">76<span class=\"riko-stat__unit\">节</span></span>\n    <span class=\"riko-stat__trend\" data-trend=\"up\">本月 +12</span>\n  </div>\n  <div class=\"riko-stat riko-stat--accent\">\n    <span class=\"riko-stat__icon\"><i data-lucide=\"star\"></i></span>\n    <span class=\"riko-stat__label\">收到的星星</span>\n    <span class=\"riko-stat__value\">2,048</span>\n    <span class=\"riko-stat__trend\" data-trend=\"up\">较上周 +8%</span>\n  </div>\n  <div class=\"riko-stat\">\n    <span class=\"riko-stat__icon\"><i data-lucide=\"type\"></i></span>\n    <span class=\"riko-stat__label\">总字数</span>\n    <span class=\"riko-stat__value\">9.0<span class=\"riko-stat__unit\">万字</span></span>\n    <span class=\"riko-stat__trend\">连载中</span>\n  </div>\n  <div class=\"riko-stat\">\n    <span class=\"riko-stat__icon\"><i data-lucide=\"bug\"></i></span>\n    <span class=\"riko-stat__label\">待修复错别字</span>\n    <span class=\"riko-stat__value\">3</span>\n    <span class=\"riko-stat__trend\" data-trend=\"down\">较上周减少 5 个</span>\n  </div>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-stat",
+      "has": ".riko-stat__value",
+      "message": "riko-stat 需要 riko-stat__value"
+    }
+  ],
+  "related": [
+    "card"
+  ]
+}

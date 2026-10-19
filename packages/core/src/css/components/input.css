@@ -1,0 +1,73 @@
+/* ==========================================================================
+   input · 输入框（同时定义 textarea / select 共用的控件外观）
+   <input class="riko-input" type="text" placeholder="写点什么吧…">
+   尺寸 --sm --lg · 状态 disabled / readonly / aria-invalid="true"
+   适用于 text / email / password / number / search / url / tel / date / time / datetime-local / month / week
+   ========================================================================== */
+@layer riko.components {
+  .riko-input, .riko-textarea, .riko-select {
+    --riko-control-h: var(--riko-control-h-md);
+    --riko-control-px: var(--riko-space-4);
+    --riko-control-bg: var(--riko-color-surface);
+    --riko-control-border: var(--riko-color-border);
+    --riko-control-radius: var(--riko-radius-md);
+    display: block; width: 100%;
+    min-height: var(--riko-control-h);
+    padding: 0 var(--riko-control-px);
+    font: var(--riko-weight-normal) var(--riko-text-md) / 1.5 var(--riko-font-body);
+    color: var(--riko-color-fg);
+    background: var(--riko-control-bg);
+    border: var(--riko-border-width) solid var(--riko-control-border);
+    border-radius: var(--riko-control-radius);
+    box-shadow: var(--riko-shadow-inset);
+    transition: border-color var(--riko-duration-fast) ease, box-shadow var(--riko-duration-fast) ease, background var(--riko-duration-base) ease;
+    appearance: none; -webkit-appearance: none;
+  }
+  .riko-input::placeholder, .riko-textarea::placeholder { color: var(--riko-color-fg-subtle); opacity: 1; }
+  .riko-input:hover, .riko-textarea:hover, .riko-select:hover { --riko-control-border: var(--riko-color-border-strong); }
+  .riko-input:focus, .riko-textarea:focus, .riko-select:focus { outline: none; }
+  .riko-input:focus-visible, .riko-textarea:focus-visible, .riko-select:focus-visible,
+  .riko-input:focus, .riko-textarea:focus, .riko-select:focus {
+    --riko-control-border: var(--riko-color-accent);
+    box-shadow: 0 0 0 4px var(--riko-color-accent-soft);
+    border-radius: var(--riko-control-radius);
+  }
+  .riko-input[aria-invalid="true"], .riko-textarea[aria-invalid="true"], .riko-select[aria-invalid="true"] {
+    --riko-control-border: var(--riko-color-danger);
+    --riko-control-bg: color-mix(in srgb, var(--riko-color-danger-soft) 45%, var(--riko-color-surface));
+  }
+  .riko-input[aria-invalid="true"]:focus, .riko-textarea[aria-invalid="true"]:focus, .riko-select[aria-invalid="true"]:focus {
+    box-shadow: 0 0 0 4px var(--riko-color-danger-soft);
+  }
+  .riko-input:disabled, .riko-textarea:disabled, .riko-select:disabled {
+    --riko-control-bg: var(--riko-color-surface-muted);
+    color: var(--riko-color-fg-muted); cursor: not-allowed; opacity: .75; box-shadow: none;
+  }
+  .riko-input:read-only:not(:disabled):not([type="date"], [type="time"], [type="datetime-local"], [type="month"], [type="week"], [type="color"], [type="range"], [type="file"], [type="checkbox"], [type="radio"]),
+  .riko-textarea:read-only:not(:disabled) {
+    --riko-control-bg: var(--riko-color-surface-sunken);
+    border-style: dashed; box-shadow: none;
+  }
+
+  .riko-input--sm, .riko-textarea--sm, .riko-select--sm { --riko-control-h: var(--riko-control-h-sm); --riko-control-px: var(--riko-space-3); font-size: var(--riko-text-sm); --riko-control-radius: var(--riko-radius-sm); }
+  .riko-input--lg, .riko-textarea--lg, .riko-select--lg { --riko-control-h: var(--riko-control-h-lg); --riko-control-px: var(--riko-space-5); font-size: var(--riko-text-lg); --riko-control-radius: var(--riko-radius-lg); }
+  .riko-input--round { --riko-control-radius: var(--riko-radius-pill); }
+
+  /* 原生类型细节 */
+  .riko-input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
+  .riko-input[type="number"] { font-variant-numeric: tabular-nums; }
+  .riko-input::-webkit-calendar-picker-indicator { opacity: .6; cursor: pointer; }
+  .riko-input[type="date"], .riko-input[type="time"], .riko-input[type="datetime-local"], .riko-input[type="month"], .riko-input[type="week"] {
+    display: flex; align-items: center; font-variant-numeric: tabular-nums;
+  }
+  .riko-input[type="color"] { width: var(--riko-control-h); padding: 4px; cursor: pointer; }
+  .riko-input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+  .riko-input[type="color"]::-webkit-color-swatch { border: 0; border-radius: var(--riko-radius-sm); }
+  .riko-input[type="file"] { padding: 6px; line-height: calc(var(--riko-control-h) - 16px); cursor: pointer; }
+  .riko-input[type="file"]::file-selector-button {
+    margin-right: var(--riko-space-3); padding: 0 var(--riko-space-3); height: calc(var(--riko-control-h) - 16px);
+    font: var(--riko-weight-medium) var(--riko-text-sm) var(--riko-font-body);
+    color: var(--riko-color-fg-strong); background: var(--riko-color-surface-muted);
+    border: 0; border-radius: var(--riko-radius-pill); cursor: pointer;
+  }
+}

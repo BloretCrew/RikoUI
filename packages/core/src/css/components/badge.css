@@ -1,0 +1,44 @@
+/* ==========================================================================
+   badge · 徽标（数字 / 小圆点）
+   <span class="riko-badge">12</span>
+   定位到头像或按钮右上角：
+   <span class="riko-badge-anchor">
+     <button class="riko-btn riko-btn--icon" aria-label="消息"><i data-lucide="bell"></i></button>
+     <span class="riko-badge riko-badge--danger" aria-label="3 条未读">3</span>
+   </span>
+   ========================================================================== */
+@layer riko.components {
+  .riko-badge {
+    --riko-badge-bg: var(--riko-color-accent);
+    --riko-badge-fg: var(--riko-color-accent-fg);
+    display: inline-flex; align-items: center; justify-content: center; gap: 3px;
+    min-width: 20px; height: 20px; padding: 0 6px;
+    font-size: .72rem; font-weight: var(--riko-weight-bold); line-height: 1;
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+    color: var(--riko-badge-fg); background: var(--riko-badge-bg);
+    border-radius: var(--riko-radius-pill);
+    vertical-align: middle;
+  }
+  .riko-badge--ice { --riko-badge-bg: var(--riko-color-ice-soft); --riko-badge-fg: var(--riko-color-ice-ink); box-shadow: inset 0 0 0 1.5px var(--riko-color-ice); }
+  .riko-badge--success { --riko-badge-bg: var(--riko-color-success-soft); --riko-badge-fg: var(--riko-color-success-ink); box-shadow: inset 0 0 0 1.5px var(--riko-color-success); }
+  .riko-badge--warning { --riko-badge-bg: var(--riko-color-warning-soft); --riko-badge-fg: var(--riko-color-warning-ink); box-shadow: inset 0 0 0 1.5px var(--riko-color-warning); }
+  .riko-badge--danger { --riko-badge-bg: var(--riko-color-danger); --riko-badge-fg: var(--riko-color-accent-fg); }
+  .riko-badge--neutral { --riko-badge-bg: var(--riko-color-surface-muted); --riko-badge-fg: var(--riko-color-fg-muted); }
+  .riko-badge--sm { min-width: 16px; height: 16px; padding: 0 4px; font-size: .64rem; }
+  .riko-badge--lg { min-width: 26px; height: 26px; padding: 0 9px; font-size: .82rem; }
+  .riko-badge--dot { min-width: 0; width: 10px; height: 10px; padding: 0; font-size: 0; }
+  .riko-badge--pulse { animation: riko-badge-pulse 2s ease-out infinite; }
+  @keyframes riko-badge-pulse {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--riko-badge-bg) 60%, transparent); }
+    100% { box-shadow: 0 0 0 9px transparent; }
+  }
+
+  .riko-badge-anchor { position: relative; display: inline-flex; vertical-align: middle; }
+  .riko-badge-anchor > .riko-badge {
+    position: absolute; z-index: 1; top: 0; right: 0;
+    transform: translate(35%, -35%);
+    box-shadow: 0 0 0 2px var(--riko-color-surface);
+    pointer-events: none;
+  }
+  .riko-badge-anchor > .riko-badge--dot { transform: translate(10%, -10%); }
+}

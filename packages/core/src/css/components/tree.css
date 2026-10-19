@@ -1,0 +1,39 @@
+/* ==========================================================================
+   tree · 树形列表（基于嵌套 <details>，原生键盘可用）
+   <ul class="riko-tree">
+     <li><details class="riko-tree__folder" open>
+       <summary class="riko-tree__label">故事</summary>
+       <ul class="riko-tree__group">
+         <li><a class="riko-tree__file" href="#">001 沙滩上的画家</a></li>
+       </ul>
+     </details></li>
+   </ul>
+   当前文件：在 __file 上加 aria-current="page"。
+   ========================================================================== */
+@layer riko.components {
+  .riko-tree, .riko-tree__group { list-style: none; margin: 0; padding: 0; font-size: var(--riko-text-sm); }
+  .riko-tree li { list-style: none; }
+  .riko-tree__group { position: relative; margin-left: 14px; padding-left: 12px; border-left: 1.5px dashed var(--riko-color-border-strong); }
+  .riko-tree__label, .riko-tree__file {
+    display: flex; align-items: center; gap: 8px; min-width: 0;
+    padding: 5px 10px; margin: 1px 0;
+    border-radius: var(--riko-radius-sm);
+    color: var(--riko-color-fg); text-decoration: none; cursor: pointer;
+    transition: background var(--riko-duration-fast) ease;
+  }
+  .riko-tree__label { list-style: none; font-weight: var(--riko-weight-medium); color: var(--riko-color-fg-strong); user-select: none; }
+  .riko-tree__label::-webkit-details-marker { display: none; }
+  .riko-tree__label::before, .riko-tree__file::before {
+    content: ""; flex: none; width: 1.1em; height: 1.1em; background: currentColor;
+    -webkit-mask: var(--riko-tree-icon) center / contain no-repeat;
+    mask: var(--riko-tree-icon) center / contain no-repeat;
+  }
+  .riko-tree__label { --riko-tree-icon: var(--riko-icon-folder); }
+  .riko-tree__label::before { color: var(--riko-color-accent); }
+  .riko-tree__folder[open] > .riko-tree__label { --riko-tree-icon: var(--riko-icon-folder-open); }
+  .riko-tree__file { --riko-tree-icon: var(--riko-icon-file); }
+  .riko-tree__file::before { color: var(--riko-color-ice-ink); }
+  .riko-tree__label:hover, .riko-tree__file:hover { background: var(--riko-color-surface-muted); }
+  .riko-tree__file[aria-current]:not([aria-current="false"]) { background: var(--riko-color-accent-soft); color: var(--riko-color-fg-strong); font-weight: var(--riko-weight-bold); }
+  .riko-tree__meta { margin-left: auto; font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted); font-weight: var(--riko-weight-normal); }
+}

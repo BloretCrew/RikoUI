@@ -1,0 +1,141 @@
+{
+  "name": "popover",
+  "title": "气泡卡片",
+  "titleEn": "Popover",
+  "category": "data",
+  "summary": "点击触发的浮层卡片，可放任意内容（文字、链接、按钮、表单），点外部或按 Esc 关闭。",
+  "when": "需要在原地展示补充信息或少量操作。只有一句提示用 tooltip；操作菜单用 dropdown；需要用户专注完成任务用 dialog。",
+  "root": "riko-popover",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-popover__header",
+      "desc": "标题行"
+    },
+    {
+      "class": "riko-popover__title",
+      "desc": "标题"
+    },
+    {
+      "class": "riko-popover__close",
+      "desc": "关闭按钮（加 data-riko-close 与 aria-label）"
+    },
+    {
+      "class": "riko-popover__body",
+      "desc": "内容"
+    },
+    {
+      "class": "riko-popover__footer",
+      "desc": "底部操作区"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-popover--sm",
+      "desc": "窄（220px）",
+      "group": "size"
+    },
+    {
+      "class": "riko-popover--lg",
+      "desc": "宽（400px）",
+      "group": "size"
+    },
+    {
+      "class": "riko-popover--ice",
+      "desc": "冰蓝底",
+      "group": "tone"
+    }
+  ],
+  "states": [
+    {
+      "attr": "aria-expanded=\"true\"",
+      "on": "触发器",
+      "desc": "打开时由 JS 维护"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"popover\"",
+    "options": [
+      {
+        "attr": "data-riko-toggle=\"<popover id>\"",
+        "values": "popover 的 id",
+        "desc": "写在触发按钮上：点击切换"
+      },
+      {
+        "attr": "popover",
+        "values": "auto",
+        "desc": "原生属性，写在 popover 上（推荐手写，避免首屏闪现）"
+      },
+      {
+        "attr": "data-riko-placement",
+        "values": "bottom | top | left | right（可加 -start / -end）",
+        "default": "bottom",
+        "desc": "写在 popover 上：相对触发器的位置"
+      },
+      {
+        "attr": "data-riko-close",
+        "values": "",
+        "desc": "写在 popover 内的按钮上：点击关闭"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "pop.riko.open(anchor?) / pop.riko.close() / pop.riko.toggle(anchor?)",
+        "desc": "手动控制；anchor 为定位参照元素"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:popover:open",
+        "detail": "{ anchor }",
+        "desc": "打开后"
+      },
+      {
+        "name": "riko:popover:close",
+        "detail": "{ anchor }",
+        "desc": "关闭后"
+      }
+    ]
+  },
+  "a11y": [
+    "触发器用 <button>；JS 会设置 aria-expanded / aria-controls / aria-haspopup。",
+    "打开后焦点移入卡片（第一个可聚焦元素，没有则卡片本身），Esc 关闭并把焦点还给触发器。",
+    "有标题时给 popover 加 aria-labelledby 指向标题 id。"
+  ],
+  "rules": [
+    "popover 元素可以放在页面任何位置（通常放在触发器旁边或 body 末尾），它会在顶层渲染。",
+    "关闭按钮：<button class=\"riko-popover__close\" data-riko-close aria-label=\"关闭\"></button>。"
+  ],
+  "avoid": [
+    "不要用 popover 做必须完成的流程（改用 dialog）。",
+    "不要给触发器同时加 popovertarget 和 data-riko-toggle。"
+  ],
+  "examples": [
+    {
+      "title": "基础用法",
+      "html": "<div class=\"riko-cluster riko-cluster--center\">\n  <button type=\"button\" class=\"riko-btn riko-btn--soft\" data-riko-toggle=\"pop-riko\">关于络可</button>\n  <div class=\"riko-popover\" id=\"pop-riko\" data-riko=\"popover\" popover aria-labelledby=\"pop-riko-title\">\n    <div class=\"riko-popover__header\">\n      <h3 class=\"riko-popover__title\" id=\"pop-riko-title\"><span class=\"riko-star\" aria-hidden=\"true\"></span>络可</h3>\n      <button type=\"button\" class=\"riko-popover__close\" data-riko-close aria-label=\"关闭\"></button>\n    </div>\n    <div class=\"riko-popover__body\">自小在 HV 长大的小画家，戴着有星星的贝雷帽，最喜欢在沙滩上画海。</div>\n    <div class=\"riko-popover__footer\">\n      <a class=\"riko-btn riko-btn--sm riko-btn--primary\" href=\"#popover\">查看设定</a>\n    </div>\n  </div>\n  <button type=\"button\" class=\"riko-btn\" data-riko-toggle=\"pop-tip\">小提示</button>\n  <div class=\"riko-popover riko-popover--sm riko-popover--ice\" id=\"pop-tip\" data-riko=\"popover\" popover data-riko-placement=\"top\">\n    <div class=\"riko-popover__body\">按 ← → 可以切换小节哦 ✦</div>\n  </div>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-popover",
+      "attr": "id",
+      "message": "riko-popover 需要 id，供触发器的 data-riko-toggle 引用"
+    },
+    {
+      "selector": ".riko-popover",
+      "attr": "popover",
+      "message": "riko-popover 建议写上 popover 属性（避免页面加载时闪现）"
+    },
+    {
+      "selector": ".riko-popover__close",
+      "attr": "aria-label",
+      "message": "riko-popover__close 需要 aria-label"
+    }
+  ],
+  "related": [
+    "tooltip",
+    "dropdown",
+    "dialog"
+  ]
+}

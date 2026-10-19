@@ -1,0 +1,72 @@
+/* ==========================================================================
+   dropdown · 下拉菜单 / menu · 菜单
+   <div class="riko-dropdown" data-riko="dropdown">
+     <button class="riko-btn" type="button" aria-haspopup="menu" aria-expanded="false">更多</button>
+     <div class="riko-menu" role="menu" hidden>
+       <p class="riko-menu__label">编辑</p>
+       <button class="riko-menu__item" role="menuitem" type="button"><span class="riko-menu__icon"><i data-lucide="pencil"></i></span>重命名<kbd class="riko-menu__shortcut">F2</kbd></button>
+       <hr class="riko-menu__separator">
+       <button class="riko-menu__item riko-menu__danger" role="menuitem" type="button">删除</button>
+     </div>
+   </div>
+   ========================================================================== */
+@layer riko.components {
+  .riko-dropdown { position: relative; display: inline-flex; }
+  .riko-dropdown [aria-haspopup][aria-expanded]::after {
+    content: ""; width: 14px; height: 14px; margin-left: 2px; background: currentColor; opacity: .7;
+    -webkit-mask: var(--riko-icon-chevron-down) center / contain no-repeat; mask: var(--riko-icon-chevron-down) center / contain no-repeat;
+    transition: transform var(--riko-duration-base) ease;
+  }
+  .riko-dropdown [aria-haspopup][aria-expanded="true"]::after { transform: rotate(180deg); }
+  .riko-dropdown--no-caret [aria-haspopup][aria-expanded]::after { display: none; }
+
+  .riko-menu {
+    z-index: var(--riko-z-dropdown);
+    display: flex; flex-direction: column; gap: 2px;
+    min-width: 200px; max-width: min(320px, calc(100vw - 16px)); max-height: min(70vh, 480px); overflow: auto;
+    margin: 0; padding: 6px;
+    background: var(--riko-color-surface); color: var(--riko-color-fg);
+    border: var(--riko-border-width) solid var(--riko-color-border); border-radius: var(--riko-radius-wobble-sm);
+    box-shadow: var(--riko-shadow-lg);
+    font-size: var(--riko-text-sm); text-align: left;
+  }
+  .riko-dropdown > .riko-menu { position: fixed; }
+  .riko-menu[data-state="open"] { animation: riko-menu-in var(--riko-duration-fast) var(--riko-ease-out); }
+  .riko-menu[data-placement="top"][data-state="open"] { animation-name: riko-menu-in-up; }
+  @keyframes riko-menu-in { from { opacity: 0; transform: translateY(-6px); } }
+  @keyframes riko-menu-in-up { from { opacity: 0; transform: translateY(6px); } }
+
+  .riko-menu__label { margin: 0; padding: 8px 12px 4px; font-size: var(--riko-text-xs); font-weight: var(--riko-weight-bold); letter-spacing: .12em; color: var(--riko-color-brown); }
+  .riko-menu__item {
+    position: relative; display: flex; align-items: center; gap: var(--riko-space-3); width: 100%;
+    padding: 8px 12px; border: 0; border-radius: var(--riko-radius-sm);
+    background: none; color: inherit; text-align: left; text-decoration: none; line-height: 1.5; white-space: nowrap;
+    transition: background var(--riko-duration-fast) ease, color var(--riko-duration-fast) ease;
+  }
+  .riko-menu__item:hover, .riko-menu__item:focus-visible { background: var(--riko-color-accent-soft); color: var(--riko-color-fg-strong); outline: none; }
+  .riko-menu__item:focus-visible { box-shadow: inset 0 0 0 2px var(--riko-color-focus); }
+  .riko-menu__item:disabled, .riko-menu__item[aria-disabled="true"] { opacity: .45; background: none; }
+  .riko-menu__icon { flex: none; display: inline-grid; place-items: center; width: 18px; color: var(--riko-color-fg-muted); }
+  .riko-menu__item:hover .riko-menu__icon { color: var(--riko-color-accent-ink); }
+  .riko-menu__shortcut {
+    margin-left: auto; padding-left: var(--riko-space-4);
+    font: var(--riko-weight-medium) var(--riko-text-xs) var(--riko-font-body); color: var(--riko-color-fg-subtle); letter-spacing: .04em;
+  }
+  .riko-menu__desc { display: block; font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted); white-space: normal; }
+  .riko-menu__separator { height: 0; margin: 4px 6px; border: 0; border-top: var(--riko-border-width) dashed var(--riko-color-border); }
+  /* 危险操作：与 riko-menu__item 同时使用 */
+  .riko-menu__danger { color: var(--riko-color-danger-ink); }
+  .riko-menu__danger .riko-menu__icon { color: inherit; }
+  .riko-menu__danger:hover, .riko-menu__danger:focus-visible { background: var(--riko-color-danger-soft); color: var(--riko-color-danger-ink); }
+
+  /* 勾选项：role=menuitemcheckbox / menuitemradio + aria-checked */
+  .riko-menu__item:is([role="menuitemcheckbox"], [role="menuitemradio"]) { padding-left: 36px; }
+  .riko-menu__item:is([role="menuitemcheckbox"], [role="menuitemradio"])::before {
+    content: ""; position: absolute; left: 12px; top: 50%; width: 16px; height: 16px; margin-top: -8px;
+    background: var(--riko-color-accent); opacity: 0; transform: scale(.4);
+    -webkit-mask: var(--riko-icon-check) center / contain no-repeat; mask: var(--riko-icon-check) center / contain no-repeat;
+    transition: opacity var(--riko-duration-fast) ease, transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-menu__item[role="menuitemradio"]::before { -webkit-mask-image: var(--riko-icon-star); mask-image: var(--riko-icon-star); }
+  .riko-menu__item[aria-checked="true"]::before { opacity: 1; transform: none; }
+}

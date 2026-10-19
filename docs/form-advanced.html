@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>表单进阶 · Riko UI</title>
+<meta name="theme-color" content="#FBF5EA">
+<script src="../packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="../packages/core/dist/riko-ui.css">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+
+<header class="docs-header">
+  <div class="docs-header__inner">
+    <button type="button" class="riko-btn riko-btn--icon riko-btn--ghost docs-menu-btn" aria-label="打开导航"><i data-lucide="menu"></i></button>
+    <a class="docs-brand" href="index.html">
+      <span class="docs-brand__mark"><span class="riko-star" aria-hidden="true"></span></span>
+      <span><span class="docs-brand__name">Riko UI</span><span class="docs-brand__sub">little star ui kit</span></span>
+    </a>
+    <span class="docs-header__spacer"></span>
+    <div class="riko-theme-picker riko-theme-picker--compact" data-riko="theme-picker"></div>
+  </div>
+</header>
+
+<div class="docs-layout">
+  <aside class="docs-sidebar" aria-label="文档导航"></aside>
+  <main class="docs-main">
+    <div class="docs-hero">
+      <h1>表单进阶</h1>
+      <p>数字步进、搜索高亮、可搜索选择、标签、上传、评分、色块、验证码与表单校验——更复杂的输入场景，同样温柔好用。</p>
+    </div>
+
+    <!-- ============ number ============ -->
+    <section class="docs-section" id="number">
+      <h2>数字输入 <small>Number</small></h2>
+      <p>带减 / 加按钮的数字输入。支持 min / max / step、长按连续增减，键盘 ↑↓ 微调、PageUp / PageDown 大步调整、Home / End 跳到边界。</p>
+      <h3>基础用法</h3>
+      <div class="docs-demo">
+        <div class="riko-number" data-riko="number">
+          <input class="riko-number__input" type="number" min="1" max="12" step="1" value="3" aria-label="星星酥数量">
+        </div>
+      </div>
+      <h3>尺寸与小数步进</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster">
+          <div class="riko-number riko-number--sm" data-riko="number">
+            <input class="riko-number__input" type="number" min="0" max="5" step="0.5" value="2.5" aria-label="评分">
+          </div>
+          <div class="riko-number" data-riko="number">
+            <input class="riko-number__input" type="number" min="0" max="99" value="7" aria-label="章节">
+          </div>
+          <div class="riko-number riko-number--lg" data-riko="number">
+            <input class="riko-number__input" type="number" min="0" step="10" value="100" aria-label="绿宝石">
+          </div>
+        </div>
+      </div>
+      <h3>放在表单项中</h3>
+      <div class="docs-demo">
+        <div class="riko-field" data-riko="field" style="max-width: 280px">
+          <label class="riko-field__label" for="ticket">船票张数</label>
+          <div class="riko-number riko-number--block" data-riko="number">
+            <input class="riko-number__input" id="ticket" type="number" min="1" max="6" value="2">
+          </div>
+          <p class="riko-field__hint">白桦木船最多能坐 6 个人哦</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ search ============ -->
+    <section class="docs-section" id="search">
+      <h2>搜索框 <small>Search</small></h2>
+      <p>胶囊形搜索框：清除按钮自动出现，Esc 清空，按 <kbd class="riko-kbd">/</kbd> 或 <kbd class="riko-kbd">Ctrl</kbd> + <kbd class="riko-kbd">K</kbd> 快速聚焦。配合 <code class="riko-code">Riko.highlight()</code> 可以实现「搜索并高亮」。</p>
+      <h3>基础用法</h3>
+      <div class="docs-demo">
+        <div class="riko-search" data-riko="search">
+          <input class="riko-search__input" type="search" placeholder="搜索小说内容，例如：星星酥" aria-label="搜索小说内容">
+          <kbd class="riko-search__hint">/</kbd>
+        </div>
+      </div>
+      <h3>尺寸</h3>
+      <div class="docs-demo">
+        <div class="riko-stack">
+          <div class="riko-search riko-search--sm" data-riko="search" data-riko-hotkey="none">
+            <input class="riko-search__input" type="search" placeholder="小号搜索" aria-label="小号搜索">
+          </div>
+          <div class="riko-search riko-search--lg riko-search--block" data-riko="search" data-riko-hotkey="none">
+            <input class="riko-search__input" type="search" placeholder="占满一行的大号搜索" aria-label="大号搜索">
+          </div>
+        </div>
+      </div>
+      <h3>搜索并高亮</h3>
+      <p>带结果计数与上一处 / 下一处按钮；Enter 跳到下一处，Shift + Enter 跳到上一处。试试搜索「络可」或「海」。</p>
+      <div class="docs-demo docs-demo--surface">
+        <template data-docs-code>
+<div class="riko-search" data-riko="search" data-riko-hotkey="none" id="story-search">
+  <input class="riko-search__input" type="search" placeholder="在下面的段落里搜索…" aria-label="搜索段落">
+  <span class="riko-search__count"></span>
+  <span class="riko-search__nav">
+    <button type="button" class="riko-search__btn" data-step="prev" aria-label="上一处"></button>
+    <button type="button" class="riko-search__btn" data-step="next" aria-label="下一处"></button>
+  </span>
+</div>
+<div class="riko-prose riko-prose--read" id="story">…正文…</div>
+
+<script>
+  const box = document.getElementById('story-search');
+  let hl = null;
+  box.addEventListener('riko:search:input', e => {
+    hl = Riko.highlight('#story', e.detail.query);
+    hl.next();
+    box.riko.setResult(e.detail.query ? { current: hl.index + 1, total: hl.count } : null);
+  });
+  box.addEventListener('riko:search:step', e => {
+    if (!hl || !hl.count) return;
+    e.detail.dir > 0 ? hl.next() : hl.prev();
+    box.riko.setResult({ current: hl.index + 1, total: hl.count });
+  });
+</script>
+        </template>
+        <div class="riko-stack">
+          <div class="riko-search" data-riko="search" data-riko-hotkey="none" id="story-search">
+            <input class="riko-search__input" type="search" placeholder="在下面的段落里搜索…" aria-label="搜索段落">
+            <span class="riko-search__count"></span>
+            <span class="riko-search__nav">
+              <button type="button" class="riko-search__btn" data-step="prev" aria-label="上一处"></button>
+              <button type="button" class="riko-search__btn" data-step="next" aria-label="下一处"></button>
+            </span>
+          </div>
+          <div class="riko-prose riko-prose--read" id="story" style="max-height: 220px; overflow: auto">
+            <p>轻柔的海浪涌来，在微风的吹拂下散入金黄的沙滩。无垠的大海倒映着碧空，也消解了一部分太阳的热。</p>
+            <p>沙滩上，一个女孩哼着欢快的歌，挥动她的画笔，一道道鲜艳的色彩在画板上留下痕迹，逐渐勾勒出天空、大海、沙滩……</p>
+            <p>女孩名叫络可，自小在 HV 长大。那是一个美好的村子，聚集着大批志同道合的玩家。络可最喜欢的点心，是甜品店里的星星酥。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ combobox ============ -->
+    <section class="docs-section" id="combobox">
+      <h2>可搜索选择 <small>Combobox</small></h2>
+      <p>能输入关键字过滤的下拉选择，遵循 WAI-ARIA combobox 模式：↑↓ 移动、Enter 选中、Esc 关闭、Home / End 跳到首尾。ARIA 属性全部由 JS 自动补全。</p>
+      <h3>内联选项</h3>
+      <div class="docs-demo">
+        <div class="riko-combobox" data-riko="combobox" data-riko-name="character">
+          <input class="riko-combobox__input" type="text" placeholder="选择一位角色…" aria-label="角色">
+          <ul class="riko-combobox__list riko-listbox">
+            <li class="riko-listbox__option" data-value="riko">络可<span class="riko-listbox__desc">沙滩上的小画家</span></li>
+            <li class="riko-listbox__option" data-value="star">Star<span class="riko-listbox__desc">戴眼罩的少年</span></li>
+            <li class="riko-listbox__option" data-value="111">111<span class="riko-listbox__desc">HV 的村长</span></li>
+            <li class="riko-listbox__option" data-value="wuni">无昵</li>
+            <li class="riko-listbox__option" data-value="rhedar">Rhedar</li>
+            <li class="riko-listbox__option" data-value="mizu" aria-disabled="true">Mizu（暂未登场）</li>
+          </ul>
+        </div>
+      </div>
+      <h3>增强原生下拉</h3>
+      <p>把普通 <code class="riko-code">&lt;select&gt;</code> 包进来即可，表单提交仍然使用原生 select 的值。</p>
+      <div class="docs-demo">
+        <div class="riko-field" style="max-width: 320px">
+          <label class="riko-field__label" for="act">想从哪一幕开始读？</label>
+          <div class="riko-combobox riko-combobox--block" data-riko="combobox">
+            <select id="act" name="act">
+              <option value="">搜索幕名…</option>
+              <optgroup label="序章">
+                <option value="p1">第一幕：沙滩上的画家</option>
+                <option value="p2">第二幕：归途的微光</option>
+                <option value="p3">第三幕：暗林深处</option>
+              </optgroup>
+              <optgroup label="第一章">
+                <option value="c1">第一幕：自晨曦中归来</option>
+                <option value="c2">第二幕：于木石间相嬉</option>
+                <option value="c5">第五幕：落星摇曳，清风回荡</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ tags-input ============ -->
+    <section class="docs-section" id="tags-input">
+      <h2>标签输入 <small>Tags Input</small></h2>
+      <p>输入后按回车或逗号生成标签；输入框为空时按两次退格删除最后一个。结果以逗号分隔写入隐藏 input，可直接随表单提交。</p>
+      <h3>基础用法</h3>
+      <div class="docs-demo">
+        <div class="riko-tags-input" data-riko="tags-input" data-riko-name="tags" data-riko-value="络可,星星酥,百络谷">
+          <input class="riko-tags-input__input" type="text" placeholder="输入后按回车添加" aria-label="作品标签">
+        </div>
+      </div>
+      <h3>限制数量</h3>
+      <div class="docs-demo">
+        <div class="riko-field" style="max-width: 420px">
+          <label class="riko-field__label" for="fav">最喜欢的三个角色</label>
+          <div class="riko-tags-input riko-tags-input--block" data-riko="tags-input" data-riko-name="favorites" data-riko-max="3">
+            <input class="riko-tags-input__input" id="fav" type="text" placeholder="最多 3 个">
+          </div>
+          <p class="riko-field__hint">支持一次粘贴多个，用逗号分隔</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ dropzone ============ -->
+    <section class="docs-section" id="dropzone">
+      <h2>拖拽上传 <small>Dropzone</small></h2>
+      <p>拖入或点击选择文件，自动显示文件列表、大小与图片缩略图，可逐个移除；不符合类型、大小或数量限制的文件会被标红提示。</p>
+      <h3>基础用法</h3>
+      <div class="docs-demo">
+        <div class="riko-dropzone" data-riko="dropzone" data-riko-max-size="5MB">
+          <label class="riko-dropzone__area">
+            <input class="riko-dropzone__input" type="file" name="drawings" accept="image/*" multiple>
+            <span class="riko-dropzone__icon" aria-hidden="true"></span>
+            <span class="riko-dropzone__title">把画稿拖到这里，或点击选择</span>
+            <span class="riko-dropzone__hint">支持 PNG / JPG / WebP，单张不超过 5MB</span>
+          </label>
+        </div>
+      </div>
+      <h3>小尺寸 · 单个文件</h3>
+      <div class="docs-demo">
+        <div class="riko-dropzone riko-dropzone--sm" data-riko="dropzone" style="max-width: 360px">
+          <label class="riko-dropzone__area">
+            <input class="riko-dropzone__input" type="file" name="manuscript" accept=".txt,.docx">
+            <span class="riko-dropzone__icon" aria-hidden="true"><i data-lucide="feather"></i></span>
+            <span class="riko-dropzone__title">上传小说手稿</span>
+            <span class="riko-dropzone__hint">.txt 或 .docx</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ rating ============ -->
+    <section class="docs-section" id="rating">
+      <h2>星星评分 <small>Rating</small></h2>
+      <p>纯 CSS 实现，基于单选框：方向键即可调整，悬停预览；按 1 → 5 的顺序书写即可。只读模式支持小数（如 3.5 星）。</p>
+      <h3>可选评分</h3>
+      <div class="docs-demo">
+        <fieldset class="riko-rating">
+          <legend class="riko-rating__legend">给这一章打个分吧</legend>
+          <input class="riko-rating__input" type="radio" name="score" id="score-1" value="1">
+          <label class="riko-rating__star" for="score-1"><span class="riko-u-sr-only">1 星</span></label>
+          <input class="riko-rating__input" type="radio" name="score" id="score-2" value="2">
+          <label class="riko-rating__star" for="score-2"><span class="riko-u-sr-only">2 星</span></label>
+          <input class="riko-rating__input" type="radio" name="score" id="score-3" value="3">
+          <label class="riko-rating__star" for="score-3"><span class="riko-u-sr-only">3 星</span></label>
+          <input class="riko-rating__input" type="radio" name="score" id="score-4" value="4" checked>
+          <label class="riko-rating__star" for="score-4"><span class="riko-u-sr-only">4 星</span></label>
+          <input class="riko-rating__input" type="radio" name="score" id="score-5" value="5">
+          <label class="riko-rating__star" for="score-5"><span class="riko-u-sr-only">5 星</span></label>
+        </fieldset>
+      </div>
+      <h3>只读展示与尺寸</h3>
+      <div class="docs-demo">
+        <div class="riko-stack riko-stack--sm">
+          <span class="riko-rating riko-rating--readonly riko-rating--sm" style="--riko-rating-value: 4.5" role="img" aria-label="评分 4.5 / 5"></span>
+          <span class="riko-rating riko-rating--readonly" style="--riko-rating-value: 3.5" role="img" aria-label="评分 3.5 / 5"></span>
+          <span class="riko-rating riko-rating--readonly riko-rating--lg" style="--riko-rating-value: 2" role="img" aria-label="评分 2 / 5"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ swatches ============ -->
+    <section class="docs-section" id="swatches">
+      <h2>色块选择 <small>Swatches</small></h2>
+      <p>基于单选框的颜色选择。色值通过 <code class="riko-code">--riko-swatch</code> 传入，建议使用设计变量。</p>
+      <h3>基础用法</h3>
+      <div class="docs-demo">
+        <div class="riko-swatches" role="radiogroup" aria-label="主题色">
+          <label class="riko-swatches__item" style="--riko-swatch: var(--riko-color-accent)">
+            <input class="riko-swatches__input" type="radio" name="color" value="star" checked>
+            <span class="riko-swatches__color"></span>
+            <span class="riko-swatches__label">星星橙</span>
+          </label>
+          <label class="riko-swatches__item" style="--riko-swatch: var(--riko-color-ice-strong)">
+            <input class="riko-swatches__input" type="radio" name="color" value="ice">
+            <span class="riko-swatches__color"></span>
+            <span class="riko-swatches__label">冰蓝</span>
+          </label>
+          <label class="riko-swatches__item" style="--riko-swatch: var(--riko-color-primary)">
+            <input class="riko-swatches__input" type="radio" name="color" value="cocoa">
+            <span class="riko-swatches__color"></span>
+            <span class="riko-swatches__label">可可</span>
+          </label>
+          <label class="riko-swatches__item" style="--riko-swatch: var(--riko-color-success)">
+            <input class="riko-swatches__input" type="radio" name="color" value="leaf">
+            <span class="riko-swatches__color"></span>
+            <span class="riko-swatches__label">嫩叶</span>
+          </label>
+          <label class="riko-swatches__item" style="--riko-swatch: var(--riko-color-danger)">
+            <input class="riko-swatches__input" type="radio" name="color" value="berry">
+            <span class="riko-swatches__color"></span>
+            <span class="riko-swatches__label">莓果</span>
+          </label>
+        </div>
+      </div>
+      <h3>小号方形（仅色块）</h3>
+      <div class="docs-demo">
+        <div class="riko-swatches riko-swatches--sm riko-swatches--square" role="radiogroup" aria-label="画笔颜色">
+          <label class="riko-swatches__item" style="--riko-swatch: var(--riko-color-tan)">
+            <input class="riko-swatches__input" type="radio" name="brush" value="sand" checked>
+            <span class="riko-swatches__color"></span>
+            <span class="riko-swatches__label riko-u-sr-only">沙滩</span>
+          </label>
+          <label class="riko-swatches__item" style="--riko-swatch: var(--riko-color-ice)">
+            <input class="riko-swatches__input" type="radio" name="brush" value="sea">
+            <span class="riko-swatches__color"></span>
+            <span class="riko-swatches__label riko-u-sr-only">海水</span>
+          </label>
+          <label class="riko-swatches__item" style="--riko-swatch: var(--riko-color-warning)">
+            <input class="riko-swatches__input" type="radio" name="brush" value="sun">
+            <span class="riko-swatches__color"></span>
+            <span class="riko-swatches__label riko-u-sr-only">阳光</span>
+          </label>
+          <label class="riko-swatches__item" style="--riko-swatch: var(--riko-color-brown)">
+            <input class="riko-swatches__input" type="radio" name="brush" value="wood">
+            <span class="riko-swatches__color"></span>
+            <span class="riko-swatches__label riko-u-sr-only">木头</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ otp ============ -->
+    <section class="docs-section" id="otp">
+      <h2>验证码输入 <small>OTP</small></h2>
+      <p>分格输入验证码：自动跳到下一格、粘贴整串自动拆分、退格回到上一格，支持短信验证码自动填充。完整的值同步到隐藏 input。</p>
+      <h3>6 位数字</h3>
+      <div class="docs-demo">
+        <div class="riko-otp" data-riko="otp" data-riko-length="6" aria-label="短信验证码">
+          <input class="riko-otp__value" type="hidden" name="code">
+        </div>
+      </div>
+      <h3>字母数字 · 中间分隔</h3>
+      <div class="docs-demo">
+        <div class="riko-otp riko-otp--sm" data-riko="otp" data-riko-length="6" data-riko-split="3" data-riko-type="alphanumeric" aria-label="邀请码">
+          <input class="riko-otp__value" type="hidden" name="invite">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ form-validate ============ -->
+    <section class="docs-section" id="form-validate">
+      <h2>表单校验 <small>Form Validate</small></h2>
+      <p>在 <code class="riko-code">&lt;form&gt;</code> 上加 <code class="riko-code">data-riko="form-validate"</code>：使用原生约束（required、type、pattern、minlength…），失焦与提交时校验，把温柔的中文错误提示写进 <code class="riko-code">riko-field__error</code>，并聚焦第一个错误。直接点「加入 HV」试试。</p>
+      <h3>注册表单</h3>
+      <div class="docs-demo docs-demo--surface">
+        <form class="riko-form" data-riko="form-validate" style="max-width: 460px">
+          <div class="riko-field" data-riko="field">
+            <label class="riko-field__label" for="reg-name">昵称<span class="riko-field__required" aria-hidden="true">*</span></label>
+            <input class="riko-input" id="reg-name" name="name" required minlength="2" maxlength="12" placeholder="小伙伴们会这样称呼你">
+          </div>
+          <div class="riko-field" data-riko="field">
+            <label class="riko-field__label" for="reg-mail">邮箱<span class="riko-field__required" aria-hidden="true">*</span></label>
+            <input class="riko-input" id="reg-mail" name="email" type="email" required placeholder="riko@riko.land">
+          </div>
+          <div class="riko-field" data-riko="field">
+            <label class="riko-field__label" for="reg-pwd">密码<span class="riko-field__required" aria-hidden="true">*</span></label>
+            <input class="riko-input" id="reg-pwd" name="password" type="password" required minlength="8" autocomplete="new-password">
+            <p class="riko-field__hint">至少 8 个字符</p>
+          </div>
+          <div class="riko-field" data-riko="field">
+            <label class="riko-field__label" for="reg-pwd2">确认密码<span class="riko-field__required" aria-hidden="true">*</span></label>
+            <input class="riko-input" id="reg-pwd2" name="password2" type="password" required data-riko-match="#reg-pwd" data-riko-message-match="两次输入的密码不一样哦" autocomplete="new-password">
+          </div>
+          <div class="riko-field">
+            <span class="riko-field__label" id="reg-code-label">邀请码<span class="riko-field__required" aria-hidden="true">*</span></span>
+            <div class="riko-otp riko-otp--sm" data-riko="otp" data-riko-length="4" data-riko-required aria-labelledby="reg-code-label">
+              <input class="riko-otp__value" type="hidden" name="invite">
+            </div>
+          </div>
+          <div class="riko-field">
+            <label class="riko-checkbox"><input type="checkbox" name="agree" required data-riko-message-required="请先同意 HV 村规哦"> 我已阅读并同意 HV 村规</label>
+          </div>
+          <div class="riko-form__actions">
+            <button type="reset" class="riko-btn riko-btn--ghost">重置</button>
+            <button type="submit" class="riko-btn riko-btn--primary">加入 HV</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="assets/manifest.js"></script>
+<script src="assets/docs.js"></script>
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="../packages/core/dist/riko-ui.js"></script>
+<script>
+  // 「搜索并高亮」演示
+  (function () {
+    const box = document.getElementById('story-search');
+    let hl = null;
+    box.addEventListener('riko:search:input', e => {
+      hl = Riko.highlight('#story', e.detail.query);
+      hl.next();
+      box.riko.setResult(e.detail.query ? { current: hl.index + 1, total: hl.count } : null);
+    });
+    box.addEventListener('riko:search:step', e => {
+      if (!hl || !hl.count) return;
+      e.detail.dir > 0 ? hl.next() : hl.prev();
+      box.riko.setResult({ current: hl.index + 1, total: hl.count });
+    });
+    // 表单演示：校验通过后不真正提交
+    document.addEventListener('riko:form:submit', e => {
+      e.preventDefault();
+      if (Riko.toast) Riko.toast({ title: '欢迎加入 HV！', message: '校验全部通过啦 ✦', tone: 'success' });
+    });
+  })();
+</script>
+</body>
+</html>

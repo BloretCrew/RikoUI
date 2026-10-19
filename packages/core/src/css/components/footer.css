@@ -1,0 +1,38 @@
+/* ==========================================================================
+   footer · 页脚（扇贝花边）
+   <footer class="riko-footer">
+     <div class="riko-footer__stars"><span class="riko-star" aria-hidden="true"></span><span class="riko-star" aria-hidden="true"></span><span class="riko-star" aria-hidden="true"></span></div>
+     <nav class="riko-footer__nav" aria-label="页脚导航"><a class="riko-footer__link" href="#">小说阅读器</a>…</nav>
+     <p class="riko-footer__copy">© 2021–2026 Bloret.All rights reserved.</p>
+     <p class="riko-footer__copy">《络的世界》项目组</p>
+   </footer>
+   ========================================================================== */
+@layer riko.components {
+  .riko-footer {
+    position: relative; margin-top: var(--riko-space-8);
+    padding: var(--riko-space-9) var(--riko-space-5) var(--riko-space-8);
+    background: var(--riko-color-surface-muted); color: var(--riko-color-fg-muted);
+    font-size: var(--riko-text-sm); text-align: center;
+  }
+  .riko-footer::before {
+    content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 15px; pointer-events: none;
+    background: radial-gradient(circle at 14px 15px, var(--riko-color-surface-muted) 14px, transparent 15px) 0 0 / 28px 15px repeat-x;
+  }
+  .riko-footer--flat::before { display: none; }
+  .riko-footer--flat { border-top: var(--riko-border-width) dashed var(--riko-color-border); }
+  .riko-footer__stars { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: var(--riko-space-4); }
+  .riko-footer__stars > .riko-star:nth-child(2) { --riko-star-size: 1.4em; margin-top: -4px; }
+  .riko-footer__brand { display: inline-flex; align-items: center; gap: var(--riko-space-2); margin-bottom: var(--riko-space-3); font-family: var(--riko-font-title); font-size: var(--riko-text-xl); color: var(--riko-color-fg-strong); }
+  .riko-footer__nav { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 12px; margin-bottom: var(--riko-space-4); }
+  .riko-footer__link {
+    position: relative; padding: 4px 14px; border-radius: var(--riko-radius-pill);
+    color: var(--riko-color-fg-strong); font-weight: var(--riko-weight-medium); text-decoration: none;
+    transition: background var(--riko-duration-fast) ease, color var(--riko-duration-fast) ease;
+  }
+  .riko-footer__link:hover { background: var(--riko-color-surface); color: var(--riko-color-accent-ink); }
+  .riko-footer__link + .riko-footer__link::before {
+    content: "·"; position: absolute; left: -6px; top: 50%; transform: translate(-50%, -50%); color: var(--riko-color-tan); pointer-events: none;
+  }
+  .riko-footer__copy { margin: 2px 0; }
+  .riko-footer__inner { width: min(var(--riko-container), 100%); margin-inline: auto; }
+}

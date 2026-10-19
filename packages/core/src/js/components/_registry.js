@@ -1,0 +1,37 @@
+// 由 tools/build.mjs 自动生成，请勿手改
+import * as m0 from './accordion.js';
+import * as m1 from './autosize.js';
+import * as m2 from './backtop.js';
+import * as m3 from './carousel.js';
+import * as m4 from './combobox.js';
+import * as m5 from './command.js';
+import * as m6 from './copy.js';
+import * as m7 from './dialog.js';
+import * as m8 from './drawer.js';
+import * as m9 from './dropdown.js';
+import * as m10 from './dropzone.js';
+import * as m11 from './field.js';
+import * as m12 from './form-validate.js';
+import * as m13 from './navbar.js';
+import * as m14 from './number.js';
+import * as m15 from './otp.js';
+import * as m16 from './pagination.js';
+import * as m17 from './password-toggle.js';
+import * as m18 from './popover.js';
+import * as m19 from './range.js';
+import * as m20 from './reading-progress.js';
+import * as m21 from './reveal.js';
+import * as m22 from './search.js';
+import * as m23 from './sidenav.js';
+import * as m24 from './table-sort.js';
+import * as m25 from './tabs.js';
+import * as m26 from './tag.js';
+import * as m27 from './tags-input.js';
+import * as m28 from './theme-picker.js';
+import * as m29 from './theme-toggle.js';
+import * as m30 from './toast.js';
+import * as m31 from './toc.js';
+import * as m32 from './tooltip.js';
+
+export const components = [m0.default, m1.default, m2.default, m3.default, m4.default, m5.default, m6.default, m7.default, m8.default, m9.default, m10.default, m11.default, m12.default, m13.default, m14.default, m15.default, m16.default, m17.default, m18.default, m19.default, m20.default, m21.default, m22.default, m23.default, m24.default, m25.default, m26.default, m27.default, m28.default, m29.default, m31.default, m32.default];
+export const api = Object.assign({}, m6.api, m7.api, m22.api, m26.api, m30.api);

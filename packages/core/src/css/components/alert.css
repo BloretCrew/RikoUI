@@ -1,0 +1,85 @@
+/* ==========================================================================
+   alert · 提示条 / 标注框
+   <div class="riko-alert riko-alert--success" role="status">
+     <span class="riko-alert__icon" aria-hidden="true"></span>
+     <div class="riko-alert__content">
+       <p class="riko-alert__title">保存成功</p>
+       <p class="riko-alert__body">络可的画稿已经收进笔记本啦。</p>
+     </div>
+     <button type="button" class="riko-alert__close" data-riko-dismiss aria-label="关闭提示"></button>
+   </div>
+   色调 --info（默认）--success --warning --danger --accent · 外观 --outline --note
+   ========================================================================== */
+@layer riko.components {
+  .riko-alert {
+    --riko-alert-bg: var(--riko-color-info-soft);
+    --riko-alert-ink: var(--riko-color-info-ink);
+    --riko-alert-line: var(--riko-color-info);
+    --riko-alert-icon: var(--riko-icon-info);
+
+    position: relative;
+    display: flex; align-items: flex-start; gap: var(--riko-space-3);
+    padding: var(--riko-space-4) var(--riko-space-5);
+    color: var(--riko-color-fg);
+    background: var(--riko-alert-bg);
+    border: var(--riko-border-width) solid color-mix(in srgb, var(--riko-alert-line) 55%, transparent);
+    border-radius: var(--riko-radius-wobble-sm);
+    font-size: var(--riko-text-sm);
+    line-height: 1.7;
+  }
+  .riko-alert--info { --riko-alert-bg: var(--riko-color-info-soft); --riko-alert-ink: var(--riko-color-info-ink); --riko-alert-line: var(--riko-color-info); --riko-alert-icon: var(--riko-icon-info); }
+  .riko-alert--success { --riko-alert-bg: var(--riko-color-success-soft); --riko-alert-ink: var(--riko-color-success-ink); --riko-alert-line: var(--riko-color-success); --riko-alert-icon: var(--riko-icon-success); }
+  .riko-alert--warning { --riko-alert-bg: var(--riko-color-warning-soft); --riko-alert-ink: var(--riko-color-warning-ink); --riko-alert-line: var(--riko-color-warning); --riko-alert-icon: var(--riko-icon-warning); }
+  .riko-alert--danger { --riko-alert-bg: var(--riko-color-danger-soft); --riko-alert-ink: var(--riko-color-danger-ink); --riko-alert-line: var(--riko-color-danger); --riko-alert-icon: var(--riko-icon-danger); }
+  .riko-alert--accent { --riko-alert-bg: var(--riko-color-accent-soft); --riko-alert-ink: var(--riko-color-accent-ink); --riko-alert-line: var(--riko-color-accent); --riko-alert-icon: var(--riko-icon-star); }
+
+  .riko-alert--outline { background: var(--riko-color-surface); border-color: var(--riko-alert-line); border-style: dashed; }
+
+  /* 便签风：缝线内框 + 手写标题 */
+  .riko-alert--note {
+    padding: var(--riko-space-5) var(--riko-space-6);
+    background: var(--riko-color-surface);
+    border-color: var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble);
+    box-shadow: var(--riko-shadow-md);
+    isolation: isolate;
+  }
+  .riko-alert--note::before {
+    content: ""; position: absolute; inset: 7px; z-index: -1; pointer-events: none;
+    border: var(--riko-border-width) dashed color-mix(in srgb, var(--riko-alert-line) 70%, transparent);
+    border-radius: 20px 16px 22px 14px / 14px 22px 16px 20px;
+  }
+  .riko-alert--note .riko-alert__title { font-family: var(--riko-font-hand); font-size: var(--riko-text-2xl); line-height: 1.1; color: var(--riko-alert-ink); }
+
+  .riko-alert__icon {
+    flex: none; display: grid; place-items: center;
+    width: 1.45em; height: 1.45em; margin-top: .05em;
+    color: var(--riko-alert-ink); font-size: 1.05em;
+  }
+  .riko-alert__icon:empty {
+    background: currentColor;
+    -webkit-mask: var(--riko-alert-icon) center / contain no-repeat;
+    mask: var(--riko-alert-icon) center / contain no-repeat;
+  }
+  .riko-alert__icon > :where(svg, i) { --riko-icon-size: 1.3em; }
+  .riko-alert__content { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+  .riko-alert__title { margin: 0; font-weight: var(--riko-weight-bold); color: var(--riko-alert-ink); font-size: var(--riko-text-md); }
+  .riko-alert__body { margin: 0; color: var(--riko-color-fg); }
+  .riko-alert__actions { display: flex; flex-wrap: wrap; gap: var(--riko-space-2); margin-top: var(--riko-space-3); }
+
+  /* 关闭按钮（通用：riko-alert__close / riko-banner__close 共享外观） */
+  .riko-alert__close {
+    flex: none; display: grid; place-items: center;
+    width: 30px; height: 30px; margin: -3px -6px -3px 0; padding: 0;
+    color: var(--riko-alert-ink); background: transparent;
+    border: 0; border-radius: 50%;
+    transition: background var(--riko-duration-fast) ease, transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-alert__close::before {
+    content: ""; width: 16px; height: 16px; background: currentColor;
+    -webkit-mask: var(--riko-icon-x) center / contain no-repeat;
+    mask: var(--riko-icon-x) center / contain no-repeat;
+  }
+  .riko-alert__close:hover { background: color-mix(in srgb, var(--riko-alert-line) 22%, transparent); transform: rotate(90deg); }
+
+}

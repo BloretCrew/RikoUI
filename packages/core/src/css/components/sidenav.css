@@ -1,0 +1,83 @@
+/* ==========================================================================
+   sidenav · 侧边目录（可折叠分组）
+   <nav class="riko-sidenav" data-riko="sidenav" aria-label="目录">
+     <div class="riko-sidenav__group">
+       <button class="riko-sidenav__group-toggle" aria-expanded="true">
+         <span class="riko-sidenav__badge">一</span>
+         <span class="riko-sidenav__label"><small>序章</small>第一幕：沙滩上的画家</span>
+         <span class="riko-sidenav__count">3</span>
+       </button>
+       <div class="riko-sidenav__panel"><ul class="riko-sidenav__list">
+         <li><a class="riko-sidenav__item" href="#" aria-current="page"><span class="riko-sidenav__num">001</span>沙滩上的画家</a></li>
+       </ul></div>
+     </div>
+   </nav>
+   ========================================================================== */
+@layer riko.components {
+  .riko-sidenav { display: flex; flex-direction: column; font-size: var(--riko-text-sm); }
+  .riko-sidenav__heading {
+    display: flex; align-items: center; gap: var(--riko-space-2);
+    margin: 0 0 var(--riko-space-2); padding: 0 var(--riko-space-2);
+    font-size: var(--riko-text-xs); font-weight: var(--riko-weight-bold); letter-spacing: .14em; color: var(--riko-color-brown);
+  }
+  .riko-sidenav__group + .riko-sidenav__group { border-top: var(--riko-border-width) dashed var(--riko-color-border); }
+  .riko-sidenav__group-toggle {
+    display: flex; align-items: center; gap: var(--riko-space-3); width: 100%;
+    padding: var(--riko-space-3) var(--riko-space-2); border: 0; border-radius: var(--riko-radius-md);
+    background: none; color: var(--riko-color-fg); text-align: left;
+    transition: background var(--riko-duration-fast) ease;
+  }
+  .riko-sidenav__group-toggle:hover { background: var(--riko-color-surface-muted); }
+  .riko-sidenav__group-toggle::after {
+    content: ""; flex: none; width: 14px; height: 14px; background: var(--riko-color-brown);
+    -webkit-mask: var(--riko-icon-chevron-right) center / contain no-repeat; mask: var(--riko-icon-chevron-right) center / contain no-repeat;
+    transition: transform var(--riko-duration-base) ease;
+  }
+  .riko-sidenav__group-toggle[aria-expanded="true"]::after { transform: rotate(90deg); }
+  .riko-sidenav__badge {
+    flex: none; display: grid; place-items: center; width: 34px; height: 34px;
+    border-radius: 12px 9px 13px 8px; background: var(--riko-color-ice-soft); color: var(--riko-color-ice-ink);
+    font-family: var(--riko-font-title); font-size: .95rem;
+    transition: background var(--riko-duration-base) ease, color var(--riko-duration-base) ease, transform var(--riko-duration-base) ease;
+  }
+  .riko-sidenav__group-toggle[aria-expanded="true"] .riko-sidenav__badge { background: var(--riko-color-accent); color: var(--riko-color-accent-fg); transform: rotate(-6deg); }
+  .riko-sidenav__label { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.35; font-family: var(--riko-font-read); font-weight: 600; color: var(--riko-color-fg-strong); }
+  .riko-sidenav__label small { font-family: var(--riko-font-body); font-weight: var(--riko-weight-normal); font-size: .72rem; letter-spacing: .12em; color: var(--riko-color-brown); }
+  .riko-sidenav__count {
+    flex: none; padding: 0 8px; border-radius: var(--riko-radius-pill);
+    font-size: .72rem; font-weight: var(--riko-weight-bold);
+    background: var(--riko-color-surface-muted); color: var(--riko-color-fg-muted);
+  }
+  .riko-sidenav__panel { display: grid; grid-template-rows: 1fr; transition: grid-template-rows var(--riko-duration-base) var(--riko-ease-out); }
+  .riko-sidenav__group-toggle[aria-expanded="false"] + .riko-sidenav__panel { grid-template-rows: 0fr; }
+  .riko-sidenav__panel > * { overflow: hidden; min-height: 0; }
+  .riko-sidenav__group-toggle[aria-expanded="false"] + .riko-sidenav__panel > * { visibility: hidden; transition: visibility 0s var(--riko-duration-base); }
+  .riko-sidenav__list { list-style: none; margin: 0; padding: 0 0 var(--riko-space-2) var(--riko-space-2); }
+  .riko-sidenav__list > li + li { margin-top: 2px; }
+  .riko-sidenav__item {
+    display: flex; align-items: center; gap: var(--riko-space-3); width: 100%;
+    padding: 8px 10px; border: var(--riko-border-width) solid transparent;
+    border-radius: var(--riko-radius-wobble-sm); background: transparent;
+    color: var(--riko-color-fg); text-decoration: none; text-align: left; line-height: 1.45;
+    transition: background var(--riko-duration-fast) ease, border-color var(--riko-duration-fast) ease, transform var(--riko-duration-fast) ease;
+  }
+  .riko-sidenav__item:hover { background: var(--riko-color-surface-sunken); transform: translateX(3px); }
+  .riko-sidenav__item[aria-current="page"], .riko-sidenav__item[aria-current="true"] { background: var(--riko-color-accent-soft); border-color: var(--riko-color-accent); font-weight: var(--riko-weight-bold); color: var(--riko-color-fg-strong); }
+  .riko-sidenav__item[aria-disabled="true"] { opacity: .5; pointer-events: none; }
+  .riko-sidenav__num {
+    flex: none; min-width: 2.6em; padding: 5px 3px; border-radius: 9px; text-align: center; line-height: 1;
+    font-family: var(--riko-font-hand); font-weight: 700; font-size: 1.05rem;
+    background: var(--riko-color-ice-soft); color: var(--riko-color-ice-ink);
+  }
+  .riko-sidenav__item[aria-current="page"] .riko-sidenav__num, .riko-sidenav__item[aria-current="true"] .riko-sidenav__num { background: var(--riko-color-accent); color: var(--riko-color-accent-fg); }
+  .riko-sidenav__text { flex: 1; min-width: 0; }
+  .riko-sidenav__meta { flex: none; padding: 0 7px; border-radius: var(--riko-radius-pill); font-size: .7rem; font-weight: var(--riko-weight-bold); color: var(--riko-color-accent-ink); background: var(--riko-color-accent-soft); }
+  .riko-sidenav__dot {
+    flex: none; width: .8em; height: .8em; background: var(--riko-color-accent); opacity: .8;
+    -webkit-mask: var(--riko-icon-star) center / contain no-repeat; mask: var(--riko-icon-star) center / contain no-repeat;
+  }
+  .riko-sidenav--compact .riko-sidenav__group-toggle { padding-block: var(--riko-space-2); }
+  .riko-sidenav--compact .riko-sidenav__badge { width: 28px; height: 28px; font-size: .85rem; }
+  .riko-sidenav--compact .riko-sidenav__item { padding: 5px 10px; }
+  .riko-sidenav--compact .riko-sidenav__num { font-size: .95rem; padding: 3px 2px; }
+}

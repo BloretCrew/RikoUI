@@ -1,0 +1,89 @@
+{
+  "name": "segmented",
+  "title": "分段选择",
+  "titleEn": "Segmented Control",
+  "category": "form",
+  "summary": "胶囊形的单选按钮组，选中项橙色并带回弹动画。",
+  "when": "2–5 个短选项的互斥切换（视图、排序、字号等）。",
+  "root": "riko-segmented",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-segmented__item",
+      "desc": "选项（<label>，内含隐藏的 radio）",
+      "required": true
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-segmented--sm",
+      "desc": "小号",
+      "group": "size"
+    },
+    {
+      "class": "riko-segmented--lg",
+      "desc": "大号",
+      "group": "size"
+    },
+    {
+      "class": "riko-segmented--block",
+      "desc": "撑满宽度、平分",
+      "group": "layout"
+    },
+    {
+      "class": "riko-segmented--ice",
+      "desc": "冰蓝选中色",
+      "group": "variant"
+    }
+  ],
+  "states": [
+    {
+      "attr": "checked",
+      "on": "input",
+      "desc": "选中项"
+    },
+    {
+      "attr": "disabled",
+      "on": "input",
+      "desc": "禁用某项"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "容器写 role=\"radiogroup\" 与 aria-label；方向键切换由原生 radio 提供。"
+  ],
+  "rules": [
+    "每项：<label class=\"riko-segmented__item\"><input type=\"radio\" name=\"组名\" value=\"值\">文字</label>。",
+    "可在文字前放 Lucide 图标。"
+  ],
+  "avoid": [
+    "不要用按钮组模拟需要提交值的单选。"
+  ],
+  "examples": [
+    {
+      "title": "基础",
+      "html": "<div class=\"riko-segmented\" role=\"radiogroup\" aria-label=\"外观\">\n  <label class=\"riko-segmented__item\"><input type=\"radio\" name=\"look\" value=\"day\" checked><i data-lucide=\"sun\"></i>白天</label>\n  <label class=\"riko-segmented__item\"><input type=\"radio\" name=\"look\" value=\"dusk\"><i data-lucide=\"sunset\"></i>黄昏</label>\n  <label class=\"riko-segmented__item\"><input type=\"radio\" name=\"look\" value=\"night\"><i data-lucide=\"moon\"></i>夜晚</label>\n</div>"
+    },
+    {
+      "title": "尺寸与色调",
+      "html": "<div class=\"riko-stack riko-stack--sm\">\n  <div class=\"riko-segmented riko-segmented--sm riko-segmented--ice\" role=\"radiogroup\" aria-label=\"字号\">\n    <label class=\"riko-segmented__item\"><input type=\"radio\" name=\"size\" value=\"s\">小</label>\n    <label class=\"riko-segmented__item\"><input type=\"radio\" name=\"size\" value=\"m\" checked>中</label>\n    <label class=\"riko-segmented__item\"><input type=\"radio\" name=\"size\" value=\"l\">大</label>\n  </div>\n  <div class=\"riko-segmented riko-segmented--block\" role=\"radiogroup\" aria-label=\"排序\">\n    <label class=\"riko-segmented__item\"><input type=\"radio\" name=\"order\" value=\"new\" checked>最新</label>\n    <label class=\"riko-segmented__item\"><input type=\"radio\" name=\"order\" value=\"hot\">最热</label>\n    <label class=\"riko-segmented__item\"><input type=\"radio\" name=\"order\" value=\"old\" disabled>最早</label>\n  </div>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-segmented",
+      "attr": "role",
+      "message": "riko-segmented 需要 role=\"radiogroup\" 与 aria-label"
+    },
+    {
+      "selector": ".riko-segmented__item",
+      "has": "input[type=\"radio\"]",
+      "message": "riko-segmented__item 内需要 <input type=\"radio\">"
+    }
+  ],
+  "related": [
+    "radio",
+    "button-group",
+    "theme-picker"
+  ]
+}

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创作后台 · 《络的世界》</title>
+<meta name="theme-color" content="#FBF5EA">
+<script src="../packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="../packages/fonts/riko-fonts.css">
+<link rel="stylesheet" href="../packages/core/dist/riko-ui.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+
+<div class="riko-page">
+  <header class="riko-navbar riko-navbar--wide">
+    <div class="riko-navbar__inner">
+      <a class="riko-navbar__brand" href="landing.html">
+        <img class="riko-navbar__logo" src="https://riko.land/assets/logo.jpg" alt="">
+        <span class="riko-navbar__text">
+          <span class="riko-navbar__title">创作后台</span>
+          <span class="riko-navbar__sub">RikoLand · studio</span>
+        </span>
+      </a>
+      <div class="riko-search riko-u-hide-md" data-riko="search" style="flex: 1; max-width: 420px; margin-inline: auto;">
+        <input class="riko-search__input" type="search" placeholder="搜索章节、设定、读者留言…" aria-label="搜索后台">
+        <kbd class="riko-search__hint">/</kbd>
+      </div>
+      <div class="riko-navbar__actions">
+        <span class="riko-badge-anchor">
+          <button type="button" class="riko-btn riko-btn--icon riko-btn--ghost" aria-label="通知（3 条未读）" data-riko-toast="你有 3 条新的读者留言" data-riko-toast-title="通知"><i data-lucide="bell"></i></button>
+          <span class="riko-badge riko-badge--danger riko-badge--sm">3</span>
+        </span>
+        <button type="button" class="riko-btn riko-btn--icon" data-riko="theme-toggle" aria-label="切换深浅色"></button>
+        <div class="riko-dropdown" data-riko="dropdown" data-riko-placement="bottom-end">
+          <button type="button" class="riko-btn riko-btn--ghost" aria-haspopup="menu" aria-label="账户菜单">
+            <span class="riko-avatar riko-avatar--sm riko-avatar--ring"><img src="https://riko.land/assets/logo.jpg" alt=""></span>
+            <span class="riko-u-hide-sm">星星酥</span>
+          </button>
+          <div class="riko-menu" role="menu" hidden>
+            <p class="riko-menu__label">作者 · 星星酥</p>
+            <a class="riko-menu__item" role="menuitem" href="settings.html"><span class="riko-menu__icon"><i data-lucide="settings"></i></span>账户设置</a>
+            <a class="riko-menu__item" role="menuitem" href="reader.html"><span class="riko-menu__icon"><i data-lucide="book-open"></i></span>打开阅读器</a>
+            <hr class="riko-menu__separator">
+            <a class="riko-menu__item riko-menu__danger" role="menuitem" href="login.html"><span class="riko-menu__icon"><i data-lucide="log-out"></i></span>退出登录</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="riko-page__main riko-container riko-container--wide riko-section riko-section--sm">
+    <div class="riko-split" style="--riko-split-aside: 240px;">
+      <aside class="riko-split__aside riko-u-hide-md">
+        <nav class="riko-sidenav" data-riko="sidenav" aria-label="后台导航">
+          <p class="riko-sidenav__heading">工作台</p>
+          <ul class="riko-sidenav__list">
+            <li><a class="riko-sidenav__item" href="#overview" aria-current="page"><i data-lucide="layout-dashboard"></i><span class="riko-sidenav__text">概览</span></a></li>
+            <li><a class="riko-sidenav__item" href="#chapters"><i data-lucide="book-open"></i><span class="riko-sidenav__text">章节管理</span><span class="riko-sidenav__meta">76</span></a></li>
+            <li><a class="riko-sidenav__item" href="#notes"><i data-lucide="notebook-pen"></i><span class="riko-sidenav__text">设定集</span></a></li>
+            <li><a class="riko-sidenav__item" href="#comments"><i data-lucide="message-circle-heart"></i><span class="riko-sidenav__text">读者留言</span><span class="riko-sidenav__meta">3</span></a></li>
+          </ul>
+          <p class="riko-sidenav__heading">数据</p>
+          <ul class="riko-sidenav__list">
+            <li><a class="riko-sidenav__item" href="#stats"><i data-lucide="chart-line"></i><span class="riko-sidenav__text">阅读统计</span></a></li>
+            <li><a class="riko-sidenav__item" href="settings.html"><i data-lucide="settings"></i><span class="riko-sidenav__text">设置</span></a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="riko-split__main riko-stack riko-stack--lg" id="overview">
+        <div class="riko-section-head">
+          <div class="riko-section-head__text">
+            <h1 class="riko-section-head__title"><span class="riko-star" aria-hidden="true"></span>早上好，星星酥</h1>
+            <span class="riko-section-head__sub">have a cozy writing day</span>
+          </div>
+          <div class="riko-section-head__actions">
+            <button type="button" class="riko-btn" data-riko-toast="草稿已自动保存" data-riko-toast-tone="success"><i data-lucide="save"></i>保存草稿</button>
+            <button type="button" class="riko-btn riko-btn--primary" id="new-chapter"><i data-lucide="plus"></i>新建章节</button>
+          </div>
+        </div>
+
+        <div class="riko-alert riko-alert--accent">
+          <span class="riko-alert__icon" aria-hidden="true"></span>
+          <div class="riko-alert__content">
+            <p class="riko-alert__title">第一章完结啦！</p>
+            <p class="riko-alert__body">第 076 节「风过围垣，落星回响」已发布，读者们正在留言庆祝。</p>
+          </div>
+          <button type="button" class="riko-alert__close" data-riko-dismiss aria-label="关闭"></button>
+        </div>
+
+        <section class="riko-grid riko-grid--cols-4 riko-grid--sm" id="stats" aria-label="数据概览">
+          <div class="riko-stat">
+            <span class="riko-stat__icon"><i data-lucide="book-open"></i></span>
+            <span class="riko-stat__label">已更新小节</span>
+            <span class="riko-stat__value">76<span class="riko-stat__unit">节</span></span>
+            <span class="riko-stat__trend" data-trend="up">本月 +12</span>
+          </div>
+          <div class="riko-stat riko-stat--accent">
+            <span class="riko-stat__icon"><i data-lucide="star"></i></span>
+            <span class="riko-stat__label">收到的星星</span>
+            <span class="riko-stat__value">2,048</span>
+            <span class="riko-stat__trend" data-trend="up">较上周 +8%</span>
+          </div>
+          <div class="riko-stat">
+            <span class="riko-stat__icon"><i data-lucide="users"></i></span>
+            <span class="riko-stat__label">今日读者</span>
+            <span class="riko-stat__value">512</span>
+            <span class="riko-stat__trend" data-trend="up">较昨日 +36</span>
+          </div>
+          <div class="riko-stat">
+            <span class="riko-stat__icon"><i data-lucide="bug"></i></span>
+            <span class="riko-stat__label">待修复错别字</span>
+            <span class="riko-stat__value">3</span>
+            <span class="riko-stat__trend" data-trend="down">较上周减少 5 个</span>
+          </div>
+        </section>
+
+        <div class="riko-split riko-split--reverse" style="--riko-split-aside: 300px;">
+          <section class="riko-card riko-split__main" id="chapters" aria-labelledby="chapters-title">
+            <div class="riko-card__header">
+              <h2 class="riko-card__title" id="chapters-title">章节管理</h2>
+              <div class="riko-dropdown riko-card__tag" data-riko="dropdown" data-riko-placement="bottom-end">
+                <button type="button" class="riko-btn riko-btn--sm riko-btn--ghost" aria-haspopup="menu">筛选</button>
+                <div class="riko-menu" role="menu" hidden>
+                  <button type="button" class="riko-menu__item" role="menuitemradio" aria-checked="true" data-riko-keep-open>全部</button>
+                  <button type="button" class="riko-menu__item" role="menuitemradio" aria-checked="false" data-riko-keep-open>已发布</button>
+                  <button type="button" class="riko-menu__item" role="menuitemradio" aria-checked="false" data-riko-keep-open>草稿</button>
+                </div>
+              </div>
+            </div>
+            <div class="riko-tabs" data-riko="tabs">
+              <div class="riko-tabs__list" aria-label="章节状态">
+                <button type="button" class="riko-tabs__tab" aria-selected="true">最近更新</button>
+                <button type="button" class="riko-tabs__tab">草稿 <span class="riko-tabs__badge">2</span></button>
+              </div>
+              <div class="riko-tabs__panel">
+                <div class="riko-table-wrap">
+                  <table class="riko-table riko-table--hover riko-table--compact" data-riko="table-sort">
+                    <thead>
+                      <tr><th scope="col">编号</th><th scope="col">标题</th><th scope="col" data-align="end">字数</th><th scope="col" data-align="end">星星</th><th scope="col" data-riko-sort="false">状态</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>076</td><th scope="row">风过围垣，落星回响</th><td data-align="end">1,422</td><td data-align="end">186</td><td><span class="riko-tag riko-tag--sm riko-tag--accent">最新</span></td></tr>
+                      <tr><td>075</td><th scope="row">月下清辉，暗见净化</th><td data-align="end">833</td><td data-align="end">142</td><td><span class="riko-tag riko-tag--sm riko-tag--success">已发布</span></td></tr>
+                      <tr><td>074</td><th scope="row">夜出医庐，独巡残村</th><td data-align="end">590</td><td data-align="end">97</td><td><span class="riko-tag riko-tag--sm riko-tag--success">已发布</span></td></tr>
+                      <tr><td>073</td><th scope="row">囚笼斗嘴，旧约重提</th><td data-align="end">1,267</td><td data-align="end">158</td><td><span class="riko-tag riko-tag--sm riko-tag--success">已发布</span></td></tr>
+                      <tr><td>072</td><th scope="row">漆桶飞落，白染三人</th><td data-align="end">676</td><td data-align="end">203</td><td><span class="riko-tag riko-tag--sm riko-tag--success">已发布</span></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="riko-tabs__panel" hidden>
+                <ul class="riko-list riko-list--divided">
+                  <li class="riko-list__item">
+                    <span class="riko-list__num">077</span>
+                    <div class="riko-list__content">
+                      <span class="riko-list__title">（暂定）第二章 · 序</span>
+                      <span class="riko-list__desc">最后编辑于 2 小时前</span>
+                    </div>
+                    <div class="riko-list__action"><button type="button" class="riko-btn riko-btn--sm riko-btn--soft">继续写</button></div>
+                  </li>
+                  <li class="riko-list__item">
+                    <span class="riko-list__num">番外</span>
+                    <div class="riko-list__content">
+                      <span class="riko-list__title">星星酥的秘方</span>
+                      <span class="riko-list__desc">最后编辑于 3 天前</span>
+                    </div>
+                    <div class="riko-list__action"><button type="button" class="riko-btn riko-btn--sm riko-btn--soft">继续写</button></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="riko-card riko-card--stitched riko-split__aside" aria-labelledby="goal-title" style="position: relative; top: 0;">
+            <h2 class="riko-card__title" id="goal-title">本周目标</h2>
+            <div class="riko-stack">
+              <div class="riko-progress">
+                <div class="riko-progress__head">
+                  <span class="riko-progress__label" id="goal-words">字数 8,200 / 10,000</span>
+                  <span class="riko-progress__value">82%</span>
+                </div>
+                <progress class="riko-progress__bar" value="82" max="100" aria-labelledby="goal-words"></progress>
+              </div>
+              <div class="riko-progress riko-progress--ice">
+                <div class="riko-progress__head">
+                  <span class="riko-progress__label" id="goal-notes">设定集整理</span>
+                  <span class="riko-progress__value">45%</span>
+                </div>
+                <progress class="riko-progress__bar" value="45" max="100" aria-labelledby="goal-notes"></progress>
+              </div>
+              <div class="riko-progress riko-progress--success">
+                <div class="riko-progress__head">
+                  <span class="riko-progress__label" id="goal-typo">错别字修复</span>
+                  <span class="riko-progress__value">100%</span>
+                </div>
+                <progress class="riko-progress__bar" value="100" max="100" aria-labelledby="goal-typo"></progress>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="riko-grid riko-grid--cols-2" style="align-items: start;">
+          <section class="riko-card" aria-labelledby="log-title">
+            <h2 class="riko-card__title" id="log-title">更新日志</h2>
+            <ol class="riko-timeline">
+              <li class="riko-timeline__item" aria-current="step">
+                <span class="riko-timeline__dot"></span>
+                <div class="riko-timeline__content">
+                  <time class="riko-timeline__time" datetime="2026-10-15">2026.10.15</time>
+                  <h3 class="riko-timeline__title">更新第 076 节</h3>
+                  <p class="riko-timeline__body">风过围垣，落星回响 —— 第一章完结！</p>
+                </div>
+              </li>
+              <li class="riko-timeline__item">
+                <span class="riko-timeline__dot"><span class="riko-star" aria-hidden="true"></span></span>
+                <div class="riko-timeline__content">
+                  <time class="riko-timeline__time" datetime="2026-07-01">2026.07.01</time>
+                  <h3 class="riko-timeline__title">官方网站上线</h3>
+                  <p class="riko-timeline__body">小说阅读器与络可的笔记本同步开放。</p>
+                </div>
+              </li>
+              <li class="riko-timeline__item">
+                <span class="riko-timeline__dot"></span>
+                <div class="riko-timeline__content">
+                  <time class="riko-timeline__time" datetime="2026-02-16">2026.02.16</time>
+                  <h3 class="riko-timeline__title">沙滩上的画家</h3>
+                  <p class="riko-timeline__body">故事从这里开始。</p>
+                </div>
+              </li>
+            </ol>
+          </section>
+
+          <section class="riko-card" id="comments" aria-labelledby="comments-title">
+            <h2 class="riko-card__title" id="comments-title">最新留言</h2>
+            <ul class="riko-list riko-list--divided">
+              <li class="riko-list__item">
+                <span class="riko-avatar riko-avatar--sm riko-avatar--soft" role="img" aria-label="小海豚">海</span>
+                <div class="riko-list__content">
+                  <span class="riko-list__title">小海豚</span>
+                  <span class="riko-list__desc">Star 终于回来了，哭了一晚上！</span>
+                </div>
+                <span class="riko-list__meta">3 分钟前</span>
+              </li>
+              <li class="riko-list__item">
+                <span class="riko-avatar riko-avatar--sm riko-avatar--accent" role="img" aria-label="贝雷帽"><span class="riko-star" aria-hidden="true"></span></span>
+                <div class="riko-list__content">
+                  <span class="riko-list__title">贝雷帽</span>
+                  <span class="riko-list__desc">求番外！想看络可学画画的故事。</span>
+                </div>
+                <span class="riko-list__meta">1 小时前</span>
+              </li>
+              <li class="riko-list__item">
+                <span class="riko-avatar riko-avatar--sm" role="img" aria-label="红石灯">红</span>
+                <div class="riko-list__content">
+                  <span class="riko-list__title">红石灯</span>
+                  <span class="riko-list__desc">第 062 节有个错别字：「传音」应为「传声」。</span>
+                </div>
+                <span class="riko-list__meta">昨天</span>
+              </li>
+            </ul>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script src="../docs/assets/vendor/lucide.min.js"></script>
+<script src="../packages/core/dist/riko-ui.js"></script>
+<script>
+  document.getElementById('new-chapter').addEventListener('click', function () {
+    Riko.toast({ title: '新建章节', message: '已创建草稿「第 077 节」', tone: 'success', action: { label: '去编辑', onClick: function (close) { close(); } } });
+  });
+</script>
+</body>
+</html>

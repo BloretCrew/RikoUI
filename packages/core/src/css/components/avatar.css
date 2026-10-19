@@ -1,0 +1,45 @@
+/* ==========================================================================
+   avatar · 头像
+   <span class="riko-avatar riko-avatar--ring"><img src="…" alt="络可"></span>
+   <span class="riko-avatar" role="img" aria-label="星星酥">星</span>
+   <span class="riko-avatar"><img src="…" alt="络可"><span class="riko-avatar__status" data-status="online" aria-label="在线"></span></span>
+   头像组：<div class="riko-avatar-group">…多个 riko-avatar…</div>
+   ========================================================================== */
+@layer riko.components {
+  .riko-avatar {
+    --riko-avatar-size: 44px;
+    --riko-avatar-bg: var(--riko-color-ice-soft);
+    --riko-avatar-fg: var(--riko-color-ice-ink);
+    position: relative; flex: none;
+    display: inline-grid; place-items: center;
+    width: var(--riko-avatar-size); height: var(--riko-avatar-size);
+    border-radius: 50%;
+    font-family: var(--riko-font-title); font-size: calc(var(--riko-avatar-size) * .42); line-height: 1;
+    color: var(--riko-avatar-fg); background: var(--riko-avatar-bg);
+    vertical-align: middle; user-select: none;
+  }
+  .riko-avatar > img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+  .riko-avatar > svg.lucide, .riko-avatar > .riko-icon, .riko-avatar > .riko-star { --riko-icon-size: 50%; --riko-star-size: 50%; }
+  .riko-avatar--xs { --riko-avatar-size: 24px; }
+  .riko-avatar--sm { --riko-avatar-size: 32px; }
+  .riko-avatar--lg { --riko-avatar-size: 64px; }
+  .riko-avatar--xl { --riko-avatar-size: 96px; }
+  .riko-avatar--ring { border: 3px solid var(--riko-color-surface); box-shadow: 0 0 0 2px var(--riko-color-tan), var(--riko-shadow-md); }
+  .riko-avatar--square { border-radius: 30% 26% 32% 24% / 24% 32% 26% 30%; }
+  .riko-avatar--accent { --riko-avatar-bg: var(--riko-color-accent-soft); --riko-avatar-fg: var(--riko-color-accent-ink); }
+  .riko-avatar--soft { --riko-avatar-bg: var(--riko-color-surface-muted); --riko-avatar-fg: var(--riko-color-brown); }
+
+  .riko-avatar__status {
+    position: absolute; right: 2%; bottom: 2%;
+    width: max(10px, calc(var(--riko-avatar-size) * .26)); height: max(10px, calc(var(--riko-avatar-size) * .26));
+    border-radius: 50%; border: 2px solid var(--riko-color-surface);
+    background: var(--riko-color-fg-subtle);
+  }
+  .riko-avatar__status[data-status="online"] { background: var(--riko-color-success); }
+  .riko-avatar__status[data-status="busy"] { background: var(--riko-color-danger); }
+  .riko-avatar__status[data-status="away"] { background: var(--riko-color-warning); }
+
+  .riko-avatar-group { display: inline-flex; align-items: center; flex-direction: row; padding-left: 10px; }
+  .riko-avatar-group > .riko-avatar { margin-left: -10px; border: 2px solid var(--riko-color-surface); transition: transform var(--riko-duration-fast) var(--riko-ease-bounce); }
+  .riko-avatar-group > .riko-avatar:hover { transform: translateY(-3px); z-index: 1; }
+}

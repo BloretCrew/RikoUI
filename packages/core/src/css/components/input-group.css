@@ -1,0 +1,74 @@
+/* ==========================================================================
+   input-group · 输入组（前后缀 / 图标 / 内嵌按钮）
+   <div class="riko-input-group">
+     <span class="riko-input-group__addon">https://</span>
+     <input class="riko-input" type="text">
+     <button type="button" class="riko-btn riko-btn--soft">检查</button>
+   </div>
+   __icon 输入框内的图标 · --sm / --lg 尺寸
+   密码切换：<button class="riko-btn riko-btn--ghost riko-btn--icon" data-riko="password-toggle" aria-label="显示密码"></button>
+   ========================================================================== */
+@layer riko.components {
+  .riko-input-group {
+    --riko-ig-h: var(--riko-control-h-md);
+    --riko-ig-radius: var(--riko-radius-md);
+    position: relative;
+    display: flex; align-items: stretch; width: 100%;
+    min-height: var(--riko-ig-h);
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-ig-radius);
+    box-shadow: var(--riko-shadow-inset);
+    transition: border-color var(--riko-duration-fast) ease, box-shadow var(--riko-duration-fast) ease;
+  }
+  .riko-input-group:hover { border-color: var(--riko-color-border-strong); }
+  .riko-input-group:focus-within { border-color: var(--riko-color-accent); box-shadow: 0 0 0 4px var(--riko-color-accent-soft); }
+  .riko-input-group:has(> .riko-input[aria-invalid="true"]) { border-color: var(--riko-color-danger); }
+  .riko-input-group:has(> .riko-input[aria-invalid="true"]):focus-within { box-shadow: 0 0 0 4px var(--riko-color-danger-soft); }
+  .riko-input-group:has(> .riko-input:disabled) { background: var(--riko-color-surface-muted); opacity: .75; }
+
+  /* 内部控件去掉自身边框 */
+  .riko-input-group > .riko-input, .riko-input-group > .riko-select {
+    flex: 1 1 auto; min-width: 0; width: auto;
+    min-height: calc(var(--riko-ig-h) - 2 * var(--riko-border-width));
+    border: 0; box-shadow: none; background-color: transparent;
+    border-radius: var(--riko-ig-radius);
+  }
+  .riko-input-group > .riko-input:focus, .riko-input-group > .riko-select:focus { box-shadow: none; }
+  .riko-input-group > .riko-input:focus-visible { outline: none; }
+
+  .riko-input-group__addon {
+    flex: none; display: inline-flex; align-items: center; gap: 6px;
+    padding: 0 var(--riko-space-3);
+    font-size: var(--riko-text-sm); color: var(--riko-color-fg-muted);
+    background: var(--riko-color-surface-muted);
+    white-space: nowrap;
+  }
+  .riko-input-group__addon:first-child { border-radius: calc(var(--riko-ig-radius) - 2px) 0 0 calc(var(--riko-ig-radius) - 2px); border-right: var(--riko-border-width) dashed var(--riko-color-border); }
+  .riko-input-group__addon:last-child { border-radius: 0 calc(var(--riko-ig-radius) - 2px) calc(var(--riko-ig-radius) - 2px) 0; border-left: var(--riko-border-width) dashed var(--riko-color-border); }
+
+  .riko-input-group__icon {
+    flex: none; display: inline-flex; align-items: center; padding-left: var(--riko-space-3);
+    color: var(--riko-color-fg-muted); pointer-events: none;
+  }
+  .riko-input-group__icon:last-child { padding: 0 var(--riko-space-3) 0 0; }
+  .riko-input-group__icon + .riko-input { padding-left: var(--riko-space-2); }
+
+  /* 内嵌按钮：缩进 4px，变小一些 */
+  .riko-input-group > .riko-btn {
+    --riko-btn-h: calc(var(--riko-ig-h) - 2 * var(--riko-border-width) - 8px);
+    align-self: center; margin: 0 4px; box-shadow: none;
+  }
+  .riko-input-group > .riko-btn:hover { transform: none; }
+  .riko-input-group > .riko-btn:first-child { margin-left: 4px; }
+
+  .riko-input-group--sm { --riko-ig-h: var(--riko-control-h-sm); --riko-ig-radius: var(--riko-radius-sm); font-size: var(--riko-text-sm); }
+  .riko-input-group--lg { --riko-ig-h: var(--riko-control-h-lg); --riko-ig-radius: var(--riko-radius-lg); }
+  .riko-input-group--round { --riko-ig-radius: var(--riko-radius-pill); }
+  .riko-input-group--round > .riko-btn { --riko-btn-radius: var(--riko-radius-pill); }
+
+  /* 密码切换按钮图标（JS 维护 aria-pressed） */
+  .riko-password-toggle__show, .riko-password-toggle__hide { pointer-events: none; }
+  [data-riko~="password-toggle"][aria-pressed="true"] .riko-password-toggle__show { display: none; }
+  [data-riko~="password-toggle"]:not([aria-pressed="true"]) .riko-password-toggle__hide { display: none; }
+}

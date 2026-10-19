@@ -1,0 +1,296 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Riko UI 组件清单条目",
+  "description": "每个组件一个文件：packages/core/ai/components/<name>.json。构建时合并为 ai/components.json，并用于生成 AI_GUIDE、文档 API 表与 riko-ui check 校验。",
+  "type": "object",
+  "required": [
+    "name",
+    "title",
+    "titleEn",
+    "category",
+    "summary",
+    "when",
+    "root",
+    "examples"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "kebab-case，与 CSS 文件名、文档 section id 一致"
+    },
+    "title": {
+      "type": "string",
+      "description": "中文名，如 按钮"
+    },
+    "titleEn": {
+      "type": "string",
+      "description": "英文名，如 Button"
+    },
+    "category": {
+      "enum": [
+        "foundation",
+        "layout",
+        "general",
+        "form",
+        "navigation",
+        "data",
+        "feedback",
+        "decor"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "description": "一句话说明"
+    },
+    "when": {
+      "type": "string",
+      "description": "什么时候用（以及什么时候改用别的组件）"
+    },
+    "root": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "根类名，如 riko-btn；纯 JS API 组件可为 null"
+    },
+    "element": {
+      "type": "string",
+      "description": "推荐的根元素标签，如 button / a / div / dialog"
+    },
+    "parts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "class",
+          "desc"
+        ],
+        "properties": {
+          "class": {
+            "type": "string"
+          },
+          "desc": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "modifiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "class",
+          "desc"
+        ],
+        "properties": {
+          "class": {
+            "type": "string"
+          },
+          "desc": {
+            "type": "string"
+          },
+          "group": {
+            "enum": [
+              "variant",
+              "tone",
+              "size",
+              "shape",
+              "layout",
+              "decor",
+              "behavior"
+            ],
+            "description": "同一 group 内的修饰互斥"
+          }
+        }
+      }
+    },
+    "states": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "attr",
+          "desc"
+        ],
+        "properties": {
+          "attr": {
+            "type": "string",
+            "description": "如 aria-pressed=\"true\"、disabled"
+          },
+          "on": {
+            "type": "string",
+            "description": "加在哪个元素上（类名），缺省为根"
+          },
+          "desc": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "js": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "attr": {
+          "type": "string",
+          "description": "如 data-riko=\"tabs\"；纯 API 组件留空"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "attr",
+              "desc"
+            ],
+            "properties": {
+              "attr": {
+                "type": "string"
+              },
+              "values": {
+                "type": "string"
+              },
+              "default": {
+                "type": "string"
+              },
+              "desc": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "methods": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "signature",
+              "desc"
+            ],
+            "properties": {
+              "signature": {
+                "type": "string",
+                "description": "如 el.riko.open() 或 Riko.toast(options)"
+              },
+              "desc": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "desc"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "如 riko:tabs:change"
+              },
+              "detail": {
+                "type": "string"
+              },
+              "desc": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "a11y": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "无障碍要求（使用者必须做的事）"
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "正确用法要点（给 AI）"
+    },
+    "avoid": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "常见错误写法"
+    },
+    "examples": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "title",
+          "html"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "html": {
+            "type": "string",
+            "description": "可直接复制的标准写法（与文档演示一致）"
+          }
+        }
+      }
+    },
+    "requires": {
+      "type": "array",
+      "description": "riko-ui check 使用的结构校验",
+      "items": {
+        "type": "object",
+        "required": [
+          "selector",
+          "message"
+        ],
+        "properties": {
+          "selector": {
+            "type": "string",
+            "description": "匹配的元素（CSS 选择器，限：类、属性、标签、:not()）"
+          },
+          "has": {
+            "type": "string",
+            "description": "必须包含的后代（选择器）"
+          },
+          "attr": {
+            "type": "string",
+            "description": "必须具有的属性名（可写 a|b 表示任一）"
+          },
+          "parent": {
+            "type": "string",
+            "description": "必须位于该选择器的元素之内"
+          },
+          "message": {
+            "type": "string"
+          },
+          "tag": {
+            "type": "string",
+            "description": "必须是这些元素之一（可写 label|div）"
+          }
+        }
+      }
+    },
+    "related": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

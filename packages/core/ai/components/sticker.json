@@ -1,0 +1,28 @@
+{
+  "name": "sticker",
+  "title": "贴纸",
+  "titleEn": "Sticker",
+  "category": "decor",
+  "summary": "倾斜的手写体小贴纸标签。",
+  "when": "点缀\"NEW\"\"连载中\"等氛围文字。",
+  "root": "riko-sticker",
+  "examples": [
+    {
+      "title": "基础",
+      "html": "<span class=\"riko-sticker riko-sticker--accent\"><span class=\"riko-star\" aria-hidden=\"true\"></span>NEW!</span>"
+    }
+  ],
+  "element": "span",
+  "modifiers": [
+    {
+      "class": "riko-sticker--accent",
+      "desc": "橙色",
+      "group": "tone"
+    },
+    {
+      "class": "riko-sticker--ice",
+      "desc": "冰蓝",
+      "group": "tone"
+    }
+  ]
+}

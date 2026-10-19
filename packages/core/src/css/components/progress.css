@@ -1,0 +1,95 @@
+/* ==========================================================================
+   progress · 进度条 / 环形进度
+   <div class="riko-progress">
+     <div class="riko-progress__head">
+       <span class="riko-progress__label" id="read-label">阅读进度</span>
+       <span class="riko-progress__value">62%</span>
+     </div>
+     <progress class="riko-progress__bar" value="62" max="100" aria-labelledby="read-label"></progress>
+   </div>
+   不写 value 即为不确定进度（来回流动）。
+   <div class="riko-progress-ring" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"
+        aria-label="上传进度" style="--riko-progress: 72"><span class="riko-progress-ring__value">72%</span></div>
+   尺寸 --sm --lg · 色调 --ice --success --warning --danger（默认橙→冰蓝渐变）
+   ========================================================================== */
+@layer riko.components {
+  .riko-progress {
+    --riko-progress-h: 12px;
+    --riko-progress-fill: linear-gradient(90deg, var(--riko-color-accent), var(--riko-color-ice-strong));
+    display: flex; flex-direction: column; gap: var(--riko-space-2);
+    width: 100%;
+  }
+  .riko-progress--sm { --riko-progress-h: 6px; }
+  .riko-progress--lg { --riko-progress-h: 18px; }
+  .riko-progress--ice { --riko-progress-fill: linear-gradient(90deg, var(--riko-color-ice), var(--riko-color-ice-strong)); }
+  .riko-progress--success { --riko-progress-fill: var(--riko-color-success); }
+  .riko-progress--warning { --riko-progress-fill: var(--riko-color-warning); }
+  .riko-progress--danger { --riko-progress-fill: var(--riko-color-danger); }
+
+  .riko-progress__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--riko-space-3); font-size: var(--riko-text-sm); }
+  .riko-progress__label { color: var(--riko-color-fg); font-weight: var(--riko-weight-medium); }
+  .riko-progress__value { color: var(--riko-color-fg-muted); font-variant-numeric: tabular-nums; font-family: var(--riko-font-hand); font-size: var(--riko-text-lg); font-weight: 700; line-height: 1; }
+
+  .riko-progress__bar {
+    -webkit-appearance: none; appearance: none;
+    display: block; width: 100%; height: var(--riko-progress-h);
+    border: 0; border-radius: var(--riko-radius-pill);
+    background: var(--riko-color-surface-muted);
+    box-shadow: var(--riko-shadow-inset);
+    overflow: hidden;
+    color: var(--riko-color-accent);
+  }
+  .riko-progress__bar::-webkit-progress-bar { background: transparent; border-radius: var(--riko-radius-pill); }
+  .riko-progress__bar::-webkit-progress-value { background: var(--riko-progress-fill); border-radius: var(--riko-radius-pill); transition: width var(--riko-duration-slow) var(--riko-ease-out); }
+  .riko-progress__bar::-moz-progress-bar { background: var(--riko-progress-fill); border-radius: var(--riko-radius-pill); }
+  /* 不确定进度 */
+  .riko-progress__bar:indeterminate {
+    background:
+      linear-gradient(90deg, transparent, color-mix(in srgb, var(--riko-color-accent) 85%, transparent), transparent) 0 0 / 40% 100% no-repeat,
+      var(--riko-color-surface-muted);
+    animation: riko-progress-flow 1.4s ease-in-out infinite;
+  }
+  .riko-progress__bar:indeterminate::-webkit-progress-bar { background: transparent; }
+  .riko-progress__bar:indeterminate::-moz-progress-bar { background: transparent; }
+  @keyframes riko-progress-flow { from { background-position: -40% 0, 0 0; } to { background-position: 140% 0, 0 0; } }
+
+  /* ---- 环形 ---- */
+  .riko-progress-ring {
+    --riko-progress: 0;
+    --riko-ring-size: 88px;
+    --riko-ring-thickness: 10px;
+    --riko-ring-color: var(--riko-color-accent);
+    position: relative; display: inline-grid; place-items: center; flex: none;
+    width: var(--riko-ring-size); height: var(--riko-ring-size);
+  }
+  .riko-progress-ring::before {
+    content: ""; position: absolute; inset: 0; border-radius: 50%;
+    background: conic-gradient(var(--riko-ring-color) calc(var(--riko-progress) * 1%), var(--riko-color-surface-muted) 0);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - var(--riko-ring-thickness)), #000 calc(100% - var(--riko-ring-thickness) + 1px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - var(--riko-ring-thickness)), #000 calc(100% - var(--riko-ring-thickness) + 1px));
+  }
+  /* 进度头部的小星星 */
+  .riko-progress-ring::after {
+    content: ""; position: absolute; top: 0; left: 50%;
+    width: calc(var(--riko-ring-thickness) + 6px); height: calc(var(--riko-ring-thickness) + 6px);
+    margin-left: calc((var(--riko-ring-thickness) + 6px) / -2); margin-top: -3px;
+    background: var(--riko-ring-color);
+    -webkit-mask: var(--riko-icon-star) center / contain no-repeat;
+    mask: var(--riko-icon-star) center / contain no-repeat;
+    transform-origin: 50% calc(var(--riko-ring-size) / 2 + 3px);
+    transform: rotate(calc(var(--riko-progress) * 3.6deg));
+  }
+  .riko-progress-ring__value {
+    position: relative;
+    font-family: var(--riko-font-hand); font-weight: 700;
+    font-size: calc(var(--riko-ring-size) * .27); line-height: 1;
+    color: var(--riko-color-fg-strong);
+    font-variant-numeric: tabular-nums;
+  }
+  .riko-progress-ring--sm { --riko-ring-size: 56px; --riko-ring-thickness: 7px; }
+  .riko-progress-ring--lg { --riko-ring-size: 128px; --riko-ring-thickness: 13px; }
+  .riko-progress-ring--ice { --riko-ring-color: var(--riko-color-ice-strong); }
+  .riko-progress-ring--success { --riko-ring-color: var(--riko-color-success); }
+  .riko-progress-ring--warning { --riko-ring-color: var(--riko-color-warning); }
+  .riko-progress-ring--danger { --riko-ring-color: var(--riko-color-danger); }
+}

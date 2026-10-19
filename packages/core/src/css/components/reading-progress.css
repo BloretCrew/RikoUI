@@ -1,0 +1,19 @@
+/* ==========================================================================
+   reading-progress · 页面阅读进度条
+   <div class="riko-reading-progress" data-riko="reading-progress"></div>
+   data-riko-target="#article" 可只计算某个元素的阅读进度
+   ========================================================================== */
+@layer riko.components {
+  .riko-reading-progress {
+    position: fixed; top: 0; left: 0; z-index: calc(var(--riko-z-sticky) + 1);
+    width: 100%; height: var(--riko-reading-progress-h, 3px); pointer-events: none;
+  }
+  .riko-reading-progress::before {
+    content: ""; display: block; height: 100%;
+    width: calc(var(--riko-progress, 0) * 100%);
+    background: linear-gradient(90deg, var(--riko-color-ice), var(--riko-color-accent));
+    border-radius: 0 3px 3px 0;
+  }
+  .riko-reading-progress--static { position: relative; z-index: auto; border-radius: var(--riko-radius-pill); background: var(--riko-color-surface-muted); height: 6px; }
+  .riko-reading-progress--static::before { border-radius: inherit; }
+}

@@ -1,0 +1,52 @@
+/* ==========================================================================
+   segmented · 分段选择（基于原生 radio，无需 JS）
+   <div class="riko-segmented" role="radiogroup" aria-label="阅读模式">
+     <label class="riko-segmented__item"><input type="radio" name="mode" value="day" checked>白天</label>
+     <label class="riko-segmented__item"><input type="radio" name="mode" value="night">夜晚</label>
+   </div>
+   --sm / --lg · --block 撑满宽度 · --ice 冰蓝选中色
+   ========================================================================== */
+@layer riko.components {
+  .riko-segmented {
+    --riko-seg-h: 38px;
+    --riko-seg-active-bg: var(--riko-color-accent);
+    --riko-seg-active-fg: var(--riko-color-accent-fg);
+    display: inline-flex; align-items: stretch; gap: 2px; padding: 3px;
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-pill);
+    box-shadow: var(--riko-shadow-press);
+    width: fit-content; max-width: 100%;
+  }
+  .riko-segmented__item {
+    position: relative; flex: 1 1 auto;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    min-height: var(--riko-seg-h); padding: 0 var(--riko-space-4);
+    font-size: var(--riko-text-sm); font-weight: var(--riko-weight-medium); white-space: nowrap;
+    color: var(--riko-color-fg-muted);
+    border-radius: var(--riko-radius-pill);
+    cursor: pointer; user-select: none;
+    transition: color var(--riko-duration-fast) ease, background var(--riko-duration-fast) ease;
+  }
+  .riko-segmented__item > input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: inherit; }
+  .riko-segmented__item:hover { color: var(--riko-color-fg-strong); background: var(--riko-color-surface-muted); }
+  .riko-segmented__item:has(> input:checked) {
+    color: var(--riko-seg-active-fg);
+    background: var(--riko-seg-active-bg);
+    box-shadow: 0 2px 0 color-mix(in srgb, var(--riko-seg-active-bg) 60%, var(--riko-color-fg-strong));
+    animation: riko-seg-pop var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-segmented__item:has(> input:focus-visible) { outline: var(--riko-focus-ring); outline-offset: 2px; }
+  .riko-segmented__item:has(> input:disabled) { opacity: .45; cursor: not-allowed; background: none; }
+  .riko-segmented__item > :where(svg.lucide, .riko-icon) { --riko-icon-size: 1.1em; }
+
+  .riko-segmented--sm { --riko-seg-h: 30px; }
+  .riko-segmented--sm .riko-segmented__item { padding: 0 var(--riko-space-3); font-size: var(--riko-text-xs); }
+  .riko-segmented--lg { --riko-seg-h: 46px; }
+  .riko-segmented--lg .riko-segmented__item { padding: 0 var(--riko-space-5); font-size: var(--riko-text-md); }
+  .riko-segmented--block { display: flex; width: 100%; }
+  .riko-segmented--ice { --riko-seg-active-bg: var(--riko-color-ice-soft); --riko-seg-active-fg: var(--riko-color-ice-ink); }
+  .riko-segmented--ice .riko-segmented__item:has(> input:checked) { box-shadow: 0 0 0 1.5px var(--riko-color-ice) inset; }
+
+  @keyframes riko-seg-pop { from { transform: scale(.86); } }
+}

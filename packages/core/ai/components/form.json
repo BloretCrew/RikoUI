@@ -1,0 +1,62 @@
+{
+  "name": "form",
+  "title": "表单布局",
+  "titleEn": "Form",
+  "category": "form",
+  "summary": "表单整体排版：纵向或两列栅格，底部操作区。",
+  "when": "任何 <form>。",
+  "root": "riko-form",
+  "element": "form",
+  "parts": [
+    {
+      "class": "riko-form__full",
+      "desc": "在 --grid 中跨两列"
+    },
+    {
+      "class": "riko-form__actions",
+      "desc": "底部按钮区（虚线分隔，右对齐）"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-form--grid",
+      "desc": "两列栅格（窄屏单列）",
+      "group": "layout"
+    },
+    {
+      "class": "riko-form--compact",
+      "desc": "紧凑间距",
+      "group": "behavior"
+    }
+  ],
+  "states": [],
+  "js": null,
+  "a11y": [
+    "提交按钮用 type=\"submit\"；错误信息用 riko-field__error 显示在对应控件下方。"
+  ],
+  "rules": [
+    "表单项用 riko-field，分组用 riko-fieldset，按钮放 riko-form__actions。",
+    "主要按钮放在操作区最右侧。"
+  ],
+  "avoid": [
+    "不要用 <br> 或空 div 撑间距。"
+  ],
+  "examples": [
+    {
+      "title": "完整表单",
+      "html": "<form class=\"riko-form riko-form--grid\">\n  <div class=\"riko-field\" data-riko=\"field\">\n    <label class=\"riko-field__label\" for=\"f-name\">昵称<span class=\"riko-field__required\" aria-hidden=\"true\">*</span></label>\n    <input class=\"riko-input\" id=\"f-name\" type=\"text\" required placeholder=\"小星星\">\n  </div>\n  <div class=\"riko-field\" data-riko=\"field\">\n    <label class=\"riko-field__label\" for=\"f-role\">最喜欢的角色</label>\n    <select class=\"riko-select\" id=\"f-role\">\n      <option>络可</option>\n      <option>Star</option>\n    </select>\n  </div>\n  <div class=\"riko-field riko-form__full\" data-riko=\"field\">\n    <label class=\"riko-field__label\" for=\"f-msg\">想对作者说的话</label>\n    <textarea class=\"riko-textarea\" id=\"f-msg\" rows=\"3\" maxlength=\"200\" data-riko=\"autosize\"></textarea>\n    <p class=\"riko-field__counter\"></p>\n  </div>\n  <fieldset class=\"riko-fieldset riko-fieldset--inline\">\n    <legend class=\"riko-fieldset__legend\">订阅</legend>\n    <label class=\"riko-checkbox\"><input type=\"checkbox\" checked> 章节更新</label>\n    <label class=\"riko-checkbox\"><input type=\"checkbox\"> 设定集</label>\n  </fieldset>\n  <div class=\"riko-form__actions\">\n    <button type=\"reset\" class=\"riko-btn riko-btn--ghost\">重置</button>\n    <button type=\"submit\" class=\"riko-btn riko-btn--primary\"><i data-lucide=\"send\"></i>寄出信件</button>\n  </div>\n</form>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-form__full",
+      "parent": ".riko-form--grid",
+      "message": "riko-form__full 只在 riko-form--grid 中有效"
+    }
+  ],
+  "related": [
+    "field",
+    "fieldset",
+    "button"
+  ]
+}

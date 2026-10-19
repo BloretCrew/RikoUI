@@ -1,0 +1,46 @@
+{
+  "name": "stack",
+  "title": "纵向堆叠",
+  "titleEn": "Stack",
+  "category": "layout",
+  "summary": "子元素纵向排列并保持统一间距。",
+  "when": "表单项、卡片内容、任何纵向列表。",
+  "root": "riko-stack",
+  "element": "div",
+  "modifiers": [
+    {
+      "class": "riko-stack--xs",
+      "desc": "4px",
+      "group": "size"
+    },
+    {
+      "class": "riko-stack--sm",
+      "desc": "8px",
+      "group": "size"
+    },
+    {
+      "class": "riko-stack--lg",
+      "desc": "24px",
+      "group": "size"
+    },
+    {
+      "class": "riko-stack--xl",
+      "desc": "48px",
+      "group": "size"
+    },
+    {
+      "class": "riko-stack--center",
+      "desc": "水平居中",
+      "group": "layout"
+    }
+  ],
+  "rules": [
+    "默认间距 16px；也可用 style=\"--riko-stack-gap: var(--riko-space-5)\" 精调。"
+  ],
+  "examples": [
+    {
+      "title": "基础",
+      "html": "<div class=\"riko-stack\">\n  <h3 class=\"riko-h3\">标题</h3>\n  <p>正文</p>\n</div>"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+/* ==========================================================================
+   accordion · 折叠面板（基于 <details>，无 JS 也可用）
+   <div class="riko-accordion" data-riko="accordion">
+     <details class="riko-accordion__item" open>
+       <summary class="riko-accordion__summary">
+         <span class="riko-accordion__badge">一</span>
+         <span class="riko-accordion__title">第一幕：沙滩上的画家</span>
+         <span class="riko-accordion__meta">3 节</span>
+       </summary>
+       <div class="riko-accordion__content">…</div>
+     </details>
+   </div>
+   ========================================================================== */
+@layer riko.components {
+  .riko-accordion {
+    interpolate-size: allow-keywords;
+    display: flex; flex-direction: column;
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble);
+    box-shadow: var(--riko-shadow-sm);
+    padding: var(--riko-space-2) var(--riko-space-4);
+  }
+  .riko-accordion__item + .riko-accordion__item { border-top: var(--riko-border-width) dashed var(--riko-color-border); }
+  .riko-accordion__summary {
+    display: flex; align-items: center; gap: var(--riko-space-3);
+    padding: var(--riko-space-3) var(--riko-space-2); margin: 2px 0;
+    list-style: none; cursor: pointer; user-select: none;
+    border-radius: var(--riko-radius-md);
+    color: var(--riko-color-fg);
+    transition: background var(--riko-duration-fast) ease;
+  }
+  .riko-accordion__summary::-webkit-details-marker { display: none; }
+  .riko-accordion__summary:hover { background: var(--riko-color-surface-muted); }
+  .riko-accordion__summary::after {
+    content: ""; flex: none; width: 14px; height: 14px; margin-left: auto;
+    background: var(--riko-color-brown);
+    -webkit-mask: var(--riko-icon-chevron-right) center / contain no-repeat;
+    mask: var(--riko-icon-chevron-right) center / contain no-repeat;
+    transition: transform var(--riko-duration-base) ease;
+  }
+  .riko-accordion__item[open] > .riko-accordion__summary::after { transform: rotate(90deg); }
+  .riko-accordion__badge {
+    flex: none; display: grid; place-items: center; min-width: 38px; height: 38px; padding: 0 6px;
+    border-radius: 13px 10px 14px 9px;
+    font-family: var(--riko-font-title); font-size: var(--riko-text-md);
+    background: var(--riko-color-ice-soft); color: var(--riko-color-ice-ink);
+    transition: background var(--riko-duration-base) ease, color var(--riko-duration-base) ease, transform var(--riko-duration-base) ease;
+  }
+  .riko-accordion__item[open] > .riko-accordion__summary .riko-accordion__badge { background: var(--riko-color-accent); color: var(--riko-color-accent-fg); transform: rotate(-6deg); }
+  .riko-accordion__title { flex: 1; min-width: 0; font-family: var(--riko-font-read); font-weight: 600; font-size: var(--riko-text-md); color: var(--riko-color-fg-strong); line-height: 1.5; }
+  .riko-accordion__meta { flex: none; margin-left: auto; padding: 1px 10px; border-radius: var(--riko-radius-pill); font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted); background: var(--riko-color-surface-muted); }
+  .riko-accordion__summary:has(.riko-accordion__meta)::after { margin-left: 0; }
+  .riko-accordion__content { padding: var(--riko-space-1) var(--riko-space-2) var(--riko-space-4); color: var(--riko-color-fg-muted); font-size: var(--riko-text-sm); }
+  .riko-accordion__summary:has(.riko-accordion__badge) + .riko-accordion__content { padding-left: calc(38px + var(--riko-space-3) + var(--riko-space-2)); }
+
+  /* 原生展开动画（支持 ::details-content 的浏览器；JS 增强时由 JS 处理） */
+  @supports selector(::details-content) {
+    .riko-accordion:not([data-riko~="accordion"]) .riko-accordion__item::details-content {
+      block-size: 0; overflow: clip;
+      transition: block-size var(--riko-duration-base) ease, content-visibility var(--riko-duration-base) allow-discrete;
+    }
+    .riko-accordion:not([data-riko~="accordion"]) .riko-accordion__item[open]::details-content { block-size: auto; }
+  }
+
+  /* 互斥展开（行为由 JS 实现；无 JS 时请给每个 details 写相同的 name） */
+  .riko-accordion--exclusive { --riko-accordion-exclusive: 1; }
+  .riko-accordion--flush { background: transparent; border: 0; box-shadow: none; padding: 0; }
+  .riko-accordion--cards { background: transparent; border: 0; box-shadow: none; padding: 0; gap: var(--riko-space-3); }
+  .riko-accordion--cards > .riko-accordion__item {
+    padding: var(--riko-space-1) var(--riko-space-3);
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble-sm);
+    box-shadow: var(--riko-shadow-sm);
+    transition: border-color var(--riko-duration-base) ease;
+  }
+  .riko-accordion--cards > .riko-accordion__item + .riko-accordion__item { border-top: var(--riko-border-width) solid var(--riko-color-border); }
+  .riko-accordion--cards > .riko-accordion__item[open] { border-color: var(--riko-color-accent); }
+}

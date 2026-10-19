@@ -1,0 +1,41 @@
+/* ==========================================================================
+   toc · 页内目录（滚动高亮）
+   <nav class="riko-toc" data-riko="toc" aria-label="本页目录">
+     <p class="riko-toc__title">本页目录</p>
+     <ul class="riko-toc__list">
+       <li><a class="riko-toc__link" href="#intro">简介</a></li>
+       <li><a class="riko-toc__link" href="#usage">用法</a>
+         <ul class="riko-toc__sublist"><li><a class="riko-toc__link" href="#basic">基础</a></li></ul></li>
+     </ul>
+   </nav>
+   ========================================================================== */
+@layer riko.components {
+  .riko-toc { font-size: var(--riko-text-sm); }
+  .riko-toc__title {
+    display: flex; align-items: center; gap: var(--riko-space-2); margin: 0 0 var(--riko-space-3);
+    font-size: var(--riko-text-xs); font-weight: var(--riko-weight-bold); letter-spacing: .14em; color: var(--riko-color-brown);
+  }
+  .riko-toc__title::before {
+    content: ""; width: 12px; height: 12px; background: var(--riko-color-accent);
+    -webkit-mask: var(--riko-icon-star) center / contain no-repeat; mask: var(--riko-icon-star) center / contain no-repeat;
+  }
+  .riko-toc__list, .riko-toc__sublist { list-style: none; margin: 0; padding: 0; }
+  .riko-toc__list { border-left: var(--riko-border-width) dashed var(--riko-color-border); }
+  .riko-toc__sublist { padding-left: var(--riko-space-3); }
+  .riko-toc__link {
+    position: relative; display: block; margin-left: -2px; padding: 5px 12px 5px 14px;
+    border-left: var(--riko-border-width) solid transparent;
+    color: var(--riko-color-fg-muted); text-decoration: none; line-height: 1.5;
+    transition: color var(--riko-duration-fast) ease, border-color var(--riko-duration-fast) ease;
+  }
+  .riko-toc__sublist .riko-toc__link { font-size: var(--riko-text-xs); }
+  .riko-toc__link:hover { color: var(--riko-color-fg-strong); }
+  .riko-toc__link[aria-current="true"], .riko-toc__link[aria-current="location"] {
+    color: var(--riko-color-accent-ink); font-weight: var(--riko-weight-bold); border-left-color: var(--riko-color-accent);
+  }
+  .riko-toc__link[aria-current="true"]::before, .riko-toc__link[aria-current="location"]::before {
+    content: ""; position: absolute; left: -7px; top: 50%; width: 12px; height: 12px; margin-top: -6px;
+    background: var(--riko-color-accent);
+    -webkit-mask: var(--riko-icon-star) center / contain no-repeat; mask: var(--riko-icon-star) center / contain no-repeat;
+  }
+}

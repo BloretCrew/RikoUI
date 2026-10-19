@@ -1,0 +1,47 @@
+/* ==========================================================================
+   empty · 空状态
+   <div class="riko-empty">
+     <div class="riko-empty__art" aria-hidden="true"></div>
+     <h3 class="riko-empty__title">这里还空空的</h3>
+     <p class="riko-empty__desc">络可还没有在这页画下任何东西呢。</p>
+     <div class="riko-empty__actions">…</div>
+   </div>
+   __art 为空时显示默认插画（星星 + 小云朵）；也可在里面放自己的图片或图标。
+   ========================================================================== */
+@layer riko.components {
+  .riko-empty {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    gap: var(--riko-space-2); padding: var(--riko-space-8) var(--riko-space-5);
+  }
+  .riko-empty__art {
+    --riko-empty-art: 140px;
+    position: relative; display: grid; place-items: center;
+    width: var(--riko-empty-art); height: calc(var(--riko-empty-art) * .8);
+    margin-bottom: var(--riko-space-3); font-size: calc(var(--riko-empty-art) * .4);
+    color: var(--riko-color-ice-ink);
+  }
+  .riko-empty__art:empty {
+    background:
+      radial-gradient(circle at 22% 78%, var(--riko-color-ice-soft) 0 16%, transparent 17%),
+      radial-gradient(circle at 38% 72%, var(--riko-color-ice-soft) 0 20%, transparent 21%),
+      radial-gradient(circle at 56% 78%, var(--riko-color-ice-soft) 0 15%, transparent 16%),
+      radial-gradient(ellipse 46% 18% at 40% 86%, var(--riko-color-ice-soft) 0 99%, transparent 100%),
+      radial-gradient(circle at 88% 22%, var(--riko-color-accent-soft) 0 5%, transparent 6%),
+      radial-gradient(circle at 10% 30%, var(--riko-color-tan) 0 2.5%, transparent 3.5%);
+  }
+  .riko-empty__art:empty::after {
+    content: ""; position: absolute; left: 50%; top: 4%;
+    width: 48%; aspect-ratio: 1; transform: translateX(-30%) rotate(-12deg);
+    background: var(--riko-color-accent);
+    -webkit-mask: var(--riko-icon-star) center / contain no-repeat;
+    mask: var(--riko-icon-star) center / contain no-repeat;
+    animation: riko-bob 5s ease-in-out infinite;
+  }
+  .riko-empty__art > img { max-height: 100%; width: auto; }
+  .riko-empty__title { font-family: var(--riko-font-title); font-weight: var(--riko-weight-normal); font-size: var(--riko-text-2xl); color: var(--riko-color-fg-strong); line-height: 1.3; }
+  .riko-empty__desc { max-width: 28em; color: var(--riko-color-fg-muted); font-size: var(--riko-text-sm); }
+  .riko-empty__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--riko-space-2); margin-top: var(--riko-space-3); }
+  .riko-empty--sm { padding: var(--riko-space-5) var(--riko-space-4); }
+  .riko-empty--sm .riko-empty__art { --riko-empty-art: 88px; margin-bottom: var(--riko-space-1); }
+  .riko-empty--sm .riko-empty__title { font-size: var(--riko-text-lg); }
+}

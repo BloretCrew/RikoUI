@@ -1,0 +1,25 @@
+/* ==========================================================================
+   button-group · 按钮组
+   <div class="riko-btn-group" role="group" aria-label="操作">…riko-btn…</div>
+   --attached 拼接成一体（适合切换视图、对齐方式等）· --vertical 纵向
+   ========================================================================== */
+@layer riko.components {
+  .riko-btn-group {
+    display: inline-flex; flex-wrap: wrap; align-items: center;
+    gap: var(--riko-space-2);
+  }
+  .riko-btn-group--vertical { flex-direction: column; align-items: stretch; }
+
+  .riko-btn-group--attached { gap: 0; flex-wrap: nowrap; }
+  .riko-btn-group--attached > .riko-btn { border-radius: 0; }
+  .riko-btn-group--attached > .riko-btn + .riko-btn { margin-left: calc(-1 * var(--riko-border-width)); }
+  .riko-btn-group--attached > .riko-btn:first-child { border-radius: var(--riko-radius-pill) 0 0 var(--riko-radius-pill); padding-left: calc(var(--riko-btn-px) + 4px); }
+  .riko-btn-group--attached > .riko-btn:last-child { border-radius: 0 var(--riko-radius-pill) var(--riko-radius-pill) 0; padding-right: calc(var(--riko-btn-px) + 4px); }
+  .riko-btn-group--attached > .riko-btn:only-child { border-radius: var(--riko-radius-pill); }
+  .riko-btn-group--attached > .riko-btn:hover,
+  .riko-btn-group--attached > .riko-btn:focus-visible,
+  .riko-btn-group--attached > .riko-btn[aria-pressed="true"] { z-index: 1; }
+  .riko-btn-group--attached.riko-btn-group--vertical > .riko-btn + .riko-btn { margin-left: 0; margin-top: calc(-1 * var(--riko-border-width)); }
+  .riko-btn-group--attached.riko-btn-group--vertical > .riko-btn:first-child { border-radius: var(--riko-radius-md) var(--riko-radius-md) 0 0; padding-left: var(--riko-btn-px); }
+  .riko-btn-group--attached.riko-btn-group--vertical > .riko-btn:last-child { border-radius: 0 0 var(--riko-radius-md) var(--riko-radius-md); padding-right: var(--riko-btn-px); }
+}

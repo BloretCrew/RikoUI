@@ -1,0 +1,150 @@
+/* ==========================================================================
+   Riko UI · 排版
+   标题  .riko-h1 … .riko-h6（也作用于 .riko-prose 内的 h1–h6）
+   其他  .riko-display .riko-lead .riko-hand .riko-text .riko-caption .riko-quote
+         .riko-kbd .riko-code .riko-mark .riko-prose（长文/阅读）
+   ========================================================================== */
+@layer riko.base {
+  .riko-display,
+  .riko-h1, .riko-h2, .riko-h3, .riko-h4, .riko-h5, .riko-h6 {
+    font-family: var(--riko-font-title);
+    font-weight: var(--riko-weight-normal);
+    color: var(--riko-color-fg-strong);
+    line-height: var(--riko-leading-tight);
+    letter-spacing: .02em;
+    text-wrap: balance;
+  }
+  .riko-display { font-size: var(--riko-text-5xl); letter-spacing: .04em; }
+  .riko-h1 { font-size: var(--riko-text-4xl); }
+  .riko-h2 { font-size: var(--riko-text-3xl); }
+  .riko-h3 { font-size: var(--riko-text-2xl); }
+  .riko-h4 { font-size: var(--riko-text-xl); }
+  .riko-h5 { font-size: var(--riko-text-lg); }
+  .riko-h6 { font-size: var(--riko-text-md); }
+
+  /* 标题旁的手写英文副标 */
+  .riko-hand {
+    font-family: var(--riko-font-hand);
+    font-size: min(1.25em, var(--riko-text-2xl));
+    font-weight: 600;
+    color: var(--riko-color-brown);
+    letter-spacing: .03em;
+    line-height: 1.2;
+  }
+  .riko-hand--ice { color: var(--riko-color-ice-ink); }
+  .riko-hand--accent { color: var(--riko-color-accent-ink); }
+
+  .riko-lead { font-size: var(--riko-text-lg); color: var(--riko-color-fg-muted); line-height: var(--riko-leading-relaxed); }
+  .riko-text { font-size: var(--riko-text-md); }
+  .riko-text--sm { font-size: var(--riko-text-sm); }
+  .riko-text--xs { font-size: var(--riko-text-xs); }
+  .riko-text--lg { font-size: var(--riko-text-lg); }
+  .riko-text--muted { color: var(--riko-color-fg-muted); }
+  .riko-text--strong { color: var(--riko-color-fg-strong); font-weight: var(--riko-weight-bold); }
+  .riko-text--accent { color: var(--riko-color-accent-ink); }
+  .riko-text--ice { color: var(--riko-color-ice-ink); }
+  .riko-text--success { color: var(--riko-color-success-ink); }
+  .riko-text--warning { color: var(--riko-color-warning-ink); }
+  .riko-text--danger { color: var(--riko-color-danger-ink); }
+  .riko-text--read { font-family: var(--riko-font-read); }
+  .riko-caption { font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted); letter-spacing: .04em; }
+  .riko-eyebrow {
+    display: inline-flex; align-items: center; gap: var(--riko-space-2);
+    font-size: var(--riko-text-xs); font-weight: var(--riko-weight-bold);
+    letter-spacing: .14em; color: var(--riko-color-brown);
+  }
+
+  .riko-quote {
+    position: relative;
+    padding: var(--riko-space-4) var(--riko-space-5) var(--riko-space-4) var(--riko-space-7);
+    border-radius: var(--riko-radius-wobble-sm);
+    background: var(--riko-color-surface-muted);
+    color: var(--riko-color-fg-muted);
+    font-family: var(--riko-font-read);
+  }
+  .riko-quote::before {
+    content: "“";
+    position: absolute; left: var(--riko-space-3); top: -.1em;
+    font-family: var(--riko-font-title); font-size: 2.6em; line-height: 1;
+    color: var(--riko-color-accent);
+  }
+  .riko-quote__cite { display: block; margin-top: var(--riko-space-2); font-size: var(--riko-text-sm); font-style: normal; color: var(--riko-color-brown); }
+  .riko-quote__cite::before { content: "—— "; }
+
+  .riko-kbd {
+    display: inline-block; min-width: 1.8em; padding: 0 .45em;
+    font: var(--riko-weight-bold) .78em/1.7 var(--riko-font-body);
+    text-align: center; color: var(--riko-color-fg-strong);
+    background: var(--riko-color-surface);
+    border: 1.5px solid var(--riko-color-border-strong);
+    border-radius: var(--riko-radius-xs);
+    box-shadow: 0 2px 0 var(--riko-color-border);
+    white-space: nowrap;
+  }
+  .riko-code {
+    padding: .1em .4em; border-radius: var(--riko-radius-xs);
+    font-family: var(--riko-font-mono); font-size: .88em;
+    background: var(--riko-color-surface-muted); color: var(--riko-color-accent-ink);
+  }
+  .riko-mark {
+    padding: 0 .1em; border-radius: 4px;
+    color: inherit; background: var(--riko-color-mark);
+    box-shadow: inset 0 -2px 0 var(--riko-color-accent);
+  }
+  .riko-mark--current { background: var(--riko-color-accent); color: var(--riko-color-accent-fg); box-shadow: 0 0 0 3px var(--riko-color-accent-soft); }
+
+  /* ---- 长文 / 文章 / 小说阅读 ---- */
+  .riko-prose {
+    --riko-prose-size: var(--riko-text-md);
+    font-size: var(--riko-prose-size);
+    line-height: var(--riko-leading-relaxed);
+    color: var(--riko-color-fg);
+    max-width: var(--riko-container-narrow);
+    overflow-wrap: anywhere;
+  }
+  .riko-prose > * + * { margin-top: 1em; }
+  .riko-prose > :first-child { margin-top: 0; }
+  .riko-prose :where(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--riko-font-title); font-weight: var(--riko-weight-normal);
+    color: var(--riko-color-fg-strong); line-height: var(--riko-leading-tight);
+    margin-top: 1.6em;
+  }
+  .riko-prose :where(h1) { font-size: 2em; }
+  .riko-prose :where(h2) { font-size: 1.6em; }
+  .riko-prose :where(h3) { font-size: 1.3em; }
+  .riko-prose :where(h4, h5, h6) { font-size: 1.1em; }
+  .riko-prose :where(ul, ol) { padding-left: 1.4em; }
+  .riko-prose :where(li + li) { margin-top: .35em; }
+  .riko-prose :where(ul > li)::marker { content: "✦ "; color: var(--riko-color-accent); font-size: .85em; }
+  .riko-prose :where(blockquote) {
+    padding: .2em 0 .2em 1.1em; border-left: 3px dashed var(--riko-color-accent);
+    color: var(--riko-color-fg-muted); font-family: var(--riko-font-read);
+  }
+  .riko-prose :where(code):not(pre code) {
+    padding: .1em .4em; border-radius: var(--riko-radius-xs);
+    font-family: var(--riko-font-mono); font-size: .88em;
+    background: var(--riko-color-surface-muted); color: var(--riko-color-accent-ink);
+  }
+  .riko-prose :where(pre) {
+    padding: var(--riko-space-4); border-radius: var(--riko-radius-md); overflow: auto;
+    background: var(--riko-color-surface-muted); font-family: var(--riko-font-mono); font-size: .88em; line-height: 1.7;
+  }
+  .riko-prose :where(img, video) { border-radius: var(--riko-radius-md); }
+  .riko-prose :where(hr) { border: 0; border-top: var(--riko-border-width) dashed var(--riko-color-border); margin: 2em 0; }
+  .riko-prose :where(mark) { padding: 0 .1em; border-radius: 4px; color: inherit; background: var(--riko-color-mark); box-shadow: inset 0 -2px 0 var(--riko-color-accent); }
+  .riko-prose :where(table) { width: 100%; font-size: .94em; }
+  .riko-prose :where(th, td) { padding: .5em .75em; border-bottom: 1.5px dashed var(--riko-color-border); text-align: left; }
+  .riko-prose :where(th) { color: var(--riko-color-fg-strong); }
+
+  /* 小说/散文阅读：衬线、首行缩进、宽松行距 */
+  .riko-prose--read {
+    --riko-prose-size: var(--riko-reading-size, 18px);
+    font-family: var(--riko-font-read);
+    line-height: var(--riko-leading-read);
+    letter-spacing: .02em;
+  }
+  .riko-prose--read > p { text-indent: 2em; text-align: justify; }
+  .riko-prose--read > * + * { margin-top: 1.05em; }
+  .riko-prose--lg { --riko-prose-size: var(--riko-text-lg); }
+  .riko-prose--wide { max-width: none; }
+}

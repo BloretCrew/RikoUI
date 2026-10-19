@@ -1,0 +1,48 @@
+/* ==========================================================================
+   field · 表单项（标签 + 控件 + 提示/错误/计数）
+   <div class="riko-field" data-riko="field">
+     <label class="riko-field__label" for="nick">昵称<span class="riko-field__required" aria-hidden="true">*</span></label>
+     <input class="riko-input" id="nick" required>
+     <p class="riko-field__hint">小伙伴们会这样称呼你</p>
+     <p class="riko-field__error" hidden>昵称不能为空哦</p>
+   </div>
+   --inline 标签在左侧 · data-riko="field" 自动关联 aria-describedby 并维护 __counter
+   ========================================================================== */
+@layer riko.components {
+  .riko-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .riko-field__label {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: var(--riko-text-sm); font-weight: var(--riko-weight-bold);
+    color: var(--riko-color-fg-strong);
+  }
+  .riko-field__required { color: var(--riko-color-accent-ink); font-weight: var(--riko-weight-bold); }
+  .riko-field__optional { font-weight: var(--riko-weight-normal); font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted); }
+  .riko-field__hint, .riko-field__error, .riko-field__counter { margin: 0; font-size: var(--riko-text-xs); line-height: 1.5; }
+  .riko-field__hint { color: var(--riko-color-fg-muted); }
+  .riko-field__error {
+    display: flex; align-items: flex-start; gap: 6px;
+    color: var(--riko-color-danger-ink); font-weight: var(--riko-weight-medium);
+  }
+  .riko-field__error::before {
+    content: ""; flex: none; width: 1.15em; height: 1.15em; margin-top: .1em;
+    background: currentColor;
+    -webkit-mask: var(--riko-icon-danger) center / contain no-repeat;
+    mask: var(--riko-icon-danger) center / contain no-repeat;
+  }
+  .riko-field__footer { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--riko-space-3); }
+  .riko-field__footer > :only-child.riko-field__counter { margin-left: auto; }
+  .riko-field__counter { margin-left: auto; color: var(--riko-color-fg-subtle); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .riko-field__counter[data-state="over"] { color: var(--riko-color-danger-ink); font-weight: var(--riko-weight-bold); }
+
+  .riko-field--inline {
+    display: grid; grid-template-columns: var(--riko-field-label-w, 120px) minmax(0, 1fr);
+    align-items: start; column-gap: var(--riko-space-4); row-gap: 6px;
+  }
+  .riko-field--inline > .riko-field__label { grid-column: 1; min-height: var(--riko-control-h-md); align-self: start; display: flex; align-items: center; }
+  .riko-field--inline > :not(.riko-field__label) { grid-column: 2; }
+  @media (max-width: 520px) {
+    .riko-field--inline { grid-template-columns: minmax(0, 1fr); }
+    .riko-field--inline > .riko-field__label { min-height: 0; }
+    .riko-field--inline > :not(.riko-field__label) { grid-column: 1; }
+  }
+}

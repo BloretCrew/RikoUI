@@ -1,0 +1,28 @@
+/* ==========================================================================
+   link · 链接
+   <a class="riko-link" href="#">阅读第一章</a>
+   --muted 低调 · --plain 无下划线（悬停才出现）· --external 外链（自动加图标，配合 target="_blank" rel="noopener"）
+   ========================================================================== */
+@layer riko.components {
+  .riko-link {
+    display: inline;
+    color: var(--riko-link-color, var(--riko-color-accent-ink));
+    text-decoration: underline wavy color-mix(in srgb, var(--riko-color-accent) 55%, transparent) 1.5px;
+    text-underline-offset: 4px;
+    border-radius: var(--riko-radius-xs);
+    cursor: pointer;
+    transition: color var(--riko-duration-fast) ease, text-decoration-color var(--riko-duration-fast) ease;
+  }
+  .riko-link:hover { color: var(--riko-color-fg-strong); text-decoration-color: var(--riko-color-accent); }
+  .riko-link--muted { --riko-link-color: var(--riko-color-fg-muted); text-decoration-color: var(--riko-color-border-strong); }
+  .riko-link--plain { text-decoration-color: transparent; }
+  .riko-link--plain:hover { text-decoration-color: var(--riko-color-accent); }
+  .riko-link--external::after {
+    content: ""; display: inline-block; width: .85em; height: .85em; margin-left: .2em; vertical-align: -.05em;
+    background: currentColor;
+    -webkit-mask: var(--riko-icon-external-link) center / contain no-repeat;
+    mask: var(--riko-icon-external-link) center / contain no-repeat;
+  }
+  .riko-link[aria-disabled="true"] { color: var(--riko-color-fg-subtle); text-decoration-color: transparent; pointer-events: none; }
+  .riko-link[aria-current="page"] { color: var(--riko-color-fg-strong); font-weight: var(--riko-weight-bold); text-decoration-style: solid; }
+}

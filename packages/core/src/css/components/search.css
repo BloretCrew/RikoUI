@@ -1,0 +1,85 @@
+/* ==========================================================================
+   search · 搜索框
+   <div class="riko-search" data-riko="search">
+     <input class="riko-search__input" type="search" placeholder="搜索小说内容…" aria-label="搜索">
+     <kbd class="riko-search__hint">/</kbd>
+     <span class="riko-search__count"></span>
+     <span class="riko-search__nav">…上一处 / 下一处按钮…</span>
+   </div>
+   放大镜图标由 CSS 绘制；清除按钮由 JS 自动加入。
+   ========================================================================== */
+@layer riko.components {
+  .riko-search {
+    --riko-search-h: 46px;
+    position: relative;
+    display: flex; align-items: center; gap: var(--riko-space-1);
+    width: min(var(--riko-search-w, 420px), 100%);
+    height: var(--riko-search-h);
+    padding: 0 6px 0 calc(var(--riko-space-4) + 1.5em);
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-pill);
+    transition: border-color var(--riko-duration-fast) ease, box-shadow var(--riko-duration-fast) ease;
+  }
+  .riko-search::before {
+    content: ""; position: absolute; left: var(--riko-space-4); top: 50%;
+    width: 1.05em; height: 1.05em; transform: translateY(-50%);
+    background: var(--riko-color-fg-muted);
+    -webkit-mask: var(--riko-icon-search) center / contain no-repeat; mask: var(--riko-icon-search) center / contain no-repeat;
+    pointer-events: none;
+  }
+  .riko-search:hover { border-color: var(--riko-color-border-strong); }
+  .riko-search:focus-within { border-color: var(--riko-color-accent); box-shadow: 0 0 0 4px var(--riko-color-accent-soft); }
+  .riko-search:focus-within::before { background: var(--riko-color-accent-ink); }
+
+  .riko-search__input {
+    flex: 1; min-width: 0; height: 100%;
+    border: 0; outline: 0; background: none; color: var(--riko-color-fg);
+    font-size: var(--riko-text-sm);
+  }
+  .riko-search__input::placeholder { color: var(--riko-color-fg-subtle); }
+  .riko-search__input::-webkit-search-cancel-button,
+  .riko-search__input::-webkit-search-decoration { -webkit-appearance: none; display: none; }
+  .riko-search__input:focus-visible { outline: none; }
+
+  .riko-search__hint {
+    flex: none; margin-right: var(--riko-space-2); padding: 0 .5em;
+    font: var(--riko-weight-bold) .72rem/1.6 var(--riko-font-body); color: var(--riko-color-fg-muted);
+    border: 1.5px solid var(--riko-color-border); border-radius: var(--riko-radius-xs);
+    background: var(--riko-color-surface);
+  }
+  .riko-search[data-state="filled"] .riko-search__hint { display: none; }
+
+  .riko-search__count {
+    flex: none; padding: 0 var(--riko-space-1);
+    font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted);
+    white-space: nowrap; font-variant-numeric: tabular-nums;
+  }
+  .riko-search__count:empty { display: none; }
+  .riko-search__nav { flex: none; display: flex; gap: 2px; }
+  .riko-search__nav[hidden] { display: none; }
+
+  .riko-search__btn,
+  .riko-search__clear {
+    flex: none; display: grid; place-items: center;
+    width: 32px; height: 32px; padding: 0;
+    border: 0; border-radius: 50%; background: transparent; color: var(--riko-color-brown);
+    transition: background var(--riko-duration-fast) ease, color var(--riko-duration-fast) ease;
+  }
+  .riko-search__btn:hover:not(:disabled),
+  .riko-search__clear:hover { background: var(--riko-color-surface-muted); color: var(--riko-color-fg-strong); }
+  .riko-search__btn:disabled { opacity: .35; }
+  .riko-search__btn::before,
+  .riko-search__clear::before {
+    content: ""; width: 16px; height: 16px; background: currentColor;
+    -webkit-mask: var(--riko-icon-x) center / contain no-repeat; mask: var(--riko-icon-x) center / contain no-repeat;
+  }
+  .riko-search__btn[data-step="prev"]::before { -webkit-mask-image: var(--riko-icon-chevron-up); mask-image: var(--riko-icon-chevron-up); }
+  .riko-search__btn[data-step="next"]::before { -webkit-mask-image: var(--riko-icon-chevron-down); mask-image: var(--riko-icon-chevron-down); }
+  .riko-search__clear[hidden] { display: none; }
+
+  .riko-search--sm { --riko-search-h: var(--riko-control-h-sm); }
+  .riko-search--lg { --riko-search-h: var(--riko-control-h-lg); font-size: var(--riko-text-lg); }
+  .riko-search--block { width: 100%; }
+  .riko-search--square { border-radius: var(--riko-radius-md); }
+}

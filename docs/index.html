@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开始使用 · Riko UI</title>
+<meta name="theme-color" content="#FBF5EA">
+<script src="../packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="../packages/core/dist/riko-ui.css">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+
+<header class="docs-header">
+  <div class="docs-header__inner">
+    <button type="button" class="riko-btn riko-btn--icon riko-btn--ghost docs-menu-btn" aria-label="打开导航"><i data-lucide="menu"></i></button>
+    <a class="docs-brand" href="index.html">
+      <span class="docs-brand__mark"><span class="riko-star" aria-hidden="true"></span></span>
+      <span><span class="docs-brand__name">Riko UI</span><span class="docs-brand__sub">little star ui kit</span></span>
+    </a>
+    <span class="docs-header__spacer"></span>
+    <div class="riko-theme-picker riko-theme-picker--compact" data-riko="theme-picker"></div>
+  </div>
+</header>
+
+<div class="docs-layout">
+  <aside class="docs-sidebar" aria-label="文档导航"></aside>
+  <main class="docs-main">
+    <div class="docs-landing">
+      <span class="riko-sticker riko-sticker--accent"><span class="riko-star" aria-hidden="true"></span>v0.1 · little star</span>
+      <h1 class="riko-display riko-u-mt-4">Riko UI</h1>
+      <span class="riko-squiggle" aria-hidden="true"></span>
+      <p class="riko-lead">源自《络的世界》的温馨手绘风 UI 框架。米色纸张、浅棕描边、冰蓝点缀与暖橙五角星——把治愈的童话感带进任何项目。</p>
+      <div class="riko-cluster riko-cluster--center riko-u-mt-6">
+        <a class="riko-btn riko-btn--primary riko-btn--lg" href="#install"><i data-lucide="rocket"></i>开始使用</a>
+        <a class="riko-btn riko-btn--lg" href="foundation.html"><i data-lucide="book-open"></i>浏览组件</a>
+      </div>
+    </div>
+
+    <section class="docs-section" id="features" data-docs-noapi>
+      <h2>特点 <small>Features</small></h2>
+      <div class="riko-grid riko-u-mt-6">
+          <article class="riko-card riko-card--stitched">
+            <div class="riko-card__header"><span class="riko-card__icon"><i data-lucide="package-open"></i></span></div>
+            <h3 class="riko-card__title">零依赖</h3>
+            <p class="riko-card__body">纯 CSS + 原生 JS，一个样式表加一个脚本即可，任何框架都能用。</p>
+          </article>
+          <article class="riko-card riko-card--stitched">
+            <div class="riko-card__header"><span class="riko-card__icon"><i data-lucide="moon-star"></i></span></div>
+            <h3 class="riko-card__title">深浅色</h3>
+            <p class="riko-card__body">按系统、按时间、浅色、深色四种模式，所有组件自动适配。</p>
+          </article>
+          <article class="riko-card riko-card--stitched">
+            <div class="riko-card__header"><span class="riko-card__icon"><i data-lucide="bot"></i></span></div>
+            <h3 class="riko-card__title">对 AI 友好</h3>
+            <p class="riko-card__body">llms.txt、组件清单与 riko-ui check 检查器，AI 一次写对。</p>
+          </article>
+          <article class="riko-card riko-card--stitched">
+            <div class="riko-card__header"><span class="riko-card__icon"><i data-lucide="accessibility"></i></span></div>
+            <h3 class="riko-card__title">无障碍</h3>
+            <p class="riko-card__body">WCAG AA 对比度、完整键盘操作、焦点可见、减少动效。</p>
+          </article>
+          <article class="riko-card riko-card--stitched">
+            <div class="riko-card__header"><span class="riko-card__icon"><i data-lucide="palette"></i></span></div>
+            <h3 class="riko-card__title">手绘童话风</h3>
+            <p class="riko-card__body">米色纸张、缝线、胶带、波浪线与暖橙星星。</p>
+          </article>
+          <article class="riko-card riko-card--stitched">
+            <div class="riko-card__header"><span class="riko-card__icon"><i data-lucide="globe"></i></span></div>
+            <h3 class="riko-card__title">全球可访问</h3>
+            <p class="riko-card__body">自托管字体与 npm 镜像，中国大陆同样顺畅。</p>
+          </article>
+      </div>
+    </section>
+
+    <section class="docs-section" id="install" data-docs-noapi>
+      <h2>安装 <small>Install</small></h2>
+      <div class="riko-stack riko-stack--lg riko-u-mt-6">
+        <div class="docs-step">
+          <span class="docs-step__num">1</span>
+          <div class="riko-stack riko-stack--sm">
+            <h3 class="riko-h4">用 npm 安装</h3>
+            <pre class="docs-pre"><code>npm i @bloret-crew/riko-ui lucide
+npm i @bloret-crew/riko-ui-fonts   # 可选：自托管字体</code></pre>
+            <pre class="docs-pre"><code>import '@bloret-crew/riko-ui-fonts/riko-fonts.css';
+import '@bloret-crew/riko-ui/css';
+import Riko from '@bloret-crew/riko-ui';   // 自动初始化，并挂到 window.Riko</code></pre>
+          </div>
+        </div>
+        <div class="docs-step">
+          <span class="docs-step__num">2</span>
+          <div class="riko-stack riko-stack--sm">
+            <h3 class="riko-h4">或者直接用 CDN</h3>
+            <p class="riko-text riko-text--sm riko-text--muted">中国大陆可把 cdn.jsdelivr.net 换成 npmmirror 镜像，或把 dist/ 目录自托管到任意服务器。</p>
+            <pre class="docs-pre"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-CN"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  &lt;script src="https://cdn.jsdelivr.net/npm/@bloret-crew/riko-ui@0/dist/riko-theme-init.js"&gt;&lt;/script&gt;
+  &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@bloret-crew/riko-ui@0/dist/riko-ui.min.css"&gt;
+&lt;/head&gt;
+&lt;body class="riko-plaid"&gt;
+  &lt;div class="riko-glow" aria-hidden="true"&gt;&lt;/div&gt;
+  &lt;main class="riko-container riko-section"&gt;
+    &lt;h1 class="riko-h1"&gt;你好，Riko UI &lt;span class="riko-star" aria-hidden="true"&gt;&lt;/span&gt;&lt;/h1&gt;
+    &lt;button type="button" class="riko-btn riko-btn--primary"&gt;开始阅读&lt;/button&gt;
+  &lt;/main&gt;
+  &lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;
+  &lt;script src="https://cdn.jsdelivr.net/npm/@bloret-crew/riko-ui@0/dist/riko-ui.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+          </div>
+        </div>
+        <div class="docs-step">
+          <span class="docs-step__num">3</span>
+          <div class="riko-stack riko-stack--sm">
+            <h3 class="riko-h4">让 AI 来写</h3>
+            <p class="riko-text riko-text--sm riko-text--muted">把下面这段放进项目的 CLAUDE.md / AGENTS.md，AI 就会读取随包附带的 llms.txt，并在交付前自检。</p>
+            <pre class="docs-pre"><code>本项目使用 Riko UI。写界面前先读 node_modules/@bloret-crew/riko-ui/llms.txt，
+交付前运行 npx riko-ui check &lt;改动的文件&gt;，0 错误才算完成。</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="naming" data-docs-noapi>
+      <h2>命名一览 <small>Naming</small></h2>
+      <div class="riko-table-wrap riko-u-mt-6">
+        <table class="riko-table">
+          <thead><tr><th scope="col">类型</th><th scope="col">写法</th><th scope="col">例子</th></tr></thead>
+          <tbody>
+            <tr><td>组件根</td><td><code class="riko-code">riko-组件</code></td><td><code class="riko-code">riko-btn</code></td></tr>
+            <tr><td>部件</td><td><code class="riko-code">riko-组件__部件</code></td><td><code class="riko-code">riko-card__title</code></td></tr>
+            <tr><td>修饰</td><td><code class="riko-code">riko-组件--修饰</code>（与根类同元素）</td><td><code class="riko-code">riko-btn riko-btn--primary</code></td></tr>
+            <tr><td>状态</td><td>原生属性 / ARIA</td><td><code class="riko-code">aria-pressed="true"</code> <code class="riko-code">disabled</code></td></tr>
+            <tr><td>JS 增强</td><td><code class="riko-code">data-riko="组件"</code></td><td><code class="riko-code">data-riko="tabs"</code></td></tr>
+            <tr><td>设计变量</td><td><code class="riko-code">--riko-分类-名</code></td><td><code class="riko-code">--riko-color-accent</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="docs-section" id="explore" data-docs-noapi>
+      <h2>浏览组件 <small>Explore</small></h2>
+      <div class="riko-grid riko-u-mt-6" style="--riko-grid-min: 220px;">
+          <a class="riko-card riko-card--interactive riko-card--compact" href="foundation.html">
+            <h3 class="riko-card__title">设计基础</h3>
+            <p class="riko-card__body">色彩、排版、图标、主题</p>
+          </a>
+          <a class="riko-card riko-card--interactive riko-card--compact" href="layout.html">
+            <h3 class="riko-card__title">布局与装饰</h3>
+            <p class="riko-card__body">栅格、侧栏、缝线、胶带</p>
+          </a>
+          <a class="riko-card riko-card--interactive riko-card--compact" href="general.html">
+            <h3 class="riko-card__title">通用</h3>
+            <p class="riko-card__body">按钮、链接</p>
+          </a>
+          <a class="riko-card riko-card--interactive riko-card--compact" href="form.html">
+            <h3 class="riko-card__title">表单</h3>
+            <p class="riko-card__body">输入框、选择、开关</p>
+          </a>
+          <a class="riko-card riko-card--interactive riko-card--compact" href="form-advanced.html">
+            <h3 class="riko-card__title">表单进阶</h3>
+            <p class="riko-card__body">搜索、上传、评分、校验</p>
+          </a>
+          <a class="riko-card riko-card--interactive riko-card--compact" href="navigation.html">
+            <h3 class="riko-card__title">导航</h3>
+            <p class="riko-card__body">导航栏、标签页、菜单</p>
+          </a>
+          <a class="riko-card riko-card--interactive riko-card--compact" href="data.html">
+            <h3 class="riko-card__title">数据展示</h3>
+            <p class="riko-card__body">卡片、表格、提示气泡</p>
+          </a>
+          <a class="riko-card riko-card--interactive riko-card--compact" href="feedback.html">
+            <h3 class="riko-card__title">反馈</h3>
+            <p class="riko-card__body">弹窗、Toast、进度</p>
+          </a>
+          <a class="riko-card riko-card--interactive riko-card--compact" href="templates.html">
+            <h3 class="riko-card__title">页面模板</h3>
+            <p class="riko-card__body">首页、阅读器、登录、后台</p>
+          </a>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="assets/manifest.js"></script>
+<script src="assets/docs.js"></script>
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="../packages/core/dist/riko-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据展示 · Riko UI</title>
+<meta name="theme-color" content="#FBF5EA">
+<script src="../packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="../packages/core/dist/riko-ui.css">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+
+<header class="docs-header">
+  <div class="docs-header__inner">
+    <button type="button" class="riko-btn riko-btn--icon riko-btn--ghost docs-menu-btn" aria-label="打开导航"><i data-lucide="menu"></i></button>
+    <a class="docs-brand" href="index.html">
+      <span class="docs-brand__mark"><span class="riko-star" aria-hidden="true"></span></span>
+      <span><span class="docs-brand__name">Riko UI</span><span class="docs-brand__sub">little star ui kit</span></span>
+    </a>
+    <span class="docs-header__spacer"></span>
+    <div class="riko-theme-picker riko-theme-picker--compact" data-riko="theme-picker"></div>
+  </div>
+</header>
+
+<div class="docs-layout">
+  <aside class="docs-sidebar" aria-label="文档导航"></aside>
+  <main class="docs-main">
+    <div class="docs-hero">
+      <h1>数据展示</h1>
+      <p>卡片、列表、表格、标签、头像、提示、折叠面板、时间轴……把内容温柔地摆在读者面前。</p>
+    </div>
+
+    <section class="docs-section" id="card">
+      <h2>卡片 <small>Card</small></h2>
+      <p>纸白底、手绘圆角的内容容器，可加缝线、胶带，或做成整卡可点击的入口。 承载一组相关内容（文章摘要、功能入口、个人资料）。只需要一行信息时用 list；需要大号统计数字时用 stat。</p>
+      <h3>基础卡片</h3>
+      <p>普通卡片、缝线卡片与胶带卡片。</p>
+      <div class="docs-demo">
+        <div class="riko-grid">
+          <article class="riko-card">
+            <div class="riko-card__header">
+              <span class="riko-card__icon"><i data-lucide="palette"></i></span>
+              <span class="riko-tag riko-tag--ice riko-card__tag">设定</span>
+            </div>
+            <h3 class="riko-card__title">络可的画板</h3>
+            <p class="riko-card__body">沙滩上的第一幅画，画的是碧空、大海和一只跃出水面的海豚。</p>
+            <div class="riko-card__footer">
+              <button type="button" class="riko-btn riko-btn--sm riko-btn--soft">查看设定</button>
+            </div>
+          </article>
+          <article class="riko-card riko-card--stitched">
+            <h3 class="riko-card__title">星星酥</h3>
+            <p class="riko-card__sub">today's special</p>
+            <p class="riko-card__body">HV 甜品店的招牌点心，酥脆香甜，今天还是特价哦。</p>
+          </article>
+          <article class="riko-card riko-card--taped">
+            <h3 class="riko-card__title">今日便签</h3>
+            <p class="riko-card__body">记得给 Star 哥哥带一份星星酥，再去钓鱼场看看。</p>
+          </article>
+        </div>
+      </div>
+      <h3>可点击的大入口卡</h3>
+      <p>整张卡片是一个链接，悬停时上浮、色团放大、按钮变橙。</p>
+      <div class="docs-demo">
+        <div class="riko-grid riko-grid--cols-2">
+          <a class="riko-card riko-card--feature riko-card--interactive riko-card--stitched" href="#card">
+            <div class="riko-card__header">
+              <span class="riko-card__icon"><i data-lucide="book-open"></i></span>
+              <span class="riko-tag riko-tag--accent riko-card__tag"><span class="riko-star" aria-hidden="true"></span>敬请期待后续更新！</span>
+            </div>
+            <h3 class="riko-card__title">《络的世界》</h3>
+            <p class="riko-card__body">从沙滩上的第一幅画开始，跟随主角一同踏入这个世界的边缘与深处。</p>
+            <span class="riko-card__cta">开始阅读</span>
+          </a>
+          <a class="riko-card riko-card--feature riko-card--interactive riko-card--stitched" href="#card">
+            <div class="riko-card__header">
+              <span class="riko-card__icon"><i data-lucide="notebook-pen"></i></span>
+              <span class="riko-tag riko-tag--ice riko-tag--dashed riko-card__tag">设定集 · 未完成</span>
+            </div>
+            <h3 class="riko-card__title">络可的笔记本</h3>
+            <p class="riko-card__body">小说中已出现设定的整理与解释。建议先阅读已更新章节后再翻阅，避免剧透。</p>
+            <span class="riko-card__cta">翻阅笔记本</span>
+          </a>
+        </div>
+      </div>
+      <h3>带图片与横排</h3>
+      <p>__media 会贴住卡片边缘；--horizontal 在窄屏下自动变回竖排。</p>
+      <div class="docs-demo">
+        <div class="riko-stack riko-stack--lg">
+          <article class="riko-card" style="max-width: 320px">
+            <div class="riko-card__media"><img src="https://riko.land/assets/logo.jpg" alt="《络的世界》封面"></div>
+            <h3 class="riko-card__title">络的世界</h3>
+            <p class="riko-card__body">一个关于画笔、星星与归途的故事。</p>
+          </article>
+          <article class="riko-card riko-card--horizontal">
+            <div class="riko-card__media"><img src="https://riko.land/assets/logo.jpg" alt="《络的世界》封面"></div>
+            <div class="riko-card__content">
+              <h3 class="riko-card__title">第一章 · 第五幕</h3>
+              <p class="riko-card__sub">落星摇曳，清风回荡</p>
+              <p class="riko-card__body">风过围垣，落星回响。少年脖颈上的流星项链轻轻摇曳，像一颗真正的落星。</p>
+              <div class="riko-card__footer">
+                <span class="riko-tag riko-tag--sm">17 节</span>
+                <span class="riko-tag riko-tag--sm riko-tag--accent">最新</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+      <h3>色调与紧凑</h3>
+      <p>tone 修饰改变底色；--compact 适合放在侧栏。</p>
+      <div class="docs-demo">
+        <div class="riko-grid" style="--riko-grid-min: 200px">
+          <article class="riko-card riko-card--soft riko-card--compact">
+            <h3 class="riko-card__title">米色</h3>
+            <p class="riko-card__body">像旧纸张一样温柔。</p>
+          </article>
+          <article class="riko-card riko-card--ice riko-card--compact">
+            <h3 class="riko-card__title">冰蓝</h3>
+            <p class="riko-card__body">边界之地的蓝色屏障。</p>
+          </article>
+          <article class="riko-card riko-card--accent riko-card--compact">
+            <h3 class="riko-card__title">暖橙</h3>
+            <p class="riko-card__body">贝雷帽上的小星星。</p>
+          </article>
+          <article class="riko-card riko-card--flat riko-card--compact">
+            <h3 class="riko-card__title">无阴影</h3>
+            <p class="riko-card__body">适合嵌在其他容器里。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="polaroid">
+      <h2>拍立得 <small>Polaroid</small></h2>
+      <p>带白边与手写说明的照片框，轻微倾斜，悬停回正。 展示插画、角色图、头图等需要「贴在手账上」感觉的图片。普通内容图用 card 的 __media。</p>
+      <h3>基础用法</h3>
+      <p>默认向右倾斜 3°；可加胶带、改方向和尺寸。</p>
+      <div class="docs-demo docs-demo--center">
+        <div class="riko-cluster riko-cluster--lg riko-cluster--center">
+          <figure class="riko-polaroid">
+            <span class="riko-tape" aria-hidden="true"></span>
+            <img src="https://riko.land/assets/logo.jpg" alt="《络的世界》封面插画">
+            <figcaption class="riko-polaroid__caption">Riko's World ✦</figcaption>
+          </figure>
+          <figure class="riko-polaroid riko-polaroid--left riko-polaroid--sm">
+            <img src="https://riko.land/assets/logo.jpg" alt="《络的世界》封面插画">
+            <figcaption class="riko-polaroid__caption">little star</figcaption>
+          </figure>
+          <figure class="riko-polaroid riko-polaroid--straight riko-polaroid--sm">
+            <img src="https://riko.land/assets/logo.jpg" alt="《络的世界》封面插画">
+            <figcaption class="riko-polaroid__caption">summer, 2026</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="list">
+      <h2>列表 <small>List</small></h2>
+      <p>一行一条信息的列表，支持图标、手写编号、说明、元信息与操作，可做成可点击列表或小卡片网格。 消息、设置项、章节目录、文件列表等纵向条目。需要多列对比时用 table。</p>
+      <h3>基础列表</h3>
+      <p>--divided 用虚线分隔每一行。</p>
+      <div class="docs-demo docs-demo--surface">
+        <ul class="riko-list riko-list--divided" style="max-width: 520px">
+          <li class="riko-list__item">
+            <span class="riko-list__icon"><i data-lucide="mail"></i></span>
+            <div class="riko-list__content">
+              <span class="riko-list__title">来自 111 的信</span>
+              <span class="riko-list__desc">今晚的会议改到红石灯下开。</span>
+            </div>
+            <span class="riko-list__meta">3 分钟前</span>
+          </li>
+          <li class="riko-list__item">
+            <span class="riko-list__icon"><i data-lucide="fish"></i></span>
+            <div class="riko-list__content">
+              <span class="riko-list__title">钓鱼场</span>
+              <span class="riko-list__desc">第一竿：皮革靴子，第二竿：俩荷叶……</span>
+            </div>
+            <div class="riko-list__action">
+              <button type="button" class="riko-btn riko-btn--sm riko-btn--ghost">再试一竿</button>
+            </div>
+          </li>
+          <li class="riko-list__item">
+            <span class="riko-list__icon"><i data-lucide="cookie"></i></span>
+            <div class="riko-list__content">
+              <span class="riko-list__title">甜品店</span>
+              <span class="riko-list__desc">星星酥今日特价。</span>
+            </div>
+            <span class="riko-list__meta">昨天</span>
+          </li>
+        </ul>
+      </div>
+      <h3>可点击列表</h3>
+      <p>每一行是一个链接；当前项用 aria-current。</p>
+      <div class="docs-demo docs-demo--surface">
+        <ul class="riko-list riko-list--interactive" style="max-width: 420px">
+          <li><a class="riko-list__item" href="#list"><span class="riko-list__num">001</span><span class="riko-list__content"><span class="riko-list__title">沙滩上的画家</span></span></a></li>
+          <li><a class="riko-list__item" href="#list" aria-current="page"><span class="riko-list__num">002</span><span class="riko-list__content"><span class="riko-list__title">世界的边缘</span></span></a></li>
+          <li><a class="riko-list__item" href="#list"><span class="riko-list__num">003</span><span class="riko-list__content"><span class="riko-list__title">熟悉的身影</span></span></a></li>
+        </ul>
+      </div>
+      <h3>小卡片网格</h3>
+      <p>章节目录同款：--cards 配合 --interactive。</p>
+      <div class="docs-demo docs-demo--surface">
+        <ul class="riko-list riko-list--cards riko-list--interactive">
+          <li><a class="riko-list__item" href="#list"><span class="riko-list__num">074</span><span class="riko-list__content"><span class="riko-list__title">夜出医庐，独巡残村</span></span></a></li>
+          <li><a class="riko-list__item" href="#list"><span class="riko-list__num">075</span><span class="riko-list__content"><span class="riko-list__title">月下清辉，暗见净化</span></span></a></li>
+          <li><a class="riko-list__item" href="#list"><span class="riko-list__num">076</span><span class="riko-list__content"><span class="riko-list__title">风过围垣，落星回响 <span class="riko-badge riko-badge--sm">最新</span></span></span></a></li>
+        </ul>
+      </div>
+    </section>
+    <section class="docs-section" id="table">
+      <h2>表格 <small>Table</small></h2>
+      <p>手绘风数据表格，外层负责横向滚动与圆角，支持斑马纹、悬停、紧凑、竖线与点击表头排序。 需要按列对比的结构化数据。只有一列信息时用 list。</p>
+      <h3>可排序表格</h3>
+      <p>点击表头排序；斑马纹 + 悬停高亮。</p>
+      <div class="docs-demo">
+        <div class="riko-table-wrap">
+          <table class="riko-table riko-table--striped riko-table--hover" data-riko="table-sort">
+            <caption>HV 骨干成员</caption>
+            <thead>
+              <tr><th scope="col">成员</th><th scope="col">职责</th><th scope="col" data-align="end">登场小节</th><th scope="col" data-riko-sort="false">状态</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">络可</th><td>画家</td><td data-align="end">1</td><td><span class="riko-tag riko-tag--sm riko-tag--success">在村中</span></td></tr>
+              <tr><th scope="row">Star</th><td>工建 · 战斗</td><td data-align="end">2</td><td><span class="riko-tag riko-tag--sm riko-tag--warning">养伤中</span></td></tr>
+              <tr><th scope="row">111</th><td>村长</td><td data-align="end">4</td><td><span class="riko-tag riko-tag--sm riko-tag--success">在村中</span></td></tr>
+              <tr><th scope="row">无昵</th><td>交易场所</td><td data-align="end">29</td><td><span class="riko-tag riko-tag--sm riko-tag--ice">外出</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <h3>紧凑与竖线</h3>
+      <p>--compact 减小内边距，--bordered 加列分隔线。</p>
+      <div class="docs-demo">
+        <div class="riko-table-wrap">
+          <table class="riko-table riko-table--compact riko-table--bordered">
+            <thead>
+              <tr><th scope="col">幕</th><th scope="col">标题</th><th scope="col" data-align="end">小节数</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>序章 · 第一幕</td><td>沙滩上的画家</td><td data-align="end">3</td></tr>
+              <tr><td>序章 · 第二幕</td><td>归途的微光</td><td data-align="end">5</td></tr>
+              <tr><td>第一章 · 第五幕</td><td>落星摇曳，清风回荡</td><td data-align="end">17</td></tr>
+            </tbody>
+            <tfoot>
+              <tr><td colspan="2">合计</td><td data-align="end">25</td></tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="badge">
+      <h2>徽标 <small>Badge</small></h2>
+      <p>小小的数字或圆点，用于未读数、计数和状态提示，可挂在按钮或头像右上角。 提示数量或「有新内容」。表示分类或属性用 tag。</p>
+      <h3>基础用法</h3>
+      <p>默认为暖橙色，另有多种色调与尺寸。</p>
+      <div class="docs-demo">
+        <div class="riko-cluster">
+          <span class="riko-badge">12</span>
+          <span class="riko-badge riko-badge--ice">新</span>
+          <span class="riko-badge riko-badge--success">3</span>
+          <span class="riko-badge riko-badge--warning">!</span>
+          <span class="riko-badge riko-badge--danger">99+</span>
+          <span class="riko-badge riko-badge--neutral">0</span>
+          <span class="riko-badge riko-badge--sm">sm</span>
+          <span class="riko-badge riko-badge--lg">76</span>
+        </div>
+      </div>
+      <h3>挂在按钮与头像上</h3>
+      <p>用 riko-badge-anchor 包住目标元素。</p>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--lg">
+          <span class="riko-badge-anchor">
+            <button type="button" class="riko-btn riko-btn--icon" aria-label="消息，3 条未读"><i data-lucide="bell"></i></button>
+            <span class="riko-badge riko-badge--danger" aria-hidden="true">3</span>
+          </span>
+          <span class="riko-badge-anchor">
+            <span class="riko-avatar riko-avatar--ring"><img src="https://riko.land/assets/logo.jpg" alt="络可"></span>
+            <span class="riko-badge riko-badge--dot riko-badge--pulse" aria-label="有新动态"></span>
+          </span>
+          <span class="riko-badge-anchor">
+            <button type="button" class="riko-btn riko-btn--soft">收件箱</button>
+            <span class="riko-badge riko-badge--ice" aria-label="12 封新邮件">12</span>
+          </span>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="tag">
+      <h2>标签 <small>Tag</small></h2>
+      <p>胶囊形的小标签，表示分类、状态或关键词，可带图标、星星，或做成可移除。 标注属性、状态、分类、关键词。数量提示用 badge；可编辑的标签输入用 tags-input。</p>
+      <h3>色调</h3>
+      <p>与主页「敬请期待后续更新！」「设定集 · 未完成」同款。</p>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--sm">
+          <span class="riko-tag">默认</span>
+          <span class="riko-tag riko-tag--accent"><span class="riko-star" aria-hidden="true"></span>敬请期待后续更新！</span>
+          <span class="riko-tag riko-tag--ice riko-tag--dashed"><i data-lucide="pencil"></i>设定集 · 未完成</span>
+          <span class="riko-tag riko-tag--soft">米色</span>
+          <span class="riko-tag riko-tag--success">已完结</span>
+          <span class="riko-tag riko-tag--warning">修订中</span>
+          <span class="riko-tag riko-tag--danger">含剧透</span>
+          <span class="riko-tag riko-tag--primary">主线</span>
+        </div>
+      </div>
+      <h3>样式与尺寸</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--sm">
+          <span class="riko-tag riko-tag--sm">小号</span>
+          <span class="riko-tag riko-tag--lg">大号</span>
+          <span class="riko-tag riko-tag--outline riko-tag--accent">透明底</span>
+          <span class="riko-tag riko-tag--dashed">虚线</span>
+          <span class="riko-tag riko-tag--square riko-tag--ice">小圆角</span>
+          <a class="riko-tag" href="#tag"><i data-lucide="hash"></i>可点击</a>
+        </div>
+      </div>
+      <h3>可移除</h3>
+      <p>按钮加 data-riko-dismiss，点击即淡出移除。</p>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--sm">
+          <span class="riko-tag riko-tag--accent">星星酥<button type="button" class="riko-tag__remove" data-riko-dismiss aria-label="移除 星星酥"></button></span>
+          <span class="riko-tag riko-tag--accent">流星项链<button type="button" class="riko-tag__remove" data-riko-dismiss aria-label="移除 流星项链"></button></span>
+          <span class="riko-tag riko-tag--accent">贝雷帽<button type="button" class="riko-tag__remove" data-riko-dismiss aria-label="移除 贝雷帽"></button></span>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="avatar">
+      <h2>头像 <small>Avatar</small></h2>
+      <p>圆形头像，支持图片、文字缩写、图标、在线状态与重叠头像组。 代表一个人或角色。站点 Logo 也可用 --ring 风格。</p>
+      <h3>尺寸与类型</h3>
+      <p>图片、文字缩写、图标；--ring 与站点 Logo 同款。</p>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--lg">
+          <span class="riko-avatar riko-avatar--xs"><img src="https://riko.land/assets/logo.jpg" alt="络可"></span>
+          <span class="riko-avatar riko-avatar--sm"><img src="https://riko.land/assets/logo.jpg" alt="络可"></span>
+          <span class="riko-avatar"><img src="https://riko.land/assets/logo.jpg" alt="络可"></span>
+          <span class="riko-avatar riko-avatar--lg riko-avatar--ring"><img src="https://riko.land/assets/logo.jpg" alt="络可"></span>
+          <span class="riko-avatar riko-avatar--xl riko-avatar--ring"><img src="https://riko.land/assets/logo.jpg" alt="络可"></span>
+          <span class="riko-avatar riko-avatar--lg" role="img" aria-label="星星酥">星</span>
+          <span class="riko-avatar riko-avatar--lg riko-avatar--accent" role="img" aria-label="Star"><span class="riko-star" aria-hidden="true"></span></span>
+          <span class="riko-avatar riko-avatar--lg riko-avatar--soft riko-avatar--square" role="img" aria-label="访客"><i data-lucide="user"></i></span>
+        </div>
+      </div>
+      <h3>状态与头像组</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--lg">
+          <span class="riko-avatar riko-avatar--lg"><img src="https://riko.land/assets/logo.jpg" alt="络可"><span class="riko-avatar__status" data-status="online" aria-label="在线"></span></span>
+          <span class="riko-avatar riko-avatar--lg riko-avatar--soft" role="img" aria-label="111"><span aria-hidden="true">111</span><span class="riko-avatar__status" data-status="busy" aria-label="忙碌"></span></span>
+          <span class="riko-avatar riko-avatar--lg riko-avatar--accent" role="img" aria-label="无昵">昵<span class="riko-avatar__status" data-status="away" aria-label="离开"></span></span>
+          <div class="riko-avatar-group">
+            <span class="riko-avatar"><img src="https://riko.land/assets/logo.jpg" alt="络可"></span>
+            <span class="riko-avatar riko-avatar--accent" role="img" aria-label="Star">S</span>
+            <span class="riko-avatar riko-avatar--soft" role="img" aria-label="111">1</span>
+            <span class="riko-avatar" role="img" aria-label="还有 5 人">+5</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="tooltip">
+      <h2>文字提示 <small>Tooltip</small></h2>
+      <p>悬停或聚焦时出现的小提示气泡，可可色底、带小箭头。 对按钮、图标做简短补充说明（一句话以内）。需要放链接、按钮或较长内容时改用 popover。</p>
+      <h3>四个方向</h3>
+      <p>悬停或用 Tab 聚焦按钮查看；空间不够时会自动翻转。</p>
+      <div class="docs-demo docs-demo--center">
+        <div class="riko-cluster riko-cluster--center">
+          <button type="button" class="riko-btn" data-riko="tooltip" data-riko-tooltip="把这一节加入书签">收藏</button>
+          <button type="button" class="riko-btn" data-riko="tooltip" data-riko-tooltip="在下方出现" data-riko-placement="bottom">下方</button>
+          <button type="button" class="riko-btn" data-riko="tooltip" data-riko-tooltip="在左侧出现" data-riko-placement="left">左侧</button>
+          <button type="button" class="riko-btn" data-riko="tooltip" data-riko-tooltip="在右侧出现" data-riko-placement="right">右侧</button>
+          <button type="button" class="riko-btn riko-btn--icon riko-btn--ghost" aria-label="分享" data-riko="tooltip" data-riko-tooltip="分享给朋友"><i data-lucide="share-2"></i></button>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="popover">
+      <h2>气泡卡片 <small>Popover</small></h2>
+      <p>点击触发的浮层卡片，可放任意内容（文字、链接、按钮、表单），点外部或按 Esc 关闭。 需要在原地展示补充信息或少量操作。只有一句提示用 tooltip；操作菜单用 dropdown；需要用户专注完成任务用 dialog。</p>
+      <h3>基础用法</h3>
+      <p>点击按钮打开；点外部、按 Esc 或点 × 关闭。</p>
+      <div class="docs-demo docs-demo--center">
+        <div class="riko-cluster riko-cluster--center">
+          <button type="button" class="riko-btn riko-btn--soft" data-riko-toggle="pop-riko">关于络可</button>
+          <div class="riko-popover" id="pop-riko" data-riko="popover" popover aria-labelledby="pop-riko-title">
+            <div class="riko-popover__header">
+              <h3 class="riko-popover__title" id="pop-riko-title"><span class="riko-star" aria-hidden="true"></span>络可</h3>
+              <button type="button" class="riko-popover__close" data-riko-close aria-label="关闭"></button>
+            </div>
+            <div class="riko-popover__body">自小在 HV 长大的小画家，戴着有星星的贝雷帽，最喜欢在沙滩上画海。</div>
+            <div class="riko-popover__footer">
+              <a class="riko-btn riko-btn--sm riko-btn--primary" href="#popover">查看设定</a>
+            </div>
+          </div>
+          <button type="button" class="riko-btn" data-riko-toggle="pop-tip">小提示</button>
+          <div class="riko-popover riko-popover--sm riko-popover--ice" id="pop-tip" data-riko="popover" popover data-riko-placement="top">
+            <div class="riko-popover__body">按 ← → 可以切换小节哦 ✦</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="accordion">
+      <h2>折叠面板 <small>Accordion</small></h2>
+      <p>基于原生 &lt;details&gt; 的折叠面板，带编号徽章与旋转箭头；加 JS 后展开收起有平滑动画。 把长内容分组收起，如章节分幕、常见问题。只需单个「展开更多」也可以用一个 __item。</p>
+      <h3>分幕目录</h3>
+      <p>与阅读器目录同款：编号徽章 + 小节数。</p>
+      <div class="docs-demo">
+        <div class="riko-accordion" data-riko="accordion" style="max-width: 560px">
+          <details class="riko-accordion__item" open>
+            <summary class="riko-accordion__summary">
+              <span class="riko-accordion__badge" aria-hidden="true">一</span>
+              <span class="riko-accordion__title">序章 · 第一幕：沙滩上的画家</span>
+              <span class="riko-accordion__meta">3 节</span>
+            </summary>
+            <div class="riko-accordion__content">001 沙滩上的画家 · 002 世界的边缘 · 003 熟悉的身影</div>
+          </details>
+          <details class="riko-accordion__item">
+            <summary class="riko-accordion__summary">
+              <span class="riko-accordion__badge" aria-hidden="true">二</span>
+              <span class="riko-accordion__title">序章 · 第二幕：归途的微光</span>
+              <span class="riko-accordion__meta">5 节</span>
+            </summary>
+            <div class="riko-accordion__content">004 变故 · 005 Star 的决心 · 006 重逢 · 007 村庄 · 008 归途的微光</div>
+          </details>
+          <details class="riko-accordion__item">
+            <summary class="riko-accordion__summary">
+              <span class="riko-accordion__badge" aria-hidden="true">三</span>
+              <span class="riko-accordion__title">序章 · 第三幕：暗林深处</span>
+              <span class="riko-accordion__meta">6 节</span>
+            </summary>
+            <div class="riko-accordion__content">009 暗林 · 010 不幸 · 011 禁忌的力量 · 012 逃离袭击 · 013 谈判 · 014 命令方块</div>
+          </details>
+        </div>
+      </div>
+      <h3>卡片式 · 互斥展开</h3>
+      <p>常见问题：一次只展开一项。</p>
+      <div class="docs-demo">
+        <div class="riko-accordion riko-accordion--cards riko-accordion--exclusive" data-riko="accordion" style="max-width: 560px">
+          <details class="riko-accordion__item" open>
+            <summary class="riko-accordion__summary"><span class="riko-accordion__title">小说多久更新一次？</span></summary>
+            <div class="riko-accordion__content">作者星星酥会尽量保持每周更新，预计 2027 年继续更新新的章节！</div>
+          </details>
+          <details class="riko-accordion__item">
+            <summary class="riko-accordion__summary"><span class="riko-accordion__title">笔记本会剧透吗？</span></summary>
+            <div class="riko-accordion__content">笔记本只整理已出现的设定，但还是建议先读完已更新的章节哦。</div>
+          </details>
+          <details class="riko-accordion__item">
+            <summary class="riko-accordion__summary"><span class="riko-accordion__title">在哪里反馈错别字？</span></summary>
+            <div class="riko-accordion__content">页面底部的「反馈」表单就可以，谢谢你帮络可捉虫！</div>
+          </details>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="timeline">
+      <h2>时间轴 <small>Timeline</small></h2>
+      <p>按时间顺序排列的事件，虚线串联，节点可以是小圆点或星星。 更新日志、故事年表、进度记录。表示流程步骤（可操作）用 steps。</p>
+      <h3>更新日志</h3>
+      <p>最新一条用 aria-current=&quot;step&quot; 高亮。</p>
+      <div class="docs-demo">
+        <ol class="riko-timeline" style="max-width: 520px">
+          <li class="riko-timeline__item" aria-current="step">
+            <span class="riko-timeline__dot"></span>
+            <div class="riko-timeline__content">
+              <time class="riko-timeline__time" datetime="2026-10-15">2026.10.15</time>
+              <h3 class="riko-timeline__title">更新第 076 节</h3>
+              <p class="riko-timeline__body">风过围垣，落星回响 —— 第一章完结！</p>
+            </div>
+          </li>
+          <li class="riko-timeline__item">
+            <span class="riko-timeline__dot"><span class="riko-star" aria-hidden="true"></span></span>
+            <div class="riko-timeline__content">
+              <time class="riko-timeline__time" datetime="2026-07-01">2026.07.01</time>
+              <h3 class="riko-timeline__title">官方网站上线</h3>
+              <p class="riko-timeline__body">小说阅读器与络可的笔记本同步开放。</p>
+            </div>
+          </li>
+          <li class="riko-timeline__item">
+            <span class="riko-timeline__dot"></span>
+            <div class="riko-timeline__content">
+              <time class="riko-timeline__time" datetime="2026-02-16">2026.02.16</time>
+              <h3 class="riko-timeline__title">沙滩上的画家</h3>
+              <p class="riko-timeline__body">故事从这里开始。</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <h3>左右交替</h3>
+      <p>宽屏下左右交替排列，窄屏自动变回单列。</p>
+      <div class="docs-demo">
+        <ol class="riko-timeline riko-timeline--alternate">
+          <li class="riko-timeline__item">
+            <span class="riko-timeline__dot"></span>
+            <div class="riko-timeline__content"><span class="riko-timeline__time">序章</span><h3 class="riko-timeline__title">沙滩上的画家</h3><p class="riko-timeline__body">络可在边界之地作画。</p></div>
+          </li>
+          <li class="riko-timeline__item">
+            <span class="riko-timeline__dot"><span class="riko-star" aria-hidden="true"></span></span>
+            <div class="riko-timeline__content"><span class="riko-timeline__time">序章</span><h3 class="riko-timeline__title">涅槃的天使</h3><p class="riko-timeline__body">幽蓝重生，裁决降临。</p></div>
+          </li>
+          <li class="riko-timeline__item">
+            <span class="riko-timeline__dot"></span>
+            <div class="riko-timeline__content"><span class="riko-timeline__time">第一章</span><h3 class="riko-timeline__title">自晨曦中归来</h3><p class="riko-timeline__body">破空而来的归乡之箭。</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+    <section class="docs-section" id="stat">
+      <h2>统计数值 <small>Stat</small></h2>
+      <p>大号手写数字的指标卡，带标签、图标与涨跌趋势。 仪表盘、个人主页的关键数字。</p>
+      <h3>指标卡</h3>
+      <div class="docs-demo">
+        <div class="riko-grid" style="--riko-grid-min: 200px">
+          <div class="riko-stat">
+            <span class="riko-stat__icon"><i data-lucide="book-open"></i></span>
+            <span class="riko-stat__label">已更新小节</span>
+            <span class="riko-stat__value">76<span class="riko-stat__unit">节</span></span>
+            <span class="riko-stat__trend" data-trend="up">本月 +12</span>
+          </div>
+          <div class="riko-stat riko-stat--accent">
+            <span class="riko-stat__icon"><i data-lucide="star"></i></span>
+            <span class="riko-stat__label">收到的星星</span>
+            <span class="riko-stat__value">2,048</span>
+            <span class="riko-stat__trend" data-trend="up">较上周 +8%</span>
+          </div>
+          <div class="riko-stat">
+            <span class="riko-stat__icon"><i data-lucide="type"></i></span>
+            <span class="riko-stat__label">总字数</span>
+            <span class="riko-stat__value">9.0<span class="riko-stat__unit">万字</span></span>
+            <span class="riko-stat__trend">连载中</span>
+          </div>
+          <div class="riko-stat">
+            <span class="riko-stat__icon"><i data-lucide="bug"></i></span>
+            <span class="riko-stat__label">待修复错别字</span>
+            <span class="riko-stat__value">3</span>
+            <span class="riko-stat__trend" data-trend="down">较上周减少 5 个</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="desc-list">
+      <h2>描述列表 <small>Description List</small></h2>
+      <p>「名称—内容」成对展示的信息列表，可竖排、横排、多列或带边框。 角色资料、订单详情、设置摘要等键值信息。</p>
+      <h3>角色资料</h3>
+      <p>--horizontal + --bordered。</p>
+      <div class="docs-demo">
+        <dl class="riko-desc-list riko-desc-list--horizontal riko-desc-list--bordered" style="max-width: 480px">
+          <div class="riko-desc-list__row"><dt class="riko-desc-list__term">姓名</dt><dd class="riko-desc-list__detail">络可（Riko）</dd></div>
+          <div class="riko-desc-list__row"><dt class="riko-desc-list__term">年龄</dt><dd class="riko-desc-list__detail">十二岁</dd></div>
+          <div class="riko-desc-list__row"><dt class="riko-desc-list__term">爱好</dt><dd class="riko-desc-list__detail">画画、星星酥、在沙滩上发呆</dd></div>
+          <div class="riko-desc-list__row"><dt class="riko-desc-list__term">标志</dt><dd class="riko-desc-list__detail"><span class="riko-tag riko-tag--accent riko-tag--sm"><span class="riko-star" aria-hidden="true"></span>星星贝雷帽</span></dd></div>
+        </dl>
+      </div>
+      <h3>多列</h3>
+      <div class="docs-demo">
+        <dl class="riko-desc-list riko-desc-list--columns">
+          <div class="riko-desc-list__row"><dt class="riko-desc-list__term">作者</dt><dd class="riko-desc-list__detail">星星酥</dd></div>
+          <div class="riko-desc-list__row"><dt class="riko-desc-list__term">状态</dt><dd class="riko-desc-list__detail">连载中</dd></div>
+          <div class="riko-desc-list__row"><dt class="riko-desc-list__term">最新</dt><dd class="riko-desc-list__detail">076 风过围垣，落星回响</dd></div>
+          <div class="riko-desc-list__row"><dt class="riko-desc-list__term">字数</dt><dd class="riko-desc-list__detail">约 9 万字</dd></div>
+        </dl>
+      </div>
+    </section>
+    <section class="docs-section" id="empty">
+      <h2>空状态 <small>Empty</small></h2>
+      <p>没有内容时的温馨占位：默认插画是一颗漂浮的星星和小云朵。 列表、搜索结果、收藏夹等为空时。整页错误（404 等）用 result。</p>
+      <h3>基础用法</h3>
+      <div class="docs-demo docs-demo--surface">
+        <div class="riko-empty">
+          <div class="riko-empty__art" aria-hidden="true"></div>
+          <h3 class="riko-empty__title">书签夹还空空的</h3>
+          <p class="riko-empty__desc">读到喜欢的小节时，点一下星星就能收藏到这里啦。</p>
+          <div class="riko-empty__actions">
+            <a class="riko-btn riko-btn--primary" href="#empty">去读小说</a>
+          </div>
+        </div>
+      </div>
+      <h3>小号</h3>
+      <div class="docs-demo">
+        <div class="riko-card" style="max-width: 320px">
+          <div class="riko-empty riko-empty--sm">
+            <div class="riko-empty__art" aria-hidden="true"></div>
+            <h3 class="riko-empty__title">没有找到「河豚」</h3>
+            <p class="riko-empty__desc">换个关键词试试吧 ✦</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="tree">
+      <h2>树形列表 <small>Tree</small></h2>
+      <p>用嵌套 &lt;details&gt; 构建的文件夹树，虚线连接层级，原生键盘可用。 层级目录（文件、设定分类、章节结构）。只有一层分组时用 accordion。</p>
+      <h3>文件夹树</h3>
+      <div class="docs-demo docs-demo--surface">
+        <ul class="riko-tree" style="max-width: 360px">
+          <li>
+            <details class="riko-tree__folder" open>
+              <summary class="riko-tree__label">络可的笔记本 <span class="riko-tree__meta">4</span></summary>
+              <ul class="riko-tree__group">
+                <li>
+                  <details class="riko-tree__folder" open>
+                    <summary class="riko-tree__label">人物</summary>
+                    <ul class="riko-tree__group">
+                      <li><a class="riko-tree__file" href="#tree" aria-current="page">络可.md</a></li>
+                      <li><a class="riko-tree__file" href="#tree">Star.md</a></li>
+                    </ul>
+                  </details>
+                </li>
+                <li>
+                  <details class="riko-tree__folder">
+                    <summary class="riko-tree__label">地点</summary>
+                    <ul class="riko-tree__group">
+                      <li><a class="riko-tree__file" href="#tree">HV 村庄.md</a></li>
+                      <li><a class="riko-tree__file" href="#tree">边界之地.md</a></li>
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="docs-section" id="codeblock">
+      <h2>代码块 <small>Code Block</small></h2>
+      <p>带标题栏与复制按钮的代码块，标题栏左侧是三颗彩色小圆点。 展示多行代码或配置。行内代码用 riko-code。</p>
+      <h3>基础用法</h3>
+      <div class="docs-demo">
+<div class="riko-codeblock">
+  <div class="riko-codeblock__header">
+    <span class="riko-codeblock__lang">index.html</span>
+    <button type="button" class="riko-codeblock__copy" data-riko="copy" data-riko-target="#code-hello" aria-label="复制代码"></button>
+  </div>
+  <pre class="riko-codeblock__pre"><code id="code-hello">&lt;link rel="stylesheet" href="riko-ui.css"&gt;
+&lt;script src="riko-ui.js"&gt;&lt;/script&gt;
+&lt;button class="riko-btn riko-btn--primary"&gt;你好，络可&lt;/button&gt;</code></pre>
+</div>
+      </div>
+    </section>
+    <section class="docs-section" id="copy">
+      <h2>复制 <small>Copy</small></h2>
+      <p>给任意按钮加上「一键复制」：复制成功时图标变成勾，并告诉读屏「已复制」。 邀请码、链接、代码等需要用户复制的内容。</p>
+      <h3>基础用法</h3>
+      <p>带文字的按钮、仅图标按钮，以及复制输入框内容。</p>
+      <div class="docs-demo">
+        <div class="riko-cluster">
+          <code class="riko-code" id="invite-code">RIKO-2026</code>
+          <button type="button" class="riko-btn riko-btn--soft riko-btn--sm" data-riko="copy" data-riko-target="#invite-code"><span class="riko-copy__icon" aria-hidden="true"></span>复制邀请码</button>
+          <button type="button" class="riko-btn riko-btn--icon riko-btn--ghost" data-riko="copy" data-riko-copy="https://riko.land" aria-label="复制网站链接"></button>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="carousel">
+      <h2>轮播 <small>Carousel</small></h2>
+      <p>基于滚动吸附的横向轮播，自动生成箭头与圆点，支持触摸滑动、键盘与自动播放。 一组同类的图片或卡片需要在有限空间内轮换展示。重要信息不要只放在轮播里。</p>
+      <h3>基础用法</h3>
+      <p>拖动、点箭头/圆点，或聚焦后按方向键。</p>
+      <div class="docs-demo">
+        <div class="riko-carousel" data-riko="carousel" aria-label="络可的画册">
+          <div class="riko-carousel__track">
+            <div class="riko-carousel__slide"><div class="riko-card riko-card--ice riko-card--flat riko-u-w-full" style="min-height: 200px"><h3 class="riko-card__title">碧空</h3><p class="riko-card__body">无垠的大海倒映着碧空。</p></div></div>
+            <div class="riko-carousel__slide"><div class="riko-card riko-card--accent riko-card--flat riko-u-w-full" style="min-height: 200px"><h3 class="riko-card__title">落日</h3><p class="riko-card__body">晚霞把沙滩染成了橘子色。</p></div></div>
+            <div class="riko-carousel__slide"><div class="riko-card riko-card--soft riko-card--flat riko-u-w-full" style="min-height: 200px"><h3 class="riko-card__title">沙滩</h3><p class="riko-card__body">金黄的沙滩上留下一串小脚印。</p></div></div>
+          </div>
+        </div>
+      </div>
+      <h3>露出相邻 · 自动播放</h3>
+      <p>--peek 露出两侧；data-riko-autoplay 自动播放（可暂停）。</p>
+      <div class="docs-demo">
+        <div class="riko-carousel riko-carousel--peek" data-riko="carousel" data-riko-autoplay="4000" aria-label="章节推荐">
+          <div class="riko-carousel__track">
+            <div class="riko-carousel__slide"><a class="riko-card riko-card--interactive riko-u-w-full" href="#carousel"><h3 class="riko-card__title">001 沙滩上的画家</h3><p class="riko-card__body">轻柔的海浪涌来，散入金黄的沙滩。</p></a></div>
+            <div class="riko-carousel__slide"><a class="riko-card riko-card--interactive riko-u-w-full" href="#carousel"><h3 class="riko-card__title">035 钓鱼场的闹剧</h3><p class="riko-card__body">第一竿：皮革靴子，第二竿：俩荷叶……</p></a></div>
+            <div class="riko-carousel__slide"><a class="riko-card riko-card--interactive riko-u-w-full" href="#carousel"><h3 class="riko-card__title">076 风过围垣，落星回响</h3><p class="riko-card__body">回来就好。</p></a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="assets/manifest.js"></script>
+<script src="assets/docs.js"></script>
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="../packages/core/dist/riko-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+/* ==========================================================================
+   drawer · 抽屉（原生 <dialog>，从边缘滑出）
+   <button type="button" class="riko-btn" data-riko-open="menu-drawer">打开抽屉</button>
+   <dialog class="riko-drawer" id="menu-drawer" data-riko="drawer" aria-labelledby="menu-drawer-title">
+     <header class="riko-drawer__header">
+       <h2 class="riko-drawer__title" id="menu-drawer-title">目录</h2>
+       <button type="button" class="riko-drawer__close" data-riko-close aria-label="关闭"></button>
+     </header>
+     <div class="riko-drawer__body">…</div>
+   </dialog>
+   位置 --right（默认）--left --bottom（底部抽屉，带把手）· 尺寸 --sm --lg
+   部件外观与 dialog 共用（见 dialog.css）
+   ========================================================================== */
+@layer riko.components {
+  .riko-drawer {
+    --riko-drawer-w: 380px;
+    position: fixed; inset: 0 0 0 auto;
+    width: min(var(--riko-drawer-w), 88vw);
+    max-width: none; height: 100dvh; max-height: none;
+    margin: 0; padding: 0;
+    color: var(--riko-color-fg);
+    background: var(--riko-color-surface);
+    border: 0;
+    border-left: var(--riko-border-width) dashed var(--riko-color-border);
+    border-radius: var(--riko-radius-xl) 0 0 var(--riko-radius-xl);
+    box-shadow: var(--riko-shadow-lg);
+    overflow: hidden;
+  }
+  .riko-drawer[open] { display: flex; flex-direction: column; animation: riko-drawer-in-right .3s var(--riko-ease-out); }
+  .riko-drawer[data-state="closing"] { animation: riko-drawer-out-right .22s linear forwards; }
+
+  .riko-drawer--sm { --riko-drawer-w: 300px; }
+  .riko-drawer--lg { --riko-drawer-w: 560px; }
+
+  .riko-drawer--left {
+    inset: 0 auto 0 0;
+    border-left: 0; border-right: var(--riko-border-width) dashed var(--riko-color-border);
+    border-radius: 0 var(--riko-radius-xl) var(--riko-radius-xl) 0;
+  }
+  .riko-drawer--left[open] { animation-name: riko-drawer-in-left; }
+  .riko-drawer--left[data-state="closing"] { animation-name: riko-drawer-out-left; }
+
+  .riko-drawer--bottom {
+    inset: auto 0 0 0;
+    width: 100%; height: auto; max-height: 86dvh;
+    border-left: 0; border-top: var(--riko-border-width) dashed var(--riko-color-border);
+    border-radius: var(--riko-radius-xl) var(--riko-radius-xl) 0 0;
+    padding-top: var(--riko-space-3);
+  }
+  .riko-drawer--bottom::before {
+    content: ""; position: absolute; top: 10px; left: 50%; translate: -50% 0;
+    width: 44px; height: 5px; border-radius: var(--riko-radius-pill);
+    background: var(--riko-color-tan);
+  }
+  .riko-drawer--bottom[open] { animation-name: riko-drawer-in-bottom; }
+  .riko-drawer--bottom[data-state="closing"] { animation-name: riko-drawer-out-bottom; }
+  @media (min-width: 769px) {
+    .riko-drawer--bottom { left: 50%; right: auto; translate: -50% 0; width: min(720px, calc(100% - 2 * var(--riko-space-6))); }
+  }
+
+  @keyframes riko-drawer-in-right { from { transform: translateX(100%); } }
+  @keyframes riko-drawer-out-right { to { transform: translateX(100%); } }
+  @keyframes riko-drawer-in-left { from { transform: translateX(-100%); } }
+  @keyframes riko-drawer-out-left { to { transform: translateX(-100%); } }
+  @keyframes riko-drawer-in-bottom { from { transform: translateY(100%); } }
+  @keyframes riko-drawer-out-bottom { to { transform: translateY(100%); } }
+}

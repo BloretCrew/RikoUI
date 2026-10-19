@@ -1,0 +1,37 @@
+/* ==========================================================================
+   polaroid · 拍立得
+   <figure class="riko-polaroid">
+     <img src="…" alt="…">
+     <figcaption class="riko-polaroid__caption">Riko's World ✦</figcaption>
+   </figure>
+   可在内部放 <span class="riko-tape" aria-hidden="true"></span> 加胶带。
+   ========================================================================== */
+@layer riko.components {
+  .riko-polaroid {
+    --riko-polaroid-rotate: 3deg;
+    position: relative;
+    width: var(--riko-polaroid-w, 280px); max-width: 100%;
+    margin: 0;
+    padding: 14px 14px 0;
+    background: var(--riko-color-surface);
+    border-radius: 6px;
+    box-shadow: var(--riko-shadow-lg);
+    transform: rotate(var(--riko-polaroid-rotate));
+    transition: transform var(--riko-duration-slow) var(--riko-ease-bounce);
+  }
+  .riko-polaroid:hover { transform: rotate(0) scale(1.02); }
+  .riko-polaroid > img, .riko-polaroid > video {
+    width: 100%; aspect-ratio: var(--riko-polaroid-ratio, 1); object-fit: cover; border-radius: 3px;
+    background: var(--riko-color-surface-muted);
+  }
+  .riko-polaroid__caption {
+    padding: 10px 4px 14px; min-height: 52px; text-align: center;
+    font-family: var(--riko-font-hand); font-size: var(--riko-text-2xl); font-weight: 600; line-height: 1.2;
+    color: var(--riko-color-brown);
+  }
+  .riko-polaroid--left { --riko-polaroid-rotate: -3deg; }
+  .riko-polaroid--straight { --riko-polaroid-rotate: 0deg; }
+  .riko-polaroid--sm { --riko-polaroid-w: 180px; }
+  .riko-polaroid--sm .riko-polaroid__caption { font-size: var(--riko-text-lg); min-height: 40px; padding-bottom: 8px; }
+  .riko-polaroid--lg { --riko-polaroid-w: 360px; }
+}

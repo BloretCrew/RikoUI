@@ -1,0 +1,30 @@
+{
+  "name": "squiggle",
+  "title": "波浪下划线",
+  "titleEn": "Squiggle",
+  "category": "decor",
+  "summary": "手绘感的橙色波浪线。",
+  "when": "大标题下方的点缀。",
+  "root": "riko-squiggle",
+  "examples": [
+    {
+      "title": "标题下方",
+      "html": "<h1 class=\"riko-display\">《络的世界》</h1>\n<span class=\"riko-squiggle\" aria-hidden=\"true\"></span>"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-squiggle--ice",
+      "desc": "冰蓝",
+      "group": "tone"
+    },
+    {
+      "class": "riko-squiggle--center",
+      "desc": "居中",
+      "group": "layout"
+    }
+  ],
+  "rules": [
+    "长度用 --riko-squiggle-w（默认 200px）。"
+  ]
+}

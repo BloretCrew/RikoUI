@@ -1,0 +1,183 @@
+/* ==========================================================================
+   button · 按钮
+   <button type="button" class="riko-btn">默认</button>
+   <button type="button" class="riko-btn riko-btn--primary"><i data-lucide="book-open"></i>开始阅读</button>
+   <button type="button" class="riko-btn riko-btn--icon" aria-label="设置"><i data-lucide="settings"></i></button>
+   外观 --primary --accent --ice --soft --outline --ghost --link --danger
+   尺寸 --xs --sm --lg --xl · 形状 --icon --round --block · 加载 aria-busy="true"
+   ========================================================================== */
+@layer riko.components {
+  .riko-btn {
+    --riko-btn-h: var(--riko-control-h-md);
+    --riko-btn-px: var(--riko-space-4);
+    --riko-btn-font: .92rem;
+    --riko-btn-bg: var(--riko-color-surface);
+    --riko-btn-fg: var(--riko-color-fg-strong);
+    --riko-btn-border: var(--riko-color-border);
+    --riko-btn-shadow: var(--riko-shadow-press);
+    --riko-btn-bg-hover: var(--riko-btn-bg);
+    --riko-btn-fg-hover: var(--riko-btn-fg);
+    --riko-btn-border-hover: var(--riko-color-accent);
+    --riko-btn-shadow-hover: var(--riko-shadow-press-hover);
+    --riko-btn-radius: var(--riko-radius-pill);
+
+    position: relative;
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--riko-space-2);
+    min-height: var(--riko-btn-h); min-width: var(--riko-btn-h);
+    padding: 0 var(--riko-btn-px);
+    font: var(--riko-weight-medium) var(--riko-btn-font) / 1.2 var(--riko-font-body);
+    color: var(--riko-btn-fg);
+    background: var(--riko-btn-bg);
+    border: var(--riko-border-width) solid var(--riko-btn-border);
+    border-radius: var(--riko-btn-radius);
+    box-shadow: var(--riko-btn-shadow);
+    text-decoration: none; white-space: nowrap; vertical-align: middle;
+    cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent;
+    transition:
+      transform var(--riko-duration-fast) ease, box-shadow var(--riko-duration-fast) ease,
+      border-color var(--riko-duration-fast) ease, background var(--riko-duration-base) ease,
+      color var(--riko-duration-base) ease, gap var(--riko-duration-base) ease;
+  }
+  .riko-btn:hover {
+    transform: translateY(-2px);
+    color: var(--riko-btn-fg-hover);
+    background: var(--riko-btn-bg-hover);
+    border-color: var(--riko-btn-border-hover);
+    box-shadow: var(--riko-btn-shadow-hover);
+  }
+  .riko-btn:active { transform: translateY(1px); box-shadow: 0 1px 0 var(--riko-btn-border); }
+  .riko-btn:focus-visible { border-radius: var(--riko-btn-radius); }
+
+  /* 图标：Lucide / 内置图标 / 星星 */
+  .riko-btn > :where(svg.lucide, .riko-icon, i[data-lucide]) { --riko-icon-size: 1.15em; flex: none; }
+  .riko-btn > :where(svg.lucide, .riko-icon) { transition: transform var(--riko-duration-base) var(--riko-ease-bounce); }
+  .riko-btn:hover > :where(svg.lucide, .riko-icon):last-child:not(:first-child) { transform: translateX(3px); }
+
+  /* ---- 外观 ---- */
+  .riko-btn--primary {
+    --riko-btn-bg: var(--riko-color-primary);
+    --riko-btn-fg: var(--riko-color-primary-fg);
+    --riko-btn-border: var(--riko-color-primary);
+    --riko-btn-shadow: var(--riko-shadow-press-primary);
+    --riko-btn-bg-hover: var(--riko-color-accent);
+    --riko-btn-fg-hover: var(--riko-color-accent-fg);
+    --riko-btn-border-hover: var(--riko-color-accent);
+    --riko-btn-shadow-hover: var(--riko-shadow-press-accent);
+  }
+  .riko-btn--accent {
+    --riko-btn-bg: var(--riko-color-accent);
+    --riko-btn-fg: var(--riko-color-accent-fg);
+    --riko-btn-border: var(--riko-color-accent);
+    --riko-btn-shadow: var(--riko-shadow-press-accent);
+    --riko-btn-border-hover: var(--riko-color-accent-shade);
+    --riko-btn-shadow-hover: 0 5px 0 var(--riko-color-accent-shade);
+  }
+  .riko-btn--ice {
+    --riko-btn-bg: var(--riko-color-ice-soft);
+    --riko-btn-fg: var(--riko-color-ice-ink);
+    --riko-btn-border: var(--riko-color-ice);
+    --riko-btn-shadow: 0 3px 0 var(--riko-color-ice);
+    --riko-btn-border-hover: var(--riko-color-ice-strong);
+    --riko-btn-shadow-hover: 0 5px 0 var(--riko-color-ice-strong);
+  }
+  .riko-btn--soft {
+    --riko-btn-bg: var(--riko-color-accent-soft);
+    --riko-btn-fg: var(--riko-color-accent-ink);
+    --riko-btn-border: transparent;
+    --riko-btn-shadow: none;
+    --riko-btn-border-hover: var(--riko-color-accent);
+    --riko-btn-shadow-hover: 0 3px 0 var(--riko-color-accent-soft);
+  }
+  .riko-btn--outline {
+    --riko-btn-bg: transparent;
+    --riko-btn-border: var(--riko-color-border-strong);
+    --riko-btn-shadow: none;
+    --riko-btn-bg-hover: var(--riko-color-surface);
+    --riko-btn-shadow-hover: none;
+    border-style: dashed;
+  }
+  .riko-btn--outline:hover { border-style: solid; }
+  .riko-btn--ghost {
+    --riko-btn-bg: transparent;
+    --riko-btn-border: transparent;
+    --riko-btn-shadow: none;
+    --riko-btn-bg-hover: var(--riko-color-surface-muted);
+    --riko-btn-border-hover: transparent;
+    --riko-btn-shadow-hover: none;
+  }
+  .riko-btn--ghost:hover { transform: none; }
+  .riko-btn--link {
+    --riko-btn-bg: transparent;
+    --riko-btn-fg: var(--riko-color-accent-ink);
+    --riko-btn-border: transparent;
+    --riko-btn-shadow: none;
+    --riko-btn-border-hover: transparent;
+    --riko-btn-shadow-hover: none;
+    --riko-btn-px: var(--riko-space-1);
+    min-width: 0;
+    text-decoration: underline wavy color-mix(in srgb, var(--riko-color-accent) 55%, transparent) 1.5px;
+    text-underline-offset: 5px;
+  }
+  .riko-btn--link:hover { transform: none; --riko-btn-fg-hover: var(--riko-color-fg-strong); text-decoration-color: var(--riko-color-accent); }
+  .riko-btn--danger {
+    --riko-btn-bg: var(--riko-color-danger-soft);
+    --riko-btn-fg: var(--riko-color-danger-ink);
+    --riko-btn-border: var(--riko-color-danger);
+    --riko-btn-shadow: 0 3px 0 color-mix(in srgb, var(--riko-color-danger) 45%, transparent);
+    --riko-btn-border-hover: var(--riko-color-danger);
+    --riko-btn-shadow-hover: 0 5px 0 color-mix(in srgb, var(--riko-color-danger) 45%, transparent);
+  }
+
+  /* ---- 尺寸 ---- */
+  .riko-btn--xs { --riko-btn-h: 28px; --riko-btn-px: var(--riko-space-2); --riko-btn-font: var(--riko-text-xs); gap: var(--riko-space-1); }
+  .riko-btn--sm { --riko-btn-h: var(--riko-control-h-sm); --riko-btn-px: var(--riko-space-3); --riko-btn-font: .84rem; gap: 6px; }
+  .riko-btn--lg { --riko-btn-h: var(--riko-control-h-lg); --riko-btn-px: var(--riko-space-6); --riko-btn-font: var(--riko-text-md); }
+  .riko-btn--xl { --riko-btn-h: 60px; --riko-btn-px: var(--riko-space-7); --riko-btn-font: var(--riko-text-lg); gap: var(--riko-space-3); }
+  .riko-btn--xs, .riko-btn--sm { box-shadow: 0 2px 0 var(--riko-btn-border); }
+  .riko-btn--xs:where(.riko-btn--soft, .riko-btn--ghost, .riko-btn--link, .riko-btn--outline),
+  .riko-btn--sm:where(.riko-btn--soft, .riko-btn--ghost, .riko-btn--link, .riko-btn--outline) { box-shadow: none; }
+
+  /* ---- 形状 ---- */
+  .riko-btn--icon { padding: 0; width: var(--riko-btn-h); }
+  .riko-btn--icon > :where(svg.lucide, .riko-icon) { --riko-icon-size: 1.25em; }
+  .riko-btn--icon:hover > :where(svg.lucide, .riko-icon):last-child:not(:first-child) { transform: none; }
+  .riko-btn--round { --riko-btn-radius: 50%; padding: 0; width: var(--riko-btn-h); }
+  .riko-btn--square { --riko-btn-radius: var(--riko-radius-wobble-sm); }
+  .riko-btn--block { display: flex; width: 100%; }
+
+  /* ---- 状态 ---- */
+  .riko-btn:disabled, .riko-btn[aria-disabled="true"] {
+    opacity: .5; cursor: not-allowed; transform: none;
+    box-shadow: var(--riko-btn-shadow); border-color: var(--riko-btn-border);
+    background: var(--riko-btn-bg); color: var(--riko-btn-fg);
+  }
+  .riko-btn[aria-pressed="true"] {
+    --riko-btn-bg: var(--riko-color-accent-soft);
+    --riko-btn-border: var(--riko-color-accent);
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 var(--riko-color-accent);
+  }
+  .riko-btn[aria-busy="true"] { color: transparent; pointer-events: none; }
+  .riko-btn[aria-busy="true"] > * { visibility: hidden; }
+  .riko-btn[aria-busy="true"]::after {
+    content: ""; position: absolute; inset: 0; margin: auto;
+    width: 1.2em; height: 1.2em;
+    background: var(--riko-btn-fg);
+    -webkit-mask: var(--riko-icon-loader) center / contain no-repeat;
+    mask: var(--riko-icon-loader) center / contain no-repeat;
+    animation: riko-spin .9s linear infinite;
+  }
+
+  /* 按钮内的计数徽章 */
+  .riko-btn__badge {
+    display: inline-grid; place-items: center; min-width: 1.5em; height: 1.5em; padding: 0 .4em;
+    font-size: .72em; font-weight: var(--riko-weight-bold); line-height: 1;
+    border-radius: var(--riko-radius-pill);
+    background: var(--riko-color-accent); color: var(--riko-color-accent-fg);
+  }
+  .riko-btn--accent .riko-btn__badge, .riko-btn--primary:hover .riko-btn__badge { background: var(--riko-color-surface); color: var(--riko-color-fg-strong); }
+
+  @media (pointer: coarse) {
+    .riko-btn--xs { min-height: 36px; }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "name": "field",
+  "title": "表单项",
+  "titleEn": "Field",
+  "category": "form",
+  "summary": "标签 + 控件 + 提示 / 错误 / 字数计数的标准组合，JS 自动处理无障碍关联。",
+  "when": "表单中每个输入控件都建议包一层 riko-field。",
+  "root": "riko-field",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-field__label",
+      "desc": "标签（<label for>）",
+      "required": true
+    },
+    {
+      "class": "riko-field__required",
+      "desc": "必填星号（aria-hidden，控件本身写 required）"
+    },
+    {
+      "class": "riko-field__optional",
+      "desc": "「选填」小字"
+    },
+    {
+      "class": "riko-field__hint",
+      "desc": "提示文字"
+    },
+    {
+      "class": "riko-field__error",
+      "desc": "错误信息；hidden 时隐藏，显示时控件自动 aria-invalid"
+    },
+    {
+      "class": "riko-field__counter",
+      "desc": "字数计数（内容由 JS 生成，读取控件 maxlength）"
+    },
+    {
+      "class": "riko-field__footer",
+      "desc": "把提示和计数放在同一行"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-field--inline",
+      "desc": "标签在左、控件在右（窄屏自动上下排列）",
+      "group": "layout"
+    }
+  ],
+  "states": [
+    {
+      "attr": "hidden",
+      "on": "riko-field__error",
+      "desc": "隐藏错误信息"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"field\"",
+    "options": [],
+    "methods": [
+      {
+        "signature": "el.riko.setError(message)",
+        "desc": "显示错误并标记控件 aria-invalid"
+      },
+      {
+        "signature": "el.riko.clearError()",
+        "desc": "清除错误"
+      },
+      {
+        "signature": "el.riko.update()",
+        "desc": "重新计算关联与计数"
+      }
+    ],
+    "events": []
+  },
+  "a11y": [
+    "用 data-riko=\"field\" 时，hint / error / counter 会自动通过 aria-describedby 关联到控件，错误信息带 aria-live。",
+    "必填项控件本身要写 required；星号只是视觉提示。"
+  ],
+  "rules": [
+    "结构顺序：label → 控件 → hint / error / counter。",
+    "需要字数统计：控件写 maxlength，并放一个空的 <p class=\"riko-field__counter\"></p>。"
+  ],
+  "avoid": [
+    "不要手写 aria-describedby 的 id 拼接，交给 data-riko=\"field\"。",
+    "不要用红色文字类代替 riko-field__error。"
+  ],
+  "examples": [
+    {
+      "title": "标签 + 提示",
+      "html": "<div class=\"riko-field\" data-riko=\"field\">\n  <label class=\"riko-field__label\" for=\"nickname\">昵称<span class=\"riko-field__required\" aria-hidden=\"true\">*</span></label>\n  <input class=\"riko-input\" id=\"nickname\" type=\"text\" required placeholder=\"例如：小星星\">\n  <p class=\"riko-field__hint\">小伙伴们会这样称呼你</p>\n</div>"
+    },
+    {
+      "title": "错误信息",
+      "html": "<div class=\"riko-field\" data-riko=\"field\">\n  <label class=\"riko-field__label\" for=\"email\">邮箱</label>\n  <input class=\"riko-input\" id=\"email\" type=\"email\" value=\"riko@\">\n  <p class=\"riko-field__error\">邮箱好像少了点什么，再检查一下吧</p>\n</div>"
+    },
+    {
+      "title": "字数计数",
+      "html": "<div class=\"riko-field\" data-riko=\"field\">\n  <label class=\"riko-field__label\" for=\"motto\">个性签名<span class=\"riko-field__optional\">（选填）</span></label>\n  <textarea class=\"riko-textarea\" id=\"motto\" rows=\"2\" maxlength=\"40\">平凡日子里的一颗小星星</textarea>\n  <div class=\"riko-field__footer\">\n    <p class=\"riko-field__hint\">最多 40 个字</p>\n    <p class=\"riko-field__counter\"></p>\n  </div>\n</div>"
+    },
+    {
+      "title": "横向标签",
+      "html": "<div class=\"riko-field riko-field--inline\" data-riko=\"field\">\n  <label class=\"riko-field__label\" for=\"village\">所在村庄</label>\n  <input class=\"riko-input\" id=\"village\" type=\"text\" value=\"HV 村\">\n  <p class=\"riko-field__hint\">将显示在你的个人卡片上</p>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-field",
+      "has": "input, select, textarea, [data-riko], [role=\"group\"], [role=\"radiogroup\"]",
+      "message": "riko-field 内需要一个表单控件（或带 data-riko / role=\"group\" 的自定义控件）"
+    },
+    {
+      "selector": ".riko-field__counter",
+      "parent": "[data-riko=\"field\"]",
+      "message": "riko-field__counter 需要所在的 riko-field 加 data-riko=\"field\" 才会计数"
+    }
+  ],
+  "related": [
+    "input",
+    "textarea",
+    "select",
+    "form"
+  ]
+}

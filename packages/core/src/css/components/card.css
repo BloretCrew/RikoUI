@@ -1,0 +1,151 @@
+/* ==========================================================================
+   card · 卡片
+   <article class="riko-card">
+     <div class="riko-card__header"><span class="riko-card__icon">…</span><span class="riko-tag">…</span></div>
+     <h3 class="riko-card__title">标题</h3>
+     <p class="riko-card__body">内容</p>
+     <div class="riko-card__footer">…</div>
+   </article>
+   整卡可点击：<a class="riko-card riko-card--interactive" href="…">…<span class="riko-card__cta">开始阅读</span></a>
+   ========================================================================== */
+@layer riko.components {
+  .riko-card {
+    --riko-card-bg: var(--riko-color-surface);
+    --riko-card-border: var(--riko-color-border);
+    --riko-card-pad: var(--riko-space-6);
+    --riko-card-blob: var(--riko-color-ice-soft);
+    --riko-card-blob-size: 220px;
+    position: relative;
+    display: flex; flex-direction: column; gap: var(--riko-space-3);
+    min-width: 0;
+    padding: var(--riko-card-pad);
+    color: var(--riko-color-fg);
+    background-color: var(--riko-card-bg);
+    border: var(--riko-border-width) solid var(--riko-card-border);
+    border-radius: var(--riko-radius-wobble);
+    box-shadow: var(--riko-shadow-md);
+    isolation: isolate;
+    text-decoration: none;
+  }
+  .riko-card__media {
+    margin: calc(-1 * var(--riko-card-pad)) calc(-1 * var(--riko-card-pad)) var(--riko-space-1);
+    overflow: hidden;
+    border-radius: 24px 20px 6px 6px / 18px 26px 6px 6px;
+    background: var(--riko-color-surface-muted);
+  }
+  .riko-card__media > img, .riko-card__media > video { width: 100%; aspect-ratio: var(--riko-card-ratio, 16 / 9); object-fit: cover; }
+  .riko-card__header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--riko-space-3); }
+  .riko-card__icon {
+    flex: none; display: grid; place-items: center;
+    width: 56px; height: 56px; font-size: 1.6rem;
+    color: var(--riko-color-fg-strong);
+    background: var(--riko-color-surface-muted);
+    border-radius: 18px 15px 19px 13px;
+    transform: rotate(-5deg);
+    transition: transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-card__tag { margin-left: auto; flex: none; }
+  .riko-card__title {
+    font-family: var(--riko-font-title); font-weight: var(--riko-weight-normal);
+    font-size: var(--riko-text-xl); line-height: var(--riko-leading-tight);
+    color: var(--riko-color-fg-strong);
+  }
+  .riko-card__sub { margin-top: -6px; font-family: var(--riko-font-hand); font-size: var(--riko-text-lg); font-weight: 600; color: var(--riko-color-brown); line-height: 1.2; }
+  .riko-card__body { flex: 1; color: var(--riko-color-fg-muted); font-size: var(--riko-text-sm); }
+  .riko-card__footer {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--riko-space-2);
+    margin-top: var(--riko-space-1); padding-top: var(--riko-space-3);
+    border-top: var(--riko-border-width) dashed var(--riko-color-border);
+  }
+  .riko-card__cta {
+    align-self: flex-start; display: inline-flex; align-items: center; gap: var(--riko-space-2);
+    margin-top: var(--riko-space-2); padding: 8px 20px;
+    border-radius: var(--riko-radius-pill);
+    font-size: var(--riko-text-sm); font-weight: var(--riko-weight-medium);
+    color: var(--riko-color-primary-fg); background: var(--riko-color-primary);
+    box-shadow: var(--riko-shadow-press-primary);
+    transition: background var(--riko-duration-base) ease, color var(--riko-duration-base) ease, gap var(--riko-duration-base) ease, box-shadow var(--riko-duration-base) ease;
+  }
+  .riko-card__cta::after {
+    content: ""; width: 1em; height: 1em; background: currentColor;
+    -webkit-mask: var(--riko-icon-arrow-right) center / contain no-repeat;
+    mask: var(--riko-icon-arrow-right) center / contain no-repeat;
+  }
+
+  /* 装饰：缝线、胶带 */
+  .riko-card--stitched::before {
+    content: ""; position: absolute; inset: 9px; z-index: -1; pointer-events: none;
+    border: var(--riko-border-width) dashed var(--riko-color-stitch);
+    border-radius: 20px 16px 22px 14px / 14px 22px 16px 20px;
+  }
+  .riko-card--taped { margin-top: 12px; }
+  .riko-card--taped::after {
+    content: ""; position: absolute; z-index: 2; top: -13px; left: 50%;
+    width: 104px; height: 26px; transform: translateX(-50%) rotate(-4deg);
+    background: repeating-linear-gradient(45deg,
+      color-mix(in srgb, var(--riko-color-ice) 80%, transparent) 0 8px,
+      color-mix(in srgb, var(--riko-color-ice-soft) 80%, transparent) 8px 16px);
+    border-radius: 3px; box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
+    pointer-events: none;
+  }
+
+  /* 可点击整卡：悬停上浮微旋，右下角色团放大 */
+  .riko-card--interactive {
+    cursor: pointer;
+    background-image: radial-gradient(circle at 100% 100%, var(--riko-card-blob) 0 70%, transparent 71%);
+    background-repeat: no-repeat;
+    background-position: right -70px bottom -90px;
+    background-size: var(--riko-card-blob-size) var(--riko-card-blob-size);
+    transition: transform var(--riko-duration-base) var(--riko-ease-bounce), box-shadow var(--riko-duration-base) ease,
+      border-color var(--riko-duration-base) ease, background-size var(--riko-duration-slow) ease;
+  }
+  .riko-card--interactive:hover {
+    --riko-card-blob-size: 280px;
+    transform: translateY(-6px) rotate(-.4deg);
+    border-color: var(--riko-color-accent);
+    box-shadow: var(--riko-shadow-lg);
+  }
+  .riko-card--interactive:active { transform: translateY(-2px); }
+  .riko-card--interactive:hover .riko-card__icon { transform: rotate(4deg) scale(1.06); }
+  .riko-card--interactive:hover .riko-card__cta {
+    gap: var(--riko-space-3);
+    color: var(--riko-color-accent-fg); background: var(--riko-color-accent);
+    box-shadow: var(--riko-shadow-press-accent);
+  }
+  .riko-card--interactive:focus-visible { border-radius: var(--riko-radius-wobble); }
+
+  /* 首页大入口卡 */
+  .riko-card--feature { --riko-card-pad: var(--riko-space-7); gap: var(--riko-space-3); }
+  .riko-card--feature .riko-card__icon { width: 76px; height: 76px; font-size: 2.2rem; border-radius: 24px 20px 26px 18px; }
+  .riko-card--feature .riko-card__title { font-size: var(--riko-text-3xl); margin-top: var(--riko-space-1); }
+  .riko-card--feature .riko-card__body { font-size: var(--riko-text-md); }
+
+  /* 色调 */
+  .riko-card--soft { --riko-card-bg: var(--riko-color-surface-muted); --riko-card-blob: var(--riko-color-surface); }
+  .riko-card--soft .riko-card__icon { background: var(--riko-color-surface); }
+  .riko-card--ice { --riko-card-bg: var(--riko-color-ice-soft); --riko-card-border: transparent; --riko-card-blob: var(--riko-color-surface); }
+  .riko-card--ice .riko-card__icon { background: var(--riko-color-surface); color: var(--riko-color-ice-ink); }
+  .riko-card--accent { --riko-card-bg: var(--riko-color-accent-soft); --riko-card-border: transparent; --riko-card-blob: var(--riko-color-surface); }
+  .riko-card--accent .riko-card__icon { background: var(--riko-color-surface); color: var(--riko-color-accent-ink); }
+
+  .riko-card--flat { box-shadow: none; }
+  .riko-card--compact { --riko-card-pad: var(--riko-space-4); gap: var(--riko-space-2); }
+  .riko-card--lg { --riko-card-pad: clamp(var(--riko-space-6), 6vw, var(--riko-space-10)); }
+  .riko-card__actions { margin-left: auto; flex: none; display: flex; align-items: center; gap: var(--riko-space-1); }
+  .riko-card--compact .riko-card__title { font-size: var(--riko-text-lg); }
+
+  /* 图文横排 */
+  .riko-card--horizontal { flex-direction: row; align-items: stretch; gap: var(--riko-space-5); }
+  .riko-card--horizontal > .riko-card__media {
+    flex: 0 0 38%; margin: calc(-1 * var(--riko-card-pad)) 0 calc(-1 * var(--riko-card-pad)) calc(-1 * var(--riko-card-pad));
+    border-radius: 24px 6px 6px 20px / 20px 6px 6px 26px;
+  }
+  .riko-card--horizontal > .riko-card__media > img { height: 100%; aspect-ratio: auto; min-height: 160px; }
+  .riko-card__content { display: flex; flex-direction: column; gap: var(--riko-space-2); min-width: 0; flex: 1; }
+  @media (max-width: 520px) {
+    .riko-card--horizontal { flex-direction: column; }
+    .riko-card--horizontal > .riko-card__media { flex: none; margin: calc(-1 * var(--riko-card-pad)) calc(-1 * var(--riko-card-pad)) 0; border-radius: 24px 20px 6px 6px / 18px 26px 6px 6px; }
+    .riko-card--horizontal > .riko-card__media > img { aspect-ratio: 16 / 9; min-height: 0; }
+    .riko-card--feature { --riko-card-pad: var(--riko-space-5); }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "section",
+  "title": "版块",
+  "titleEn": "Section",
+  "category": "layout",
+  "summary": "版块上下留白。",
+  "when": "页面中的每个主要区块。",
+  "root": "riko-section",
+  "element": "div",
+  "modifiers": [
+    {
+      "class": "riko-section--sm",
+      "desc": "小留白",
+      "group": "size"
+    },
+    {
+      "class": "riko-section--lg",
+      "desc": "大留白",
+      "group": "size"
+    }
+  ],
+  "examples": [
+    {
+      "title": "基础",
+      "html": "<section class=\"riko-section\">\n  <div class=\"riko-container\">…</div>\n</section>"
+    }
+  ]
+}

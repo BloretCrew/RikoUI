@@ -1,0 +1,101 @@
+/* ==========================================================================
+   navbar · 导航栏
+   <header class="riko-navbar" data-riko="navbar">
+     <div class="riko-navbar__inner">
+       <a class="riko-navbar__brand" href="/"><img class="riko-navbar__logo" src="logo.jpg" alt="">
+         <span class="riko-navbar__text"><span class="riko-navbar__title">《络的世界》</span><span class="riko-navbar__sub">RikoLand</span></span></a>
+       <nav class="riko-navbar__nav" aria-label="主导航">
+         <a class="riko-navbar__link" href="/" aria-current="page">首页</a> …
+       </nav>
+       <div class="riko-navbar__actions">…按钮…</div>
+       <button class="riko-navbar__toggle" aria-label="打开菜单"></button>
+     </div>
+   </header>
+   ========================================================================== */
+@layer riko.components {
+  .riko-navbar {
+    position: sticky; top: 0; z-index: var(--riko-z-sticky);
+    background: var(--riko-color-surface-glass);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    backdrop-filter: blur(14px) saturate(1.2);
+    border-bottom: var(--riko-border-width) dashed var(--riko-color-border);
+  }
+  .riko-navbar--transparent { position: relative; background: transparent; border-bottom-color: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .riko-navbar__inner {
+    position: relative;
+    display: flex; align-items: center; gap: var(--riko-space-4);
+    width: min(var(--riko-container), 100% - 2 * var(--riko-space-5)); margin-inline: auto;
+    min-height: var(--riko-header-h);
+  }
+  .riko-navbar--wide .riko-navbar__inner { width: min(var(--riko-container-wide), 100% - 2 * var(--riko-space-5)); }
+  .riko-navbar__brand { display: flex; align-items: center; gap: var(--riko-space-3); min-width: 0; color: inherit; text-decoration: none; }
+  .riko-navbar__logo {
+    flex: none; width: 46px; height: 46px; border-radius: 50%; object-fit: cover;
+    border: 3px solid var(--riko-color-surface);
+    box-shadow: 0 0 0 2px var(--riko-color-tan), var(--riko-shadow-md);
+    background: var(--riko-color-accent-soft);
+    transition: transform .4s var(--riko-ease-bounce);
+  }
+  .riko-navbar__logo:is(span, div) { display: grid; place-items: center; color: var(--riko-color-accent); }
+  .riko-navbar__brand:hover .riko-navbar__logo { transform: rotate(-10deg) scale(1.06); }
+  .riko-navbar__text { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
+  .riko-navbar__title { font-family: var(--riko-font-title); font-size: var(--riko-text-xl); color: var(--riko-color-fg-strong); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .riko-navbar__sub { font-family: var(--riko-font-hand); font-weight: 600; font-size: 1.05rem; color: var(--riko-color-brown); letter-spacing: .04em; white-space: nowrap; }
+
+  .riko-navbar__nav { display: flex; align-items: center; gap: var(--riko-space-1); margin-left: var(--riko-space-4); }
+  .riko-navbar__link {
+    position: relative; display: inline-flex; align-items: center; gap: var(--riko-space-2);
+    padding: 8px 14px; border-radius: var(--riko-radius-pill);
+    color: var(--riko-color-fg); font-weight: var(--riko-weight-medium); font-size: var(--riko-text-sm);
+    text-decoration: none; white-space: nowrap;
+    transition: background var(--riko-duration-fast) ease, color var(--riko-duration-fast) ease;
+  }
+  .riko-navbar__link:hover { background: var(--riko-color-surface-muted); color: var(--riko-color-fg-strong); }
+  .riko-navbar__link[aria-current="page"] { color: var(--riko-color-fg-strong); background: var(--riko-color-accent-soft); }
+  .riko-navbar__link[aria-current="page"]::after {
+    content: ""; position: absolute; left: 50%; bottom: -3px; width: 7px; height: 7px; transform: translateX(-50%);
+    background: var(--riko-color-accent);
+    -webkit-mask: var(--riko-icon-star) center / contain no-repeat; mask: var(--riko-icon-star) center / contain no-repeat;
+  }
+  .riko-navbar__actions { display: flex; align-items: center; gap: var(--riko-space-2); margin-left: auto; }
+  /* 中间区：搜索框等，占据剩余空间并居中 */
+  .riko-navbar__center { flex: 1 1 auto; min-width: 0; display: flex; justify-content: center; }
+  .riko-navbar__center > * { width: min(520px, 100%); }
+  .riko-navbar__center + .riko-navbar__actions { margin-left: 0; }
+  .riko-navbar__nav + .riko-navbar__actions { margin-left: auto; }
+  .riko-navbar__nav:has(+ .riko-navbar__actions) { margin-right: 0; }
+
+  .riko-navbar__toggle {
+    display: none; flex: none; place-items: center;
+    width: 44px; height: 44px; padding: 0;
+    color: var(--riko-color-fg-strong); background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border); border-radius: 50%;
+    box-shadow: var(--riko-shadow-press);
+    transition: transform var(--riko-duration-fast) ease, border-color var(--riko-duration-fast) ease;
+  }
+  .riko-navbar__toggle:hover { transform: translateY(-2px); border-color: var(--riko-color-accent); }
+  .riko-navbar__toggle::before {
+    content: ""; width: 20px; height: 20px; background: currentColor;
+    -webkit-mask: var(--riko-icon-menu) center / contain no-repeat; mask: var(--riko-icon-menu) center / contain no-repeat;
+  }
+  .riko-navbar__toggle[aria-expanded="true"]::before { -webkit-mask-image: var(--riko-icon-x); mask-image: var(--riko-icon-x); }
+
+  @media (max-width: 768px) {
+    .riko-navbar__toggle { display: grid; }
+    .riko-navbar__nav {
+      position: absolute; top: calc(100% + var(--riko-space-2)); left: 0; right: 0; z-index: var(--riko-z-dropdown);
+      flex-direction: column; align-items: stretch; gap: 2px; margin: 0;
+      padding: var(--riko-space-3);
+      background: var(--riko-color-surface);
+      border: var(--riko-border-width) solid var(--riko-color-border); border-radius: var(--riko-radius-wobble);
+      box-shadow: var(--riko-shadow-lg);
+    }
+    .riko-navbar__nav[data-state="closed"] { display: none; }
+    .riko-navbar__nav[data-state="open"] { animation: riko-navbar-drop var(--riko-duration-base) var(--riko-ease-out); }
+    .riko-navbar__link { padding: 12px 16px; font-size: var(--riko-text-md); border-radius: var(--riko-radius-wobble-sm); }
+    .riko-navbar__link[aria-current="page"]::after { left: auto; right: 16px; bottom: auto; top: 50%; transform: translateY(-50%); width: 10px; height: 10px; }
+    .riko-navbar__actions { margin-left: auto; }
+    .riko-navbar__sub { display: none; }
+  }
+  @keyframes riko-navbar-drop { from { opacity: 0; transform: translateY(-8px); } }
+}

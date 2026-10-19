@@ -1,0 +1,28 @@
+/* ==========================================================================
+   select · 下拉选择（原生 <select> 美化）
+   <select class="riko-select"><option>暖暖的米色</option></select>
+   尺寸 --sm --lg · multiple / size 时为列表外观（共用外观定义在 input.css）
+   ========================================================================== */
+@layer riko.components {
+  .riko-select {
+    padding-right: calc(var(--riko-control-px) + 1.6em);
+    cursor: pointer;
+    text-overflow: ellipsis;
+  }
+  /* 小三角箭头：两个渐变拼成，颜色随主题 */
+  .riko-select:not([multiple]):not([size]) {
+    background-color: var(--riko-control-bg);
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--riko-color-brown) 50%),
+      linear-gradient(135deg, var(--riko-color-brown) 50%, transparent 50%);
+    background-position:
+      right calc(var(--riko-control-px) + 5px) top 54%,
+      right var(--riko-control-px) top 54%;
+    background-size: 5px 5px;
+    background-repeat: no-repeat;
+  }
+  .riko-select:is([multiple], [size]) { padding: var(--riko-space-2); min-height: 120px; }
+  .riko-select option { padding: 6px 10px; border-radius: var(--riko-radius-xs); background: var(--riko-color-surface); color: var(--riko-color-fg); }
+  .riko-select:is([multiple], [size]) option:checked { background: var(--riko-color-accent-soft); color: var(--riko-color-fg-strong); }
+  .riko-select optgroup { font-weight: var(--riko-weight-bold); color: var(--riko-color-brown); }
+}

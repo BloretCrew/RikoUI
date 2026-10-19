@@ -1,0 +1,49 @@
+/* ==========================================================================
+   timeline · 时间轴
+   <ol class="riko-timeline">
+     <li class="riko-timeline__item">
+       <span class="riko-timeline__dot"></span>
+       <div class="riko-timeline__content">
+         <time class="riko-timeline__time">2026-10-15</time>
+         <h3 class="riko-timeline__title">更新第 076 节</h3>
+         <p class="riko-timeline__body">风过围垣，落星回响。</p>
+       </div>
+     </li>
+   </ol>
+   当前/重要节点：在 __item 上加 aria-current="step"；__dot 内放 <span class="riko-star"></span> 变为星星。
+   ========================================================================== */
+@layer riko.components {
+  .riko-timeline { --riko-tl-dot: 18px; list-style: none; margin: 0; padding: 0; position: relative; }
+  .riko-timeline__item {
+    position: relative; display: grid; grid-template-columns: var(--riko-tl-dot) minmax(0, 1fr);
+    column-gap: var(--riko-space-4); padding-bottom: var(--riko-space-6);
+  }
+  .riko-timeline__item::before {
+    content: ""; position: absolute; left: calc(var(--riko-tl-dot) / 2 - 1px); top: calc(var(--riko-tl-dot) + 6px); bottom: 4px;
+    border-left: var(--riko-border-width) dashed var(--riko-color-border-strong);
+  }
+  .riko-timeline__item:last-child { padding-bottom: 0; }
+  .riko-timeline__item:last-child::before { display: none; }
+  .riko-timeline__dot {
+    grid-column: 1; margin-top: 3px;
+    display: grid; place-items: center;
+    width: var(--riko-tl-dot); height: var(--riko-tl-dot); border-radius: 50%;
+    background: var(--riko-color-surface); border: 3px solid var(--riko-color-ice);
+  }
+  .riko-timeline__dot:has(> .riko-star) { border: 0; background: transparent; }
+  .riko-timeline__dot > .riko-star { --riko-star-size: calc(var(--riko-tl-dot) + 4px); }
+  .riko-timeline__item[aria-current]:not([aria-current="false"]) .riko-timeline__dot { border-color: var(--riko-color-accent); background: var(--riko-color-accent-soft); box-shadow: 0 0 0 4px var(--riko-color-accent-soft); }
+  .riko-timeline__content { grid-column: 2; min-width: 0; }
+  .riko-timeline__time { display: block; font-family: var(--riko-font-hand); font-size: var(--riko-text-lg); font-weight: 600; color: var(--riko-color-brown); line-height: 1.3; }
+  .riko-timeline__title { margin-top: 2px; font-family: var(--riko-font-title); font-weight: var(--riko-weight-normal); font-size: var(--riko-text-lg); color: var(--riko-color-fg-strong); line-height: 1.4; }
+  .riko-timeline__body { margin-top: var(--riko-space-1); font-size: var(--riko-text-sm); color: var(--riko-color-fg-muted); }
+
+  /* 左右交替（宽屏） */
+  @media (min-width: 769px) {
+    .riko-timeline--alternate .riko-timeline__item { grid-template-columns: minmax(0, 1fr) var(--riko-tl-dot) minmax(0, 1fr); }
+    .riko-timeline--alternate .riko-timeline__item::before { left: calc(50% - 1px); }
+    .riko-timeline--alternate .riko-timeline__dot { grid-column: 2; grid-row: 1; }
+    .riko-timeline--alternate .riko-timeline__item:nth-child(odd) .riko-timeline__content { grid-column: 1; grid-row: 1; text-align: right; }
+    .riko-timeline--alternate .riko-timeline__item:nth-child(even) .riko-timeline__content { grid-column: 3; grid-row: 1; }
+  }
+}

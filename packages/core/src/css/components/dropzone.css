@@ -1,0 +1,82 @@
+/* ==========================================================================
+   dropzone · 拖拽上传
+   <div class="riko-dropzone" data-riko="dropzone">
+     <label class="riko-dropzone__area">
+       <input class="riko-dropzone__input" type="file" multiple>
+       <span class="riko-dropzone__icon" aria-hidden="true"></span>
+       <span class="riko-dropzone__title">把画稿拖到这里，或点击选择</span>
+       <span class="riko-dropzone__hint">支持 PNG / JPG</span>
+     </label>
+   </div>
+   JS 会在区域下方生成 .riko-dropzone__list 文件列表。
+   ========================================================================== */
+@layer riko.components {
+  .riko-dropzone { display: grid; gap: var(--riko-space-3); width: 100%; }
+  .riko-dropzone__area {
+    position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: var(--riko-space-1); min-height: 170px; padding: var(--riko-space-6) var(--riko-space-5);
+    text-align: center; cursor: pointer;
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) dashed var(--riko-color-border-strong);
+    border-radius: var(--riko-radius-wobble);
+    transition: background var(--riko-duration-base) ease, border-color var(--riko-duration-base) ease, transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-dropzone__area:hover { background: var(--riko-color-surface-muted); border-color: var(--riko-color-accent); }
+  .riko-dropzone__area:focus-within { outline: var(--riko-focus-ring); outline-offset: var(--riko-focus-offset); }
+  .riko-dropzone[data-state="dragover"] .riko-dropzone__area {
+    background: var(--riko-color-accent-soft); border-color: var(--riko-color-accent); border-style: solid; transform: scale(1.01);
+  }
+  .riko-dropzone__input { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; clip: rect(0 0 0 0); }
+  .riko-dropzone__input:disabled + .riko-dropzone__icon { opacity: .5; }
+  .riko-dropzone__icon {
+    display: grid; place-items: center; width: 56px; height: 56px; margin-bottom: var(--riko-space-2);
+    border-radius: 18px 14px 20px 13px; background: var(--riko-color-ice-soft); color: var(--riko-color-ice-ink);
+    transform: rotate(-5deg); transition: transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-dropzone__icon:empty::before {
+    content: ""; width: 26px; height: 26px; background: currentColor;
+    -webkit-mask: var(--riko-icon-upload) center / contain no-repeat; mask: var(--riko-icon-upload) center / contain no-repeat;
+  }
+  .riko-dropzone__area:hover .riko-dropzone__icon,
+  .riko-dropzone[data-state="dragover"] .riko-dropzone__icon { transform: rotate(5deg) translateY(-3px); }
+  .riko-dropzone__title { font-weight: var(--riko-weight-medium); color: var(--riko-color-fg-strong); }
+  .riko-dropzone__hint { font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted); }
+
+  .riko-dropzone__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--riko-space-2); }
+  .riko-dropzone__list:empty { display: none; }
+  .riko-dropzone__file {
+    display: flex; align-items: center; gap: var(--riko-space-3);
+    padding: var(--riko-space-2) var(--riko-space-2) var(--riko-space-2) var(--riko-space-3);
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble-sm);
+    animation: riko-dropzone-pop var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-dropzone__file[aria-invalid="true"] { border-color: var(--riko-color-danger); background: var(--riko-color-danger-soft); }
+  .riko-dropzone__thumb {
+    flex: none; display: grid; place-items: center; width: 40px; height: 40px; overflow: hidden;
+    border-radius: var(--riko-radius-sm); background: var(--riko-color-surface-muted); color: var(--riko-color-brown);
+  }
+  .riko-dropzone__thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .riko-dropzone__thumb:empty::before {
+    content: ""; width: 20px; height: 20px; background: currentColor;
+    -webkit-mask: var(--riko-icon-file) center / contain no-repeat; mask: var(--riko-icon-file) center / contain no-repeat;
+  }
+  .riko-dropzone__meta { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.4; }
+  .riko-dropzone__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--riko-text-sm); color: var(--riko-color-fg-strong); }
+  .riko-dropzone__size { font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted); }
+  .riko-dropzone__file[aria-invalid="true"] .riko-dropzone__size { color: var(--riko-color-danger-ink); }
+  .riko-dropzone__remove {
+    flex: none; display: grid; place-items: center; width: 34px; height: 34px; padding: 0;
+    border: 0; border-radius: 50%; background: transparent; color: var(--riko-color-fg-muted);
+    transition: background var(--riko-duration-fast) ease, color var(--riko-duration-fast) ease;
+  }
+  .riko-dropzone__remove:hover { background: var(--riko-color-danger-soft); color: var(--riko-color-danger-ink); }
+  .riko-dropzone__remove::before {
+    content: ""; width: 16px; height: 16px; background: currentColor;
+    -webkit-mask: var(--riko-icon-x) center / contain no-repeat; mask: var(--riko-icon-x) center / contain no-repeat;
+  }
+  @keyframes riko-dropzone-pop { from { transform: scale(.94); opacity: 0; } }
+  .riko-dropzone--sm .riko-dropzone__area { min-height: 110px; padding: var(--riko-space-4); }
+  .riko-dropzone--sm .riko-dropzone__icon { width: 42px; height: 42px; }
+}

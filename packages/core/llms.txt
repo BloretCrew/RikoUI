@@ -1,0 +1,149 @@
+# Riko UI (@bloret-crew/riko-ui)
+
+> 温馨手绘风的通用 UI 框架：纯 CSS + 原生 JS、零依赖、深浅色、无障碍、对 AI 友好。v0.1.0
+
+**阅读方式**：先读完本文件的「核心规则」；然后只读你要用到的组件文档 `ai/guide/<组件>.md`（每份约 1–2k tokens，含结构、修饰、状态、JS、无障碍与可复制示例）。不要整篇读 AI_GUIDE.md（合订本，很长）。
+
+## 核心规则
+
+1. 类名前缀一律 `riko-`。根类 `riko-<组件>`，部件 `riko-<组件>__<部件>`，修饰 `riko-<组件>--<修饰>`。**修饰类必须与根类写在同一元素上**（`class="riko-btn riko-btn--primary"`）。
+2. 状态用原生属性/ARIA，不用状态类：`disabled`、`aria-pressed`、`aria-selected`、`aria-expanded`、`aria-current="page"`、`aria-invalid="true"`、`aria-busy="true"`、`hidden`。**不要写 `.active` `.is-open` `.dark`**。
+3. 需要 JS 的组件在根元素加 `data-riko="<组件>"`，Riko 会自动初始化（包括之后动态插入的元素）；打开弹层用 `data-riko-open="<id>"`，关闭用 `data-riko-close`。
+4. 只用设计变量，不写死颜色/阴影/圆角：`var(--riko-color-*)`、`var(--riko-space-*)`、`var(--riko-radius-*)`、`var(--riko-shadow-*)`。定制品牌色就覆盖变量。
+5. 深色模式由 `<html data-theme="dark">` 控制，交给 `Riko.theme`；不要自己写 `prefers-color-scheme` 或深色类。在 `<head>`、样式表之前用 `<script src>` 引入 `riko-theme-init.js` 防闪烁（SSR 可内联 `Riko.themeInitSnippet()`）。
+6. 布局用原语：`riko-container`、`riko-section`、`riko-stack`（纵向）、`riko-cluster`（横向）、`riko-grid`、`riko-split`（侧栏+主区），不要为常规排版手写 flex/grid CSS。
+7. 图标用 Lucide：`<i data-lucide="名称"></i>`（先引入 lucide 再引入 riko-ui）。仅图标的按钮必须有 `aria-label`；装饰图标/星星加 `aria-hidden="true"`。
+8. 同一组（group）的修饰互斥，只选一个；尺寸默认 md 不写修饰。
+9. 照抄本指南 examples 中的结构，不要增删部件层级；不确定时查 `ai/components/<组件>.json`。
+10. 写完运行 `npx riko-ui check <文件或目录>`，把错误全部修掉再交付。check 只检查结构、类名与无障碍，交互行为请自己在浏览器里点一遍。
+11. 页面最上方的标题区用 `riko-hero`（h1，每页唯一）；页面内的版块标题用 `riko-section-head`（h2）。
+
+## 引入
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@bloret-crew/riko-ui@0/dist/riko-theme-init.js"></script>   <!-- head，防闪烁 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@bloret-crew/riko-ui@0/dist/riko-ui.min.css">
+<script src="https://unpkg.com/lucide@latest"></script>              <!-- body 末尾 -->
+<script src="https://cdn.jsdelivr.net/npm/@bloret-crew/riko-ui@0/dist/riko-ui.min.js"></script>
+```
+
+npm：`import '@bloret-crew/riko-ui/css'; import Riko from '@bloret-crew/riko-ui';`
+
+## 组件索引
+
+### 设计基础
+- [icon](ai/guide/icon.md)（图标与星星） `riko-icon`：页面图标推荐 Lucide；框架内置 47 个 Lucide 图标可用 riko-icon--<名> 直接显示；品牌五角星 riko-star。
+- [reveal](ai/guide/reveal.md)（滚动进场） `data-riko="reveal"`：元素滚动进入视口时淡入上移。
+- [theme](ai/guide/theme.md)（主题与深色模式）：四种外观模式（按系统 / 按时间 / 浅色 / 深色）、防闪烁脚本与设计变量覆盖。
+- [typography](ai/guide/typography.md)（排版）：标题、手写副标、正文色调、引用、键位、行内代码、高亮与长文排版。
+- [utilities](ai/guide/utilities.md)（工具类）：少量高频工具类：读屏专用、显示隐藏、文字对齐/截断、宽度、外边距。
+
+### 布局
+- [cluster](ai/guide/cluster.md)（横向排列） `riko-cluster`：子元素横向排列、自动换行、垂直居中。
+- [container](ai/guide/container.md)（容器） `riko-container`：水平居中、限制最大宽度并留出左右边距。
+- [divider](ai/guide/divider.md)（分割线） `riko-divider`：虚线、波浪线、带文字或星星的分割线，以及竖向分隔。
+- [grid](ai/guide/grid.md)（栅格） `riko-grid`：自适应栅格：按最小列宽自动排列，或固定 2/3/4/6 列（小屏自动减少）。
+- [hero](ai/guide/hero.md)（主视觉 / 页头） `riko-hero`：页面最上方的主视觉：手写引导语、大标题、手写副标、波浪线、导语、操作按钮，可在右侧放插画或拍立得。
+- [layout-helpers](ai/guide/layout-helpers.md)（居中与占位） `riko-center`：riko-center 让内容水平垂直居中；riko-spacer 在 flex 容器中推开两侧。
+- [page](ai/guide/page.md)（页面外壳） `riko-page`：整页纵向布局，页脚始终贴底。
+- [section](ai/guide/section.md)（版块） `riko-section`：版块上下留白。
+- [section-head](ai/guide/section-head.md)（版块标题） `riko-section-head`：版块大标题 + 手写副标 + 说明 + 右侧操作区。
+- [split](ai/guide/split.md)（侧栏布局） `riko-split`：左侧（或右侧）固定宽度侧栏 + 主区；侧栏吸顶；窄屏变为上下。
+- [stack](ai/guide/stack.md)（纵向堆叠） `riko-stack`：子元素纵向排列并保持统一间距。
+
+### 通用
+- [button](ai/guide/button.md)（按钮） `riko-btn`：触发操作的按钮：纸白描边 + 底部实体阴影，悬停上浮、按下下沉。
+- [button-group](ai/guide/button-group.md)（按钮组） `riko-btn-group`：把相关按钮放在一起：默认带间距，--attached 拼接成一体。
+- [link](ai/guide/link.md)（链接） `riko-link`：带波浪下划线的文字链接，适合正文中跳转。
+- [theme-picker](ai/guide/theme-picker.md)（主题选择器） `riko-theme-picker` `data-riko="theme-picker"`：让用户在「按系统 / 按时间 / 浅色 / 深色」四种外观模式间切换，选择自动保存。
+
+### 表单
+- [checkbox](ai/guide/checkbox.md)（复选框） `riko-checkbox`：原生 checkbox 美化：勾选时橙色小方块弹出对勾，支持半选与卡片样式。
+- [combobox](ai/guide/combobox.md)（可搜索选择） `riko-combobox` `data-riko="combobox"`：可输入关键字过滤的单选下拉（WAI-ARIA combobox + listbox），支持内联选项或增强原生 <select>；附带可复用的 riko-listbox 选项列表样式。
+- [dropzone](ai/guide/dropzone.md)（拖拽上传） `riko-dropzone` `data-riko="dropzone"`：拖拽或点击选择文件的上传区域，显示文件列表、大小与图片缩略图，支持类型 / 大小 / 数量限制。
+- [field](ai/guide/field.md)（表单项） `riko-field` `data-riko="field"`：标签 + 控件 + 提示 / 错误 / 字数计数的标准组合，JS 自动处理无障碍关联。
+- [fieldset](ai/guide/fieldset.md)（字段组） `riko-fieldset`：用 legend 给一组相关控件起标题，可做成缝线卡片。
+- [form](ai/guide/form.md)（表单布局） `riko-form`：表单整体排版：纵向或两列栅格，底部操作区。
+- [form-validate](ai/guide/form-validate.md)（表单校验） `data-riko="form-validate"`：基于浏览器原生约束的表单校验：失焦 / 提交时校验，把中文错误写入 riko-field__error、设置 aria-invalid，并聚焦第一个错误。
+- [input](ai/guide/input.md)（输入框） `riko-input`：单行文本输入，统一美化 text / email / password / number / date / time / color / file 等原生类型。
+- [input-group](ai/guide/input-group.md)（输入组） `riko-input-group` `data-riko="password-toggle"`：给输入框加前后缀文字、图标或内嵌按钮，整体一个边框。
+- [number](ai/guide/number.md)（数字输入） `riko-number` `data-riko="number"`：带减 / 加按钮的数字输入，支持范围、步长、长按连续增减与键盘微调。
+- [otp](ai/guide/otp.md)（验证码输入） `riko-otp` `data-riko="otp"`：分格输入验证码：自动跳格、粘贴拆分、退格回退、短信自动填充，完整值同步到隐藏 input。
+- [radio](ai/guide/radio.md)（单选框） `riko-radio`：原生 radio 美化：选中时中心弹出一颗橙色小星星，支持卡片样式。
+- [range](ai/guide/range.md)（滑块） `riko-range` `data-riko="range"`：美化的原生滑块：已选段为暖橙色，可同步显示数值。
+- [rating](ai/guide/rating.md)（星星评分） `riko-rating`：品牌五角星评分：可选模式基于单选框（纯 CSS、可键盘操作），只读模式支持小数。
+- [search](ai/guide/search.md)（搜索框） `riko-search` `data-riko="search"`：胶囊形搜索框：清除按钮、快捷键聚焦、防抖输入事件、可选结果计数与上一处 / 下一处；配合 Riko.highlight() 实现搜索并高亮。
+- [segmented](ai/guide/segmented.md)（分段选择） `riko-segmented`：胶囊形的单选按钮组，选中项橙色并带回弹动画。
+- [select](ai/guide/select.md)（下拉选择） `riko-select`：美化后的原生 <select>，支持分组、多选列表。
+- [swatches](ai/guide/swatches.md)（色块选择） `riko-swatches`：基于单选框的圆形色块选择，选中时显示勾与描边。
+- [switch](ai/guide/switch.md)（开关） `riko-switch`：立即生效的开/关设置，打开时圆钮里出现一颗小星星。
+- [tags-input](ai/guide/tags-input.md)（标签输入） `riko-tags-input` `data-riko="tags-input"`：输入后按回车 / 逗号生成标签，可删除、可粘贴批量添加，结果以逗号分隔同步到隐藏 input。
+- [textarea](ai/guide/textarea.md)（多行文本） `riko-textarea` `data-riko="autosize"`：多行输入，可自动增高，也有横线信纸外观。
+
+### 导航
+- [backtop](ai/guide/backtop.md)（返回顶部） `riko-backtop` `data-riko="backtop"`：页面右下角的橙色星形按钮，滚动一段后出现，点击平滑回到顶部。
+- [breadcrumb](ai/guide/breadcrumb.md)（面包屑） `riko-breadcrumb`：显示当前页面在层级中的位置，分隔符为小箭头或小星星。
+- [command](ai/guide/command.md)（命令面板） `riko-command` `data-riko="command"`：快捷键唤起的全局搜索/命令弹窗：输入即过滤、分组结果、↑↓ 选择、Enter 执行，线性动画开合。
+- [dropdown](ai/guide/dropdown.md)（下拉菜单） `riko-dropdown` `data-riko="dropdown"`：点击按钮弹出的操作菜单（riko-menu），支持图标、快捷键、分组标题、分隔线、勾选项与危险操作。
+- [footer](ai/guide/footer.md)（页脚） `riko-footer`：米色扇贝花边页脚：三颗星星、一行文字链接、两行版权信息。
+- [navbar](ai/guide/navbar.md)（导航栏） `riko-navbar` `data-riko="navbar"`：吸顶毛玻璃导航栏：左侧 logo 与标题，中间主导航，右侧操作按钮；窄屏自动收起为菜单。
+- [pager](ai/guide/pager.md)（翻页） `riko-pager`：「上一节 / 下一节」两张大卡片，显示前后内容的标题。
+- [pagination](ai/guide/pagination.md)（分页） `riko-pagination` `data-riko="pagination"`：页码分页，当前页是一颗微微倾斜的橙色小方块；可由 JS 根据总页数自动渲染。
+- [reading-progress](ai/guide/reading-progress.md)（阅读进度条） `riko-reading-progress` `data-riko="reading-progress"`：固定在页面顶部的细进度条（冰蓝到橙色渐变），显示整页或某篇文章的阅读进度。
+- [sidenav](ai/guide/sidenav.md)（侧边目录） `riko-sidenav` `data-riko="sidenav"`：可折叠分组的侧边目录（小说章节、文档目录、设置分类），支持编号、已读星星、计数徽章。
+- [steps](ai/guide/steps.md)（步骤条） `riko-steps`：展示流程进度：已完成显示勾，当前步骤是倾斜的橙色小方块，出错显示红叉。
+- [tabs](ai/guide/tabs.md)（标签页） `riko-tabs` `data-riko="tabs"`：在同一区域内切换几组平级内容；支持波浪下划线、胶囊滑块、笔记本分隔页、纵向四种外观。
+- [toc](ai/guide/toc.md)（页内目录） `riko-toc` `data-riko="toc"`：页内锚点目录，滚动时自动高亮当前小节（左侧橙色竖线 + 小星星）。
+
+### 数据展示
+- [accordion](ai/guide/accordion.md)（折叠面板） `riko-accordion` `data-riko="accordion"`：基于原生 <details> 的折叠面板，带编号徽章与旋转箭头；加 JS 后展开收起有平滑动画。
+- [avatar](ai/guide/avatar.md)（头像） `riko-avatar`：圆形头像，支持图片、文字缩写、图标、在线状态与重叠头像组。
+- [badge](ai/guide/badge.md)（徽标） `riko-badge`：小小的数字或圆点，用于未读数、计数和状态提示，可挂在按钮或头像右上角。
+- [card](ai/guide/card.md)（卡片） `riko-card`：纸白底、手绘圆角的内容容器，可加缝线、胶带，或做成整卡可点击的入口。
+- [carousel](ai/guide/carousel.md)（轮播） `riko-carousel` `data-riko="carousel"`：基于滚动吸附的横向轮播，自动生成箭头与圆点，支持触摸滑动、键盘与自动播放。
+- [codeblock](ai/guide/codeblock.md)（代码块） `riko-codeblock`：带标题栏与复制按钮的代码块，标题栏左侧是三颗彩色小圆点。
+- [copy](ai/guide/copy.md)（复制） `data-riko="copy"`：给任意按钮加上「一键复制」：复制成功时图标变成勾，并告诉读屏「已复制」。
+- [desc-list](ai/guide/desc-list.md)（描述列表） `riko-desc-list`：「名称—内容」成对展示的信息列表，可竖排、横排、多列或带边框。
+- [empty](ai/guide/empty.md)（空状态） `riko-empty`：没有内容时的温馨占位：默认插画是一颗漂浮的星星和小云朵。
+- [list](ai/guide/list.md)（列表） `riko-list`：一行一条信息的列表，支持图标、手写编号、说明、元信息与操作，可做成可点击列表或小卡片网格。
+- [polaroid](ai/guide/polaroid.md)（拍立得） `riko-polaroid`：带白边与手写说明的照片框，轻微倾斜，悬停回正。
+- [popover](ai/guide/popover.md)（气泡卡片） `riko-popover` `data-riko="popover"`：点击触发的浮层卡片，可放任意内容（文字、链接、按钮、表单），点外部或按 Esc 关闭。
+- [stat](ai/guide/stat.md)（统计数值） `riko-stat`：大号手写数字的指标卡，带标签、图标与涨跌趋势。
+- [table](ai/guide/table.md)（表格） `riko-table` `data-riko="table-sort"`：手绘风数据表格，外层负责横向滚动与圆角，支持斑马纹、悬停、紧凑、竖线与点击表头排序。
+- [tag](ai/guide/tag.md)（标签） `riko-tag` `data-riko-dismiss`：胶囊形的小标签，表示分类、状态或关键词，可带图标、星星，或做成可移除。
+- [timeline](ai/guide/timeline.md)（时间轴） `riko-timeline`：按时间顺序排列的事件，虚线串联，节点可以是小圆点或星星。
+- [tooltip](ai/guide/tooltip.md)（文字提示） `data-riko="tooltip"`：悬停或聚焦时出现的小提示气泡，可可色底、带小箭头。
+- [tree](ai/guide/tree.md)（树形列表） `riko-tree`：用嵌套 <details> 构建的文件夹树，虚线连接层级，原生键盘可用。
+
+### 反馈
+- [alert](ai/guide/alert.md)（提示条） `riko-alert`：在内容中显示一条带色调图标的提示/标注，可带标题、操作按钮与关闭按钮。
+- [banner](ai/guide/banner.md)（公告横幅） `riko-banner`：横跨页面或内容区顶部的一条公告，可带图标、链接与关闭按钮，可吸顶。
+- [dialog](ai/guide/dialog.md)（对话框） `riko-dialog` `data-riko="dialog"`：基于原生 <dialog> 的模态对话框：线性动画、遮罩模糊、焦点锁定、Esc/遮罩关闭；另提供 Riko.confirm / Riko.alert。
+- [drawer](ai/guide/drawer.md)（抽屉） `riko-drawer` `data-riko="drawer"`：从屏幕左/右/底部滑出的模态面板（原生 <dialog>），用法与对话框一致。
+- [progress](ai/guide/progress.md)（进度） `riko-progress`：基于原生 <progress> 的渐变进度条（支持不确定进度），以及带小星星的环形进度。
+- [result](ai/guide/result.md)（结果页） `riko-result`：操作完成、出错、空结果或 404 时的整块居中反馈：插画/图标、标题、说明与操作。
+- [skeleton](ai/guide/skeleton.md)（骨架屏） `riko-skeleton`：内容加载前的柔和闪光占位块：文字行、圆形头像、矩形图片。
+- [spinner](ai/guide/spinner.md)（加载中） `riko-spinner`：旋转的品牌星星（或三颗跳动的小星星）加可读文字。
+- [toast](ai/guide/toast.md)（轻提示） `riko-toast`：由 JS 弹出、几秒后自动消失的通知卡片；悬停/聚焦时暂停计时，可带操作按钮。
+
+### 装饰
+- [glow](ai/guide/glow.md)（柔光背景） `riko-glow`：页面角落的冰蓝与暖橙柔光（fixed，不影响布局）。
+- [note](ai/guide/note.md)（便利贴） `riko-note`：略微倾斜、右下角折页的便利贴。
+- [notebook](ai/guide/notebook.md)（笔记本纸） `riko-notebook`：左侧装订孔 + 橙色页边线，可选横线格。
+- [plaid](ai/guide/plaid.md)（格纹背景） `riko-plaid`：络可裙摆般的淡格纹背景。
+- [scallop](ai/guide/scallop.md)（扇贝花边） `riko-scallop`：色块顶部（或底部）的圆弧花边。
+- [sky](ai/guide/sky.md)（漂浮星星） `riko-sky`：背景中缓慢闪烁的小星星（最多 7 颗位置预设）。
+- [squiggle](ai/guide/squiggle.md)（波浪下划线） `riko-squiggle`：手绘感的橙色波浪线。
+- [sticker](ai/guide/sticker.md)（贴纸） `riko-sticker`：倾斜的手写体小贴纸标签。
+- [stitched](ai/guide/stitched.md)（缝线内框） `riko-stitched`：在有背景的块内画一圈虚线缝线（像布艺/裙摆的走线）。
+- [tape](ai/guide/tape.md)（胶带） `riko-tape`：贴在卡片/照片顶部的半透明条纹胶带。
+- [tilt](ai/guide/tilt.md)（轻微倾斜） `riko-tilt`：让元素微微倾斜，悬停时回正。
+
+## 文件
+
+- `ai/guide/<组件>.md`：单个组件的完整说明（推荐按需阅读）
+- [ai/guide/_tokens.md](ai/guide/_tokens.md)：全部设计变量
+- [ai/AI_GUIDE.md](ai/AI_GUIDE.md)：合订本（全部组件，很长，仅供检索）
+- [ai/components.json](ai/components.json)：机器可读的组件清单
+- [types/index.d.ts](types/index.d.ts)：JS API 类型
+- `npx riko-ui check <路径>`：用法检查

@@ -1,0 +1,24 @@
+/* ==========================================================================
+   form · 表单整体布局
+   <form class="riko-form">
+     …riko-field / riko-fieldset…
+     <div class="riko-form__actions"><button class="riko-btn riko-btn--primary">保存</button></div>
+   </form>
+   --grid 两列（窄屏自动单列，用 __full 跨两列）· --compact 紧凑间距
+   ========================================================================== */
+@layer riko.components {
+  .riko-form { display: flex; flex-direction: column; gap: var(--riko-space-5); min-width: 0; }
+  .riko-form--compact { gap: var(--riko-space-3); }
+  .riko-form--grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--riko-space-5) var(--riko-space-6);
+  }
+  .riko-form--grid > .riko-form__full, .riko-form--grid > .riko-form__actions, .riko-form--grid > .riko-fieldset { grid-column: 1 / -1; }
+  @media (max-width: 640px) { .riko-form--grid { grid-template-columns: minmax(0, 1fr); } }
+  .riko-form__full { min-width: 0; }
+  .riko-form__actions {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--riko-space-3);
+    padding-top: var(--riko-space-4);
+    border-top: var(--riko-border-width) dashed var(--riko-color-border);
+  }
+}

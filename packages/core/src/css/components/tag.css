@@ -1,0 +1,55 @@
+/* ==========================================================================
+   tag · 标签
+   <span class="riko-tag riko-tag--accent"><span class="riko-star"></span>敬请期待后续更新！</span>
+   可移除：<span class="riko-tag">星星酥<button type="button" class="riko-tag__remove" data-riko-dismiss aria-label="移除 星星酥"></button></span>
+   ========================================================================== */
+@layer riko.components {
+  .riko-tag {
+    --riko-tag-bg: var(--riko-color-surface);
+    --riko-tag-fg: var(--riko-color-fg-strong);
+    --riko-tag-border: var(--riko-color-border);
+    display: inline-flex; align-items: center; gap: 6px;
+    max-width: 100%; min-height: 28px; padding: 3px 12px;
+    font-size: var(--riko-text-xs); font-weight: var(--riko-weight-medium); line-height: 1.4;
+    color: var(--riko-tag-fg); background: var(--riko-tag-bg);
+    border: 1.5px solid var(--riko-tag-border);
+    border-radius: var(--riko-radius-pill);
+    white-space: nowrap; vertical-align: middle;
+    text-decoration: none;
+    transition: opacity var(--riko-duration-base) ease, transform var(--riko-duration-base) ease;
+  }
+  .riko-tag > .riko-star { --riko-star-size: .95em; }
+  .riko-tag > svg.lucide, .riko-tag > .riko-icon { --riko-icon-size: 1.05em; }
+  a.riko-tag:hover { border-color: var(--riko-color-accent); }
+
+  .riko-tag--accent { --riko-tag-bg: var(--riko-color-accent-soft); --riko-tag-fg: var(--riko-color-fg-strong); --riko-tag-border: var(--riko-color-accent); }
+  .riko-tag--ice { --riko-tag-bg: var(--riko-color-ice-soft); --riko-tag-fg: var(--riko-color-ice-ink); --riko-tag-border: var(--riko-color-ice); }
+  .riko-tag--soft { --riko-tag-bg: var(--riko-color-surface-muted); --riko-tag-border: transparent; }
+  .riko-tag--success { --riko-tag-bg: var(--riko-color-success-soft); --riko-tag-fg: var(--riko-color-success-ink); --riko-tag-border: var(--riko-color-success); }
+  .riko-tag--warning { --riko-tag-bg: var(--riko-color-warning-soft); --riko-tag-fg: var(--riko-color-warning-ink); --riko-tag-border: var(--riko-color-warning); }
+  .riko-tag--danger { --riko-tag-bg: var(--riko-color-danger-soft); --riko-tag-fg: var(--riko-color-danger-ink); --riko-tag-border: var(--riko-color-danger); }
+  .riko-tag--primary { --riko-tag-bg: var(--riko-color-primary); --riko-tag-fg: var(--riko-color-primary-fg); --riko-tag-border: var(--riko-color-primary); }
+
+  .riko-tag--outline { --riko-tag-bg: transparent; }
+  .riko-tag--dashed { border-style: dashed; }
+  .riko-tag--sm { min-height: 22px; padding: 1px 9px; font-size: .7rem; }
+  .riko-tag--lg { min-height: 34px; padding: 5px 16px; font-size: var(--riko-text-sm); }
+  .riko-tag--square { border-radius: var(--riko-radius-xs); }
+
+  .riko-tag__remove {
+    flex: none; display: inline-grid; place-items: center;
+    width: 18px; height: 18px; margin: 0 -6px 0 0; padding: 0;
+    border: 0; border-radius: 50%;
+    color: inherit; background: transparent; opacity: .7;
+    transition: background var(--riko-duration-fast) ease, opacity var(--riko-duration-fast) ease;
+  }
+  .riko-tag__remove::before {
+    content: ""; width: 12px; height: 12px; background: currentColor;
+    -webkit-mask: var(--riko-icon-x) center / contain no-repeat;
+    mask: var(--riko-icon-x) center / contain no-repeat;
+  }
+  .riko-tag__remove:hover { opacity: 1; background: color-mix(in srgb, currentColor 15%, transparent); }
+
+  /* data-riko-dismiss 移除时的过渡（任意组件通用） */
+  [data-riko-dismissing] { opacity: 0 !important; transform: scale(.9); transition: opacity .2s ease, transform .2s ease !important; }
+}

@@ -1,0 +1,94 @@
+{
+  "name": "textarea",
+  "title": "多行文本",
+  "titleEn": "Textarea",
+  "category": "form",
+  "summary": "多行输入，可自动增高，也有横线信纸外观。",
+  "when": "留言、日记、描述等多行内容。",
+  "root": "riko-textarea",
+  "element": "textarea",
+  "modifiers": [
+    {
+      "class": "riko-textarea--sm",
+      "desc": "小号",
+      "group": "size"
+    },
+    {
+      "class": "riko-textarea--lg",
+      "desc": "大号",
+      "group": "size"
+    },
+    {
+      "class": "riko-textarea--notebook",
+      "desc": "横线信纸外观（衬线字体）",
+      "group": "variant"
+    }
+  ],
+  "states": [
+    {
+      "attr": "disabled",
+      "desc": "禁用"
+    },
+    {
+      "attr": "readonly",
+      "desc": "只读：虚线边框"
+    },
+    {
+      "attr": "aria-invalid=\"true\"",
+      "desc": "校验失败：红色边框（配合 riko-field__error）"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"autosize\"",
+    "options": [
+      {
+        "attr": "data-riko-max-rows",
+        "values": "数字",
+        "default": "不限",
+        "desc": "最多增高到几行，超出后滚动"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "el.riko.update()",
+        "desc": "用 JS 修改 value 后手动重算高度"
+      }
+    ],
+    "events": []
+  },
+  "a11y": [
+    "与输入框相同：必须有 label 或 aria-label。"
+  ],
+  "rules": [
+    "自动增高：加 data-riko=\"autosize\"，用 rows 设置初始行数。",
+    "需要字数统计时放进 riko-field 并加 riko-field__counter，配合 maxlength。"
+  ],
+  "avoid": [
+    "自动增高时不要再设置固定 height。"
+  ],
+  "examples": [
+    {
+      "title": "基础",
+      "html": "<textarea class=\"riko-textarea\" rows=\"3\" placeholder=\"写下今天的冒险日记…\" aria-label=\"日记\"></textarea>"
+    },
+    {
+      "title": "自动增高",
+      "html": "<textarea class=\"riko-textarea\" data-riko=\"autosize\" data-riko-max-rows=\"8\" rows=\"2\" placeholder=\"越写越长也没关系，会自己长高哦\" aria-label=\"留言\"></textarea>"
+    },
+    {
+      "title": "信纸外观",
+      "html": "<textarea class=\"riko-textarea riko-textarea--notebook\" rows=\"4\" aria-label=\"信纸\">亲爱的 Star：\n今天的晚霞像橘子汽水一样。</textarea>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": "textarea.riko-textarea:not([id]):not([aria-label]):not([aria-labelledby])",
+      "parent": "label",
+      "message": "riko-textarea 需要关联标签（id + label for，或 aria-label）"
+    }
+  ],
+  "related": [
+    "field",
+    "input"
+  ]
+}

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>导航 · Riko UI</title>
+<meta name="theme-color" content="#FBF5EA">
+<script src="../packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="../packages/core/dist/riko-ui.css">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+<div class="riko-reading-progress" data-riko="reading-progress"></div>
+
+<header class="docs-header">
+  <div class="docs-header__inner">
+    <button type="button" class="riko-btn riko-btn--icon riko-btn--ghost docs-menu-btn" aria-label="打开导航"><i data-lucide="menu"></i></button>
+    <a class="docs-brand" href="index.html">
+      <span class="docs-brand__mark"><span class="riko-star" aria-hidden="true"></span></span>
+      <span><span class="docs-brand__name">Riko UI</span><span class="docs-brand__sub">little star ui kit</span></span>
+    </a>
+    <span class="docs-header__spacer"></span>
+    <div class="riko-theme-picker riko-theme-picker--compact" data-riko="theme-picker"></div>
+  </div>
+</header>
+
+<div class="docs-layout">
+  <aside class="docs-sidebar" aria-label="文档导航"></aside>
+  <main class="docs-main">
+    <div class="docs-hero">
+      <h1>导航</h1>
+      <p>帮小读者在故事里认路：导航栏、侧边目录、标签页、分页、下拉菜单、命令面板……每一块都带着手绘的温度。</p>
+    </div>
+
+    <section class="docs-section" id="navbar">
+      <h2>导航栏 <small>Navbar</small></h2>
+      <p>吸顶毛玻璃导航栏：左侧 logo 与标题，中间主导航，右侧操作按钮；窄屏自动收起为菜单。</p>
+      <h3>基础导航栏</h3>
+      <p>窄屏（≤768px）时导航链接收进右侧的菜单按钮，点击外部或按 Esc 关闭。</p>
+      <div class="docs-demo">
+        <header class="riko-navbar" data-riko="navbar">
+          <div class="riko-navbar__inner">
+            <a class="riko-navbar__brand" href="#">
+              <img class="riko-navbar__logo" src="https://riko.land/assets/logo.jpg" alt="">
+              <span class="riko-navbar__text">
+                <span class="riko-navbar__title">《络的世界》</span>
+                <span class="riko-navbar__sub">RikoLand · little star</span>
+              </span>
+            </a>
+            <nav class="riko-navbar__nav" aria-label="主导航">
+              <a class="riko-navbar__link" href="#" aria-current="page">首页</a>
+              <a class="riko-navbar__link" href="#">小说</a>
+              <a class="riko-navbar__link" href="#">设定集</a>
+              <a class="riko-navbar__link" href="#">关于</a>
+            </nav>
+            <div class="riko-navbar__actions">
+              <button type="button" class="riko-btn riko-btn--icon" data-riko="theme-toggle" aria-label="切换深浅色"></button>
+              <a class="riko-btn riko-btn--primary riko-btn--sm" href="#">开始阅读</a>
+            </div>
+            <button type="button" class="riko-navbar__toggle" aria-label="打开菜单"></button>
+          </div>
+        </header>
+      </div>
+      <h3>透明导航栏（不吸顶）</h3>
+      <p>logo 也可以用 span 包一颗星星；没有导航链接时可省略 __nav 与 __toggle。</p>
+      <div class="docs-demo">
+        <header class="riko-navbar riko-navbar--transparent">
+          <div class="riko-navbar__inner">
+            <a class="riko-navbar__brand" href="#">
+              <span class="riko-navbar__logo"><span class="riko-star riko-star--lg" aria-hidden="true"></span></span>
+              <span class="riko-navbar__text">
+                <span class="riko-navbar__title">络可的笔记本</span>
+                <span class="riko-navbar__sub">little notes</span>
+              </span>
+            </a>
+            <div class="riko-navbar__actions">
+              <a class="riko-btn riko-btn--ghost riko-btn--sm" href="#"><i data-lucide="arrow-left"></i>返回主页</a>
+            </div>
+          </div>
+        </header>
+      </div>
+    </section>
+
+    <section class="docs-section" id="sidenav">
+      <h2>侧边目录 <small>Side Nav</small></h2>
+      <p>可折叠分组的侧边目录（小说章节、文档目录、设置分类），支持编号、已读星星、计数徽章。</p>
+      <h3>分组目录（小说阅读器）</h3>
+      <p>含 aria-current 的分组会自动展开；在目录内可用 ↑ ↓ Home End 移动焦点。</p>
+      <div class="docs-demo">
+        <div style="max-width: 340px">
+          <nav class="riko-sidenav" data-riko="sidenav" aria-label="小说目录">
+            <p class="riko-sidenav__heading">小说目录</p>
+            <div class="riko-sidenav__group">
+              <button type="button" class="riko-sidenav__group-toggle" aria-expanded="true">
+                <span class="riko-sidenav__badge">一</span>
+                <span class="riko-sidenav__label"><small>序章</small>第一幕：沙滩上的画家</span>
+                <span class="riko-sidenav__count">3 节</span>
+              </button>
+              <div class="riko-sidenav__panel">
+                <ul class="riko-sidenav__list">
+                  <li><a class="riko-sidenav__item" href="#001"><span class="riko-sidenav__num">001</span><span class="riko-sidenav__text">沙滩上的画家</span><span class="riko-sidenav__dot" aria-label="已读"></span></a></li>
+                  <li><a class="riko-sidenav__item" href="#002" aria-current="page"><span class="riko-sidenav__num">002</span><span class="riko-sidenav__text">世界的边缘</span><span class="riko-sidenav__meta">3</span></a></li>
+                  <li><a class="riko-sidenav__item" href="#003"><span class="riko-sidenav__num">003</span><span class="riko-sidenav__text">熟悉的身影</span></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="riko-sidenav__group">
+              <button type="button" class="riko-sidenav__group-toggle" aria-expanded="false">
+                <span class="riko-sidenav__badge">二</span>
+                <span class="riko-sidenav__label"><small>序章</small>第二幕：归途的微光</span>
+                <span class="riko-sidenav__count">5 节</span>
+              </button>
+              <div class="riko-sidenav__panel">
+                <ul class="riko-sidenav__list">
+                  <li><a class="riko-sidenav__item" href="#004"><span class="riko-sidenav__num">004</span><span class="riko-sidenav__text">变故</span></a></li>
+                  <li><a class="riko-sidenav__item" href="#005"><span class="riko-sidenav__num">005</span><span class="riko-sidenav__text">Star 的决心</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <template data-docs-code>
+          <nav class="riko-sidenav" data-riko="sidenav" aria-label="小说目录">
+            <p class="riko-sidenav__heading">小说目录</p>
+            <div class="riko-sidenav__group">
+              <button type="button" class="riko-sidenav__group-toggle" aria-expanded="true">
+                <span class="riko-sidenav__badge">一</span>
+                <span class="riko-sidenav__label"><small>序章</small>第一幕：沙滩上的画家</span>
+                <span class="riko-sidenav__count">3 节</span>
+              </button>
+              <div class="riko-sidenav__panel">
+                <ul class="riko-sidenav__list">
+                  <li><a class="riko-sidenav__item" href="#001"><span class="riko-sidenav__num">001</span><span class="riko-sidenav__text">沙滩上的画家</span><span class="riko-sidenav__dot" aria-label="已读"></span></a></li>
+                  <li><a class="riko-sidenav__item" href="#002" aria-current="page"><span class="riko-sidenav__num">002</span><span class="riko-sidenav__text">世界的边缘</span><span class="riko-sidenav__meta">3</span></a></li>
+                  <li><a class="riko-sidenav__item" href="#003"><span class="riko-sidenav__num">003</span><span class="riko-sidenav__text">熟悉的身影</span></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="riko-sidenav__group">
+              <button type="button" class="riko-sidenav__group-toggle" aria-expanded="false">
+                <span class="riko-sidenav__badge">二</span>
+                <span class="riko-sidenav__label"><small>序章</small>第二幕：归途的微光</span>
+                <span class="riko-sidenav__count">5 节</span>
+              </button>
+              <div class="riko-sidenav__panel">
+                <ul class="riko-sidenav__list">
+                  <li><a class="riko-sidenav__item" href="#004"><span class="riko-sidenav__num">004</span><span class="riko-sidenav__text">变故</span></a></li>
+                  <li><a class="riko-sidenav__item" href="#005"><span class="riko-sidenav__num">005</span><span class="riko-sidenav__text">Star 的决心</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </template>
+      </div>
+      <h3>紧凑型</h3>
+      <div class="docs-demo">
+        <div style="max-width: 340px">
+          <nav class="riko-sidenav riko-sidenav--compact" data-riko="sidenav" aria-label="设定集">
+            <div class="riko-sidenav__group">
+              <button type="button" class="riko-sidenav__group-toggle" aria-expanded="true">
+                <span class="riko-sidenav__badge"><i data-lucide="users"></i></span>
+                <span class="riko-sidenav__label">人物</span>
+              </button>
+              <div class="riko-sidenav__panel">
+                <ul class="riko-sidenav__list">
+                  <li><a class="riko-sidenav__item" href="#riko" aria-current="page">络可</a></li>
+                  <li><a class="riko-sidenav__item" href="#star">Star</a></li>
+                  <li><a class="riko-sidenav__item" href="#111">111</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <template data-docs-code>
+          <nav class="riko-sidenav riko-sidenav--compact" data-riko="sidenav" aria-label="设定集">
+            <div class="riko-sidenav__group">
+              <button type="button" class="riko-sidenav__group-toggle" aria-expanded="true">
+                <span class="riko-sidenav__badge"><i data-lucide="users"></i></span>
+                <span class="riko-sidenav__label">人物</span>
+              </button>
+              <div class="riko-sidenav__panel">
+                <ul class="riko-sidenav__list">
+                  <li><a class="riko-sidenav__item" href="#riko" aria-current="page">络可</a></li>
+                  <li><a class="riko-sidenav__item" href="#star">Star</a></li>
+                  <li><a class="riko-sidenav__item" href="#111">111</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </template>
+      </div>
+    </section>
+
+    <section class="docs-section" id="breadcrumb">
+      <h2>面包屑 <small>Breadcrumb</small></h2>
+      <p>显示当前页面在层级中的位置，分隔符为小箭头或小星星。</p>
+      <h3>基础</h3>
+      <div class="docs-demo">
+        <nav class="riko-breadcrumb" aria-label="面包屑">
+          <ol class="riko-breadcrumb__list">
+            <li class="riko-breadcrumb__item"><a class="riko-breadcrumb__link" href="#"><i data-lucide="house"></i>首页</a></li>
+            <li class="riko-breadcrumb__item"><a class="riko-breadcrumb__link" href="#">小说</a></li>
+            <li class="riko-breadcrumb__item"><span class="riko-breadcrumb__link" aria-current="page">沙滩上的画家</span></li>
+          </ol>
+        </nav>
+      </div>
+      <h3>星星分隔</h3>
+      <div class="docs-demo">
+        <nav class="riko-breadcrumb riko-breadcrumb--stars" aria-label="面包屑">
+          <ol class="riko-breadcrumb__list">
+            <li class="riko-breadcrumb__item"><a class="riko-breadcrumb__link" href="#">络可的笔记本</a></li>
+            <li class="riko-breadcrumb__item"><a class="riko-breadcrumb__link" href="#">地点</a></li>
+            <li class="riko-breadcrumb__item"><span class="riko-breadcrumb__link" aria-current="page">百络谷</span></li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <section class="docs-section" id="tabs">
+      <h2>标签页 <small>Tabs</small></h2>
+      <p>在同一区域内切换几组平级内容；支持波浪下划线、胶囊滑块、笔记本分隔页、纵向四种外观。</p>
+      <h3>默认（波浪下划线）</h3>
+      <p>方向键切换，Home / End 跳到首尾；role、aria、id 由 JS 自动补齐。</p>
+      <div class="docs-demo">
+        <div class="riko-tabs" data-riko="tabs">
+          <div class="riko-tabs__list" aria-label="设定集">
+            <button type="button" class="riko-tabs__tab" aria-selected="true">人物</button>
+            <button type="button" class="riko-tabs__tab">地点</button>
+            <button type="button" class="riko-tabs__tab">道具 <span class="riko-tabs__badge">12</span></button>
+            <button type="button" class="riko-tabs__tab" disabled>未解锁</button>
+          </div>
+          <div class="riko-tabs__panel">络可：喜欢画画的小女孩，戴着带星星的贝雷帽。</div>
+          <div class="riko-tabs__panel" hidden>百络谷：海边的温柔小村，HV 的大家都住在这里。</div>
+          <div class="riko-tabs__panel" hidden>画笔、颜料盒，还有一串会发光的流星项链。</div>
+          <div class="riko-tabs__panel" hidden>这一页还没有写好哦。</div>
+        </div>
+      </div>
+      <h3>胶囊</h3>
+      <p>选中滑块带轻微回弹。</p>
+      <div class="docs-demo">
+        <div class="riko-tabs riko-tabs--pills" data-riko="tabs">
+          <div class="riko-tabs__list" aria-label="设定集">
+            <button type="button" class="riko-tabs__tab" aria-selected="true">人物</button>
+            <button type="button" class="riko-tabs__tab">地点</button>
+            <button type="button" class="riko-tabs__tab">道具 <span class="riko-tabs__badge">12</span></button>
+            <button type="button" class="riko-tabs__tab" disabled>未解锁</button>
+          </div>
+          <div class="riko-tabs__panel">络可：喜欢画画的小女孩，戴着带星星的贝雷帽。</div>
+          <div class="riko-tabs__panel" hidden>百络谷：海边的温柔小村，HV 的大家都住在这里。</div>
+          <div class="riko-tabs__panel" hidden>画笔、颜料盒，还有一串会发光的流星项链。</div>
+          <div class="riko-tabs__panel" hidden>这一页还没有写好哦。</div>
+        </div>
+      </div>
+      <h3>卡片（笔记本分隔页）</h3>
+      <div class="docs-demo">
+        <div class="riko-tabs riko-tabs--cards" data-riko="tabs">
+          <div class="riko-tabs__list" aria-label="设定集">
+            <button type="button" class="riko-tabs__tab" aria-selected="true">人物</button>
+            <button type="button" class="riko-tabs__tab">地点</button>
+            <button type="button" class="riko-tabs__tab">道具 <span class="riko-tabs__badge">12</span></button>
+            <button type="button" class="riko-tabs__tab" disabled>未解锁</button>
+          </div>
+          <div class="riko-tabs__panel">络可：喜欢画画的小女孩，戴着带星星的贝雷帽。</div>
+          <div class="riko-tabs__panel" hidden>百络谷：海边的温柔小村，HV 的大家都住在这里。</div>
+          <div class="riko-tabs__panel" hidden>画笔、颜料盒，还有一串会发光的流星项链。</div>
+          <div class="riko-tabs__panel" hidden>这一页还没有写好哦。</div>
+        </div>
+      </div>
+      <h3>纵向 + 手动激活</h3>
+      <p>手动激活：方向键只移动焦点，按 Enter / Space 才切换。</p>
+      <div class="docs-demo">
+        <div class="riko-tabs riko-tabs--vertical" data-riko="tabs" data-riko-activation="manual">
+          <div class="riko-tabs__list" aria-label="设定集">
+            <button type="button" class="riko-tabs__tab" aria-selected="true">人物</button>
+            <button type="button" class="riko-tabs__tab">地点</button>
+            <button type="button" class="riko-tabs__tab">道具 <span class="riko-tabs__badge">12</span></button>
+            <button type="button" class="riko-tabs__tab" disabled>未解锁</button>
+          </div>
+          <div class="riko-tabs__panel">络可：喜欢画画的小女孩，戴着带星星的贝雷帽。</div>
+          <div class="riko-tabs__panel" hidden>百络谷：海边的温柔小村，HV 的大家都住在这里。</div>
+          <div class="riko-tabs__panel" hidden>画笔、颜料盒，还有一串会发光的流星项链。</div>
+          <div class="riko-tabs__panel" hidden>这一页还没有写好哦。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="pagination">
+      <h2>分页 <small>Pagination</small></h2>
+      <p>页码分页，当前页是一颗微微倾斜的橙色小方块；可由 JS 根据总页数自动渲染。</p>
+      <h3>自动渲染</h3>
+      <p>点击页码派发 riko:pagination:change；加 data-riko-href="?page={page}" 则渲染为链接。</p>
+      <div class="docs-demo">
+        <nav class="riko-pagination" data-riko="pagination" data-riko-total="20" data-riko-current="6" aria-label="分页"></nav>
+      </div>
+      <h3>手写结构（服务端渲染）</h3>
+      <p>上一页 / 下一页留空时只显示箭头，此时必须写 aria-label。</p>
+      <div class="docs-demo">
+        <nav class="riko-pagination riko-pagination--sm" aria-label="分页">
+          <a class="riko-pagination__item riko-pagination__prev" href="?page=1">上一页</a>
+          <a class="riko-pagination__item" href="?page=1">1</a>
+          <span class="riko-pagination__item" aria-current="page">2</span>
+          <a class="riko-pagination__item" href="?page=3">3</a>
+          <span class="riko-pagination__ellipsis" aria-hidden="true">…</span>
+          <a class="riko-pagination__item" href="?page=9">9</a>
+          <a class="riko-pagination__item riko-pagination__next" href="?page=3">下一页</a>
+          <span class="riko-pagination__info">共 76 节</span>
+        </nav>
+      </div>
+    </section>
+
+    <section class="docs-section" id="pager">
+      <h2>翻页 <small>Pager</small></h2>
+      <p>「上一节 / 下一节」两张大卡片，显示前后内容的标题。</p>
+      <h3>上一节 / 下一节</h3>
+      <p>没有上一节时用 aria-disabled="true" 的 span，或只保留 __next（会自动靠右）。</p>
+      <div class="docs-demo">
+        <nav class="riko-pager" aria-label="小节翻页">
+          <a class="riko-pager__prev" href="#001"><span class="riko-pager__label">上一节</span><span class="riko-pager__title">001 沙滩上的画家</span></a>
+          <a class="riko-pager__next" href="#003"><span class="riko-pager__label">下一节</span><span class="riko-pager__title">003 熟悉的身影</span></a>
+        </nav>
+      </div>
+    </section>
+
+    <section class="docs-section" id="steps">
+      <h2>步骤条 <small>Steps</small></h2>
+      <p>展示流程进度：已完成显示勾，当前步骤是倾斜的橙色小方块，出错显示红叉。</p>
+      <h3>横向</h3>
+      <div class="docs-demo">
+        <ol class="riko-steps">
+          <li class="riko-steps__item" data-status="done"><span class="riko-steps__marker">1</span><span class="riko-steps__body"><span class="riko-steps__title">踏上沙滩</span><span class="riko-steps__desc">第一幅画</span></span></li>
+          <li class="riko-steps__item" data-status="done"><span class="riko-steps__marker">2</span><span class="riko-steps__body"><span class="riko-steps__title">世界边缘</span><span class="riko-steps__desc">遇见屏障</span></span></li>
+          <li class="riko-steps__item" aria-current="step"><span class="riko-steps__marker">3</span><span class="riko-steps__body"><span class="riko-steps__title">踏上归途</span><span class="riko-steps__desc">进行中</span></span></li>
+          <li class="riko-steps__item"><span class="riko-steps__marker">4</span><span class="riko-steps__body"><span class="riko-steps__title">回到 HV</span><span class="riko-steps__desc">敬请期待</span></span></li>
+        </ol>
+      </div>
+      <h3>纵向 + 出错状态</h3>
+      <div class="docs-demo">
+        <ol class="riko-steps riko-steps--vertical riko-steps--sm">
+          <li class="riko-steps__item" data-status="done"><span class="riko-steps__marker">1</span><span class="riko-steps__body"><span class="riko-steps__title">填写昵称</span><span class="riko-steps__desc">好啦，你叫「小星星」</span></span></li>
+          <li class="riko-steps__item" data-status="error"><span class="riko-steps__marker">2</span><span class="riko-steps__body"><span class="riko-steps__title">验证邮箱</span><span class="riko-steps__desc">验证码过期了，再发一次吧</span></span></li>
+          <li class="riko-steps__item" aria-current="step"><span class="riko-steps__marker">3</span><span class="riko-steps__body"><span class="riko-steps__title">选择头像</span></span></li>
+          <li class="riko-steps__item"><span class="riko-steps__marker">4</span><span class="riko-steps__body"><span class="riko-steps__title">完成</span></span></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="docs-section" id="dropdown">
+      <h2>下拉菜单 <small>Dropdown Menu</small></h2>
+      <p>点击按钮弹出的操作菜单（riko-menu），支持图标、快捷键、分组标题、分隔线、勾选项与危险操作。</p>
+      <h3>操作菜单</h3>
+      <p>点击或按 ↓ 打开；↑ ↓ Home End 移动；首字母快速跳转；Esc 关闭并回到按钮。</p>
+      <div class="docs-demo">
+        <div class="riko-dropdown" data-riko="dropdown">
+          <button type="button" class="riko-btn" aria-haspopup="menu">更多操作</button>
+          <div class="riko-menu" role="menu" hidden>
+            <p class="riko-menu__label">本节</p>
+            <button type="button" class="riko-menu__item" role="menuitem"><span class="riko-menu__icon"><i data-lucide="bookmark"></i></span>加入书签<kbd class="riko-menu__shortcut">B</kbd></button>
+            <button type="button" class="riko-menu__item" role="menuitem"><span class="riko-menu__icon"><i data-lucide="share-2"></i></span>分享给朋友</button>
+            <a class="riko-menu__item" role="menuitem" href="#"><span class="riko-menu__icon"><i data-lucide="message-circle"></i></span>去论坛讨论</a>
+            <hr class="riko-menu__separator">
+            <button type="button" class="riko-menu__item riko-menu__danger" role="menuitem"><span class="riko-menu__icon"><i data-lucide="trash-2"></i></span>清除阅读记录</button>
+          </div>
+        </div>
+      </div>
+      <h3>勾选菜单（右对齐）</h3>
+      <p>menuitemcheckbox / menuitemradio 自动切换 aria-checked；data-riko-keep-open 让菜单在选择后保持打开。</p>
+      <div class="docs-demo">
+        <div class="riko-dropdown" data-riko="dropdown" data-riko-placement="bottom-end">
+          <button type="button" class="riko-btn riko-btn--soft" aria-haspopup="menu"><i data-lucide="sliders-horizontal"></i>阅读设置</button>
+          <div class="riko-menu" role="menu" hidden>
+            <button type="button" class="riko-menu__item" role="menuitemcheckbox" aria-checked="true" data-riko-keep-open>显示已读星星</button>
+            <button type="button" class="riko-menu__item" role="menuitemcheckbox" aria-checked="false" data-riko-keep-open>首行缩进</button>
+            <hr class="riko-menu__separator">
+            <div role="group" aria-label="字体">
+              <p class="riko-menu__label">字体</p>
+              <button type="button" class="riko-menu__item" role="menuitemradio" aria-checked="true" data-riko-keep-open>宋体（衬线）</button>
+              <button type="button" class="riko-menu__item" role="menuitemradio" aria-checked="false" data-riko-keep-open>黑体（无衬线）</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="toc">
+      <h2>页内目录 <small>Table of Contents</small></h2>
+      <p>页内锚点目录，滚动时自动高亮当前小节（左侧橙色竖线 + 小星星）。</p>
+      <h3>页内目录（试着滚动本页）</h3>
+      <p>也可以留空列表，用 data-riko-source="article" 从文章里带 id 的 h2 / h3 自动生成。</p>
+      <div class="docs-demo">
+        <div style="max-width: 260px">
+          <nav class="riko-toc" data-riko="toc" aria-label="本页目录">
+            <p class="riko-toc__title">本页目录</p>
+            <ul class="riko-toc__list">
+              <li><a class="riko-toc__link" href="#navbar">导航栏</a></li>
+              <li><a class="riko-toc__link" href="#sidenav">侧边目录</a></li>
+              <li><a class="riko-toc__link" href="#tabs">标签页</a>
+                <ul class="riko-toc__sublist">
+                  <li><a class="riko-toc__link" href="#pagination">分页</a></li>
+                  <li><a class="riko-toc__link" href="#pager">翻页</a></li>
+                </ul>
+              </li>
+              <li><a class="riko-toc__link" href="#dropdown">下拉菜单</a></li>
+              <li><a class="riko-toc__link" href="#command">命令面板</a></li>
+            </ul>
+          </nav>
+        </div>
+        <template data-docs-code>
+          <nav class="riko-toc" data-riko="toc" aria-label="本页目录">
+            <p class="riko-toc__title">本页目录</p>
+            <ul class="riko-toc__list">
+              <li><a class="riko-toc__link" href="#navbar">导航栏</a></li>
+              <li><a class="riko-toc__link" href="#sidenav">侧边目录</a></li>
+              <li><a class="riko-toc__link" href="#tabs">标签页</a>
+                <ul class="riko-toc__sublist">
+                  <li><a class="riko-toc__link" href="#pagination">分页</a></li>
+                  <li><a class="riko-toc__link" href="#pager">翻页</a></li>
+                </ul>
+              </li>
+              <li><a class="riko-toc__link" href="#dropdown">下拉菜单</a></li>
+              <li><a class="riko-toc__link" href="#command">命令面板</a></li>
+            </ul>
+          </nav>
+        </template>
+      </div>
+    </section>
+
+    <section class="docs-section" id="backtop">
+      <h2>返回顶部 <small>Back to Top</small></h2>
+      <p>页面右下角的橙色星形按钮，滚动一段后出现，点击平滑回到顶部。</p>
+      <h3>星形按钮</h3>
+      <p>演示用 --static 固定在原处；正式使用写 &lt;button class="riko-backtop" data-riko="backtop" aria-label="返回顶部"&gt;&lt;/button&gt;，本页右下角就有一个（向下滚动后出现）。</p>
+      <div class="docs-demo docs-demo--center">
+        <button type="button" class="riko-backtop riko-backtop--static" aria-label="返回顶部"></button>
+      </div>
+    </section>
+
+    <section class="docs-section" id="reading-progress">
+      <h2>阅读进度条 <small>Reading Progress</small></h2>
+      <p>固定在页面顶部的细进度条（冰蓝到橙色渐变），显示整页或某篇文章的阅读进度。</p>
+      <h3>阅读进度条</h3>
+      <p>演示用 --static 与手动进度；正式使用写 &lt;div class="riko-reading-progress" data-riko="reading-progress"&gt;&lt;/div&gt;，本页顶部就有一条。</p>
+      <div class="docs-demo">
+        <div class="riko-reading-progress riko-reading-progress--static" style="--riko-progress: .62"></div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="command">
+      <h2>命令面板 <small>Command Palette</small></h2>
+      <p>快捷键唤起的全局搜索/命令弹窗：输入即过滤、分组结果、↑↓ 选择、Enter 执行，线性动画开合。</p>
+      <h3>命令面板</h3>
+      <p>支持多关键词过滤（空格分隔）与 data-riko-keywords 别名；按钮型条目通过 riko:command:select 事件处理。</p>
+      <div class="docs-demo">
+        <button type="button" class="riko-btn riko-btn--soft" data-riko-open="demo-command"><i data-lucide="search"></i>快速搜索 <kbd class="riko-kbd">Ctrl K</kbd></button>
+        <dialog class="riko-command" id="demo-command" data-riko="command" data-riko-hotkey="k" aria-label="快速搜索">
+          <div class="riko-command__search">
+            <input class="riko-command__input" type="text" placeholder="搜索章节、设定或操作…" aria-label="搜索">
+            <kbd class="riko-command__esc">Esc</kbd>
+          </div>
+          <div class="riko-command__list">
+            <div class="riko-command__group">
+              <p class="riko-command__group-label">章节</p>
+              <a class="riko-command__item" href="#001"><span class="riko-command__icon"><i data-lucide="book-open"></i></span><span class="riko-command__text">沙滩上的画家<span class="riko-command__desc">序章 · 第一幕 · 001</span></span></a>
+              <a class="riko-command__item" href="#076"><span class="riko-command__icon"><i data-lucide="sparkles"></i></span><span class="riko-command__text">风过围垣，落星回响<span class="riko-command__desc">第一章 · 第五幕 · 最新</span></span></a>
+            </div>
+            <div class="riko-command__group">
+              <p class="riko-command__group-label">设定</p>
+              <a class="riko-command__item" href="#riko" data-riko-keywords="主角 贝雷帽 画家"><span class="riko-command__icon"><i data-lucide="palette"></i></span><span class="riko-command__text">络可<span class="riko-command__desc">喜欢画画的小女孩</span></span></a>
+              <a class="riko-command__item" href="#hv" data-riko-keywords="村庄 百络谷"><span class="riko-command__icon"><i data-lucide="house"></i></span><span class="riko-command__text">HV 村<span class="riko-command__desc">大家的家</span></span></a>
+            </div>
+            <div class="riko-command__group">
+              <p class="riko-command__group-label">操作</p>
+              <button type="button" class="riko-command__item" data-value="theme"><span class="riko-command__icon"><i data-lucide="moon"></i></span><span class="riko-command__text">切换深浅色</span><kbd class="riko-command__shortcut">T</kbd></button>
+            </div>
+          </div>
+          <p class="riko-command__empty" hidden>没有找到呢……换个关键词试试吧 ✦</p>
+          <div class="riko-command__footer"><span><kbd>↑</kbd><kbd>↓</kbd>选择</span><span><kbd>↵</kbd>打开</span><span><kbd>Esc</kbd>关闭</span></div>
+        </dialog>
+      </div>
+    </section>
+
+    <section class="docs-section" id="footer">
+      <h2>页脚 <small>Footer</small></h2>
+      <p>米色扇贝花边页脚：三颗星星、一行文字链接、两行版权信息。</p>
+      <h3>页脚</h3>
+      <div class="docs-demo">
+        <footer class="riko-footer">
+          <div class="riko-footer__stars"><span class="riko-star" aria-hidden="true"></span><span class="riko-star" aria-hidden="true"></span><span class="riko-star" aria-hidden="true"></span></div>
+          <nav class="riko-footer__nav" aria-label="页脚导航">
+            <a class="riko-footer__link" href="https://read.riko.land">小说阅读器</a>
+            <a class="riko-footer__link" href="https://wiki.riko.land">Wiki</a>
+            <a class="riko-footer__link" href="https://contact.riko.land">联系我们</a>
+          </nav>
+          <p class="riko-footer__copy">© 2021–2026 Bloret.All rights reserved.</p>
+          <p class="riko-footer__copy">《络的世界》项目组</p>
+        </footer>
+      </div>
+    </section>
+
+    <!-- 本页真实使用的返回顶部与阅读进度条 -->
+    <button type="button" class="riko-backtop" data-riko="backtop" aria-label="返回顶部"></button>
+  </main>
+</div>
+
+<script src="assets/manifest.js"></script>
+<script src="assets/docs.js"></script>
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="../packages/core/dist/riko-ui.js"></script>
+</body>
+</html>

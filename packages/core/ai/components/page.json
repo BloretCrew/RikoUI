@@ -1,0 +1,25 @@
+{
+  "name": "page",
+  "title": "页面外壳",
+  "titleEn": "Page",
+  "category": "layout",
+  "summary": "整页纵向布局，页脚始终贴底。",
+  "when": "每个页面的 <body> 内最外层。",
+  "root": "riko-page",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-page__main",
+      "desc": "主体区域（占满剩余高度）"
+    }
+  ],
+  "rules": [
+    "<body class=\"riko-plaid\"> 可获得淡格纹背景；再放 <div class=\"riko-glow\" aria-hidden=\"true\"></div> 获得柔光。"
+  ],
+  "examples": [
+    {
+      "title": "页面骨架",
+      "html": "<div class=\"riko-page\">\n  <header>…页头（如 riko-navbar）…</header>\n  <main class=\"riko-page__main\">…</main>\n  <footer>…页脚（如 riko-footer）…</footer>\n</div>"
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+/* ==========================================================================
+   Riko UI · 布局原语
+   .riko-page        整页外壳（页脚贴底）：.riko-page__main
+   .riko-container   居中容器 --wide / --narrow / --fluid
+   .riko-section     版块纵向留白 --sm / --lg
+   .riko-stack       纵向排列（间距 --xs/--sm/--lg/--xl）
+   .riko-cluster     横向换行排列 --xs/--sm/--lg、--between/--center/--end、--nowrap
+   .riko-grid        自适应栅格 --cols-2/3/4/6；最小列宽 --riko-grid-min
+   .riko-split       侧栏 + 主区：.riko-split__aside / .riko-split__main；--reverse / --wide-aside
+   .riko-center      内容水平垂直居中
+   .riko-spacer      在 flex 中占满剩余空间
+   .riko-section-head 版块标题：__text __title __sub __desc __actions
+   .riko-divider     分割线 --squiggle / --stars / --vertical / --solid（可带文字）
+   ========================================================================== */
+@layer riko.layout {
+  .riko-page { min-height: 100dvh; display: flex; flex-direction: column; }
+  .riko-page__main { flex: 1; }
+
+  .riko-container {
+    width: min(var(--riko-container), 100% - 2 * var(--riko-space-5));
+    margin-inline: auto;
+  }
+  .riko-container--wide { width: min(var(--riko-container-wide), 100% - 2 * var(--riko-space-5)); }
+  .riko-container--narrow { width: min(var(--riko-container-narrow), 100% - 2 * var(--riko-space-5)); }
+  .riko-container--fluid { width: calc(100% - 2 * var(--riko-space-5)); }
+
+  .riko-section { padding-block: var(--riko-space-9); }
+  .riko-section--sm { padding-block: var(--riko-space-6); }
+  .riko-section--lg { padding-block: var(--riko-space-10) calc(var(--riko-space-10) + var(--riko-space-5)); }
+
+  .riko-stack { display: flex; flex-direction: column; gap: var(--riko-stack-gap, var(--riko-space-4)); }
+  .riko-stack--xs { --riko-stack-gap: var(--riko-space-1); }
+  .riko-stack--sm { --riko-stack-gap: var(--riko-space-2); }
+  .riko-stack--lg { --riko-stack-gap: var(--riko-space-6); }
+  .riko-stack--xl { --riko-stack-gap: var(--riko-space-9); }
+  .riko-stack--center { align-items: center; text-align: center; }
+
+  .riko-cluster {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: var(--riko-cluster-gap, var(--riko-space-3));
+  }
+  .riko-cluster--xs { --riko-cluster-gap: var(--riko-space-1); }
+  .riko-cluster--sm { --riko-cluster-gap: var(--riko-space-2); }
+  .riko-cluster--lg { --riko-cluster-gap: var(--riko-space-6); }
+  .riko-cluster--between { justify-content: space-between; }
+  .riko-cluster--center { justify-content: center; }
+  .riko-cluster--end { justify-content: flex-end; }
+  .riko-cluster--start { align-items: flex-start; }
+  .riko-cluster--nowrap { flex-wrap: nowrap; }
+
+  .riko-grid {
+    display: grid;
+    gap: var(--riko-grid-gap, var(--riko-space-6));
+    grid-template-columns: repeat(auto-fill, minmax(min(var(--riko-grid-min, 240px), 100%), 1fr));
+  }
+  .riko-grid--cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .riko-grid--cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .riko-grid--cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .riko-grid--cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .riko-grid--sm { --riko-grid-gap: var(--riko-space-3); }
+  .riko-grid--lg { --riko-grid-gap: var(--riko-space-8); }
+  @media (max-width: 1024px) {
+    .riko-grid--cols-4, .riko-grid--cols-6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .riko-grid--cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 768px) {
+    .riko-grid--cols-2, .riko-grid--cols-3 { grid-template-columns: minmax(0, 1fr); }
+    .riko-grid--cols-4, .riko-grid--cols-6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 420px) {
+    .riko-grid--cols-4 { grid-template-columns: minmax(0, 1fr); }
+  }
+  /* 跨列：列数不足时自动占满整行，不会撑出隐式列 */
+  .riko-grid__span-2 { grid-column: span 2; }
+  .riko-grid__span-3 { grid-column: span 3; }
+  .riko-grid__span-full { grid-column: 1 / -1; }
+  @media (max-width: 1024px) { .riko-grid__span-3 { grid-column: 1 / -1; } }
+  @media (max-width: 768px) { .riko-grid__span-2 { grid-column: 1 / -1; } }
+
+  .riko-split {
+    display: grid; align-items: start;
+    grid-template-columns: var(--riko-split-aside, 300px) minmax(0, 1fr);
+    gap: var(--riko-split-gap, var(--riko-space-7));
+  }
+  .riko-split--wide-aside { --riko-split-aside: 360px; }
+  .riko-split--reverse { grid-template-columns: minmax(0, 1fr) var(--riko-split-aside, 300px); }
+  .riko-split--reverse > .riko-split__aside { order: 2; }
+  .riko-split__aside { position: sticky; top: calc(var(--riko-header-h) + var(--riko-space-5)); min-width: 0; }
+  .riko-split__main { min-width: 0; }
+  .riko-split--static > .riko-split__aside { position: static; }
+  @media (max-width: 900px) {
+    .riko-split, .riko-split--reverse { grid-template-columns: minmax(0, 1fr); }
+    .riko-split__aside { position: static; }
+  }
+
+  .riko-center { display: grid; place-items: center; text-align: center; }
+  .riko-spacer { flex: 1 1 auto; }
+
+  /* ---- 版块标题 ---- */
+  .riko-section-head {
+    display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+    gap: var(--riko-space-3) var(--riko-space-6);
+    margin-bottom: var(--riko-space-6);
+  }
+  .riko-section-head__text { display: flex; flex-direction: column; gap: var(--riko-space-1); min-width: 0; }
+  .riko-section-head__title {
+    display: flex; align-items: center; gap: var(--riko-space-2);
+    font-family: var(--riko-font-title); font-weight: var(--riko-weight-normal);
+    font-size: var(--riko-text-3xl); line-height: var(--riko-leading-tight);
+    color: var(--riko-color-fg-strong);
+  }
+  .riko-section-head__title > .riko-star { --riko-star-size: .8em; }
+  .riko-section-head__sub { font-family: var(--riko-font-hand); font-weight: 600; font-size: var(--riko-text-xl); color: var(--riko-color-brown); line-height: 1.1; }
+  .riko-section-head__desc { max-width: 42em; margin-top: var(--riko-space-1); font-size: var(--riko-text-sm); color: var(--riko-color-fg-muted); }
+  .riko-section-head__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--riko-space-2); }
+  .riko-section-head--center { flex-direction: column; align-items: center; text-align: center; }
+  .riko-section-head--center .riko-section-head__text { align-items: center; }
+  .riko-section-head--sm .riko-section-head__title { font-size: var(--riko-text-2xl); }
+
+  /* ---- 分割线 ---- */
+  .riko-divider {
+    display: flex; align-items: center; gap: var(--riko-space-3);
+    margin-block: var(--riko-divider-space, var(--riko-space-6));
+    color: var(--riko-color-fg-muted); font-size: var(--riko-text-sm);
+    border: 0;
+  }
+  .riko-divider::before, .riko-divider::after {
+    content: ""; flex: 1; height: 0;
+    border-top: var(--riko-border-width) dashed var(--riko-color-border);
+  }
+  .riko-divider:empty { gap: 0; }
+  .riko-divider:empty::after { display: none; }
+  .riko-divider--solid::before, .riko-divider--solid::after { border-top-style: solid; }
+  .riko-divider--squiggle::before, .riko-divider--squiggle::after {
+    height: 10px; border: 0;
+    background: var(--riko-color-accent);
+    -webkit-mask: var(--riko-squiggle-mask) left center / 48px 10px repeat-x;
+    mask: var(--riko-squiggle-mask) left center / 48px 10px repeat-x;
+  }
+  /* 中间放星星：<div class="riko-divider riko-divider--stars"><span class="riko-star"></span></div> */
+  .riko-divider--stars { color: var(--riko-color-accent); }
+  .riko-divider--stars::before, .riko-divider--stars::after { border-top-color: var(--riko-color-border-strong); }
+  .riko-divider--vertical {
+    display: inline-block; align-self: stretch; width: 0; min-height: 1em;
+    margin: 0 var(--riko-space-2);
+    border-left: var(--riko-border-width) dashed var(--riko-color-border);
+  }
+  .riko-divider--vertical::before, .riko-divider--vertical::after { display: none; }
+}

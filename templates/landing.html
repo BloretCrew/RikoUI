@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《络的世界》RikoLand · 官方网站</title>
+<meta name="description" content="《络的世界》官方网站：小说正文、络可的笔记本设定集与章节目录。">
+<meta name="theme-color" content="#FBF5EA">
+<link rel="icon" href="https://riko.land/assets/logo.jpg" type="image/jpeg">
+<script src="../packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="../packages/fonts/riko-fonts.css">
+<link rel="stylesheet" href="../packages/core/dist/riko-ui.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+<div class="riko-sky" aria-hidden="true">
+  <span class="riko-star"></span><span class="riko-star"></span><span class="riko-star"></span><span class="riko-star"></span>
+  <span class="riko-star"></span><span class="riko-star"></span><span class="riko-star"></span>
+</div>
+<div class="riko-reading-progress" data-riko="reading-progress" aria-hidden="true"></div>
+
+<div class="riko-page">
+  <header class="riko-navbar" id="top">
+    <div class="riko-navbar__inner">
+      <a class="riko-navbar__brand" href="#top" aria-label="《络的世界》首页">
+        <img class="riko-navbar__logo" src="https://riko.land/assets/logo.jpg" alt="">
+        <span class="riko-navbar__text">
+          <span class="riko-navbar__title">《络的世界》</span>
+          <span class="riko-navbar__sub">RikoLand · little star</span>
+        </span>
+      </a>
+      <div class="riko-navbar__actions">
+        <button type="button" class="riko-btn" data-riko-open="settings"><i data-lucide="settings"></i><span class="riko-u-hide-sm">设置</span></button>
+        <a class="riko-btn" href="https://passport.infds.top" aria-label="INFDS 通行证">
+          <img src="https://online.infds.top/passport-icon.png" alt="" width="22" height="22">
+          <span class="riko-u-hide-sm">INFDS通行证</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <dialog class="riko-dialog" id="settings" data-riko="dialog" aria-labelledby="settings-title">
+    <header class="riko-dialog__header">
+      <h2 class="riko-dialog__title" id="settings-title"><span class="riko-star" aria-hidden="true"></span>设置</h2>
+      <button type="button" class="riko-dialog__close" data-riko-close aria-label="关闭"></button>
+    </header>
+    <div class="riko-dialog__body">
+      <p class="riko-dialog__desc">深浅色模式 · 选择你喜欢的阅读外观</p>
+      <div class="riko-theme-picker" data-riko="theme-picker"></div>
+    </div>
+  </dialog>
+
+  <main class="riko-page__main riko-container">
+    <!-- 主视觉 -->
+    <section class="riko-hero riko-hero--split">
+      <div class="riko-hero__text">
+        <p class="riko-hero__eyebrow"><span class="riko-star" aria-hidden="true"></span>a small star in ordinary days</p>
+        <h1 class="riko-hero__title">《络的世界》</h1>
+        <p class="riko-hero__sub">Welcome to RikoLand</p>
+        <span class="riko-squiggle" aria-hidden="true"></span>
+        <p class="riko-hero__desc">欢迎来到络可的童话小镇呀！这里藏着好多好多五彩斑斓的画稿和奇思妙想，快和络可一起推开这扇充满魔法的门，开启一段超温馨的冒险之旅吧~</p>
+        <div class="riko-hero__actions">
+          <span class="riko-tag riko-tag--lg"><i data-lucide="feather"></i>预计2027年继续更新！</span>
+        </div>
+      </div>
+      <div class="riko-hero__art">
+        <figure class="riko-polaroid riko-polaroid--lg">
+          <span class="riko-tape" aria-hidden="true"></span>
+          <img src="https://riko.land/assets/logo.jpg" alt="《络的世界》封面插画">
+          <figcaption class="riko-polaroid__caption">Riko's World ✦</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 主入口 -->
+    <section class="riko-grid riko-grid--cols-2" aria-label="主要入口" data-riko="reveal">
+      <a class="riko-card riko-card--feature riko-card--interactive riko-card--stitched" href="https://bbs.bloret.net/#section/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4">
+        <div class="riko-card__header">
+          <span class="riko-card__icon"><i data-lucide="book-open"></i></span>
+          <span class="riko-tag riko-tag--accent riko-card__tag"><span class="riko-star" aria-hidden="true"></span>敬请期待后续更新！</span>
+        </div>
+        <h2 class="riko-card__title">《络的世界》</h2>
+        <p class="riko-card__body">从沙滩上的第一幅画开始，跟随主角一同踏入这个世界的边缘与深处。</p>
+        <span class="riko-card__cta">开始阅读</span>
+      </a>
+      <a class="riko-card riko-card--feature riko-card--interactive riko-card--stitched riko-card--accent" href="https://bbs.bloret.net/#section/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E7%BB%9C%E5%8F%AF%E7%9A%84%E7%AC%94%E8%AE%B0%E6%9C%AC">
+        <div class="riko-card__header">
+          <span class="riko-card__icon"><i data-lucide="notebook-pen"></i></span>
+          <span class="riko-tag riko-tag--ice riko-tag--dashed riko-card__tag"><i data-lucide="pencil"></i>设定集 · 未完成</span>
+        </div>
+        <h2 class="riko-card__title">络可的笔记本</h2>
+        <p class="riko-card__body">小说中已出现设定的整理与解释。建议先阅读已更新章节后再翻阅，避免剧透。</p>
+        <span class="riko-card__cta">翻阅笔记本</span>
+      </a>
+    </section>
+
+    <!-- 小说目录 -->
+    <section class="riko-section" id="toc" aria-labelledby="toc-title">
+      <div class="riko-section-head">
+        <div class="riko-section-head__text">
+          <h2 class="riko-section-head__title" id="toc-title"><span class="riko-star" aria-hidden="true"></span>小说目录</h2>
+          <span class="riko-section-head__sub">table of contents</span>
+          <p class="riko-section-head__desc">点击目录中的章节可以直接跳转到对应的剧情内容。此功能让您可以快速定位到感兴趣的章节，无需从头开始阅读。</p>
+        </div>
+        <div class="riko-section-head__actions">
+          <div class="riko-search riko-search--sm" data-riko="search" id="toc-search">
+            <input class="riko-search__input" type="search" placeholder="搜索章节名或编号…" aria-label="搜索章节">
+            <kbd class="riko-search__hint">/</kbd>
+          </div>
+          <a class="riko-btn riko-btn--sm" href="#latest" id="jump-latest"><span class="riko-star" aria-hidden="true"></span>最新章节</a>
+          <button type="button" class="riko-btn riko-btn--sm" id="toggle-all" aria-pressed="false"><i data-lucide="layers"></i><span>全部展开</span></button>
+        </div>
+      </div>
+
+      <div class="riko-notebook" style="padding: var(--riko-space-6) var(--riko-space-6) var(--riko-space-6) calc(var(--riko-space-9) + var(--riko-space-3)); border-radius: var(--riko-radius-wobble); box-shadow: var(--riko-shadow-md);">
+        <p class="riko-text riko-text--sm riko-text--muted riko-u-mb-4"><i data-lucide="bookmark"></i> 已更新 <strong class="riko-text riko-text--accent">76</strong> 节 · 共 10 幕 · 连载中</p>
+        <div class="riko-accordion riko-accordion--flush" data-riko="accordion" id="acts">
+          <details class="riko-accordion__item" open>
+            <summary class="riko-accordion__summary">
+              <span class="riko-accordion__badge" aria-hidden="true">一</span>
+              <span class="riko-accordion__title">序章 · 第一幕：沙滩上的画家</span>
+              <span class="riko-accordion__meta">3 节</span>
+            </summary>
+            <div class="riko-accordion__content">
+              <ul class="riko-list riko-list--cards riko-list--interactive">
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1771202993250_58a9t.json" target="_blank" rel="noopener"><span class="riko-list__num">001</span><span class="riko-list__content"><span class="riko-list__title">沙滩上的画家</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1771204284271_fgtk8.json" target="_blank" rel="noopener"><span class="riko-list__num">002</span><span class="riko-list__content"><span class="riko-list__title">世界的边缘</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1771204347365_6vdn3.json" target="_blank" rel="noopener"><span class="riko-list__num">003</span><span class="riko-list__content"><span class="riko-list__title">熟悉的身影</span></span></a></li>
+              </ul>
+            </div>
+          </details>
+          <details class="riko-accordion__item">
+            <summary class="riko-accordion__summary">
+              <span class="riko-accordion__badge" aria-hidden="true">二</span>
+              <span class="riko-accordion__title">序章 · 第二幕：归途的微光</span>
+              <span class="riko-accordion__meta">5 节</span>
+            </summary>
+            <div class="riko-accordion__content">
+              <ul class="riko-list riko-list--cards riko-list--interactive">
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1771204861158_yfq6o.json" target="_blank" rel="noopener"><span class="riko-list__num">004</span><span class="riko-list__content"><span class="riko-list__title">变故</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1771299397663_wng3q.json" target="_blank" rel="noopener"><span class="riko-list__num">005</span><span class="riko-list__content"><span class="riko-list__title">Star 的决心</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1771383156099_hxa6t.json" target="_blank" rel="noopener"><span class="riko-list__num">006</span><span class="riko-list__content"><span class="riko-list__title">重逢</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1771475432403_zu3n7.json" target="_blank" rel="noopener"><span class="riko-list__num">007</span><span class="riko-list__content"><span class="riko-list__title">村庄</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1771556634794_t0v8z.json" target="_blank" rel="noopener"><span class="riko-list__num">008</span><span class="riko-list__content"><span class="riko-list__title">归途的微光</span></span></a></li>
+              </ul>
+            </div>
+          </details>
+          <details class="riko-accordion__item">
+            <summary class="riko-accordion__summary">
+              <span class="riko-accordion__badge" aria-hidden="true">三</span>
+              <span class="riko-accordion__title">序章 · 第三幕：暗林深处</span>
+              <span class="riko-accordion__meta">6 节</span>
+            </summary>
+            <div class="riko-accordion__content">
+              <ul class="riko-list riko-list--cards riko-list--interactive">
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1771640797551_hnl6b.json" target="_blank" rel="noopener"><span class="riko-list__num">009</span><span class="riko-list__content"><span class="riko-list__title">暗林</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1771726105146_10w8u.json" target="_blank" rel="noopener"><span class="riko-list__num">010</span><span class="riko-list__content"><span class="riko-list__title">不幸</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1771812387412_be0vd.json" target="_blank" rel="noopener"><span class="riko-list__num">011</span><span class="riko-list__content"><span class="riko-list__title">禁忌的力量</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1771898682912_mytdr.json" target="_blank" rel="noopener"><span class="riko-list__num">012</span><span class="riko-list__content"><span class="riko-list__title">逃离袭击</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1771985279402_4lmzw.json" target="_blank" rel="noopener"><span class="riko-list__num">013</span><span class="riko-list__content"><span class="riko-list__title">谈判</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1771996890236_phjrn.json" target="_blank" rel="noopener"><span class="riko-list__num">014</span><span class="riko-list__content"><span class="riko-list__title">命令方块</span></span></a></li>
+              </ul>
+            </div>
+          </details>
+          <details class="riko-accordion__item">
+            <summary class="riko-accordion__summary">
+              <span class="riko-accordion__badge" aria-hidden="true">四</span>
+              <span class="riko-accordion__title">序章 · 第四幕：绝处涅槃</span>
+              <span class="riko-accordion__meta">9 节</span>
+            </summary>
+            <div class="riko-accordion__content">
+              <ul class="riko-list riko-list--cards riko-list--interactive">
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1781756909048_34pnv.json" target="_blank" rel="noopener"><span class="riko-list__num">015</span><span class="riko-list__content"><span class="riko-list__title">暗林稚影</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1782965937499_3iy1y.json" target="_blank" rel="noopener"><span class="riko-list__num">016</span><span class="riko-list__content"><span class="riko-list__title">林间巧计</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1782988247123_s158d.json" target="_blank" rel="noopener"><span class="riko-list__num">017</span><span class="riko-list__content"><span class="riko-list__title">平原死斗</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1783048367352_dr2tb.json" target="_blank" rel="noopener"><span class="riko-list__num">018</span><span class="riko-list__content"><span class="riko-list__title">灾厄化形</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1783131945979_yfjnp.json" target="_blank" rel="noopener"><span class="riko-list__num">019</span><span class="riko-list__content"><span class="riko-list__title">血色陨落</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1783132221376_seevw.json" target="_blank" rel="noopener"><span class="riko-list__num">020</span><span class="riko-list__content"><span class="riko-list__title">幽蓝重生</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1783395074902_yof0u.json" target="_blank" rel="noopener"><span class="riko-list__num">021</span><span class="riko-list__content"><span class="riko-list__title">裁决降临</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1783522660612_9n062.json" target="_blank" rel="noopener"><span class="riko-list__num">022</span><span class="riko-list__content"><span class="riko-list__title">赌约对决</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1783607514294_c7om6.json" target="_blank" rel="noopener"><span class="riko-list__num">023</span><span class="riko-list__content"><span class="riko-list__title">晨光归途</span></span></a></li>
+              </ul>
+            </div>
+          </details>
+          <details class="riko-accordion__item">
+            <summary class="riko-accordion__summary">
+              <span class="riko-accordion__badge" aria-hidden="true">五</span>
+              <span class="riko-accordion__title">序章 · 第五幕：在那遥远的天际线</span>
+              <span class="riko-accordion__meta">5 节</span>
+            </summary>
+            <div class="riko-accordion__content">
+              <ul class="riko-list riko-list--cards riko-list--interactive">
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1783653540607_e3b89.json" target="_blank" rel="noopener"><span class="riko-list__num">024</span><span class="riko-list__content"><span class="riko-list__title">碧海醒舟</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1783750513224_5ru0c.json" target="_blank" rel="noopener"><span class="riko-list__num">025</span><span class="riko-list__content"><span class="riko-list__title">旧筑铜扉</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1783845652830_6npce.json" target="_blank" rel="noopener"><span class="riko-list__num">026</span><span class="riko-list__content"><span class="riko-list__title">星夜对谈</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1783916538219_8zofl.json" target="_blank" rel="noopener"><span class="riko-list__num">027</span><span class="riko-list__content"><span class="riko-list__title">画题天涯</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1784031327727_swr96.json" target="_blank" rel="noopener"><span class="riko-list__num">028</span><span class="riko-list__content"><span class="riko-list__title">归程启幕</span></span></a></li>
+              </ul>
+            </div>
+          </details>
+          <details class="riko-accordion__item">
+            <summary class="riko-accordion__summary">
+              <span class="riko-accordion__badge" aria-hidden="true">一</span>
+              <span class="riko-accordion__title">第一章 · 第一幕：自晨曦中归来</span>
+              <span class="riko-accordion__meta">8 节</span>
+            </summary>
+            <div class="riko-accordion__content">
+              <ul class="riko-list riko-list--cards riko-list--interactive">
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1784108639825_1py5a.json" target="_blank" rel="noopener"><span class="riko-list__num">029</span><span class="riko-list__content"><span class="riko-list__title">晨会上的沉重决议</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1784178431073_mujdt.json" target="_blank" rel="noopener"><span class="riko-list__num">030</span><span class="riko-list__content"><span class="riko-list__title">破空而来的归乡之箭</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1784303294183_n297r.json" target="_blank" rel="noopener"><span class="riko-list__num">031</span><span class="riko-list__content"><span class="riko-list__title">骤然倒下的归人</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1784340017474_m1sph.json" target="_blank" rel="noopener"><span class="riko-list__num">032</span><span class="riko-list__content"><span class="riko-list__title">河豚毒与深夜复盘</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1784426409478_a2o61.json" target="_blank" rel="noopener"><span class="riko-list__num">033</span><span class="riko-list__content"><span class="riko-list__title">裁决者与灾厄的指名</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1784512817345_97sy0.json" target="_blank" rel="noopener"><span class="riko-list__num">034</span><span class="riko-list__content"><span class="riko-list__title">深夜里的少年心事</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1784599214012_myeoe.json" target="_blank" rel="noopener"><span class="riko-list__num">035</span><span class="riko-list__content"><span class="riko-list__title">钓鱼场的闹剧</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1784685611381_8ntro.json" target="_blank" rel="noopener"><span class="riko-list__num">036</span><span class="riko-list__content"><span class="riko-list__title">日光下的鲜活剪影</span></span></a></li>
+              </ul>
+            </div>
+          </details>
+          <details class="riko-accordion__item">
+            <summary class="riko-accordion__summary">
+              <span class="riko-accordion__badge" aria-hidden="true">二</span>
+              <span class="riko-accordion__title">第一章 · 第二幕：于木石间相嬉</span>
+              <span class="riko-accordion__meta">8 节</span>
+            </summary>
+            <div class="riko-accordion__content">
+              <ul class="riko-list riko-list--cards riko-list--interactive">
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1784772010168_sykte.json" target="_blank" rel="noopener"><span class="riko-list__num">037</span><span class="riko-list__content"><span class="riko-list__title">雨夜惊现的血色身影</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1784858410199_lpu17.json" target="_blank" rel="noopener"><span class="riko-list__num">038</span><span class="riko-list__content"><span class="riko-list__title">固化结界的意外消解</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1785066590910_sa3e8.json" target="_blank" rel="noopener"><span class="riko-list__num">039</span><span class="riko-list__content"><span class="riko-list__title">街巷里的旧日闲谈</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1785066619848_pq6zr.json" target="_blank" rel="noopener"><span class="riko-list__num">040</span><span class="riko-list__content"><span class="riko-list__title">战备室的生存箴言</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1785117605697_h4nmn.json" target="_blank" rel="noopener"><span class="riko-list__num">041</span><span class="riko-list__content"><span class="riko-list__title">红石中枢的致命陷阱</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1785208317066_v9uel.json" target="_blank" rel="noopener"><span class="riko-list__num">042</span><span class="riko-list__content"><span class="riko-list__title">被操控的异乡来客</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1785380307862_ctq2y.json" target="_blank" rel="noopener"><span class="riko-list__num">043</span><span class="riko-list__content"><span class="riko-list__title">接踵而来的凶险噩耗</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1785380377604_us4r1.json" target="_blank" rel="noopener"><span class="riko-list__num">044</span><span class="riko-list__content"><span class="riko-list__title">最后通牒与全员戒备</span></span></a></li>
+              </ul>
+            </div>
+          </details>
+          <details class="riko-accordion__item">
+            <summary class="riko-accordion__summary">
+              <span class="riko-accordion__badge" aria-hidden="true">三</span>
+              <span class="riko-accordion__title">第一章 · 第三幕：闻腥风之猎猎</span>
+              <span class="riko-accordion__meta">7 节</span>
+            </summary>
+            <div class="riko-accordion__content">
+              <ul class="riko-list riko-list--cards riko-list--interactive">
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1785463216623_tq5si.json" target="_blank" rel="noopener"><span class="riko-list__num">045</span><span class="riko-list__content"><span class="riko-list__title">灾厄逼近的备战日常</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1785549608790_mgitx.json" target="_blank" rel="noopener"><span class="riko-list__num">046</span><span class="riko-list__content"><span class="riko-list__title">血色前线的告急急报</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1785636019609_jrngu.json" target="_blank" rel="noopener"><span class="riko-list__num">047</span><span class="riko-list__content"><span class="riko-list__title">初夜激战与牢狱异变</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1785722415921_u6r2n.json" target="_blank" rel="noopener"><span class="riko-list__num">048</span><span class="riko-list__content"><span class="riko-list__title">血色旋风人现身战场</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1785808816763_bas4e.json" target="_blank" rel="noopener"><span class="riko-list__num">049</span><span class="riko-list__content"><span class="riko-list__title">监狱噩耗与全员死战</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1785895220722_f1a7z.json" target="_blank" rel="noopener"><span class="riko-list__num">050</span><span class="riko-list__content"><span class="riko-list__title">粘液困局与血雾反噬</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1785981610523_n0tow.json" target="_blank" rel="noopener"><span class="riko-list__num">051</span><span class="riko-list__content"><span class="riko-list__title">绝境法阵与天降王牌</span></span></a></li>
+              </ul>
+            </div>
+          </details>
+          <details class="riko-accordion__item">
+            <summary class="riko-accordion__summary">
+              <span class="riko-accordion__badge" aria-hidden="true">四</span>
+              <span class="riko-accordion__title">第一章 · 第四幕：叹厄夜于囹圄</span>
+              <span class="riko-accordion__meta">8 节</span>
+            </summary>
+            <div class="riko-accordion__content">
+              <ul class="riko-list riko-list--cards riko-list--interactive">
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1786097581621_nzm0s.json" target="_blank" rel="noopener"><span class="riko-list__num">052</span><span class="riko-list__content"><span class="riko-list__title">天降王牌与脱身秘辛</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1786362081948_3ca2q.json" target="_blank" rel="noopener"><span class="riko-list__num">053</span><span class="riko-list__content"><span class="riko-list__title">火力压制与法阵破局</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1786362128323_1x8ed.json" target="_blank" rel="noopener"><span class="riko-list__num">054</span><span class="riko-list__content"><span class="riko-list__title">三人合围与村口截杀</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1786362162445_69bns.json" target="_blank" rel="noopener"><span class="riko-list__num">055</span><span class="riko-list__content"><span class="riko-list__title">孤注一掷与核心剥离</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1786418537283_qoor6.json" target="_blank" rel="noopener"><span class="riko-list__num">056</span><span class="riko-list__content"><span class="riko-list__title">血色凶兽与手撕灾厄</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1786500012128_7fqs0.json" target="_blank" rel="noopener"><span class="riko-list__num">057</span><span class="riko-list__content"><span class="riko-list__title">失控战魂与众人抉择</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1786586415663_d7wl2.json" target="_blank" rel="noopener"><span class="riko-list__num">058</span><span class="riko-list__content"><span class="riko-list__title">金瞳启封与裁决复苏</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1786672817247_j3xog.json" target="_blank" rel="noopener"><span class="riko-list__num">059</span><span class="riko-list__content"><span class="riko-list__title">双强联手与腥风授首&amp;双神对峙与长夜未央</span></span></a></li>
+              </ul>
+            </div>
+          </details>
+          <details class="riko-accordion__item">
+            <summary class="riko-accordion__summary">
+              <span class="riko-accordion__badge" aria-hidden="true">五</span>
+              <span class="riko-accordion__title">第一章 · 第五幕：落星摇曳，清风回荡</span>
+              <span class="riko-accordion__meta">17 节</span>
+            </summary>
+            <div class="riko-accordion__content">
+              <ul class="riko-list riko-list--cards riko-list--interactive">
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1786711738594_y66mb.json" target="_blank" rel="noopener"><span class="riko-list__num">060</span><span class="riko-list__content"><span class="riko-list__title">惊雷骤雨，铜针御劫</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1786759213745_6c9my.json" target="_blank" rel="noopener"><span class="riko-list__num">061</span><span class="riko-list__content"><span class="riko-list__title">双雄对谈，暂息天灾</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1786877711487_p0dhh.json" target="_blank" rel="noopener"><span class="riko-list__num">062</span><span class="riko-list__content"><span class="riko-list__title">传声问计，河豚为饵</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1786932004757_tpsww.json" target="_blank" rel="noopener"><span class="riko-list__num">063</span><span class="riko-list__content"><span class="riko-list__title">毒食破防，灾厄失控</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1787018406521_z0fqu.json" target="_blank" rel="noopener"><span class="riko-list__num">064</span><span class="riko-list__content"><span class="riko-list__title">圣箭穿身，力量渐溃</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1787104809915_h424q.json" target="_blank" rel="noopener"><span class="riko-list__num">065</span><span class="riko-list__content"><span class="riko-list__title">孤注一掷，两败俱伤</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1787191213532_xr78l.json" target="_blank" rel="noopener"><span class="riko-list__num">066</span><span class="riko-list__content"><span class="riko-list__title">战尘初定，善后铺排</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1787277604395_bofbm.json" target="_blank" rel="noopener"><span class="riko-list__num">067</span><span class="riko-list__content"><span class="riko-list__title">魂漂星海，死域惊魂</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1787364009095_h39cb.json" target="_blank" rel="noopener"><span class="riko-list__num">068</span><span class="riko-list__content"><span class="riko-list__title">铃琅现身，授业约盟</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1787450410517_v8nlb.json" target="_blank" rel="noopener"><span class="riko-list__num">069</span><span class="riko-list__content"><span class="riko-list__title">三号归复，共赴故星</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1787536802480_g47xh.json" target="_blank" rel="noopener"><span class="riko-list__num">070</span><span class="riko-list__content"><span class="riko-list__title">魂归百络，暗布棋眼</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1787623208839_920nq.json" target="_blank" rel="noopener"><span class="riko-list__num">071</span><span class="riko-list__content"><span class="riko-list__title">晓窗梦醒，初览疮痍</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1787709610469_nqahl.json" target="_blank" rel="noopener"><span class="riko-list__num">072</span><span class="riko-list__content"><span class="riko-list__title">漆桶飞落，白染三人</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1787796002016_1ov6z.json" target="_blank" rel="noopener"><span class="riko-list__num">073</span><span class="riko-list__content"><span class="riko-list__title">囚笼斗嘴，旧约重提</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1787882407000_kt5ad.json" target="_blank" rel="noopener"><span class="riko-list__num">074</span><span class="riko-list__content"><span class="riko-list__title">夜出医庐，独巡残村</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1787968811376_qk2t3.json" target="_blank" rel="noopener"><span class="riko-list__num">075</span><span class="riko-list__content"><span class="riko-list__title">月下清辉，暗见净化</span></span></a></li>
+              <li><a class="riko-list__item" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%B0%8F%E8%AF%B4/1788055214630_ivojn.json" target="_blank" rel="noopener" id="latest"><span class="riko-list__num">076</span><span class="riko-list__content"><span class="riko-list__title">风过围垣，落星回响 <span class="riko-badge riko-badge--sm">最新</span></span></span></a></li>
+              </ul>
+            </div>
+          </details>
+        </div>
+        <div class="riko-empty riko-empty--sm" id="toc-empty" hidden>
+          <div class="riko-empty__art" aria-hidden="true"></div>
+          <h3 class="riko-empty__title">没有找到相关章节呢</h3>
+          <p class="riko-empty__desc">换个关键词试试吧 ✦</p>
+        </div>
+        <p class="riko-hand riko-u-text-center riko-u-mt-6">✨ 旅途仍在继续……</p>
+      </div>
+    </section>
+
+    <!-- 其他内容 -->
+    <section class="riko-section" aria-labelledby="aux-title">
+      <div class="riko-section-head">
+        <div class="riko-section-head__text">
+          <h2 class="riko-section-head__title" id="aux-title"><span class="riko-star" aria-hidden="true"></span>其他内容</h2>
+          <span class="riko-section-head__sub">more little things</span>
+        </div>
+      </div>
+      <div class="riko-grid riko-grid--cols-3" data-riko="reveal">
+        <a class="riko-card riko-card--interactive riko-card--horizontal riko-card--compact" href="https://bloretcrew.feishu.cn/share/base/form/shrcnQ7VAoJCmgZRD4SSouNxaWg" target="_blank" rel="noopener">
+          <span class="riko-card__icon"><i data-lucide="message-circle-heart"></i></span>
+          <div class="riko-card__content">
+            <h3 class="riko-card__title">反馈</h3>
+            <p class="riko-card__body">提交问题、建议或错误报告</p>
+          </div>
+        </a>
+        <a class="riko-card riko-card--interactive riko-card--horizontal riko-card--compact" href="https://bloretcrew.feishu.cn/share/base/form/shrcnYqJNY9ARYaf3VWmAoHkbHf" target="_blank" rel="noopener">
+          <span class="riko-card__icon"><i data-lucide="clipboard-list"></i></span>
+          <div class="riko-card__content">
+            <h3 class="riko-card__title">满意度调查</h3>
+            <p class="riko-card__body">帮助我们改进项目体验</p>
+          </div>
+        </a>
+        <a class="riko-card riko-card--interactive riko-card--horizontal riko-card--compact" href="https://bbs.bloret.net/#post/%E7%BB%9C%E7%9A%84%E4%B8%96%E7%95%8C/%E5%85%B3%E4%BA%8E/1771205653713_xisoo.json">
+          <span class="riko-card__icon"><i data-lucide="mail"></i></span>
+          <div class="riko-card__content">
+            <h3 class="riko-card__title">联系我们 · 关于项目</h3>
+            <p class="riko-card__body">了解项目详情或与我们取得联系</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="riko-footer">
+    <div class="riko-footer__stars"><span class="riko-star" aria-hidden="true"></span><span class="riko-star" aria-hidden="true"></span><span class="riko-star" aria-hidden="true"></span></div>
+    <nav class="riko-footer__nav" aria-label="页脚导航">
+      <a class="riko-footer__link" href="https://read.riko.land">小说阅读器</a>
+      <a class="riko-footer__link" href="https://wiki.riko.land">Wiki</a>
+      <a class="riko-footer__link" href="https://contact.riko.land">联系我们</a>
+    </nav>
+    <p class="riko-footer__copy">© 2021–2026 Bloret.All rights reserved.</p>
+    <p class="riko-footer__copy">《络的世界》项目组</p>
+  </footer>
+</div>
+
+<button type="button" class="riko-backtop" data-riko="backtop" aria-label="返回顶部"></button>
+
+<script src="../docs/assets/vendor/lucide.min.js"></script>
+<script src="../packages/core/dist/riko-ui.js"></script>
+<script>
+  // 页面胶水：目录搜索、全部展开、跳到最新章节
+  (function () {
+    var acts = document.getElementById('acts');
+    var items = Array.prototype.slice.call(acts.querySelectorAll('.riko-accordion__item'));
+    var toggleAll = document.getElementById('toggle-all');
+    var empty = document.getElementById('toc-empty');
+
+    function syncToggle() {
+      var allOpen = items.every(function (d) { return d.open; });
+      toggleAll.setAttribute('aria-pressed', String(allOpen));
+      toggleAll.querySelector('span').textContent = allOpen ? '全部收起' : '全部展开';
+    }
+    toggleAll.addEventListener('click', function () {
+      var open = toggleAll.getAttribute('aria-pressed') !== 'true';
+      items.forEach(function (d) { d.open = open; });
+      syncToggle();
+    });
+    items.forEach(function (d) { d.addEventListener('toggle', syncToggle); });
+
+    document.getElementById('jump-latest').addEventListener('click', function () {
+      var latest = document.getElementById('latest');
+      latest.closest('details').open = true;
+      syncToggle();
+      requestAnimationFrame(function () { latest.scrollIntoView({ behavior: 'smooth', block: 'center' }); latest.focus({ preventScroll: true }); });
+    });
+
+    document.getElementById('toc-search').addEventListener('riko:search:input', function (e) {
+      var q = e.detail.query, any = false;
+      items.forEach(function (d) {
+        var hits = 0;
+        d.querySelectorAll('.riko-list li').forEach(function (li) {
+          var num = li.querySelector('.riko-list__num').textContent;
+          var match = !q || li.textContent.toLowerCase().indexOf(q) > -1 || String(parseInt(num, 10)) === q;
+          li.hidden = !match;
+          if (match) hits++;
+        });
+        d.hidden = !!q && !hits;
+        if (q) d.open = hits > 0;
+        if (hits) any = true;
+      });
+      empty.hidden = !q || any;
+      syncToggle();
+    });
+  })();
+</script>
+</body>
+</html>

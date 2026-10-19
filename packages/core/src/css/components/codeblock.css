@@ -1,0 +1,44 @@
+/* ==========================================================================
+   codeblock · 代码块
+   <div class="riko-codeblock">
+     <div class="riko-codeblock__header">
+       <span class="riko-codeblock__lang">HTML</span>
+       <button type="button" class="riko-codeblock__copy" data-riko="copy" data-riko-target="#code-hello" aria-label="复制代码"></button>
+     </div>
+     <pre class="riko-codeblock__pre"><code id="code-hello">…</code></pre>
+   </div>
+   ========================================================================== */
+@layer riko.components {
+  .riko-codeblock {
+    min-width: 0; overflow: hidden;
+    background: var(--riko-color-surface-muted);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble-sm);
+  }
+  .riko-codeblock__header {
+    display: flex; align-items: center; gap: var(--riko-space-2);
+    padding: 6px 8px 6px 14px;
+    border-bottom: var(--riko-border-width) dashed var(--riko-color-border);
+  }
+  .riko-codeblock__header::before {
+    content: ""; flex: none; width: 46px; height: 10px;
+    background:
+      radial-gradient(circle at 5px 5px, var(--riko-color-accent) 4.5px, transparent 5px),
+      radial-gradient(circle at 23px 5px, var(--riko-color-ice) 4.5px, transparent 5px),
+      radial-gradient(circle at 41px 5px, var(--riko-color-tan) 4.5px, transparent 5px);
+  }
+  .riko-codeblock__lang { flex: 1; min-width: 0; font-family: var(--riko-font-mono); font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .riko-codeblock__copy {
+    flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    height: 30px; min-width: 30px; padding: 0 8px; margin-left: auto;
+    border: 1.5px solid transparent; border-radius: var(--riko-radius-pill);
+    background: transparent; color: var(--riko-color-fg-muted); font-size: var(--riko-text-xs);
+    transition: background var(--riko-duration-fast) ease, color var(--riko-duration-fast) ease, border-color var(--riko-duration-fast) ease;
+  }
+  .riko-codeblock__copy:hover { background: var(--riko-color-surface); border-color: var(--riko-color-border); color: var(--riko-color-fg-strong); }
+  .riko-codeblock__pre {
+    margin: 0; padding: var(--riko-space-4) var(--riko-space-5); overflow: auto;
+    font: 13.5px/1.75 var(--riko-font-mono); color: var(--riko-color-fg); tab-size: 2;
+  }
+  .riko-codeblock__pre code { font: inherit; background: none; padding: 0; }
+}

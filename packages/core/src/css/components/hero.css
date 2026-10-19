@@ -1,0 +1,62 @@
+/* ==========================================================================
+   hero · 主视觉 / 页头
+   <section class="riko-hero riko-hero--split">
+     <div class="riko-hero__text">
+       <p class="riko-hero__eyebrow"><span class="riko-star" aria-hidden="true"></span>a small star in ordinary days</p>
+       <h1 class="riko-hero__title">《络的世界》</h1>
+       <p class="riko-hero__sub">Welcome to RikoLand</p>
+       <span class="riko-squiggle" aria-hidden="true"></span>
+       <p class="riko-hero__desc">…</p>
+       <div class="riko-hero__actions">…按钮/标签…</div>
+     </div>
+     <div class="riko-hero__art">…拍立得/插画…</div>
+   </section>
+   ========================================================================== */
+@layer riko.components {
+  .riko-hero {
+    display: grid; align-items: center;
+    gap: var(--riko-space-8) var(--riko-space-9);
+    padding-block: var(--riko-space-10) var(--riko-space-8);
+  }
+  .riko-hero__text { display: flex; flex-direction: column; align-items: flex-start; gap: var(--riko-space-2); min-width: 0; }
+  .riko-hero__eyebrow {
+    display: inline-flex; align-items: center; gap: var(--riko-space-2);
+    font-family: var(--riko-font-hand); font-weight: 600; font-size: var(--riko-text-2xl);
+    color: var(--riko-color-brown); line-height: 1.2;
+  }
+  .riko-hero__title {
+    font-family: var(--riko-font-title); font-weight: var(--riko-weight-normal);
+    font-size: var(--riko-text-5xl); line-height: 1.15; letter-spacing: .04em;
+    color: var(--riko-color-fg-strong); text-wrap: balance;
+  }
+  .riko-hero__sub {
+    font-family: var(--riko-font-hand); font-weight: 600; font-size: var(--riko-text-2xl);
+    color: var(--riko-color-ice-ink); letter-spacing: .06em; line-height: 1.1;
+  }
+  .riko-hero__text > .riko-squiggle { margin-block: var(--riko-space-2) var(--riko-space-3); }
+  .riko-hero__desc { max-width: 34em; font-size: var(--riko-text-lg); line-height: var(--riko-leading-relaxed); color: var(--riko-color-fg-muted); }
+  .riko-hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--riko-space-3); margin-top: var(--riko-space-4); }
+  .riko-hero__art { position: relative; justify-self: center; width: min(var(--riko-hero-art, 340px), 100%); }
+
+  /* 左文右图 */
+  .riko-hero--split { grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr); }
+  /* 居中 */
+  .riko-hero--center { justify-items: center; text-align: center; }
+  .riko-hero--center .riko-hero__text { align-items: center; }
+  .riko-hero--center .riko-hero__actions { justify-content: center; }
+  .riko-hero--center .riko-hero__text > .riko-squiggle { margin-inline: auto; }
+  /* 内页页头：小一号、留白更少 */
+  .riko-hero--sm { padding-block: var(--riko-space-8) var(--riko-space-6); }
+  .riko-hero--sm .riko-hero__title { font-size: var(--riko-text-4xl); }
+  .riko-hero--sm .riko-hero__eyebrow, .riko-hero--sm .riko-hero__sub { font-size: var(--riko-text-xl); }
+  .riko-hero--sm .riko-hero__desc { font-size: var(--riko-text-md); }
+
+  @media (max-width: 900px) {
+    .riko-hero--split { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; }
+    .riko-hero--split .riko-hero__text { align-items: center; }
+    .riko-hero--split .riko-hero__actions { justify-content: center; }
+    .riko-hero--split .riko-hero__text > .riko-squiggle { margin-inline: auto; }
+    .riko-hero__art { width: min(var(--riko-hero-art, 340px), 80%); }
+    .riko-hero { padding-block: var(--riko-space-8) var(--riko-space-7); }
+  }
+}

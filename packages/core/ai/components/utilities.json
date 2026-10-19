@@ -1,0 +1,139 @@
+{
+  "name": "utilities",
+  "title": "工具类",
+  "titleEn": "Utilities",
+  "category": "foundation",
+  "summary": "少量高频工具类：读屏专用、显示隐藏、文字对齐/截断、宽度、外边距。",
+  "when": "仅在组件/布局原语无法满足的小调整时使用。",
+  "root": null,
+  "parts": [
+    {
+      "class": "riko-u-sr-only",
+      "desc": "只对读屏可见"
+    },
+    {
+      "class": "riko-u-hidden",
+      "desc": "隐藏"
+    },
+    {
+      "class": "riko-u-hide-sm",
+      "desc": "≤520px 隐藏"
+    },
+    {
+      "class": "riko-u-hide-md",
+      "desc": "≤768px 隐藏"
+    },
+    {
+      "class": "riko-u-only-mobile",
+      "desc": "仅 ≤768px 显示"
+    },
+    {
+      "class": "riko-u-text-left",
+      "desc": "text-left"
+    },
+    {
+      "class": "riko-u-text-center",
+      "desc": "text-center"
+    },
+    {
+      "class": "riko-u-text-right",
+      "desc": "text-right"
+    },
+    {
+      "class": "riko-u-nowrap",
+      "desc": "nowrap"
+    },
+    {
+      "class": "riko-u-truncate",
+      "desc": "单行省略"
+    },
+    {
+      "class": "riko-u-clamp-2",
+      "desc": "两行省略"
+    },
+    {
+      "class": "riko-u-clamp-3",
+      "desc": "三行省略"
+    },
+    {
+      "class": "riko-u-tabular",
+      "desc": "等宽数字"
+    },
+    {
+      "class": "riko-u-w-full",
+      "desc": "w-full"
+    },
+    {
+      "class": "riko-u-flex-1",
+      "desc": "flex-1"
+    },
+    {
+      "class": "riko-u-relative",
+      "desc": "relative"
+    },
+    {
+      "class": "riko-u-mx-auto",
+      "desc": "mx-auto"
+    },
+    {
+      "class": "riko-u-mt-0",
+      "desc": "mt-0"
+    },
+    {
+      "class": "riko-u-mt-2",
+      "desc": "mt-2"
+    },
+    {
+      "class": "riko-u-mt-4",
+      "desc": "mt-4"
+    },
+    {
+      "class": "riko-u-mt-6",
+      "desc": "mt-6"
+    },
+    {
+      "class": "riko-u-mt-8",
+      "desc": "mt-8"
+    },
+    {
+      "class": "riko-u-mt-10",
+      "desc": "mt-10"
+    },
+    {
+      "class": "riko-u-mb-0",
+      "desc": "mb-0"
+    },
+    {
+      "class": "riko-u-mb-2",
+      "desc": "mb-2"
+    },
+    {
+      "class": "riko-u-mb-4",
+      "desc": "mb-4"
+    },
+    {
+      "class": "riko-u-mb-6",
+      "desc": "mb-6"
+    },
+    {
+      "class": "riko-u-mb-8",
+      "desc": "mb-8"
+    },
+    {
+      "class": "riko-u-mb-10",
+      "desc": "mb-10"
+    }
+  ],
+  "rules": [
+    "间距工具只有 mt/mb 的 0/2/4/6/8/10 档（对应 --riko-space-*）；更复杂的间距请用 riko-stack / riko-cluster。"
+  ],
+  "avoid": [
+    "不要用工具类堆砌组件外观（颜色、阴影、圆角），那是组件的职责。"
+  ],
+  "examples": [
+    {
+      "title": "读屏专用文字",
+      "html": "<a class=\"riko-link\" href=\"#chapters\">继续阅读<span class=\"riko-u-sr-only\">：第 76 节 风过围垣，落星回响</span></a>"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+/* ==========================================================================
+   toast · 轻提示
+   由 JS 创建：Riko.toast({ title, message, tone, duration, action })
+   <section class="riko-toaster" data-position="bottom-right">
+     <div class="riko-toast riko-toast--success" role="status">
+       <span class="riko-toast__icon" aria-hidden="true"></span>
+       <div class="riko-toast__content"><p class="riko-toast__title">…</p><p class="riko-toast__message">…</p></div>
+       <button class="riko-toast__action">撤销</button>
+       <button class="riko-toast__close" aria-label="关闭通知"></button>
+       <span class="riko-toast__timer"></span>
+     </div>
+   </section>
+   位置 data-position：top-right / top-center / top-left / bottom-right（默认）/ bottom-center / bottom-left
+   ========================================================================== */
+@layer riko.components {
+  .riko-toaster {
+    position: fixed; z-index: var(--riko-z-toast);
+    display: flex; flex-direction: column; gap: var(--riko-space-3);
+    width: min(380px, calc(100vw - 2 * var(--riko-space-4)));
+    padding: 0; margin: 0;
+    pointer-events: none;
+  }
+  .riko-toaster[data-position^="top"] { top: var(--riko-space-5); }
+  .riko-toaster[data-position^="bottom"] { bottom: var(--riko-space-5); }
+  .riko-toaster[data-position$="right"] { right: var(--riko-space-5); }
+  .riko-toaster[data-position$="left"] { left: var(--riko-space-5); }
+  .riko-toaster[data-position$="center"] { left: 50%; translate: -50% 0; }
+  @media (max-width: 520px) {
+    .riko-toaster { left: 50% !important; right: auto !important; translate: -50% 0; }
+  }
+
+  .riko-toast {
+    --riko-toast-ink: var(--riko-color-ice-ink);
+    --riko-toast-soft: var(--riko-color-ice-soft);
+    --riko-toast-line: var(--riko-color-ice-strong);
+    --riko-toast-icon: var(--riko-icon-info);
+    --riko-toast-duration: 4000ms;
+
+    position: relative; overflow: hidden;
+    display: flex; align-items: flex-start; gap: var(--riko-space-3);
+    padding: var(--riko-space-4) var(--riko-space-4) calc(var(--riko-space-4) + 2px);
+    color: var(--riko-color-fg);
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-left: 5px solid var(--riko-toast-line);
+    border-radius: var(--riko-radius-wobble-sm);
+    box-shadow: var(--riko-shadow-lg);
+    font-size: var(--riko-text-sm);
+    line-height: 1.6;
+    pointer-events: auto;
+    animation: riko-toast-in var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-toast--success { --riko-toast-ink: var(--riko-color-success-ink); --riko-toast-soft: var(--riko-color-success-soft); --riko-toast-line: var(--riko-color-success); --riko-toast-icon: var(--riko-icon-success); }
+  .riko-toast--warning { --riko-toast-ink: var(--riko-color-warning-ink); --riko-toast-soft: var(--riko-color-warning-soft); --riko-toast-line: var(--riko-color-warning); --riko-toast-icon: var(--riko-icon-warning); }
+  .riko-toast--danger { --riko-toast-ink: var(--riko-color-danger-ink); --riko-toast-soft: var(--riko-color-danger-soft); --riko-toast-line: var(--riko-color-danger); --riko-toast-icon: var(--riko-icon-danger); }
+  .riko-toast--accent { --riko-toast-ink: var(--riko-color-accent-ink); --riko-toast-soft: var(--riko-color-accent-soft); --riko-toast-line: var(--riko-color-accent); --riko-toast-icon: var(--riko-icon-star); }
+  .riko-toast[data-state="closing"] { animation: riko-toast-out var(--riko-duration-fast) linear forwards; }
+
+  .riko-toast__icon {
+    flex: none; display: grid; place-items: center;
+    width: 30px; height: 30px; border-radius: 50%;
+    color: var(--riko-toast-ink); background: var(--riko-toast-soft);
+  }
+  .riko-toast__icon:empty::before {
+    content: ""; width: 18px; height: 18px; background: currentColor;
+    -webkit-mask: var(--riko-toast-icon) center / contain no-repeat;
+    mask: var(--riko-toast-icon) center / contain no-repeat;
+  }
+  .riko-toast__icon > :where(svg, i) { --riko-icon-size: 18px; }
+  .riko-toast__content { flex: 1; min-width: 0; padding-top: 3px; }
+  .riko-toast__title { margin: 0; font-weight: var(--riko-weight-bold); color: var(--riko-color-fg-strong); }
+  .riko-toast__message { margin: 0; color: var(--riko-color-fg-muted); overflow-wrap: anywhere; }
+  .riko-toast__title + .riko-toast__message { margin-top: 1px; }
+  .riko-toast__action {
+    flex: none; align-self: center;
+    padding: 4px 12px; border-radius: var(--riko-radius-pill);
+    font: var(--riko-weight-bold) var(--riko-text-xs) / 1.5 var(--riko-font-body);
+    color: var(--riko-toast-ink); background: var(--riko-toast-soft);
+    border: 1.5px solid color-mix(in srgb, var(--riko-toast-line) 60%, transparent);
+    transition: transform var(--riko-duration-fast) ease, background var(--riko-duration-fast) ease;
+  }
+  .riko-toast__action:hover { transform: translateY(-1px); background: color-mix(in srgb, var(--riko-toast-line) 30%, var(--riko-color-surface)); }
+  .riko-toast__close {
+    flex: none; display: grid; place-items: center;
+    width: 28px; height: 28px; margin: 1px -4px 0 0; padding: 0;
+    color: var(--riko-color-fg-muted); background: transparent; border: 0; border-radius: 50%;
+    transition: background var(--riko-duration-fast) ease, color var(--riko-duration-fast) ease;
+  }
+  .riko-toast__close::before {
+    content: ""; width: 15px; height: 15px; background: currentColor;
+    -webkit-mask: var(--riko-icon-x) center / contain no-repeat;
+    mask: var(--riko-icon-x) center / contain no-repeat;
+  }
+  .riko-toast__close:hover { background: var(--riko-color-surface-muted); color: var(--riko-color-fg-strong); }
+  .riko-toast__timer {
+    position: absolute; left: 0; bottom: 0; height: 3px; width: 100%;
+    background: linear-gradient(90deg, var(--riko-toast-line), color-mix(in srgb, var(--riko-toast-line) 40%, transparent));
+    transform-origin: left center;
+    animation: riko-toast-timer var(--riko-toast-duration) linear forwards;
+  }
+  .riko-toast:hover .riko-toast__timer, .riko-toast:focus-within .riko-toast__timer { animation-play-state: paused; }
+
+  @keyframes riko-toast-in { from { opacity: 0; transform: translateY(14px) scale(.95); } }
+  @keyframes riko-toast-out { to { opacity: 0; transform: translateX(24px) scale(.96); } }
+  @keyframes riko-toast-timer { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+  @media (prefers-reduced-motion: reduce) { .riko-toast__timer { display: none; } }
+}

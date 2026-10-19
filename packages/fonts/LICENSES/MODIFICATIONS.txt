@@ -1,0 +1,2 @@
+ZCOOL XiaoWei：由 Riko UI 修正了部分字形的轮廓方向（嵌套轮廓按奇偶层交替方向），使"回""圄""圃"等字在浏览器中正确显示空洞。
+未改动字形设计与字体名称。原字体版权与许可见 zcool-xiaowei.txt（SIL Open Font License 1.1）。修复脚本：tools/fonts/fix_contours.py

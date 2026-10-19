@@ -1,0 +1,156 @@
+{
+  "name": "tabs",
+  "title": "标签页",
+  "titleEn": "Tabs",
+  "category": "navigation",
+  "summary": "在同一区域内切换几组平级内容；支持波浪下划线、胶囊滑块、笔记本分隔页、纵向四种外观。",
+  "when": "2–7 组平级内容、一次只看一组时用。需要同时展开多组用 accordion；切换页面用链接/navbar。",
+  "root": "riko-tabs",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-tabs__list",
+      "desc": "页签容器（role=\"tablist\"，需 aria-label）",
+      "required": true
+    },
+    {
+      "class": "riko-tabs__tab",
+      "desc": "页签按钮（role=\"tab\"）",
+      "required": true
+    },
+    {
+      "class": "riko-tabs__badge",
+      "desc": "页签内的小计数"
+    },
+    {
+      "class": "riko-tabs__panel",
+      "desc": "内容面板（role=\"tabpanel\"），与页签按顺序对应；非选中面板加 hidden",
+      "required": true
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-tabs--pills",
+      "desc": "胶囊外观，选中滑块带回弹",
+      "group": "variant"
+    },
+    {
+      "class": "riko-tabs--cards",
+      "desc": "卡片外观，像笔记本分隔页",
+      "group": "variant"
+    },
+    {
+      "class": "riko-tabs--vertical",
+      "desc": "纵向排列（窄屏自动变横向）",
+      "group": "layout"
+    },
+    {
+      "class": "riko-tabs--fill",
+      "desc": "页签平分整行宽度",
+      "group": "shape"
+    }
+  ],
+  "states": [
+    {
+      "attr": "aria-selected=\"true\"",
+      "on": "riko-tabs__tab",
+      "desc": "当前页签（JS 维护）"
+    },
+    {
+      "attr": "disabled",
+      "on": "riko-tabs__tab",
+      "desc": "禁用的页签"
+    },
+    {
+      "attr": "hidden",
+      "on": "riko-tabs__panel",
+      "desc": "未选中的面板"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"tabs\"",
+    "options": [
+      {
+        "attr": "data-riko-activation",
+        "values": "auto | manual",
+        "default": "auto",
+        "desc": "manual：方向键只移动焦点，Enter/Space 才切换"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "el.riko.select(index)",
+        "desc": "切换到第 index 个页签"
+      },
+      {
+        "signature": "el.riko.index",
+        "desc": "当前索引"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:tabs:change",
+        "detail": "{ index, tab, panel }",
+        "desc": "切换后派发"
+      }
+    ]
+  },
+  "a11y": [
+    "role、aria-controls、aria-labelledby、tabindex 由 JS 补齐；没有 JS 时请自行写全。",
+    "__list 需要 aria-label 说明这组页签的用途。",
+    "键盘：←/→（纵向为 ↑/↓）、Home、End。"
+  ],
+  "rules": [
+    "页签与面板按出现顺序一一对应；也可以用 aria-controls 显式指定。",
+    "初始选中项写 aria-selected=\"true\"，其余面板写 hidden，避免无 JS 时全部显示。",
+    "页签用 <button type=\"button\">。"
+  ],
+  "avoid": [
+    "不要用 <a href> 做页签（那是导航，不是 tabs）。",
+    "不要用 .active 标记选中项。"
+  ],
+  "examples": [
+    {
+      "title": "默认（波浪下划线）",
+      "html": "<div class=\"riko-tabs\" data-riko=\"tabs\">\n  <div class=\"riko-tabs__list\" aria-label=\"设定集\">\n    <button type=\"button\" class=\"riko-tabs__tab\" aria-selected=\"true\">人物</button>\n    <button type=\"button\" class=\"riko-tabs__tab\">地点</button>\n    <button type=\"button\" class=\"riko-tabs__tab\">道具 <span class=\"riko-tabs__badge\">12</span></button>\n    <button type=\"button\" class=\"riko-tabs__tab\" disabled>未解锁</button>\n  </div>\n  <div class=\"riko-tabs__panel\">络可：喜欢画画的小女孩，戴着带星星的贝雷帽。</div>\n  <div class=\"riko-tabs__panel\" hidden>百络谷：海边的温柔小村，HV 的大家都住在这里。</div>\n  <div class=\"riko-tabs__panel\" hidden>画笔、颜料盒，还有一串会发光的流星项链。</div>\n  <div class=\"riko-tabs__panel\" hidden>这一页还没有写好哦。</div>\n</div>"
+    },
+    {
+      "title": "胶囊",
+      "html": "<div class=\"riko-tabs riko-tabs--pills\" data-riko=\"tabs\">\n  <div class=\"riko-tabs__list\" aria-label=\"设定集\">\n    <button type=\"button\" class=\"riko-tabs__tab\" aria-selected=\"true\">人物</button>\n    <button type=\"button\" class=\"riko-tabs__tab\">地点</button>\n    <button type=\"button\" class=\"riko-tabs__tab\">道具 <span class=\"riko-tabs__badge\">12</span></button>\n    <button type=\"button\" class=\"riko-tabs__tab\" disabled>未解锁</button>\n  </div>\n  <div class=\"riko-tabs__panel\">络可：喜欢画画的小女孩，戴着带星星的贝雷帽。</div>\n  <div class=\"riko-tabs__panel\" hidden>百络谷：海边的温柔小村，HV 的大家都住在这里。</div>\n  <div class=\"riko-tabs__panel\" hidden>画笔、颜料盒，还有一串会发光的流星项链。</div>\n  <div class=\"riko-tabs__panel\" hidden>这一页还没有写好哦。</div>\n</div>"
+    },
+    {
+      "title": "卡片（笔记本分隔页）",
+      "html": "<div class=\"riko-tabs riko-tabs--cards\" data-riko=\"tabs\">\n  <div class=\"riko-tabs__list\" aria-label=\"设定集\">\n    <button type=\"button\" class=\"riko-tabs__tab\" aria-selected=\"true\">人物</button>\n    <button type=\"button\" class=\"riko-tabs__tab\">地点</button>\n    <button type=\"button\" class=\"riko-tabs__tab\">道具 <span class=\"riko-tabs__badge\">12</span></button>\n    <button type=\"button\" class=\"riko-tabs__tab\" disabled>未解锁</button>\n  </div>\n  <div class=\"riko-tabs__panel\">络可：喜欢画画的小女孩，戴着带星星的贝雷帽。</div>\n  <div class=\"riko-tabs__panel\" hidden>百络谷：海边的温柔小村，HV 的大家都住在这里。</div>\n  <div class=\"riko-tabs__panel\" hidden>画笔、颜料盒，还有一串会发光的流星项链。</div>\n  <div class=\"riko-tabs__panel\" hidden>这一页还没有写好哦。</div>\n</div>"
+    },
+    {
+      "title": "纵向 + 手动激活",
+      "html": "<div class=\"riko-tabs riko-tabs--vertical\" data-riko=\"tabs\" data-riko-activation=\"manual\">\n  <div class=\"riko-tabs__list\" aria-label=\"设定集\">\n    <button type=\"button\" class=\"riko-tabs__tab\" aria-selected=\"true\">人物</button>\n    <button type=\"button\" class=\"riko-tabs__tab\">地点</button>\n    <button type=\"button\" class=\"riko-tabs__tab\">道具 <span class=\"riko-tabs__badge\">12</span></button>\n    <button type=\"button\" class=\"riko-tabs__tab\" disabled>未解锁</button>\n  </div>\n  <div class=\"riko-tabs__panel\">络可：喜欢画画的小女孩，戴着带星星的贝雷帽。</div>\n  <div class=\"riko-tabs__panel\" hidden>百络谷：海边的温柔小村，HV 的大家都住在这里。</div>\n  <div class=\"riko-tabs__panel\" hidden>画笔、颜料盒，还有一串会发光的流星项链。</div>\n  <div class=\"riko-tabs__panel\" hidden>这一页还没有写好哦。</div>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-tabs",
+      "has": ".riko-tabs__list",
+      "message": "riko-tabs 内需要 riko-tabs__list"
+    },
+    {
+      "selector": ".riko-tabs",
+      "has": ".riko-tabs__panel",
+      "message": "riko-tabs 内需要 riko-tabs__panel"
+    },
+    {
+      "selector": ".riko-tabs__list",
+      "attr": "aria-label|aria-labelledby",
+      "message": "riko-tabs__list（tablist）需要 aria-label"
+    },
+    {
+      "selector": ".riko-tabs__tab",
+      "parent": ".riko-tabs__list",
+      "message": "riko-tabs__tab 必须放在 riko-tabs__list 内"
+    }
+  ],
+  "related": [
+    "accordion",
+    "segmented"
+  ]
+}

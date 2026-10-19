@@ -1,0 +1,58 @@
+/* ==========================================================================
+   range · 滑块（原生 <input type="range"> 美化）
+   <input class="riko-range" type="range" min="0" max="100" value="40" data-riko="range" aria-label="音量">
+   data-riko="range"：同步已选段（--riko-range-fill）与 <output for="…">；--sm · --ice
+   ========================================================================== */
+@layer riko.components {
+  .riko-range {
+    --riko-range-h: 8px;
+    --riko-range-thumb: 22px;
+    --riko-range-color: var(--riko-color-accent);
+    --riko-range-track: var(--riko-color-surface-muted);
+    display: block; width: 100%; height: calc(var(--riko-range-thumb) + 6px);
+    margin: 0; padding: 0; background: transparent; cursor: pointer;
+    appearance: none; -webkit-appearance: none;
+  }
+  .riko-range:focus { outline: none; }
+  .riko-range::-webkit-slider-runnable-track {
+    height: var(--riko-range-h); border-radius: var(--riko-radius-pill);
+    background: linear-gradient(90deg, var(--riko-range-color) 0 var(--riko-range-fill, 0%), var(--riko-range-track) var(--riko-range-fill, 0%));
+    box-shadow: var(--riko-shadow-inset);
+  }
+  .riko-range::-moz-range-track { height: var(--riko-range-h); border-radius: var(--riko-radius-pill); background: var(--riko-range-track); }
+  .riko-range::-moz-range-progress { height: var(--riko-range-h); border-radius: var(--riko-radius-pill); background: var(--riko-range-color); }
+  .riko-range::-webkit-slider-thumb {
+    appearance: none; -webkit-appearance: none;
+    width: var(--riko-range-thumb); height: var(--riko-range-thumb);
+    margin-top: calc((var(--riko-range-h) - var(--riko-range-thumb)) / 2);
+    border-radius: 50%;
+    background: var(--riko-color-surface);
+    border: 3px solid var(--riko-range-color);
+    box-shadow: 0 2px 0 var(--riko-color-border-strong);
+    transition: transform var(--riko-duration-base) var(--riko-ease-bounce), box-shadow var(--riko-duration-fast) ease;
+  }
+  .riko-range::-moz-range-thumb {
+    width: var(--riko-range-thumb); height: var(--riko-range-thumb); box-sizing: border-box;
+    border-radius: 50%; background: var(--riko-color-surface);
+    border: 3px solid var(--riko-range-color); box-shadow: 0 2px 0 var(--riko-color-border-strong);
+    transition: transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-range:hover::-webkit-slider-thumb { transform: scale(1.12); }
+  .riko-range:active::-webkit-slider-thumb { transform: scale(.92); }
+  .riko-range:hover::-moz-range-thumb { transform: scale(1.12); }
+  .riko-range:focus-visible::-webkit-slider-thumb { outline: var(--riko-focus-ring); outline-offset: 3px; }
+  .riko-range:focus-visible::-moz-range-thumb { outline: var(--riko-focus-ring); outline-offset: 3px; }
+  .riko-range:disabled { opacity: .5; cursor: not-allowed; }
+  .riko-range:disabled::-webkit-slider-thumb { transform: none; }
+
+  .riko-range--sm { --riko-range-h: 6px; --riko-range-thumb: 16px; }
+  .riko-range--ice { --riko-range-color: var(--riko-color-ice-strong); }
+
+  /* 数值显示（独立元素，range / number 等通用）：<output class="riko-output" for="vol">40</output> */
+  .riko-output {
+    display: inline-grid; place-items: center; min-width: 3em; padding: 2px 10px;
+    font-size: var(--riko-text-sm); font-weight: var(--riko-weight-bold); font-variant-numeric: tabular-nums;
+    color: var(--riko-color-accent-ink); background: var(--riko-color-accent-soft);
+    border-radius: var(--riko-radius-pill);
+  }
+}

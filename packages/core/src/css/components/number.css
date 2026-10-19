@@ -1,0 +1,57 @@
+/* ==========================================================================
+   number · 数字输入
+   <div class="riko-number" data-riko="number">
+     <input class="riko-number__input" type="number" min="0" max="10" step="1" value="1" aria-label="数量">
+   </div>
+   JS 自动在两侧加入 .riko-number__btn（减 / 加）；无 JS 时保留原生数字输入。
+   ========================================================================== */
+@layer riko.components {
+  .riko-number {
+    --riko-number-h: var(--riko-control-h-md);
+    display: inline-flex; align-items: stretch;
+    height: var(--riko-number-h); min-width: 140px; max-width: 100%;
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-pill);
+    box-shadow: var(--riko-shadow-inset);
+    overflow: hidden;
+    transition: border-color var(--riko-duration-fast) ease, box-shadow var(--riko-duration-fast) ease;
+  }
+  .riko-number:hover { border-color: var(--riko-color-border-strong); }
+  .riko-number:focus-within { border-color: var(--riko-color-accent); box-shadow: 0 0 0 4px var(--riko-color-accent-soft); }
+  .riko-number:has(.riko-number__input[aria-invalid="true"]) { border-color: var(--riko-color-danger); }
+  .riko-number:has(.riko-number__input:disabled) { opacity: .55; box-shadow: none; }
+
+  .riko-number__input {
+    flex: 1; width: 0; min-width: 3em; padding: 0 var(--riko-space-2);
+    border: 0; outline: 0; background: none; color: var(--riko-color-fg);
+    font-weight: var(--riko-weight-bold); font-variant-numeric: tabular-nums; text-align: center;
+    -moz-appearance: textfield; appearance: textfield;
+  }
+  .riko-number__input::-webkit-outer-spin-button,
+  .riko-number__input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  .riko-number__input:focus-visible { outline: none; }
+
+  .riko-number__btn {
+    flex: none; display: grid; place-items: center;
+    width: calc(var(--riko-number-h) - 4px); padding: 0;
+    border: 0; background: transparent; color: var(--riko-color-brown);
+    transition: background var(--riko-duration-fast) ease, color var(--riko-duration-fast) ease;
+    touch-action: manipulation; user-select: none;
+  }
+  .riko-number__btn:hover:not(:disabled) { background: var(--riko-color-accent-soft); color: var(--riko-color-accent-ink); }
+  .riko-number__btn:active:not(:disabled) { background: var(--riko-color-accent); color: var(--riko-color-accent-fg); }
+  .riko-number__btn:disabled { color: var(--riko-color-fg-subtle); opacity: .5; }
+  .riko-number__btn:focus-visible { outline-offset: -4px; border-radius: var(--riko-radius-pill); }
+  .riko-number__btn::before {
+    content: ""; width: 1em; height: 1em; background: currentColor;
+    -webkit-mask: var(--riko-icon-minus) center / contain no-repeat; mask: var(--riko-icon-minus) center / contain no-repeat;
+  }
+  .riko-number__btn[data-step="up"]::before { -webkit-mask-image: var(--riko-icon-plus); mask-image: var(--riko-icon-plus); }
+  .riko-number__btn[data-step="down"] { border-right: 1.5px dashed var(--riko-color-border); }
+  .riko-number__btn[data-step="up"] { border-left: 1.5px dashed var(--riko-color-border); }
+
+  .riko-number--sm { --riko-number-h: var(--riko-control-h-sm); min-width: 110px; font-size: var(--riko-text-sm); }
+  .riko-number--lg { --riko-number-h: var(--riko-control-h-lg); min-width: 170px; font-size: var(--riko-text-lg); }
+  .riko-number--block { display: flex; width: 100%; }
+}

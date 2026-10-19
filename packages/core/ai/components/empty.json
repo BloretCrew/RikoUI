@@ -1,0 +1,70 @@
+{
+  "name": "empty",
+  "title": "空状态",
+  "titleEn": "Empty",
+  "category": "data",
+  "summary": "没有内容时的温馨占位：默认插画是一颗漂浮的星星和小云朵。",
+  "when": "列表、搜索结果、收藏夹等为空时。整页错误（404 等）用 result。",
+  "root": "riko-empty",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-empty__art",
+      "desc": "插画区；为空时显示默认星星云朵，也可放自己的图片/图标"
+    },
+    {
+      "class": "riko-empty__title",
+      "desc": "标题"
+    },
+    {
+      "class": "riko-empty__desc",
+      "desc": "说明"
+    },
+    {
+      "class": "riko-empty__actions",
+      "desc": "操作按钮区"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-empty--sm",
+      "desc": "小号（嵌在卡片、下拉框中）",
+      "group": "size"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "默认插画是装饰，__art 加 aria-hidden=\"true\"。"
+  ],
+  "rules": [
+    "给出下一步操作（如「去看看」「清除筛选」）。"
+  ],
+  "avoid": [
+    "不要只写「暂无数据」，用温暖的语气说明原因。"
+  ],
+  "examples": [
+    {
+      "title": "基础用法",
+      "html": "<div class=\"riko-empty\">\n  <div class=\"riko-empty__art\" aria-hidden=\"true\"></div>\n  <h3 class=\"riko-empty__title\">书签夹还空空的</h3>\n  <p class=\"riko-empty__desc\">读到喜欢的小节时，点一下星星就能收藏到这里啦。</p>\n  <div class=\"riko-empty__actions\">\n    <a class=\"riko-btn riko-btn--primary\" href=\"#empty\">去读小说</a>\n  </div>\n</div>"
+    },
+    {
+      "title": "小号",
+      "html": "<div class=\"riko-card\" style=\"max-width: 320px\">\n  <div class=\"riko-empty riko-empty--sm\">\n    <div class=\"riko-empty__art\" aria-hidden=\"true\"></div>\n    <h3 class=\"riko-empty__title\">没有找到「河豚」</h3>\n    <p class=\"riko-empty__desc\">换个关键词试试吧 ✦</p>\n  </div>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-empty",
+      "has": ".riko-empty__title",
+      "message": "riko-empty 需要 riko-empty__title"
+    },
+    {
+      "selector": ".riko-empty__art",
+      "attr": "aria-hidden",
+      "message": "装饰插画 riko-empty__art 需要 aria-hidden=\"true\""
+    }
+  ],
+  "related": [
+    "result"
+  ]
+}

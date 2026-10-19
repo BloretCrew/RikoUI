@@ -1,0 +1,22 @@
+/* ==========================================================================
+   textarea · 多行文本
+   <textarea class="riko-textarea" rows="4" placeholder="今天的心情…"></textarea>
+   data-riko="autosize" 随内容自动增高 · --notebook 横线信纸外观
+   （共用外观定义在 input.css）
+   ========================================================================== */
+@layer riko.components {
+  .riko-textarea {
+    padding-block: var(--riko-space-3);
+    min-height: calc(var(--riko-control-h) * 2);
+    line-height: var(--riko-leading-normal);
+    resize: vertical;
+  }
+  .riko-textarea[data-riko~="autosize"] { resize: none; overflow: hidden; }
+  .riko-textarea--notebook {
+    --riko-control-radius: var(--riko-radius-wobble-sm);
+    line-height: 2em; padding-block: .5em; font-family: var(--riko-font-read);
+    background:
+      repeating-linear-gradient(transparent 0 calc(2em - 1px), color-mix(in srgb, var(--riko-color-ice-strong) 30%, transparent) calc(2em - 1px) 2em) 0 .5em / 100% calc(100% - 1em) no-repeat local,
+      var(--riko-control-bg);
+  }
+}

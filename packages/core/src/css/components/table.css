@@ -1,0 +1,72 @@
+/* ==========================================================================
+   table · 表格
+   <div class="riko-table-wrap">
+     <table class="riko-table riko-table--striped">
+       <thead><tr><th scope="col">…</th></tr></thead>
+       <tbody><tr><td>…</td></tr></tbody>
+     </table>
+   </div>
+   可排序：<table class="riko-table" data-riko="table-sort">（th 加 data-riko-sort="false" 可禁止该列排序）
+   ========================================================================== */
+@layer riko.components {
+  .riko-table-wrap {
+    position: relative; max-width: 100%; overflow: auto;
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble-sm);
+    box-shadow: var(--riko-shadow-sm);
+  }
+  .riko-table-wrap--sticky { max-height: var(--riko-table-max-h, 360px); }
+  .riko-table-wrap--sticky .riko-table thead th { position: sticky; top: 0; z-index: 1; }
+  .riko-table {
+    --riko-table-pad-y: var(--riko-space-3);
+    --riko-table-pad-x: var(--riko-space-4);
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    font-size: var(--riko-text-sm); color: var(--riko-color-fg);
+    font-variant-numeric: tabular-nums;
+  }
+  .riko-table caption {
+    caption-side: top; padding: var(--riko-space-3) var(--riko-table-pad-x) var(--riko-space-1); text-align: left;
+    font-family: var(--riko-font-title); font-size: var(--riko-text-lg); color: var(--riko-color-fg-strong);
+  }
+  .riko-table th, .riko-table td {
+    padding: var(--riko-table-pad-y) var(--riko-table-pad-x);
+    text-align: left; vertical-align: middle;
+    border-bottom: 1.5px dashed var(--riko-color-border);
+  }
+  .riko-table thead th {
+    font-size: var(--riko-text-xs); font-weight: var(--riko-weight-bold); letter-spacing: .08em;
+    color: var(--riko-color-brown); white-space: nowrap;
+    background: var(--riko-color-surface-muted);
+    border-bottom: var(--riko-border-width) solid var(--riko-color-border);
+  }
+  .riko-table tbody th { font-weight: var(--riko-weight-medium); color: var(--riko-color-fg-strong); }
+  .riko-table tbody tr:last-child > * { border-bottom: 0; }
+  .riko-table tfoot td, .riko-table tfoot th { font-weight: var(--riko-weight-bold); border-top: var(--riko-border-width) dashed var(--riko-color-border); border-bottom: 0; }
+  .riko-table td[data-align="end"], .riko-table th[data-align="end"] { text-align: right; }
+  .riko-table td[data-align="center"], .riko-table th[data-align="center"] { text-align: center; }
+
+  .riko-table--striped tbody tr:nth-child(even) > * { background: color-mix(in srgb, var(--riko-color-surface-muted) 55%, transparent); }
+  .riko-table--hover tbody tr { transition: background var(--riko-duration-fast) ease; }
+  .riko-table--hover tbody tr:hover > * { background: var(--riko-color-accent-soft); }
+  .riko-table--compact { --riko-table-pad-y: var(--riko-space-2); --riko-table-pad-x: var(--riko-space-3); }
+  .riko-table--bordered th + th, .riko-table--bordered td + td,
+  .riko-table--bordered th + td, .riko-table--bordered td + th { border-left: 1.5px dashed var(--riko-color-border); }
+  .riko-table tbody tr[aria-selected="true"] > * { background: var(--riko-color-accent-soft); }
+
+  /* 排序按钮（由 data-riko="table-sort" 生成） */
+  .riko-table__sort {
+    display: inline-flex; align-items: center; gap: 6px; margin: -4px -8px; padding: 4px 8px;
+    border: 0; border-radius: var(--riko-radius-xs); background: transparent;
+    font: inherit; letter-spacing: inherit; color: inherit; text-transform: inherit;
+  }
+  .riko-table__sort:hover { background: var(--riko-color-surface); color: var(--riko-color-fg-strong); }
+  .riko-table__sort::after {
+    content: ""; width: 1em; height: 1em; background: currentColor; opacity: .45;
+    -webkit-mask: var(--riko-icon-chevrons-up-down) center / contain no-repeat;
+    mask: var(--riko-icon-chevrons-up-down) center / contain no-repeat;
+  }
+  .riko-table th[aria-sort="ascending"] .riko-table__sort::after { opacity: 1; color: var(--riko-color-accent-ink); -webkit-mask-image: var(--riko-icon-chevron-up); mask-image: var(--riko-icon-chevron-up); }
+  .riko-table th[aria-sort="descending"] .riko-table__sort::after { opacity: 1; color: var(--riko-color-accent-ink); -webkit-mask-image: var(--riko-icon-chevron-down); mask-image: var(--riko-icon-chevron-down); }
+  .riko-table th[aria-sort="ascending"], .riko-table th[aria-sort="descending"] { color: var(--riko-color-accent-ink); }
+}

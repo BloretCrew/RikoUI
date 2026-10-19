@@ -1,0 +1,136 @@
+/* ==========================================================================
+   Riko UI · 装饰（本风格的灵魂）
+   .riko-stitched   缝线内框（加在任意有背景的块上）
+   .riko-tape       胶带（放在 position:relative 的容器内）--left / --right / --accent
+   .riko-squiggle   波浪下划线 --ice / --center
+   .riko-scallop    扇贝花边（加在色块上，花边朝上）--bottom
+   .riko-notebook   笔记本纸（装订孔 + 红色页边线）--lined
+   .riko-glow       页面柔光背景层（fixed）
+   .riko-sky        漂浮星星背景层（fixed，内放若干 .riko-star）
+   .riko-sticker    倾斜贴纸标签 --ice / --accent
+   .riko-note       便利贴 --ice / --accent
+   .riko-tilt       轻微倾斜（悬停回正）--left
+   ========================================================================== */
+@layer riko.tokens {
+  :root {
+    --riko-squiggle-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 10'%3E%3Cpath d='M0 5 C 6 0, 12 0, 18 5 S 30 10, 36 5 S 44 1, 48 5' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+}
+
+@layer riko.decor {
+  .riko-stitched { position: relative; isolation: isolate; }
+  .riko-stitched::before {
+    content: ""; position: absolute; inset: var(--riko-stitch-inset, 9px); z-index: -1; pointer-events: none;
+    border: var(--riko-border-width) dashed var(--riko-color-stitch);
+    border-radius: var(--riko-stitch-radius, 20px 16px 22px 14px / 14px 22px 16px 20px);
+  }
+
+  .riko-tape {
+    position: absolute; z-index: 2; top: -12px; left: 50%;
+    width: var(--riko-tape-w, 104px); height: 26px;
+    transform: translateX(-50%) rotate(-4deg);
+    background: repeating-linear-gradient(45deg,
+      color-mix(in srgb, var(--riko-tape-a, var(--riko-color-ice)) 80%, transparent) 0 8px,
+      color-mix(in srgb, var(--riko-tape-b, var(--riko-color-ice-soft)) 80%, transparent) 8px 16px);
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .06);
+    pointer-events: none;
+  }
+  .riko-tape--left { left: 18px; transform: rotate(-35deg); top: 6px; width: 70px; }
+  .riko-tape--right { left: auto; right: 18px; transform: rotate(35deg); top: 6px; width: 70px; }
+  .riko-tape--accent { --riko-tape-a: var(--riko-color-accent); --riko-tape-b: var(--riko-color-accent-soft); }
+
+  .riko-squiggle {
+    display: block; width: var(--riko-squiggle-w, 200px); height: 12px;
+    background: var(--riko-squiggle-color, var(--riko-color-accent));
+    -webkit-mask: var(--riko-squiggle-mask) left center / 48px 10px repeat-x;
+    mask: var(--riko-squiggle-mask) left center / 48px 10px repeat-x;
+  }
+  .riko-squiggle--ice { --riko-squiggle-color: var(--riko-color-ice-strong); }
+  .riko-squiggle--center { margin-inline: auto; }
+
+  .riko-scallop { position: relative; }
+  .riko-scallop::before {
+    content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 15px; pointer-events: none;
+    background: radial-gradient(circle at 14px 15px, var(--riko-scallop-color, var(--riko-color-surface-muted)) 14px, transparent 15px) 0 0 / 28px 15px repeat-x;
+  }
+  .riko-scallop--bottom::before { top: auto; bottom: -14px; transform: scaleY(-1); }
+
+  .riko-notebook {
+    position: relative;
+    padding: var(--riko-space-6) var(--riko-space-6) var(--riko-space-6) calc(var(--riko-space-9) + var(--riko-space-3));
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble);
+    box-shadow: var(--riko-shadow-md);
+    background:
+      linear-gradient(90deg, transparent 46px, color-mix(in srgb, var(--riko-color-accent) 40%, transparent) 46px 48px, transparent 48px),
+      var(--riko-color-surface);
+  }
+  .riko-notebook::after {
+    content: ""; position: absolute; left: 16px; top: 24px; bottom: 24px; width: 14px; pointer-events: none;
+    background: radial-gradient(circle at 7px 7px, var(--riko-color-bg) 5px, var(--riko-color-border-strong) 6px, transparent 7px) 0 0 / 14px 46px repeat-y;
+  }
+  .riko-notebook--lined {
+    background:
+      linear-gradient(90deg, transparent 46px, color-mix(in srgb, var(--riko-color-accent) 40%, transparent) 46px 48px, transparent 48px),
+      repeating-linear-gradient(transparent 0 calc(2em - 1px), color-mix(in srgb, var(--riko-color-ice-strong) 30%, transparent) calc(2em - 1px) 2em),
+      var(--riko-color-surface);
+    line-height: 2em;
+  }
+  @media (max-width: 520px) {
+    .riko-notebook { padding-left: var(--riko-space-8); background-position: -14px 0, 0 0; }
+    .riko-notebook::after { left: 8px; }
+  }
+
+  .riko-glow { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+  .riko-glow::before, .riko-glow::after {
+    content: ""; position: absolute; border-radius: 50%; filter: blur(70px);
+  }
+  .riko-glow::before { width: 460px; height: 460px; top: -120px; right: -100px; background: var(--riko-glow-a); opacity: .75; }
+  .riko-glow::after { width: 380px; height: 380px; bottom: 6%; left: -150px; background: var(--riko-glow-b); opacity: .55; }
+
+  .riko-sky { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+  .riko-sky > .riko-star { position: absolute; opacity: .55; animation: riko-twinkle 4s ease-in-out infinite; }
+  .riko-sky > .riko-star:nth-child(1) { left: 6%; top: 18%; --riko-star-size: 14px; }
+  .riko-sky > .riko-star:nth-child(2) { left: 92%; top: 26%; --riko-star-size: 18px; animation-delay: -.7s; }
+  .riko-sky > .riko-star:nth-child(3) { left: 14%; top: 62%; --riko-star-size: 10px; animation-delay: -1.4s; }
+  .riko-sky > .riko-star:nth-child(4) { left: 86%; top: 72%; --riko-star-size: 12px; animation-delay: -2.1s; }
+  .riko-sky > .riko-star:nth-child(5) { left: 48%; top: 88%; --riko-star-size: 9px; animation-delay: -2.8s; }
+  .riko-sky > .riko-star:nth-child(6) { left: 70%; top: 12%; --riko-star-size: 8px; animation-delay: -3.5s; }
+  .riko-sky > .riko-star:nth-child(7) { left: 30%; top: 40%; --riko-star-size: 7px; animation-delay: -4.2s; }
+
+  .riko-sticker {
+    display: inline-flex; align-items: center; gap: var(--riko-space-1);
+    padding: 4px 12px;
+    font-family: var(--riko-font-hand); font-size: var(--riko-text-lg); font-weight: 700; line-height: 1.2;
+    color: var(--riko-sticker-fg, var(--riko-color-fg-strong));
+    background: var(--riko-sticker-bg, var(--riko-color-surface));
+    border: var(--riko-border-width) solid var(--riko-sticker-border, var(--riko-color-border-strong));
+    border-radius: var(--riko-radius-wobble-sm);
+    box-shadow: var(--riko-shadow-sm);
+    transform: rotate(var(--riko-sticker-rotate, -4deg));
+  }
+  .riko-sticker--accent { --riko-sticker-bg: var(--riko-color-accent-soft); --riko-sticker-border: var(--riko-color-accent); --riko-sticker-fg: var(--riko-color-accent-ink); }
+  .riko-sticker--ice { --riko-sticker-bg: var(--riko-color-ice-soft); --riko-sticker-border: var(--riko-color-ice); --riko-sticker-fg: var(--riko-color-ice-ink); --riko-sticker-rotate: 3deg; }
+
+  .riko-note {
+    position: relative; padding: var(--riko-space-6) var(--riko-space-5) var(--riko-space-5);
+    background: var(--riko-note-bg, var(--riko-color-warning-soft));
+    color: var(--riko-color-fg);
+    border-radius: 4px 4px 18px 4px;
+    box-shadow: var(--riko-shadow-md);
+    transform: rotate(var(--riko-note-rotate, -1.5deg));
+    font-family: var(--riko-font-read);
+  }
+  .riko-note::after {
+    content: ""; position: absolute; right: 0; bottom: 0; width: 22px; height: 22px;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--riko-color-fg) 12%, transparent) 50%, var(--riko-color-bg) 50%);
+    border-radius: 0 0 18px 0;
+  }
+  .riko-note--ice { --riko-note-bg: var(--riko-color-ice-soft); --riko-note-rotate: 1.5deg; }
+  .riko-note--accent { --riko-note-bg: var(--riko-color-accent-soft); }
+
+  .riko-tilt { transform: rotate(var(--riko-tilt, 1.2deg)); transition: transform var(--riko-duration-slow) var(--riko-ease-bounce); }
+  .riko-tilt--left { --riko-tilt: -1.2deg; }
+  .riko-tilt:hover { transform: rotate(0) scale(1.01); }
+}

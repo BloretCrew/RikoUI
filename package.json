@@ -1,0 +1,28 @@
+{
+  "name": "riko-ui-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Riko UI — 温馨手绘风的通用 UI 框架（源自《络的世界》）",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "check": "node packages/core/bin/riko-ui.mjs check docs",
+    "contrast": "node tools/contrast.mjs",
+    "test": "node tools/build.mjs && node tools/verify.mjs && node tools/dom-check.mjs",
+    "shots": "node tools/screenshot.mjs",
+    "build:fonts": "node tools/build-fonts.mjs",
+    "check:dom": "node tools/dom-check.mjs"
+  },
+  "devDependencies": {
+    "@fontsource/caveat": "^5.3.0",
+    "@fontsource/noto-sans-sc": "^5.3.1",
+    "@fontsource/noto-serif-sc": "^5.3.1",
+    "@fontsource/zcool-xiaowei": "^5.3.0",
+    "esbuild": "0.28.2",
+    "lucide": "1.59.0"
+  },
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ]
+}

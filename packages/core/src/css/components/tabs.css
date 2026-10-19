@@ -1,0 +1,104 @@
+/* ==========================================================================
+   tabs · 标签页
+   <div class="riko-tabs" data-riko="tabs">
+     <div class="riko-tabs__list" role="tablist" aria-label="设定集">
+       <button class="riko-tabs__tab" role="tab" aria-selected="true" aria-controls="p1" id="t1">人物</button>
+       <button class="riko-tabs__tab" role="tab" aria-selected="false" aria-controls="p2" id="t2" tabindex="-1">地点</button>
+     </div>
+     <div class="riko-tabs__panel" role="tabpanel" id="p1" aria-labelledby="t1">…</div>
+     <div class="riko-tabs__panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>…</div>
+   </div>
+   （role / aria / id 可省略，JS 会自动补齐）
+   ========================================================================== */
+@layer riko.components {
+  .riko-tabs { --riko-tabs-gap: var(--riko-space-1); display: flex; flex-direction: column; min-width: 0; }
+  .riko-tabs__list {
+    position: relative; display: flex; gap: var(--riko-tabs-gap); overflow-x: auto; overflow-y: hidden;
+    scrollbar-width: none; padding-bottom: 6px;
+    border-bottom: var(--riko-border-width) dashed var(--riko-color-border);
+  }
+  .riko-tabs__list::-webkit-scrollbar { display: none; }
+  .riko-tabs__tab {
+    position: relative; flex: none; display: inline-flex; align-items: center; gap: var(--riko-space-2);
+    padding: 10px 16px; border: 0; border-radius: var(--riko-radius-md); background: none;
+    color: var(--riko-color-fg-muted); font-weight: var(--riko-weight-medium); font-size: var(--riko-text-sm); white-space: nowrap;
+    transition: color var(--riko-duration-fast) ease, background var(--riko-duration-fast) ease;
+  }
+  .riko-tabs__tab:hover { color: var(--riko-color-fg-strong); background: var(--riko-color-surface-muted); }
+  .riko-tabs__tab[aria-selected="true"] { color: var(--riko-color-fg-strong); }
+  .riko-tabs__tab[aria-selected="true"]::after {
+    content: ""; position: absolute; left: 10px; right: 10px; bottom: -8px; height: 8px;
+    background: var(--riko-color-accent);
+    -webkit-mask: var(--riko-squiggle-mask) left center / 24px 8px repeat-x; mask: var(--riko-squiggle-mask) left center / 24px 8px repeat-x;
+    animation: riko-tabs-ink var(--riko-duration-base) var(--riko-ease-out);
+  }
+  .riko-tabs__tab:disabled, .riko-tabs__tab[aria-disabled="true"] { opacity: .45; }
+  .riko-tabs__badge { padding: 0 7px; border-radius: var(--riko-radius-pill); font-size: .7rem; font-weight: var(--riko-weight-bold); background: var(--riko-color-ice-soft); color: var(--riko-color-ice-ink); }
+  .riko-tabs__panel { padding-top: var(--riko-space-5); min-width: 0; }
+  .riko-tabs__panel:focus-visible { border-radius: var(--riko-radius-md); }
+  .riko-tabs__panel[data-state="entering"] { animation: riko-tabs-panel var(--riko-duration-base) var(--riko-ease-out); }
+  @keyframes riko-tabs-ink { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes riko-tabs-panel { from { opacity: 0; transform: translateY(6px); } }
+
+  /* ---- 胶囊：带回弹滑块（JS 设置 --riko-tabs-x / --riko-tabs-w） ---- */
+  .riko-tabs--pills .riko-tabs__list {
+    align-self: flex-start; max-width: 100%; gap: 2px; padding: 4px;
+    border: var(--riko-border-width) solid var(--riko-color-border); border-radius: var(--riko-radius-pill);
+    background: var(--riko-color-surface);
+  }
+  .riko-tabs--pills .riko-tabs__list::before {
+    content: ""; position: absolute; z-index: 0; top: 4px; bottom: 4px; left: 0;
+    width: var(--riko-tabs-w, 0); transform: translateX(var(--riko-tabs-x, 0));
+    border-radius: var(--riko-radius-pill); background: var(--riko-color-accent-soft);
+    box-shadow: inset 0 0 0 var(--riko-border-width) var(--riko-color-accent);
+    transition: transform .45s var(--riko-ease-bounce), width .45s var(--riko-ease-bounce);
+  }
+  .riko-tabs--pills .riko-tabs__tab { z-index: 1; border-radius: var(--riko-radius-pill); padding: 8px 18px; }
+  .riko-tabs--pills .riko-tabs__tab:hover { background: transparent; }
+  .riko-tabs--pills .riko-tabs__tab[aria-selected="true"]::after { display: none; }
+  /* 无 JS 兜底：直接给选中项上色 */
+  .riko-tabs--pills:not([data-ready]) .riko-tabs__tab[aria-selected="true"] { background: var(--riko-color-accent-soft); }
+
+  /* ---- 卡片：笔记本分隔页 ---- */
+  .riko-tabs--cards .riko-tabs__list { gap: 4px; padding: 0 var(--riko-space-3); padding-bottom: 0; border-bottom: var(--riko-border-width) solid var(--riko-color-border); overflow: visible; }
+  .riko-tabs--cards .riko-tabs__tab {
+    margin-bottom: calc(-1 * var(--riko-border-width)); padding: 10px 18px 9px;
+    border: var(--riko-border-width) solid var(--riko-color-border); border-bottom-color: transparent;
+    border-radius: 16px 12px 0 0 / 14px 12px 0 0;
+    background: var(--riko-color-surface-muted); transform-origin: bottom center;
+  }
+  .riko-tabs--cards .riko-tabs__tab:nth-child(odd) { transform: rotate(-.6deg); }
+  .riko-tabs--cards .riko-tabs__tab:nth-child(even) { transform: rotate(.5deg); }
+  .riko-tabs--cards .riko-tabs__tab:hover { background: var(--riko-color-surface); }
+  .riko-tabs--cards .riko-tabs__tab[aria-selected="true"] {
+    z-index: 1; transform: none; background: var(--riko-color-surface);
+    border-bottom-color: var(--riko-color-surface); box-shadow: inset 0 3px 0 var(--riko-color-accent);
+  }
+  .riko-tabs--cards .riko-tabs__tab[aria-selected="true"]::after { display: none; }
+  .riko-tabs--cards .riko-tabs__panel {
+    padding: var(--riko-space-5); background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border); border-top: 0;
+    border-radius: 0 0 var(--riko-radius-lg) var(--riko-radius-lg);
+  }
+
+  /* ---- 纵向 ---- */
+  .riko-tabs--vertical { flex-direction: row; gap: var(--riko-space-5); }
+  .riko-tabs--vertical .riko-tabs__list {
+    flex-direction: column; flex: none; min-width: 160px; overflow: visible; padding: 0 6px 0 0;
+    border-bottom: 0; border-right: var(--riko-border-width) dashed var(--riko-color-border);
+  }
+  .riko-tabs--vertical .riko-tabs__tab { justify-content: flex-start; }
+  .riko-tabs--vertical .riko-tabs__tab[aria-selected="true"] { background: var(--riko-color-accent-soft); }
+  .riko-tabs--vertical .riko-tabs__tab[aria-selected="true"]::after {
+    left: auto; right: -10px; top: 50%; bottom: auto; width: 10px; height: 10px; transform: translateY(-50%);
+    -webkit-mask: var(--riko-icon-star) center / contain no-repeat; mask: var(--riko-icon-star) center / contain no-repeat;
+    animation: none;
+  }
+  .riko-tabs--vertical .riko-tabs__panel { flex: 1; padding-top: 0; }
+  @media (max-width: 520px) {
+    .riko-tabs--vertical { flex-direction: column; }
+    .riko-tabs--vertical .riko-tabs__list { flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: var(--riko-border-width) dashed var(--riko-color-border); padding: 0 0 6px; }
+    .riko-tabs--vertical .riko-tabs__tab[aria-selected="true"]::after { display: none; }
+  }
+  .riko-tabs--fill .riko-tabs__tab { flex: 1; justify-content: center; }
+}

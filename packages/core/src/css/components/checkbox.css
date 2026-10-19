@@ -1,0 +1,68 @@
+/* ==========================================================================
+   checkbox · 复选框（原生 input 美化，无需 JS）
+   <label class="riko-checkbox"><input type="checkbox" name="like"> 喜欢星星酥</label>
+   带说明：<label class="riko-checkbox"><input type="checkbox"><span class="riko-checkbox__text">标题<span class="riko-checkbox__desc">说明</span></span></label>
+   --card 可选卡片 · --sm / --lg · indeterminate（JS 设置 input.indeterminate = true）· disabled
+   ========================================================================== */
+@layer riko.components {
+  .riko-checkbox {
+    --riko-check-size: 20px;
+    display: inline-flex; align-items: flex-start; gap: 10px;
+    font-size: var(--riko-text-md); line-height: 1.5; color: var(--riko-color-fg);
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
+  }
+  .riko-checkbox > input {
+    flex: none; appearance: none; -webkit-appearance: none; margin: calc((1.5em - var(--riko-check-size)) / 2) 0 0;
+    width: var(--riko-check-size); height: var(--riko-check-size);
+    display: grid; place-items: center;
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border-strong);
+    border-radius: 7px 5px 8px 5px / 5px 8px 5px 7px;
+    box-shadow: 0 2px 0 var(--riko-color-border);
+    cursor: inherit;
+    transition: background var(--riko-duration-fast) ease, border-color var(--riko-duration-fast) ease, transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-checkbox > input::before {
+    content: ""; width: 78%; height: 78%;
+    background: var(--riko-color-accent-fg);
+    -webkit-mask: var(--riko-icon-check) center / contain no-repeat;
+    mask: var(--riko-icon-check) center / contain no-repeat;
+    transform: scale(0); transition: transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-checkbox:hover > input:not(:disabled) { border-color: var(--riko-color-accent); }
+  .riko-checkbox > input:checked, .riko-checkbox > input:indeterminate {
+    background: var(--riko-color-accent); border-color: var(--riko-color-accent);
+    box-shadow: 0 2px 0 var(--riko-color-accent-shade);
+  }
+  .riko-checkbox > input:checked::before { transform: scale(1); }
+  .riko-checkbox > input:indeterminate::before {
+    transform: scale(1);
+    -webkit-mask-image: var(--riko-icon-minus); mask-image: var(--riko-icon-minus);
+  }
+  .riko-checkbox > input:active:not(:disabled) { transform: scale(.88); }
+  .riko-checkbox > input:focus-visible { outline: var(--riko-focus-ring); outline-offset: var(--riko-focus-offset); }
+  .riko-checkbox > input[aria-invalid="true"] { border-color: var(--riko-color-danger); }
+  .riko-checkbox:has(> input:disabled) { cursor: not-allowed; color: var(--riko-color-fg-muted); }
+  .riko-checkbox > input:disabled { opacity: .55; box-shadow: none; }
+
+  .riko-checkbox__text { display: flex; flex-direction: column; min-width: 0; }
+  .riko-checkbox__desc { font-size: var(--riko-text-sm); color: var(--riko-color-fg-muted); }
+
+  .riko-checkbox--sm { --riko-check-size: 16px; font-size: var(--riko-text-sm); gap: 8px; }
+  .riko-checkbox--lg { --riko-check-size: 24px; font-size: var(--riko-text-lg); }
+
+  /* 卡片 */
+  .riko-checkbox--card {
+    display: flex; width: 100%;
+    padding: var(--riko-space-4);
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) dashed var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble-sm);
+    transition: border-color var(--riko-duration-fast) ease, background var(--riko-duration-fast) ease, transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-checkbox--card:hover { background: var(--riko-color-surface-muted); transform: translateY(-2px); }
+  .riko-checkbox--card:has(> input:checked) { border-style: solid; border-color: var(--riko-color-accent); background: var(--riko-color-accent-soft); }
+  .riko-checkbox--card:has(> input:disabled) { transform: none; background: var(--riko-color-surface); }
+  .riko-checkbox--card .riko-checkbox__text { flex: 1; font-weight: var(--riko-weight-medium); }
+  .riko-checkbox--card .riko-checkbox__desc { font-weight: var(--riko-weight-normal); }
+}

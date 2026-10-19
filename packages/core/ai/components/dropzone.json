@@ -1,0 +1,175 @@
+{
+  "name": "dropzone",
+  "title": "拖拽上传",
+  "titleEn": "Dropzone",
+  "category": "form",
+  "summary": "拖拽或点击选择文件的上传区域，显示文件列表、大小与图片缩略图，支持类型 / 大小 / 数量限制。",
+  "when": "上传图片、附件、手稿。只需一个简单文件按钮时可用 <input class=\"riko-input\" type=\"file\">。",
+  "root": "riko-dropzone",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-dropzone__area",
+      "desc": "可点击 / 拖入的区域，用 <label> 包住 input",
+      "required": true
+    },
+    {
+      "class": "riko-dropzone__input",
+      "desc": "原生 <input type=\"file\">（视觉隐藏，accept / multiple 写在这里）",
+      "required": true
+    },
+    {
+      "class": "riko-dropzone__icon",
+      "desc": "图标框；留空显示默认上传图标，也可放 Lucide 图标"
+    },
+    {
+      "class": "riko-dropzone__title",
+      "desc": "主提示"
+    },
+    {
+      "class": "riko-dropzone__hint",
+      "desc": "次要提示（格式、大小）"
+    },
+    {
+      "class": "riko-dropzone__list",
+      "desc": "文件列表（JS 生成）"
+    },
+    {
+      "class": "riko-dropzone__file",
+      "desc": "文件项"
+    },
+    {
+      "class": "riko-dropzone__thumb",
+      "desc": "缩略图 / 文件图标"
+    },
+    {
+      "class": "riko-dropzone__meta",
+      "desc": "文件名与大小容器"
+    },
+    {
+      "class": "riko-dropzone__name",
+      "desc": "文件名"
+    },
+    {
+      "class": "riko-dropzone__size",
+      "desc": "大小或拒绝原因"
+    },
+    {
+      "class": "riko-dropzone__remove",
+      "desc": "移除按钮"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-dropzone--sm",
+      "desc": "紧凑尺寸",
+      "group": "size"
+    }
+  ],
+  "states": [
+    {
+      "attr": "data-state=\"dragover\"",
+      "desc": "文件拖入时（JS 维护）"
+    },
+    {
+      "attr": "aria-invalid=\"true\"",
+      "on": "riko-dropzone__file",
+      "desc": "被拒绝的文件"
+    },
+    {
+      "attr": "disabled",
+      "on": "riko-dropzone__input",
+      "desc": "禁用"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"dropzone\"",
+    "options": [
+      {
+        "attr": "data-riko-max-size",
+        "values": "如 500KB / 5MB",
+        "default": "不限",
+        "desc": "单个文件大小上限"
+      },
+      {
+        "attr": "data-riko-max-files",
+        "values": "数字",
+        "default": "multiple 时不限，否则 1",
+        "desc": "最多文件数"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "el.riko.files",
+        "desc": "当前文件数组（同时已同步到 input.files，可随表单提交）"
+      },
+      {
+        "signature": "el.riko.add(files)",
+        "desc": "添加文件（数组或 FileList）"
+      },
+      {
+        "signature": "el.riko.remove(index)",
+        "desc": "移除第 index 个"
+      },
+      {
+        "signature": "el.riko.clear()",
+        "desc": "清空"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:dropzone:change",
+        "detail": "{ files }",
+        "desc": "文件列表变化"
+      },
+      {
+        "name": "riko:dropzone:reject",
+        "detail": "{ file, reason }",
+        "desc": "文件因类型 / 大小 / 数量被拒绝"
+      }
+    ]
+  },
+  "a11y": [
+    "input 保持可聚焦（只是视觉隐藏），键盘 Tab 到区域后按空格 / 回车即可选择文件。",
+    "移除按钮自动带 aria-label，文件列表为 aria-live。"
+  ],
+  "rules": [
+    "必须用 <label class=\"riko-dropzone__area\"> 包住 input，这样点击整个区域都能选文件。",
+    "类型限制写在 input 的 accept 上，JS 会同时用于拖入校验。"
+  ],
+  "avoid": [
+    "不要把文件列表放进 label 内（点击移除按钮会再次打开文件选择）。"
+  ],
+  "examples": [
+    {
+      "title": "基础用法",
+      "html": "<div class=\"riko-dropzone\" data-riko=\"dropzone\" data-riko-max-size=\"5MB\">\n  <label class=\"riko-dropzone__area\">\n    <input class=\"riko-dropzone__input\" type=\"file\" name=\"drawings\" accept=\"image/*\" multiple>\n    <span class=\"riko-dropzone__icon\" aria-hidden=\"true\"></span>\n    <span class=\"riko-dropzone__title\">把画稿拖到这里，或点击选择</span>\n    <span class=\"riko-dropzone__hint\">支持 PNG / JPG / WebP，单张不超过 5MB</span>\n  </label>\n</div>"
+    },
+    {
+      "title": "小尺寸 · 单个文件",
+      "html": "<div class=\"riko-dropzone riko-dropzone--sm\" data-riko=\"dropzone\" style=\"max-width: 360px\">\n  <label class=\"riko-dropzone__area\">\n    <input class=\"riko-dropzone__input\" type=\"file\" name=\"manuscript\" accept=\".txt,.docx\">\n    <span class=\"riko-dropzone__icon\" aria-hidden=\"true\"><i data-lucide=\"feather\"></i></span>\n    <span class=\"riko-dropzone__title\">上传小说手稿</span>\n    <span class=\"riko-dropzone__hint\">.txt 或 .docx</span>\n  </label>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-dropzone",
+      "has": "input[type=\"file\"]",
+      "message": "riko-dropzone 内需要 <input type=\"file\" class=\"riko-dropzone__input\">"
+    },
+    {
+      "selector": ".riko-dropzone__area",
+      "tag": "label",
+      "message": "riko-dropzone__area 必须是 <label>，点击整个区域才能选择文件"
+    },
+    {
+      "selector": ".riko-dropzone__input",
+      "parent": "label",
+      "message": "riko-dropzone__input 应放在 <label class=\"riko-dropzone__area\"> 内"
+    }
+  ],
+  "related": [
+    "field",
+    "input",
+    "progress"
+  ]
+}

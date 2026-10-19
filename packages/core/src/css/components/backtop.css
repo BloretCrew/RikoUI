@@ -1,0 +1,29 @@
+/* ==========================================================================
+   backtop · 返回顶部（星形按钮）
+   <button class="riko-backtop" data-riko="backtop" aria-label="返回顶部"></button>
+   data-riko-offset="400"：滚动超过多少像素后出现
+   ========================================================================== */
+@layer riko.components {
+  .riko-backtop {
+    position: fixed; right: var(--riko-backtop-right, 22px); bottom: var(--riko-backtop-bottom, 22px); z-index: var(--riko-z-sticky);
+    width: 54px; height: 54px; padding: 0; border: 0; background: none;
+    color: var(--riko-color-accent-fg);
+    filter: drop-shadow(0 6px 10px rgba(94, 61, 43, .3));
+    transition: opacity var(--riko-duration-base) ease, transform .35s var(--riko-ease-bounce), visibility var(--riko-duration-base);
+  }
+  .riko-backtop::before, .riko-backtop::after { content: ""; position: absolute; inset: 0; margin: auto; }
+  .riko-backtop::before {
+    background: var(--riko-color-accent);
+    -webkit-mask: var(--riko-icon-star) center / contain no-repeat; mask: var(--riko-icon-star) center / contain no-repeat;
+    transition: background var(--riko-duration-fast) ease;
+  }
+  .riko-backtop::after {
+    width: 16px; height: 16px; top: 4px; background: currentColor;
+    -webkit-mask: var(--riko-icon-arrow-up) center / contain no-repeat; mask: var(--riko-icon-arrow-up) center / contain no-repeat;
+  }
+  .riko-backtop:hover { transform: rotate(-15deg) scale(1.08); }
+  .riko-backtop:hover::before { background: var(--riko-color-accent-shade); }
+  .riko-backtop:focus-visible { border-radius: 50%; }
+  .riko-backtop[data-state="hidden"] { opacity: 0; transform: translateY(16px) scale(.8); pointer-events: none; visibility: hidden; }
+  .riko-backtop--static { position: relative; right: auto; bottom: auto; }
+}

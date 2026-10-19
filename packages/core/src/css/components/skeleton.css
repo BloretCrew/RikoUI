@@ -1,0 +1,30 @@
+/* ==========================================================================
+   skeleton · 骨架屏
+   <div class="riko-skeleton-group" aria-busy="true" aria-label="正在加载">
+     <span class="riko-skeleton riko-skeleton--circle"></span>
+     <span class="riko-skeleton riko-skeleton--text"></span>
+     <span class="riko-skeleton riko-skeleton--text"></span>
+   </div>
+   形状 --text（一行文字，组内最后一行自动变短）--circle --rect · 尺寸变量 --riko-skeleton-size / --riko-skeleton-h
+   ========================================================================== */
+@layer riko.components {
+  .riko-skeleton-group { display: flex; flex-direction: column; gap: var(--riko-space-2); }
+  .riko-skeleton {
+    display: block;
+    width: 100%; height: var(--riko-skeleton-h, 1em);
+    border-radius: var(--riko-radius-sm);
+    background:
+      linear-gradient(100deg, transparent 20%, color-mix(in srgb, var(--riko-color-surface) 75%, transparent) 50%, transparent 80%) 0 0 / 200% 100% no-repeat,
+      var(--riko-color-surface-muted);
+    animation: riko-shimmer 1.6s ease-in-out infinite;
+  }
+  .riko-skeleton--text { height: var(--riko-skeleton-h, .95em); margin-block: .3em; border-radius: var(--riko-radius-pill); }
+  .riko-skeleton--text:last-child:not(:first-child) { width: 62%; }
+  .riko-skeleton--circle {
+    width: var(--riko-skeleton-size, 48px); height: var(--riko-skeleton-size, 48px);
+    flex: none; border-radius: 50%;
+  }
+  .riko-skeleton--rect { height: var(--riko-skeleton-h, 160px); border-radius: var(--riko-radius-wobble-sm); }
+
+  @keyframes riko-shimmer { from { background-position: 150% 0, 0 0; } to { background-position: -50% 0, 0 0; } }
+}

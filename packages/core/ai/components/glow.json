@@ -1,0 +1,25 @@
+{
+  "name": "glow",
+  "title": "柔光背景",
+  "titleEn": "Glow",
+  "category": "decor",
+  "summary": "页面角落的冰蓝与暖橙柔光（fixed，不影响布局）。",
+  "when": "每个页面放一个即可。",
+  "root": "riko-glow",
+  "examples": [
+    {
+      "title": "基础",
+      "html": "<div class=\"riko-glow\" aria-hidden=\"true\"></div>"
+    }
+  ],
+  "a11y": [
+    "加 aria-hidden=\"true\"。"
+  ],
+  "requires": [
+    {
+      "selector": ".riko-glow",
+      "attr": "aria-hidden",
+      "message": "riko-glow 是装饰，请加 aria-hidden=\"true\""
+    }
+  ]
+}

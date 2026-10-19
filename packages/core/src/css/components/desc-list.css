@@ -1,0 +1,26 @@
+/* ==========================================================================
+   desc-list · 描述列表
+   <dl class="riko-desc-list riko-desc-list--horizontal">
+     <div class="riko-desc-list__row"><dt class="riko-desc-list__term">主角</dt><dd class="riko-desc-list__detail">络可</dd></div>
+   </dl>
+   ========================================================================== */
+@layer riko.components {
+  .riko-desc-list { display: grid; gap: var(--riko-space-3); margin: 0; }
+  .riko-desc-list__row { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .riko-desc-list__term { font-size: var(--riko-text-xs); font-weight: var(--riko-weight-bold); letter-spacing: .08em; color: var(--riko-color-brown); }
+  .riko-desc-list__detail { margin: 0; color: var(--riko-color-fg); overflow-wrap: anywhere; }
+  .riko-desc-list--horizontal .riko-desc-list__row { display: grid; grid-template-columns: var(--riko-desc-term-w, 8em) minmax(0, 1fr); gap: var(--riko-space-4); align-items: baseline; }
+  .riko-desc-list--horizontal .riko-desc-list__term { font-size: var(--riko-text-sm); letter-spacing: .04em; }
+  .riko-desc-list--columns { grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: var(--riko-space-4) var(--riko-space-6); }
+  .riko-desc-list--bordered {
+    gap: 0; padding: var(--riko-space-1) var(--riko-space-5);
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble-sm);
+  }
+  .riko-desc-list--bordered .riko-desc-list__row { padding: var(--riko-space-3) 0; }
+  .riko-desc-list--bordered .riko-desc-list__row + .riko-desc-list__row { border-top: 1.5px dashed var(--riko-color-border); }
+  @media (max-width: 520px) {
+    .riko-desc-list--horizontal .riko-desc-list__row { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  }
+}

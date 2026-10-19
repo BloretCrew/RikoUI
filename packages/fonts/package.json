@@ -1,0 +1,38 @@
+{
+  "name": "@bloret-crew/riko-ui-fonts",
+  "version": "0.1.0",
+  "description": "Riko UI 自托管字体：ZCOOL XiaoWei、Noto Sans SC、Noto Serif SC、Caveat（woff2 + unicode-range 分片，按需加载）。可放在任意服务器/CDN，全球与中国大陆均可访问。",
+  "license": "OFL-1.1",
+  "style": "./riko-fonts.css",
+  "exports": {
+    ".": "./riko-fonts.css",
+    "./riko-fonts.css": "./riko-fonts.css",
+    "./files/*": "./files/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "riko-fonts.css",
+    "files",
+    "LICENSES",
+    "README.md"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "keywords": [
+    "fonts",
+    "self-hosted",
+    "chinese",
+    "noto-sans-sc",
+    "noto-serif-sc",
+    "zcool-xiaowei",
+    "caveat",
+    "riko-ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BloretCrew/RikoUI.git",
+    "directory": "packages/fonts"
+  },
+  "homepage": "https://bloretcrew.github.io/RikoUI/"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "sky",
+  "title": "漂浮星星",
+  "titleEn": "Sky",
+  "category": "decor",
+  "summary": "背景中缓慢闪烁的小星星（最多 7 颗位置预设）。",
+  "when": "首页、空状态等需要童话氛围的页面。",
+  "root": "riko-sky",
+  "examples": [
+    {
+      "title": "基础",
+      "html": "<div class=\"riko-sky\" aria-hidden=\"true\">\n  <span class=\"riko-star\"></span><span class=\"riko-star\"></span><span class=\"riko-star\"></span>\n  <span class=\"riko-star\"></span><span class=\"riko-star\"></span>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-sky",
+      "attr": "aria-hidden",
+      "message": "riko-sky 是装饰，请加 aria-hidden=\"true\""
+    }
+  ]
+}

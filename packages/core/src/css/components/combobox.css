@@ -1,0 +1,85 @@
+/* ==========================================================================
+   combobox · 可搜索选择框  /  listbox · 选项列表
+   <div class="riko-combobox" data-riko="combobox">
+     <input class="riko-combobox__input" type="text" placeholder="选择一位角色…" aria-label="角色">
+     <ul class="riko-combobox__list riko-listbox">
+       <li class="riko-listbox__option" data-value="riko">络可</li>
+     </ul>
+   </div>
+   或增强原生下拉：<div class="riko-combobox" data-riko="combobox"><select name="x">…</select></div>
+   ARIA（role / aria-expanded / aria-activedescendant…）由 JS 自动补全。
+   ========================================================================== */
+@layer riko.components {
+  .riko-combobox {
+    --riko-combobox-h: var(--riko-control-h-md);
+    position: relative; display: inline-flex; align-items: center;
+    width: min(var(--riko-combobox-w, 320px), 100%);
+  }
+  .riko-combobox > select { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+  .riko-combobox::after {
+    content: ""; position: absolute; right: var(--riko-space-4); top: 50%;
+    width: 1em; height: 1em; transform: translateY(-50%);
+    background: var(--riko-color-brown); pointer-events: none;
+    -webkit-mask: var(--riko-icon-chevrons-up-down) center / contain no-repeat; mask: var(--riko-icon-chevrons-up-down) center / contain no-repeat;
+  }
+  .riko-combobox__input {
+    width: 100%; height: var(--riko-combobox-h);
+    padding: 0 calc(var(--riko-space-4) + 1.4em) 0 var(--riko-space-4);
+    background: var(--riko-color-surface); color: var(--riko-color-fg);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-md);
+    box-shadow: var(--riko-shadow-inset);
+    transition: border-color var(--riko-duration-fast) ease, box-shadow var(--riko-duration-fast) ease;
+  }
+  .riko-combobox__input::placeholder { color: var(--riko-color-fg-subtle); }
+  .riko-combobox__input:hover { border-color: var(--riko-color-border-strong); }
+  .riko-combobox__input:focus-visible { outline: none; border-color: var(--riko-color-accent); box-shadow: 0 0 0 4px var(--riko-color-accent-soft); }
+  .riko-combobox__input[aria-expanded="true"] { border-color: var(--riko-color-accent); }
+  .riko-combobox__input[aria-invalid="true"] { border-color: var(--riko-color-danger); }
+  .riko-combobox__input:disabled { opacity: .55; cursor: not-allowed; box-shadow: none; }
+  /* 列表以 popover（顶层）显示，避免被 overflow / transform / 弹窗遮挡 */
+  .riko-combobox__list { position: fixed; z-index: var(--riko-z-dropdown); inset: auto; margin: 0; }
+  .riko-combobox__list:not([data-open]) { display: none; }
+
+  .riko-combobox--sm { --riko-combobox-h: var(--riko-control-h-sm); font-size: var(--riko-text-sm); }
+  .riko-combobox--lg { --riko-combobox-h: var(--riko-control-h-lg); font-size: var(--riko-text-lg); }
+  .riko-combobox--block { display: flex; width: 100%; }
+
+  /* ---- 选项列表（可单独使用） ---- */
+  .riko-listbox {
+    list-style: none; margin: 0; padding: var(--riko-space-2);
+    min-width: 180px; max-height: var(--riko-listbox-max-h, 280px); overflow-y: auto; overscroll-behavior: contain;
+    background: var(--riko-color-surface); color: var(--riko-color-fg);
+    border: var(--riko-border-width) solid var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble-sm);
+    box-shadow: var(--riko-shadow-lg);
+    animation: riko-listbox-in var(--riko-duration-fast) var(--riko-ease-out);
+  }
+  @keyframes riko-listbox-in { from { opacity: 0; transform: translateY(-4px); } }
+  .riko-listbox__option {
+    position: relative; display: flex; flex-direction: column;
+    padding: var(--riko-space-2) calc(var(--riko-space-3) + 1.4em) var(--riko-space-2) var(--riko-space-3);
+    border-radius: var(--riko-radius-sm); cursor: pointer;
+    font-size: var(--riko-text-sm); line-height: 1.5;
+    transition: background var(--riko-duration-fast) ease;
+  }
+  .riko-listbox__option[hidden] { display: none; }
+  .riko-listbox__option:hover,
+  .riko-listbox__option[data-state="active"] { background: var(--riko-color-surface-muted); }
+  .riko-listbox__option[data-state="active"] { box-shadow: inset 3px 0 0 var(--riko-color-accent); }
+  .riko-listbox__option[aria-selected="true"] { color: var(--riko-color-fg-strong); font-weight: var(--riko-weight-bold); background: var(--riko-color-accent-soft); }
+  .riko-listbox__option[aria-selected="true"]::after {
+    content: ""; position: absolute; right: var(--riko-space-3); top: 50%;
+    width: 1em; height: 1em; transform: translateY(-50%); background: var(--riko-color-accent-ink);
+    -webkit-mask: var(--riko-icon-check) center / contain no-repeat; mask: var(--riko-icon-check) center / contain no-repeat;
+  }
+  .riko-listbox__option[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+  .riko-listbox__desc { font-size: var(--riko-text-xs); font-weight: var(--riko-weight-normal); color: var(--riko-color-fg-muted); }
+  .riko-listbox__group {
+    padding: var(--riko-space-2) var(--riko-space-3) var(--riko-space-1);
+    font-size: var(--riko-text-xs); font-weight: var(--riko-weight-bold); letter-spacing: .12em; color: var(--riko-color-brown);
+  }
+  .riko-listbox__empty { padding: var(--riko-space-4) var(--riko-space-3); text-align: center; font-size: var(--riko-text-sm); color: var(--riko-color-fg-muted); }
+  .riko-listbox__empty[hidden] { display: none; }
+  .riko-listbox mark { padding: 0; color: inherit; background: none; box-shadow: inset 0 -2px 0 var(--riko-color-accent); }
+}

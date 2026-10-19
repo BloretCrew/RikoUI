@@ -1,0 +1,67 @@
+/* ==========================================================================
+   rating · 星星评分（纯 CSS，基于 radio，可键盘操作）
+   <fieldset class="riko-rating">
+     <legend class="riko-rating__legend">给这一章打个分吧</legend>
+     <input class="riko-rating__input" type="radio" name="score" id="score-1" value="1">
+     <label class="riko-rating__star" for="score-1"><span class="riko-u-sr-only">1 星</span></label>
+     …（共 5 组，按 1→5 顺序书写）
+   </fieldset>
+   只读展示（支持小数）：
+   <span class="riko-rating riko-rating--readonly" style="--riko-rating-value: 3.5" role="img" aria-label="评分 3.5 / 5"></span>
+   ========================================================================== */
+@layer riko.components {
+  .riko-rating {
+    --riko-rating-size: 30px;
+    --riko-rating-on: var(--riko-color-accent);
+    --riko-rating-off: var(--riko-color-surface-muted);
+    --riko-rating-off-line: var(--riko-color-border-strong);
+    display: inline-flex; flex-wrap: wrap; align-items: center; gap: 2px;
+    margin: 0; padding: 0; border: 0; min-width: 0;
+  }
+  .riko-rating__legend {
+    float: left; width: 100%; padding: 0; margin-bottom: var(--riko-space-1);
+    font-size: var(--riko-text-sm); font-weight: var(--riko-weight-medium); color: var(--riko-color-fg-strong);
+  }
+  .riko-rating__legend + * { clear: left; }
+  .riko-rating__input { position: absolute; width: 1px; height: 1px; opacity: 0; margin: 0; pointer-events: none; }
+  .riko-rating__star {
+    position: relative; display: inline-block; flex: none;
+    width: var(--riko-rating-size); height: var(--riko-rating-size);
+    cursor: pointer; border-radius: var(--riko-radius-sm);
+    transition: transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-rating__star::before {
+    content: ""; position: absolute; inset: 0;
+    background: var(--riko-rating-off);
+    -webkit-mask: var(--riko-icon-star) center / contain no-repeat; mask: var(--riko-icon-star) center / contain no-repeat;
+    transition: background var(--riko-duration-fast) ease;
+  }
+  /* 空星描边：用一层略大的轮廓衬底 */
+  .riko-rating__star::after {
+    content: ""; position: absolute; inset: -1.5px; z-index: -1;
+    background: var(--riko-rating-off-line);
+    -webkit-mask: var(--riko-icon-star) center / contain no-repeat; mask: var(--riko-icon-star) center / contain no-repeat;
+  }
+  .riko-rating__star { isolation: isolate; }
+  /* 已选：选中项及其之前的星 */
+  .riko-rating__input:checked + .riko-rating__star::before,
+  .riko-rating__star:has(~ .riko-rating__input:checked)::before { background: var(--riko-rating-on); }
+  /* 悬停预览：先全部熄灭，再点亮悬停项及其之前 */
+  .riko-rating:not(:disabled):hover .riko-rating__star::before { background: var(--riko-rating-off); }
+  .riko-rating:not(:disabled) .riko-rating__star:hover::before,
+  .riko-rating:not(:disabled) .riko-rating__star:has(~ .riko-rating__star:hover)::before { background: var(--riko-rating-on); }
+  .riko-rating__star:hover { transform: scale(1.15) rotate(-8deg); }
+  .riko-rating__input:focus-visible + .riko-rating__star { outline: var(--riko-focus-ring); outline-offset: 2px; }
+  .riko-rating:disabled .riko-rating__star { cursor: not-allowed; opacity: .6; }
+
+  /* 只读：按小数填充 */
+  .riko-rating--readonly {
+    width: calc(var(--riko-rating-size) * 5); height: var(--riko-rating-size);
+    gap: 0; vertical-align: middle;
+    background: linear-gradient(90deg, var(--riko-rating-on) calc(var(--riko-rating-value, 0) / 5 * 100%), var(--riko-color-tan) 0);
+    -webkit-mask: var(--riko-icon-star) left center / var(--riko-rating-size) var(--riko-rating-size) repeat-x;
+    mask: var(--riko-icon-star) left center / var(--riko-rating-size) var(--riko-rating-size) repeat-x;
+  }
+  .riko-rating--sm { --riko-rating-size: 20px; }
+  .riko-rating--lg { --riko-rating-size: 40px; }
+}

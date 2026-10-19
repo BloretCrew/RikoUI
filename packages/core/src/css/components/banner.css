@@ -1,0 +1,68 @@
+/* ==========================================================================
+   banner · 公告横幅
+   <div class="riko-banner" role="region" aria-label="公告">
+     <span class="riko-banner__icon riko-star" aria-hidden="true"></span>
+     <p class="riko-banner__text">第 76 节已更新！<a class="riko-banner__link" href="#">去看看</a></p>
+     <button type="button" class="riko-banner__close" data-riko-dismiss aria-label="关闭公告"></button>
+   </div>
+   色调 --accent（默认）--ice --success --warning --danger · 布局 --sticky（吸顶）--inline（内容中的圆角条）
+   ========================================================================== */
+@layer riko.components {
+  .riko-banner {
+    --riko-banner-bg: var(--riko-color-accent-soft);
+    --riko-banner-ink: var(--riko-color-accent-ink);
+    --riko-banner-line: var(--riko-color-accent);
+
+    position: relative;
+    display: flex; align-items: center; justify-content: center; gap: var(--riko-space-3);
+    min-height: 44px;
+    padding: var(--riko-space-2) calc(var(--riko-space-9) + var(--riko-space-2)) var(--riko-space-2) var(--riko-space-5);
+    color: var(--riko-color-fg);
+    background:
+      repeating-linear-gradient(-45deg, transparent 0 14px, color-mix(in srgb, var(--riko-banner-line) 9%, transparent) 14px 28px),
+      var(--riko-banner-bg);
+    border-bottom: var(--riko-border-width) dashed color-mix(in srgb, var(--riko-banner-line) 50%, transparent);
+    font-size: var(--riko-text-sm);
+    text-align: center;
+  }
+  .riko-banner--ice { --riko-banner-bg: var(--riko-color-ice-soft); --riko-banner-ink: var(--riko-color-ice-ink); --riko-banner-line: var(--riko-color-ice-strong); }
+  .riko-banner--success { --riko-banner-bg: var(--riko-color-success-soft); --riko-banner-ink: var(--riko-color-success-ink); --riko-banner-line: var(--riko-color-success); }
+  .riko-banner--warning { --riko-banner-bg: var(--riko-color-warning-soft); --riko-banner-ink: var(--riko-color-warning-ink); --riko-banner-line: var(--riko-color-warning); }
+  .riko-banner--danger { --riko-banner-bg: var(--riko-color-danger-soft); --riko-banner-ink: var(--riko-color-danger-ink); --riko-banner-line: var(--riko-color-danger); }
+
+  .riko-banner--sticky { position: sticky; top: 0; z-index: var(--riko-z-sticky); }
+  .riko-banner--inline {
+    border: var(--riko-border-width) dashed color-mix(in srgb, var(--riko-banner-line) 50%, transparent);
+    border-radius: var(--riko-radius-wobble-sm);
+    justify-content: flex-start; text-align: left;
+  }
+
+  .riko-banner__icon { flex: none; color: var(--riko-banner-ink); }
+  .riko-banner__icon:where(.riko-star) { --riko-star-color: var(--riko-banner-line); animation: riko-twinkle 4s ease-in-out infinite; }
+  .riko-banner__icon > :where(svg, i) { --riko-icon-size: 1.2em; }
+  .riko-banner__text { margin: 0; min-width: 0; }
+  .riko-banner__link {
+    margin-left: var(--riko-space-2);
+    color: var(--riko-banner-ink); font-weight: var(--riko-weight-bold);
+    text-decoration: underline wavy color-mix(in srgb, var(--riko-banner-line) 70%, transparent);
+    text-underline-offset: 4px; text-decoration-thickness: 1.5px;
+    white-space: nowrap;
+  }
+  .riko-banner__link:hover { color: var(--riko-color-fg-strong); }
+  .riko-banner__close {
+    position: absolute; right: var(--riko-space-3); top: 50%; translate: 0 -50%;
+    display: grid; place-items: center;
+    width: 32px; height: 32px; padding: 0;
+    color: var(--riko-banner-ink); background: transparent; border: 0; border-radius: 50%;
+    transition: background var(--riko-duration-fast) ease, transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-banner__close::before {
+    content: ""; width: 16px; height: 16px; background: currentColor;
+    -webkit-mask: var(--riko-icon-x) center / contain no-repeat;
+    mask: var(--riko-icon-x) center / contain no-repeat;
+  }
+  .riko-banner__close:hover { background: color-mix(in srgb, var(--riko-banner-line) 22%, transparent); transform: rotate(90deg); }
+  @media (max-width: 520px) {
+    .riko-banner { justify-content: flex-start; text-align: left; padding-left: var(--riko-space-4); }
+  }
+}

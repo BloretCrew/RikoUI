@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设计基础 · Riko UI</title>
+<meta name="theme-color" content="#FBF5EA">
+<script src="../packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="../packages/core/dist/riko-ui.css">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+
+<header class="docs-header">
+  <div class="docs-header__inner">
+    <button type="button" class="riko-btn riko-btn--icon riko-btn--ghost docs-menu-btn" aria-label="打开导航"><i data-lucide="menu"></i></button>
+    <a class="docs-brand" href="index.html">
+      <span class="docs-brand__mark"><span class="riko-star" aria-hidden="true"></span></span>
+      <span><span class="docs-brand__name">Riko UI</span><span class="docs-brand__sub">little star ui kit</span></span>
+    </a>
+    <span class="docs-header__spacer"></span>
+    <div class="riko-theme-picker riko-theme-picker--compact" data-riko="theme-picker"></div>
+  </div>
+</header>
+
+<div class="docs-layout">
+  <aside class="docs-sidebar" aria-label="文档导航"></aside>
+  <main class="docs-main">
+    <div class="docs-hero">
+      <h1>设计基础</h1>
+      <p>设计变量、色彩、排版、图标与主题——Riko UI 一切组件的地基。</p>
+    </div>
+
+    <section class="docs-section" id="theme">
+      <h2>主题与深色模式 <small>Theme</small></h2>
+      <p>四种外观模式：按系统、按时间（8:00–18:00 浅色）、浅色、深色。选择会保存在 localStorage，所有使用 Riko UI 的页面共享。页面顶部右侧的小胶囊就是主题选择器。</p>
+      <h3>防闪烁（放在 &lt;head&gt; 中、样式表之前）</h3>
+      <div class="docs-demo" data-docs-nocode>
+        <pre class="riko-prose" style="margin:0; max-width:none;"><code>&lt;script src="https://cdn.jsdelivr.net/npm/@bloret-crew/riko-ui/dist/riko-theme-init.js"&gt;&lt;/script&gt;</code></pre>
+      </div>
+      <h3>局部深色区域</h3>
+      <p>任意元素加 data-theme 即可在局部强制浅色或深色。</p>
+      <div class="docs-demo">
+        <div data-theme="dark" style="padding: var(--riko-space-6); border-radius: var(--riko-radius-wobble); background: var(--riko-color-bg); color: var(--riko-color-fg);">
+          <h3 class="riko-h4">夜晚的百络谷 <span class="riko-star" aria-hidden="true"></span></h3>
+          <p class="riko-text riko-text--muted">这块区域始终是深色。</p>
+        </div>
+      </div>
+      <h3>覆盖品牌色</h3>
+      <p>只改调色板变量，所有组件自动跟随。下面这块把星星橙换成了樱花粉。</p>
+      <div class="docs-demo">
+        <div style="--riko-color-accent: #E98A9B; --riko-color-accent-soft: #FBE1E6; --riko-color-accent-ink: #A8364F; padding: var(--riko-space-5); border-radius: var(--riko-radius-wobble); background: var(--riko-color-surface);">
+          <p class="riko-hand riko-hand--accent">sakura mode <span class="riko-star" aria-hidden="true"></span></p>
+          <p>强调色变成了樱花粉，<mark class="riko-mark">高亮</mark> 也跟着变。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="theme-picker">
+      <h2>主题选择器 <small>Theme Picker</small></h2>
+      <p>留空容器即可，JS 自动生成四个选项并与 Riko.theme 同步。</p>
+      <h3>完整列表</h3>
+      <div class="docs-demo">
+        <div class="riko-theme-picker" data-riko="theme-picker" style="max-width: 420px;"></div>
+      </div>
+      <h3>紧凑胶囊</h3>
+      <div class="docs-demo">
+        <div class="riko-theme-picker riko-theme-picker--compact" data-riko="theme-picker"></div>
+      </div>
+      <h3>深浅切换按钮</h3>
+      <div class="docs-demo">
+        <button type="button" class="riko-btn riko-btn--icon" data-riko="theme-toggle" aria-label="切换深浅色"></button>
+      </div>
+    </section>
+
+    <section class="docs-section" id="colors" data-docs-noapi>
+      <h2>色彩 <small>Colors</small></h2>
+      <p>组件只使用这些语义变量（--riko-color-*）。切换右上角主题即可看到深色版本。所有文字组合均通过 WCAG AA 对比度校验（npm run contrast）。</p>
+      <div class="docs-demo docs-demo--surface" data-docs-nocode>
+        <div class="docs-swatches">
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-bg);"></div><div class="docs-swatch__name">页面背景<code>--riko-color-bg</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-surface);"></div><div class="docs-swatch__name">卡片/纸张<code>--riko-color-surface</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-surface-sunken);"></div><div class="docs-swatch__name">凹陷底<code>--riko-color-surface-sunken</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-surface-muted);"></div><div class="docs-swatch__name">米色块<code>--riko-color-surface-muted</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-fg);"></div><div class="docs-swatch__name">正文<code>--riko-color-fg</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-fg-strong);"></div><div class="docs-swatch__name">标题<code>--riko-color-fg-strong</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-fg-muted);"></div><div class="docs-swatch__name">次要文字<code>--riko-color-fg-muted</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-fg-subtle);"></div><div class="docs-swatch__name">占位/弱化<code>--riko-color-fg-subtle</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-border);"></div><div class="docs-swatch__name">描边<code>--riko-color-border</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-border-strong);"></div><div class="docs-swatch__name">强描边<code>--riko-color-border-strong</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-stitch);"></div><div class="docs-swatch__name">缝线<code>--riko-color-stitch</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-primary);"></div><div class="docs-swatch__name">主色·可可<code>--riko-color-primary</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-primary-fg);"></div><div class="docs-swatch__name">主色上的文字<code>--riko-color-primary-fg</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-brown);"></div><div class="docs-swatch__name">浅棕<code>--riko-color-brown</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-tan);"></div><div class="docs-swatch__name">驼色<code>--riko-color-tan</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-accent);"></div><div class="docs-swatch__name">强调·星星橙<code>--riko-color-accent</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-accent-soft);"></div><div class="docs-swatch__name">浅橙底<code>--riko-color-accent-soft</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-accent-ink);"></div><div class="docs-swatch__name">橙色文字<code>--riko-color-accent-ink</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-accent-fg);"></div><div class="docs-swatch__name">橙底上的文字<code>--riko-color-accent-fg</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-ice);"></div><div class="docs-swatch__name">冰蓝<code>--riko-color-ice</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-ice-soft);"></div><div class="docs-swatch__name">浅冰蓝底<code>--riko-color-ice-soft</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-ice-strong);"></div><div class="docs-swatch__name">深冰蓝<code>--riko-color-ice-strong</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-ice-ink);"></div><div class="docs-swatch__name">冰蓝文字<code>--riko-color-ice-ink</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-success);"></div><div class="docs-swatch__name">成功<code>--riko-color-success</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-success-soft);"></div><div class="docs-swatch__name">成功底<code>--riko-color-success-soft</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-success-ink);"></div><div class="docs-swatch__name">成功文字<code>--riko-color-success-ink</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-warning);"></div><div class="docs-swatch__name">警告<code>--riko-color-warning</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-warning-soft);"></div><div class="docs-swatch__name">警告底<code>--riko-color-warning-soft</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-warning-ink);"></div><div class="docs-swatch__name">警告文字<code>--riko-color-warning-ink</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-danger);"></div><div class="docs-swatch__name">危险<code>--riko-color-danger</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-danger-soft);"></div><div class="docs-swatch__name">危险底<code>--riko-color-danger-soft</code></div></div>
+          <div class="docs-swatch"><div class="docs-swatch__color" style="background: var(--riko-color-danger-ink);"></div><div class="docs-swatch__name">危险文字<code>--riko-color-danger-ink</code></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="typography">
+      <h2>排版 <small>Typography</small></h2>
+      <p>标题 ZCOOL XiaoWei，正文 Noto Sans SC，长文阅读 Noto Serif SC，手写点缀 Caveat，全部有系统字体兜底。</p>
+      <h3>标题</h3>
+      <div class="docs-demo" data-riko-ignore="multiple-h1">
+        <p class="riko-display">《络的世界》</p>
+        <h1 class="riko-h1">一级标题 · 沙滩上的画家</h1>
+        <h2 class="riko-h2">二级标题 · 世界的边缘</h2>
+        <h3 class="riko-h3">三级标题 · 熟悉的身影</h3>
+        <h4 class="riko-h4">四级标题 · 归途的微光</h4>
+        <h5 class="riko-h5">五级标题 · 暗林</h5>
+        <h6 class="riko-h6">六级标题 · 重逢</h6>
+      </div>
+      <h3>标题 + 手写副标</h3>
+      <div class="docs-demo">
+        <h2 class="riko-h2">小说目录 <span class="riko-hand">table of contents</span></h2>
+        <p class="riko-hand riko-hand--ice">a small star in ordinary days</p>
+      </div>
+      <h3>正文色调与尺寸</h3>
+      <div class="docs-demo">
+        <p class="riko-lead">从沙滩上的第一幅画开始，跟随主角一同踏入这个世界的边缘与深处。</p>
+        <p class="riko-text">这是普通正文。</p>
+        <p class="riko-text riko-text--sm riko-text--muted">这是次要的小字说明。</p>
+        <p class="riko-text riko-text--accent">橙色强调文字</p>
+        <p class="riko-text riko-text--ice">冰蓝文字</p>
+        <p class="riko-text riko-text--success">保存成功啦</p>
+        <p class="riko-text riko-text--danger">出了点小问题</p>
+        <p class="riko-eyebrow"><span class="riko-star riko-star--sm" aria-hidden="true"></span>CHAPTER ONE</p>
+        <p class="riko-caption">图注：络可的贝雷帽</p>
+      </div>
+      <h3>引用、键位、代码、高亮</h3>
+      <div class="docs-demo">
+        <blockquote class="riko-quote">愿你在字里行间找到属于自己的那片海。<cite class="riko-quote__cite">《络的世界》</cite></blockquote>
+        <p style="margin-top: var(--riko-space-4);">按 <kbd class="riko-kbd">/</kbd> 或 <kbd class="riko-kbd">Ctrl</kbd> + <kbd class="riko-kbd">K</kbd> 搜索，配置项 <code class="riko-code">themeMode</code>，<mark class="riko-mark">星星酥</mark> 今日特价，<mark class="riko-mark riko-mark--current">当前结果</mark>。</p>
+      </div>
+      <h3>长文（文章 / Markdown 输出）</h3>
+      <div class="docs-demo docs-demo--surface">
+        <article class="riko-prose">
+          <h2>络可的笔记本</h2>
+          <p>这里整理了小说中已经出现的设定。建议先读完已更新的章节，<a href="#typography">避免剧透</a>。</p>
+          <ul>
+            <li>HV：一个聚集着志同道合玩家的美好村子</li>
+            <li>灾厄：在大陆上蔓延的未知力量</li>
+          </ul>
+          <blockquote>日月忽其不淹兮，春与秋其代序。</blockquote>
+          <p>行内代码 <code>Riko.theme.set('dark')</code> 与 <mark>高亮</mark>。</p>
+        </article>
+      </div>
+      <h3>小说阅读</h3>
+      <div class="docs-demo docs-demo--surface">
+        <article class="riko-prose riko-prose--read">
+          <p>轻柔的海浪涌来，在微风的吹拂下散入金黄的沙滩。无垠的大海倒映着碧空，也消解了一部分太阳的热。</p>
+          <p>沙滩上，一个女孩哼着欢快的歌，挥动她的画笔，一道道鲜艳的色彩在画板上留下痕迹。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="docs-section" id="tokens" data-docs-noapi>
+      <h2>间距 · 圆角 · 阴影 <small>Tokens</small></h2>
+      <p>间距按 4px 递增；wobble 系列是手绘感的不规则圆角；press 系列是按钮底部的"实体阴影"。</p>
+      <h3>间距 --riko-space-*</h3>
+      <div class="docs-demo docs-demo--surface" data-docs-nocode>
+        <div class="riko-stack riko-stack--sm">
+          <div class="riko-cluster riko-cluster--nowrap"><code class="riko-code">--riko-space-1</code><span style="display:block; height: 14px; width: var(--riko-space-1); background: var(--riko-color-accent); border-radius: 4px;"></span></div>
+          <div class="riko-cluster riko-cluster--nowrap"><code class="riko-code">--riko-space-2</code><span style="display:block; height: 14px; width: var(--riko-space-2); background: var(--riko-color-accent); border-radius: 4px;"></span></div>
+          <div class="riko-cluster riko-cluster--nowrap"><code class="riko-code">--riko-space-3</code><span style="display:block; height: 14px; width: var(--riko-space-3); background: var(--riko-color-accent); border-radius: 4px;"></span></div>
+          <div class="riko-cluster riko-cluster--nowrap"><code class="riko-code">--riko-space-4</code><span style="display:block; height: 14px; width: var(--riko-space-4); background: var(--riko-color-accent); border-radius: 4px;"></span></div>
+          <div class="riko-cluster riko-cluster--nowrap"><code class="riko-code">--riko-space-5</code><span style="display:block; height: 14px; width: var(--riko-space-5); background: var(--riko-color-accent); border-radius: 4px;"></span></div>
+          <div class="riko-cluster riko-cluster--nowrap"><code class="riko-code">--riko-space-6</code><span style="display:block; height: 14px; width: var(--riko-space-6); background: var(--riko-color-accent); border-radius: 4px;"></span></div>
+          <div class="riko-cluster riko-cluster--nowrap"><code class="riko-code">--riko-space-7</code><span style="display:block; height: 14px; width: var(--riko-space-7); background: var(--riko-color-accent); border-radius: 4px;"></span></div>
+          <div class="riko-cluster riko-cluster--nowrap"><code class="riko-code">--riko-space-8</code><span style="display:block; height: 14px; width: var(--riko-space-8); background: var(--riko-color-accent); border-radius: 4px;"></span></div>
+          <div class="riko-cluster riko-cluster--nowrap"><code class="riko-code">--riko-space-9</code><span style="display:block; height: 14px; width: var(--riko-space-9); background: var(--riko-color-accent); border-radius: 4px;"></span></div>
+          <div class="riko-cluster riko-cluster--nowrap"><code class="riko-code">--riko-space-10</code><span style="display:block; height: 14px; width: var(--riko-space-10); background: var(--riko-color-accent); border-radius: 4px;"></span></div>
+        </div>
+      </div>
+      <h3>圆角 --riko-radius-*</h3>
+      <div class="docs-demo" data-docs-nocode>
+        <div class="riko-grid" style="--riko-grid-min: 120px;">
+          <div class="docs-box" style="border-radius: var(--riko-radius-xs); padding: var(--riko-space-6) var(--riko-space-3);">xs</div>
+          <div class="docs-box" style="border-radius: var(--riko-radius-sm); padding: var(--riko-space-6) var(--riko-space-3);">sm</div>
+          <div class="docs-box" style="border-radius: var(--riko-radius-md); padding: var(--riko-space-6) var(--riko-space-3);">md</div>
+          <div class="docs-box" style="border-radius: var(--riko-radius-lg); padding: var(--riko-space-6) var(--riko-space-3);">lg</div>
+          <div class="docs-box" style="border-radius: var(--riko-radius-xl); padding: var(--riko-space-6) var(--riko-space-3);">xl</div>
+          <div class="docs-box" style="border-radius: var(--riko-radius-pill); padding: var(--riko-space-6) var(--riko-space-3);">pill</div>
+          <div class="docs-box" style="border-radius: var(--riko-radius-wobble-sm); padding: var(--riko-space-6) var(--riko-space-3);">wobble-sm</div>
+          <div class="docs-box" style="border-radius: var(--riko-radius-wobble); padding: var(--riko-space-6) var(--riko-space-3);">wobble</div>
+          <div class="docs-box" style="border-radius: var(--riko-radius-wobble-lg); padding: var(--riko-space-6) var(--riko-space-3);">wobble-lg</div>
+        </div>
+      </div>
+      <h3>阴影 --riko-shadow-*</h3>
+      <div class="docs-demo" data-docs-nocode>
+        <div class="riko-grid" style="--riko-grid-min: 140px;">
+          <div class="docs-box" style="box-shadow: var(--riko-shadow-sm); background: var(--riko-color-surface); color: var(--riko-color-fg); padding: var(--riko-space-6) var(--riko-space-3);">sm</div>
+          <div class="docs-box" style="box-shadow: var(--riko-shadow-md); background: var(--riko-color-surface); color: var(--riko-color-fg); padding: var(--riko-space-6) var(--riko-space-3);">md</div>
+          <div class="docs-box" style="box-shadow: var(--riko-shadow-lg); background: var(--riko-color-surface); color: var(--riko-color-fg); padding: var(--riko-space-6) var(--riko-space-3);">lg</div>
+          <div class="docs-box" style="box-shadow: var(--riko-shadow-press); background: var(--riko-color-surface); color: var(--riko-color-fg); padding: var(--riko-space-6) var(--riko-space-3);">press</div>
+          <div class="docs-box" style="box-shadow: var(--riko-shadow-press-primary); background: var(--riko-color-surface); color: var(--riko-color-fg); padding: var(--riko-space-6) var(--riko-space-3);">press-primary</div>
+          <div class="docs-box" style="box-shadow: var(--riko-shadow-press-accent); background: var(--riko-color-surface); color: var(--riko-color-fg); padding: var(--riko-space-6) var(--riko-space-3);">press-accent</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="icon">
+      <h2>图标与星星 <small>Icon &amp; Star</small></h2>
+      <p>页面图标推荐 <a href="https://lucide.dev/icons/">Lucide</a>：先引入 lucide，再引入 riko-ui.js，所有 &lt;i data-lucide&gt; 会被自动渲染（包括之后动态插入的）。</p>
+      <h3>Lucide 图标</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--lg">
+          <i data-lucide="book-open"></i>
+          <i data-lucide="notebook-pen"></i>
+          <i data-lucide="heart"></i>
+          <i data-lucide="sparkles"></i>
+          <i data-lucide="palette"></i>
+          <i data-lucide="cloud-sun"></i>
+        </div>
+      </div>
+      <h3>品牌星星</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--lg">
+          <span class="riko-star riko-star--xs" aria-hidden="true"></span>
+          <span class="riko-star riko-star--sm" aria-hidden="true"></span>
+          <span class="riko-star" aria-hidden="true"></span>
+          <span class="riko-star riko-star--lg" aria-hidden="true"></span>
+          <span class="riko-star riko-star--xl riko-star--twinkle" aria-hidden="true"></span>
+          <span class="riko-star riko-star--lg riko-star--ice riko-star--bob" aria-hidden="true"></span>
+          <span class="riko-star riko-star--lg riko-star--muted" aria-hidden="true"></span>
+        </div>
+      </div>
+      <h3>内置图标（无需 Lucide）</h3>
+      <p>组件内部使用的 46 个图标同样可以直接使用：&lt;span class="riko-icon riko-icon--名称" aria-hidden="true"&gt;&lt;/span&gt;。</p>
+      <div class="docs-demo" data-docs-nocode>
+        <div class="riko-grid riko-grid--sm" style="--riko-grid-min: 96px;">
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--check" aria-hidden="true"></span><br>check</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--x" aria-hidden="true"></span><br>x</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--minus" aria-hidden="true"></span><br>minus</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--plus" aria-hidden="true"></span><br>plus</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--chevron-down" aria-hidden="true"></span><br>chevron-down</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--chevron-up" aria-hidden="true"></span><br>chevron-up</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--chevron-left" aria-hidden="true"></span><br>chevron-left</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--chevron-right" aria-hidden="true"></span><br>chevron-right</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--chevrons-up-down" aria-hidden="true"></span><br>chevrons-up-down</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--arrow-up" aria-hidden="true"></span><br>arrow-up</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--arrow-right" aria-hidden="true"></span><br>arrow-right</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--arrow-left" aria-hidden="true"></span><br>arrow-left</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--search" aria-hidden="true"></span><br>search</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--info" aria-hidden="true"></span><br>info</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--success" aria-hidden="true"></span><br>success</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--warning" aria-hidden="true"></span><br>warning</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--danger" aria-hidden="true"></span><br>danger</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--help" aria-hidden="true"></span><br>help</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--loader" aria-hidden="true"></span><br>loader</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--upload" aria-hidden="true"></span><br>upload</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--file" aria-hidden="true"></span><br>file</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--calendar" aria-hidden="true"></span><br>calendar</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--clock" aria-hidden="true"></span><br>clock</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--eye" aria-hidden="true"></span><br>eye</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--eye-off" aria-hidden="true"></span><br>eye-off</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--copy" aria-hidden="true"></span><br>copy</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--menu" aria-hidden="true"></span><br>menu</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--more-horizontal" aria-hidden="true"></span><br>more-horizontal</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--external-link" aria-hidden="true"></span><br>external-link</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--sun" aria-hidden="true"></span><br>sun</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--moon" aria-hidden="true"></span><br>moon</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--monitor" aria-hidden="true"></span><br>monitor</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--settings" aria-hidden="true"></span><br>settings</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--inbox" aria-hidden="true"></span><br>inbox</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--image" aria-hidden="true"></span><br>image</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--user" aria-hidden="true"></span><br>user</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--bell" aria-hidden="true"></span><br>bell</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--grip-vertical" aria-hidden="true"></span><br>grip-vertical</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--folder" aria-hidden="true"></span><br>folder</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--folder-open" aria-hidden="true"></span><br>folder-open</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--circle" aria-hidden="true"></span><br>circle</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--dot" aria-hidden="true"></span><br>dot</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--pencil" aria-hidden="true"></span><br>pencil</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--feather" aria-hidden="true"></span><br>feather</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--lock" aria-hidden="true"></span><br>lock</div>
+          <div class="docs-box" style="background: var(--riko-color-surface); color: var(--riko-color-fg); font-size: var(--riko-text-xs);"><span class="riko-icon riko-icon--lg riko-icon--send" aria-hidden="true"></span><br>send</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="reveal">
+      <h2>滚动进场 <small>Reveal</small></h2>
+      <p>加上 data-riko="reveal" 的元素进入视口时会淡入上移；减少动态效果时直接显示。</p>
+      <div class="docs-demo">
+        <div class="riko-grid riko-grid--cols-3">
+          <div class="docs-box" data-riko="reveal">第一张</div>
+          <div class="docs-box" data-riko="reveal" data-riko-delay="120">第二张</div>
+          <div class="docs-box" data-riko="reveal" data-riko-delay="240">第三张</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="utilities">
+      <h2>工具类 <small>Utilities</small></h2>
+      <p>只提供少量高频工具，更多布局请用布局原语。</p>
+      <div class="docs-demo">
+        <p class="riko-u-truncate" style="max-width: 260px;">这是一段会被截断的很长很长很长很长的文字。</p>
+        <p class="riko-u-clamp-2" style="max-width: 320px;">这是一段最多显示两行的文字，超出部分会用省略号表示。络可在沙滩上画画，海浪一遍遍涌上来，又退下去。</p>
+        <p class="riko-u-text-center riko-u-mt-4">居中文字</p>
+        <span class="riko-u-sr-only">只有读屏软件能读到这句话</span>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="assets/manifest.js"></script>
+<script src="assets/docs.js"></script>
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="../packages/core/dist/riko-ui.js"></script>
+</body>
+</html>

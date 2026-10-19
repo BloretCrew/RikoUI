@@ -1,0 +1,71 @@
+{
+  "name": "polaroid",
+  "title": "拍立得",
+  "titleEn": "Polaroid",
+  "category": "data",
+  "summary": "带白边与手写说明的照片框，轻微倾斜，悬停回正。",
+  "when": "展示插画、角色图、头图等需要「贴在手账上」感觉的图片。普通内容图用 card 的 __media。",
+  "root": "riko-polaroid",
+  "element": "figure",
+  "parts": [
+    {
+      "class": "riko-polaroid__caption",
+      "desc": "手写体说明（figcaption）"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-polaroid--left",
+      "desc": "向左倾斜",
+      "group": "layout"
+    },
+    {
+      "class": "riko-polaroid--straight",
+      "desc": "不倾斜",
+      "group": "layout"
+    },
+    {
+      "class": "riko-polaroid--sm",
+      "desc": "小号（180px）",
+      "group": "size"
+    },
+    {
+      "class": "riko-polaroid--lg",
+      "desc": "大号（360px）",
+      "group": "size"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "<img> 必须有描述性的 alt；__caption 是可见说明，不能替代 alt。"
+  ],
+  "rules": [
+    "内部可放 <span class=\"riko-tape\" aria-hidden=\"true\"></span> 加胶带。",
+    "宽度可用 style=\"--riko-polaroid-w: 240px\" 自定义；图片比例用 --riko-polaroid-ratio。"
+  ],
+  "avoid": [
+    "不要把拍立得放进 overflow:hidden 的小容器，倾斜与胶带会被裁掉。"
+  ],
+  "examples": [
+    {
+      "title": "基础用法",
+      "html": "<div class=\"riko-cluster riko-cluster--lg riko-cluster--center\">\n  <figure class=\"riko-polaroid\">\n    <span class=\"riko-tape\" aria-hidden=\"true\"></span>\n    <img src=\"https://riko.land/assets/logo.jpg\" alt=\"《络的世界》封面插画\">\n    <figcaption class=\"riko-polaroid__caption\">Riko's World ✦</figcaption>\n  </figure>\n  <figure class=\"riko-polaroid riko-polaroid--left riko-polaroid--sm\">\n    <img src=\"https://riko.land/assets/logo.jpg\" alt=\"《络的世界》封面插画\">\n    <figcaption class=\"riko-polaroid__caption\">little star</figcaption>\n  </figure>\n  <figure class=\"riko-polaroid riko-polaroid--straight riko-polaroid--sm\">\n    <img src=\"https://riko.land/assets/logo.jpg\" alt=\"《络的世界》封面插画\">\n    <figcaption class=\"riko-polaroid__caption\">summer, 2026</figcaption>\n  </figure>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-polaroid",
+      "has": "img,video,picture",
+      "message": "riko-polaroid 内需要一张图片"
+    },
+    {
+      "selector": ".riko-polaroid__caption",
+      "parent": ".riko-polaroid",
+      "message": "riko-polaroid__caption 必须位于 riko-polaroid 之内"
+    }
+  ],
+  "related": [
+    "card",
+    "tape"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "name": "timeline",
+  "title": "时间轴",
+  "titleEn": "Timeline",
+  "category": "data",
+  "summary": "按时间顺序排列的事件，虚线串联，节点可以是小圆点或星星。",
+  "when": "更新日志、故事年表、进度记录。表示流程步骤（可操作）用 steps。",
+  "root": "riko-timeline",
+  "element": "ol",
+  "parts": [
+    {
+      "class": "riko-timeline__item",
+      "desc": "一个事件（li）"
+    },
+    {
+      "class": "riko-timeline__dot",
+      "desc": "节点（内部可放 riko-star 变成星星）"
+    },
+    {
+      "class": "riko-timeline__content",
+      "desc": "右侧内容列"
+    },
+    {
+      "class": "riko-timeline__time",
+      "desc": "时间（手写体，建议用 <time>）"
+    },
+    {
+      "class": "riko-timeline__title",
+      "desc": "标题"
+    },
+    {
+      "class": "riko-timeline__body",
+      "desc": "描述"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-timeline--alternate",
+      "desc": "宽屏左右交替",
+      "group": "layout"
+    }
+  ],
+  "states": [
+    {
+      "attr": "aria-current=\"step\"",
+      "on": "riko-timeline__item",
+      "desc": "当前/最新节点高亮"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "用有序列表 <ol>；时间用 <time datetime=\"…\">。"
+  ],
+  "rules": [
+    "节点换成星星：<span class=\"riko-timeline__dot\"><span class=\"riko-star\" aria-hidden=\"true\"></span></span>。"
+  ],
+  "avoid": [
+    "不要省略 __content 包裹，否则布局会错位。"
+  ],
+  "examples": [
+    {
+      "title": "更新日志",
+      "html": "<ol class=\"riko-timeline\" style=\"max-width: 520px\">\n  <li class=\"riko-timeline__item\" aria-current=\"step\">\n    <span class=\"riko-timeline__dot\"></span>\n    <div class=\"riko-timeline__content\">\n      <time class=\"riko-timeline__time\" datetime=\"2026-10-15\">2026.10.15</time>\n      <h3 class=\"riko-timeline__title\">更新第 076 节</h3>\n      <p class=\"riko-timeline__body\">风过围垣，落星回响 —— 第一章完结！</p>\n    </div>\n  </li>\n  <li class=\"riko-timeline__item\">\n    <span class=\"riko-timeline__dot\"><span class=\"riko-star\" aria-hidden=\"true\"></span></span>\n    <div class=\"riko-timeline__content\">\n      <time class=\"riko-timeline__time\" datetime=\"2026-07-01\">2026.07.01</time>\n      <h3 class=\"riko-timeline__title\">官方网站上线</h3>\n      <p class=\"riko-timeline__body\">小说阅读器与络可的笔记本同步开放。</p>\n    </div>\n  </li>\n  <li class=\"riko-timeline__item\">\n    <span class=\"riko-timeline__dot\"></span>\n    <div class=\"riko-timeline__content\">\n      <time class=\"riko-timeline__time\" datetime=\"2026-02-16\">2026.02.16</time>\n      <h3 class=\"riko-timeline__title\">沙滩上的画家</h3>\n      <p class=\"riko-timeline__body\">故事从这里开始。</p>\n    </div>\n  </li>\n</ol>"
+    },
+    {
+      "title": "左右交替",
+      "html": "<ol class=\"riko-timeline riko-timeline--alternate\">\n  <li class=\"riko-timeline__item\">\n    <span class=\"riko-timeline__dot\"></span>\n    <div class=\"riko-timeline__content\"><span class=\"riko-timeline__time\">序章</span><h3 class=\"riko-timeline__title\">沙滩上的画家</h3><p class=\"riko-timeline__body\">络可在边界之地作画。</p></div>\n  </li>\n  <li class=\"riko-timeline__item\">\n    <span class=\"riko-timeline__dot\"><span class=\"riko-star\" aria-hidden=\"true\"></span></span>\n    <div class=\"riko-timeline__content\"><span class=\"riko-timeline__time\">序章</span><h3 class=\"riko-timeline__title\">涅槃的天使</h3><p class=\"riko-timeline__body\">幽蓝重生，裁决降临。</p></div>\n  </li>\n  <li class=\"riko-timeline__item\">\n    <span class=\"riko-timeline__dot\"></span>\n    <div class=\"riko-timeline__content\"><span class=\"riko-timeline__time\">第一章</span><h3 class=\"riko-timeline__title\">自晨曦中归来</h3><p class=\"riko-timeline__body\">破空而来的归乡之箭。</p></div>\n  </li>\n</ol>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-timeline__item",
+      "parent": ".riko-timeline",
+      "message": "riko-timeline__item 必须位于 riko-timeline 之内"
+    },
+    {
+      "selector": ".riko-timeline__item",
+      "has": ".riko-timeline__content",
+      "message": "riko-timeline__item 内需要 riko-timeline__content"
+    }
+  ],
+  "related": [
+    "steps",
+    "list"
+  ]
+}

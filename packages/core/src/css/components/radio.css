@@ -1,0 +1,62 @@
+/* ==========================================================================
+   radio · 单选框（原生 input 美化，无需 JS）
+   <label class="riko-radio"><input type="radio" name="drink" value="tea"> 热红茶</label>
+   带说明：<span class="riko-radio__text">标题<span class="riko-radio__desc">说明</span></span>
+   --card 可选卡片 · --sm / --lg · disabled · 同组用相同 name，并放进 <fieldset class="riko-fieldset">
+   ========================================================================== */
+@layer riko.components {
+  .riko-radio {
+    --riko-check-size: 20px;
+    display: inline-flex; align-items: flex-start; gap: 10px;
+    font-size: var(--riko-text-md); line-height: 1.5; color: var(--riko-color-fg);
+    cursor: pointer; -webkit-tap-highlight-color: transparent;
+  }
+  .riko-radio > input {
+    flex: none; appearance: none; -webkit-appearance: none; margin: calc((1.5em - var(--riko-check-size)) / 2) 0 0;
+    width: var(--riko-check-size); height: var(--riko-check-size);
+    display: grid; place-items: center;
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) solid var(--riko-color-border-strong);
+    border-radius: 50%;
+    box-shadow: 0 2px 0 var(--riko-color-border);
+    cursor: inherit;
+    transition: border-color var(--riko-duration-fast) ease, transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  /* 选中时中心是一颗小星星 */
+  .riko-radio > input::before {
+    content: ""; width: 64%; height: 64%;
+    background: var(--riko-color-accent);
+    -webkit-mask: var(--riko-icon-star) center / contain no-repeat;
+    mask: var(--riko-icon-star) center / contain no-repeat;
+    transform: scale(0) rotate(-40deg);
+    transition: transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-radio:hover > input:not(:disabled) { border-color: var(--riko-color-accent); }
+  .riko-radio > input:checked { border-color: var(--riko-color-accent); box-shadow: 0 2px 0 var(--riko-color-accent-shade); }
+  .riko-radio > input:checked::before { transform: scale(1) rotate(0); }
+  .riko-radio > input:active:not(:disabled) { transform: scale(.88); }
+  .riko-radio > input:focus-visible { outline: var(--riko-focus-ring); outline-offset: var(--riko-focus-offset); }
+  .riko-radio > input[aria-invalid="true"] { border-color: var(--riko-color-danger); }
+  .riko-radio:has(> input:disabled) { cursor: not-allowed; color: var(--riko-color-fg-muted); }
+  .riko-radio > input:disabled { opacity: .55; box-shadow: none; }
+
+  .riko-radio__text { display: flex; flex-direction: column; min-width: 0; }
+  .riko-radio__desc { font-size: var(--riko-text-sm); color: var(--riko-color-fg-muted); }
+
+  .riko-radio--sm { --riko-check-size: 16px; font-size: var(--riko-text-sm); gap: 8px; }
+  .riko-radio--lg { --riko-check-size: 24px; font-size: var(--riko-text-lg); }
+
+  .riko-radio--card {
+    display: flex; width: 100%;
+    padding: var(--riko-space-4);
+    background: var(--riko-color-surface);
+    border: var(--riko-border-width) dashed var(--riko-color-border);
+    border-radius: var(--riko-radius-wobble-sm);
+    transition: border-color var(--riko-duration-fast) ease, background var(--riko-duration-fast) ease, transform var(--riko-duration-base) var(--riko-ease-bounce);
+  }
+  .riko-radio--card:hover { background: var(--riko-color-surface-muted); transform: translateY(-2px); }
+  .riko-radio--card:has(> input:checked) { border-style: solid; border-color: var(--riko-color-accent); background: var(--riko-color-accent-soft); }
+  .riko-radio--card:has(> input:disabled) { transform: none; background: var(--riko-color-surface); }
+  .riko-radio--card .riko-radio__text { flex: 1; font-weight: var(--riko-weight-medium); }
+  .riko-radio--card .riko-radio__desc { font-weight: var(--riko-weight-normal); }
+}

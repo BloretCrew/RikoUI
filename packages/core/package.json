@@ -1,0 +1,76 @@
+{
+  "name": "@bloret-crew/riko-ui",
+  "version": "0.1.0",
+  "description": "温馨手绘风的通用 UI 框架：纯 CSS + 原生 JS，零依赖，深浅色，对 AI 友好。",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/riko-ui.esm.js",
+  "module": "./dist/riko-ui.esm.js",
+  "types": "./types/index.d.ts",
+  "style": "./dist/riko-ui.css",
+  "unpkg": "./dist/riko-ui.min.js",
+  "jsdelivr": "./dist/riko-ui.min.js",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./dist/riko-ui.esm.js"
+    },
+    "./css": "./dist/riko-ui.css",
+    "./css/min": "./dist/riko-ui.min.css",
+    "./tokens.css": "./dist/tokens.css",
+    "./riko-ui.css": "./dist/riko-ui.css",
+    "./riko-ui.min.css": "./dist/riko-ui.min.css",
+    "./riko-ui.js": "./dist/riko-ui.js",
+    "./riko-ui.min.js": "./dist/riko-ui.min.js",
+    "./theme-init": "./dist/riko-theme-init.js",
+    "./components.json": "./ai/components.json",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "riko-ui": "./bin/riko-ui.mjs"
+  },
+  "files": [
+    "dist",
+    "types",
+    "ai",
+    "bin",
+    "llms.txt",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "*.css",
+    "./dist/riko-ui.esm.js",
+    "./dist/riko-ui.esm.min.js",
+    "./dist/riko-ui.js",
+    "./dist/riko-ui.min.js"
+  ],
+  "keywords": [
+    "ui",
+    "css",
+    "design-system",
+    "components",
+    "dark-mode",
+    "cute",
+    "hand-drawn",
+    "ai-friendly",
+    "chinese"
+  ],
+  "peerDependencies": {
+    "lucide": ">=0.400.0"
+  },
+  "peerDependenciesMeta": {
+    "lucide": {
+      "optional": true
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BloretCrew/RikoUI.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://bloretcrew.github.io/RikoUI/",
+  "bugs": {
+    "url": "https://github.com/BloretCrew/RikoUI/issues"
+  }
+}

@@ -1,0 +1,74 @@
+/* ==========================================================================
+   list · 列表
+   <ul class="riko-list riko-list--divided">
+     <li class="riko-list__item">
+       <span class="riko-list__icon">…</span>
+       <div class="riko-list__content"><span class="riko-list__title">标题</span><span class="riko-list__desc">说明</span></div>
+       <span class="riko-list__meta">3 分钟前</span>
+     </li>
+   </ul>
+   可点击：<ul class="riko-list riko-list--interactive"><li><a class="riko-list__item" href="…">…</a></li></ul>
+   ========================================================================== */
+@layer riko.components {
+  .riko-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--riko-list-gap, 2px); }
+  .riko-list > li { list-style: none; min-width: 0; }
+  .riko-list__item {
+    position: relative; display: flex; align-items: center; gap: var(--riko-space-3);
+    width: 100%; min-width: 0; padding: var(--riko-space-3) var(--riko-space-3);
+    color: var(--riko-color-fg); text-align: left; text-decoration: none;
+    background: transparent; border: var(--riko-border-width) solid transparent;
+    border-radius: var(--riko-radius-wobble-sm);
+  }
+  .riko-list__icon {
+    flex: none; display: grid; place-items: center; width: 40px; height: 40px;
+    border-radius: 13px 11px 14px 10px; font-size: 1.15rem;
+    background: var(--riko-color-ice-soft); color: var(--riko-color-ice-ink);
+  }
+  .riko-list__num {
+    flex: none; min-width: 2.6em; padding: 5px 4px; border-radius: 9px; text-align: center; line-height: 1;
+    font-family: var(--riko-font-hand); font-weight: 700; font-size: var(--riko-text-lg);
+    background: var(--riko-color-ice-soft); color: var(--riko-color-ice-ink);
+    transition: background var(--riko-duration-fast) ease, color var(--riko-duration-fast) ease;
+  }
+  .riko-list__content { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+  .riko-list__title { font-weight: var(--riko-weight-medium); color: var(--riko-color-fg-strong); line-height: 1.5; }
+  .riko-list__desc { font-size: var(--riko-text-sm); color: var(--riko-color-fg-muted); line-height: 1.6; }
+  .riko-list__meta { flex: none; font-size: var(--riko-text-xs); color: var(--riko-color-fg-muted); white-space: nowrap; }
+  .riko-list__action { flex: none; display: flex; align-items: center; gap: var(--riko-space-1); }
+
+  .riko-list--divided { --riko-list-gap: 0; }
+  .riko-list--divided > li + li, .riko-list--divided > .riko-list__item + .riko-list__item { border-top: var(--riko-border-width) dashed var(--riko-color-border); }
+  .riko-list--divided .riko-list__item { border-radius: 0; padding-inline: var(--riko-space-1); }
+
+  /* 可点击列表 */
+  .riko-list--interactive .riko-list__item {
+    cursor: pointer;
+    transition: background var(--riko-duration-fast) ease, transform var(--riko-duration-fast) ease, border-color var(--riko-duration-fast) ease;
+  }
+  .riko-list--interactive .riko-list__item::after {
+    content: ""; flex: none; width: .8em; height: .8em; background: var(--riko-color-tan);
+    -webkit-mask: var(--riko-icon-chevron-right) center / contain no-repeat;
+    mask: var(--riko-icon-chevron-right) center / contain no-repeat;
+    transition: transform var(--riko-duration-fast) ease, background var(--riko-duration-fast) ease;
+  }
+  .riko-list--interactive .riko-list__item:hover { background: var(--riko-color-surface-muted); transform: translateX(3px); }
+  .riko-list--interactive .riko-list__item:hover::after { transform: translateX(3px); background: var(--riko-color-accent); }
+  .riko-list--interactive .riko-list__item:hover .riko-list__num { background: var(--riko-color-accent-soft); color: var(--riko-color-accent-ink); }
+  .riko-list--interactive .riko-list__item[aria-current]:not([aria-current="false"]) {
+    background: var(--riko-color-accent-soft); border-color: var(--riko-color-accent);
+  }
+  .riko-list--interactive .riko-list__item[aria-current]:not([aria-current="false"]) .riko-list__num { background: var(--riko-color-accent); color: var(--riko-color-accent-fg); }
+  .riko-list--divided.riko-list--interactive .riko-list__item:hover { transform: none; }
+
+  /* 小卡片网格（如章节目录） */
+  .riko-list--cards {
+    display: grid; gap: var(--riko-space-3);
+    grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+  }
+  .riko-list--cards .riko-list__item { height: 100%; background: var(--riko-color-surface-sunken); }
+  .riko-list--cards.riko-list--interactive .riko-list__item:hover {
+    transform: translateY(-3px) rotate(-.6deg);
+    background: var(--riko-color-surface); border-color: var(--riko-color-accent); box-shadow: var(--riko-shadow-md);
+  }
+  .riko-list--cards .riko-list__title { font-weight: var(--riko-weight-normal); font-size: var(--riko-text-sm); color: var(--riko-color-fg); }
+}
