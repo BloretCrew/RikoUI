@@ -28,7 +28,7 @@
 
   /* 紧凑：一行四个图标胶囊 */
   .riko-theme-picker--compact {
-    display: inline-flex; width: fit-content; align-self: flex-start; gap: 2px; padding: 3px;
+    display: inline-flex; width: fit-content; gap: 2px; padding: 3px;
     border: var(--riko-border-width) solid var(--riko-color-border); border-radius: var(--riko-radius-pill);
     background: var(--riko-color-surface);
   }

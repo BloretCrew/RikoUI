@@ -8,10 +8,11 @@
     "build": "node tools/build.mjs",
     "check": "node packages/core/bin/riko-ui.mjs check docs",
     "contrast": "node tools/contrast.mjs",
-    "test": "node tools/build.mjs && node tools/verify.mjs && node tools/dom-check.mjs",
+    "test": "node tools/build.mjs && node tools/verify.mjs && node tools/dom-check.mjs && node tools/mobile-check.mjs && node tools/mobile-check.mjs --width 320",
     "shots": "node tools/screenshot.mjs",
     "build:fonts": "node tools/build-fonts.mjs",
-    "check:dom": "node tools/dom-check.mjs"
+    "check:dom": "node tools/dom-check.mjs",
+    "check:mobile": "node tools/mobile-check.mjs"
   },
   "devDependencies": {
     "@fontsource/caveat": "^5.3.0",

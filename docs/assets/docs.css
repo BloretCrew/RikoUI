@@ -7,10 +7,10 @@
   border-bottom: var(--riko-border-width) dashed var(--riko-color-border);
 }
 .docs-header__inner { display: flex; align-items: center; gap: var(--riko-space-4); height: var(--riko-header-h); width: min(1440px, 100% - 40px); margin-inline: auto; }
-.docs-brand { text-decoration: none; display: flex; align-items: center; gap: var(--riko-space-3); }
-.docs-brand__mark { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--riko-color-accent-soft); box-shadow: 0 0 0 2px var(--riko-color-tan); }
+.docs-brand { flex: none; min-width: 0; text-decoration: none; display: flex; align-items: center; gap: var(--riko-space-3); }
+.docs-brand__mark { flex: none; display: grid; place-items: center; width: 42px; height: 42px; border-radius: 50%; background: var(--riko-color-accent-soft); box-shadow: 0 0 0 2px var(--riko-color-tan); }
 .docs-brand__mark .riko-star { --riko-star-size: 24px; }
-.docs-brand__name { font-family: var(--riko-font-title); font-size: var(--riko-text-xl); color: var(--riko-color-fg-strong); line-height: 1.1; }
+.docs-brand__name { white-space: nowrap; font-family: var(--riko-font-title); font-size: var(--riko-text-xl); color: var(--riko-color-fg-strong); line-height: 1.1; }
 .docs-brand__sub { display: block; font-family: var(--riko-font-hand); font-size: var(--riko-text-md); color: var(--riko-color-brown); }
 .docs-header__spacer { flex: 1; }
 .docs-menu-btn { display: none; }
@@ -67,7 +67,7 @@
 .docs-api th { color: var(--riko-color-fg-muted); font-weight: 500; font-size: var(--riko-text-xs); }
 .docs-api td:first-child { max-width: 320px; overflow-wrap: anywhere; }
 .docs-api code { font-family: var(--riko-font-mono); font-size: .85em; color: var(--riko-color-accent-ink); background: var(--riko-color-surface-muted); padding: 1px 6px; border-radius: 6px; }
-.docs-api ul { margin: 0; padding-left: 1.2em; font-size: var(--riko-text-sm); }
+.docs-api ul { margin: 0; padding-left: 1.2em; font-size: var(--riko-text-sm); overflow-wrap: anywhere; }
 .docs-api ul li + li { margin-top: 2px; }
 .docs-api .docs-avoid li::marker { content: "✗ "; color: var(--riko-color-danger-ink); }
 .docs-api .docs-rules li::marker { content: "✓ "; color: var(--riko-color-success-ink); }
@@ -101,4 +101,15 @@
   .docs-api table { display: block; overflow-x: auto; }
   .docs-api td:first-child { max-width: none; }
   .docs-api td:first-child code { white-space: nowrap; }
+}
+
+/* 手机：顶栏不挤压品牌区 */
+@media (max-width: 480px) {
+  .docs-header__inner { gap: var(--riko-space-2); width: calc(100% - 24px); }
+  .docs-brand__sub { display: none; }
+  .docs-brand__mark { width: 36px; height: 36px; }
+  .docs-header .riko-theme-picker--compact .riko-theme-picker__icon { width: 30px; height: 30px; }
+}
+@media (max-width: 360px) {
+  .docs-brand__name { display: none; }
 }
