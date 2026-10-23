@@ -1,0 +1,2 @@
+/*! Riko UI v0.1.0 | MIT License | 内置图标来自 Lucide (ISC) */
+(function(){try{var m=localStorage.getItem('riko-theme')||'system',h=new Date().getHours(),d=m==='dark'||(m==='time'&&(h<8||h>=18))||(m==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.setAttribute('data-theme',d?'dark':'light');document.documentElement.setAttribute('data-theme-mode',m)}catch(e){}})();

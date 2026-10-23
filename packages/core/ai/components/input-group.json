@@ -1,0 +1,112 @@
+{
+  "name": "input-group",
+  "title": "输入组",
+  "titleEn": "Input Group",
+  "category": "form",
+  "summary": "给输入框加前后缀文字、图标或内嵌按钮，整体一个边框。",
+  "when": "网址前缀、单位后缀、搜索框带按钮、密码显示切换等。",
+  "root": "riko-input-group",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-input-group__addon",
+      "desc": "前缀/后缀文字块（放在开头或末尾）"
+    },
+    {
+      "class": "riko-input-group__icon",
+      "desc": "输入框内的装饰图标"
+    },
+    {
+      "class": "riko-password-toggle__show",
+      "desc": "（JS 生成）密码切换按钮中的「显示」图标"
+    },
+    {
+      "class": "riko-password-toggle__hide",
+      "desc": "（JS 生成）密码切换按钮中的「隐藏」图标"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-input-group--sm",
+      "desc": "小号",
+      "group": "size"
+    },
+    {
+      "class": "riko-input-group--lg",
+      "desc": "大号",
+      "group": "size"
+    },
+    {
+      "class": "riko-input-group--round",
+      "desc": "胶囊形",
+      "group": "shape"
+    }
+  ],
+  "states": [
+    {
+      "attr": "aria-invalid=\"true\"",
+      "on": "riko-input",
+      "desc": "写在内部 input 上，整个组变红"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"password-toggle\"",
+    "options": [
+      {
+        "attr": "data-riko-target",
+        "values": "CSS 选择器",
+        "default": "同组内的 input",
+        "desc": "要切换的密码框"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "el.riko.toggle()",
+        "desc": "切换显示/隐藏"
+      }
+    ],
+    "events": []
+  },
+  "a11y": [
+    "图标只是装饰；输入框仍需 label 或 aria-label。",
+    "密码切换按钮需要 aria-label，JS 会在显示后改为「隐藏密码」并维护 aria-pressed。"
+  ],
+  "rules": [
+    "内部直接放 riko-input / riko-select / riko-btn，不需要给它们去边框。",
+    "密码切换按钮留空即可，图标由 JS 生成。"
+  ],
+  "avoid": [
+    "不要在输入组外层再包 riko-input 的边框样式。"
+  ],
+  "examples": [
+    {
+      "title": "前后缀",
+      "html": "<div class=\"riko-input-group\">\n  <span class=\"riko-input-group__addon\">https://</span>\n  <input class=\"riko-input\" type=\"text\" value=\"riko.land\" aria-label=\"网址\">\n  <span class=\"riko-input-group__addon\">.com</span>\n</div>"
+    },
+    {
+      "title": "图标与按钮",
+      "html": "<div class=\"riko-input-group riko-input-group--round\">\n  <span class=\"riko-input-group__icon\"><i data-lucide=\"search\"></i></span>\n  <input class=\"riko-input\" type=\"search\" placeholder=\"搜索小说内容…\" aria-label=\"搜索小说内容\">\n  <button type=\"button\" class=\"riko-btn riko-btn--primary riko-btn--sm\">搜索</button>\n</div>"
+    },
+    {
+      "title": "密码显示/隐藏",
+      "html": "<div class=\"riko-input-group\">\n  <span class=\"riko-input-group__icon\"><i data-lucide=\"lock\"></i></span>\n  <input class=\"riko-input\" id=\"password\" type=\"password\" value=\"star-cake-2026\" aria-label=\"密码\">\n  <button type=\"button\" class=\"riko-btn riko-btn--ghost riko-btn--icon\" data-riko=\"password-toggle\" aria-label=\"显示密码\"></button>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-input-group",
+      "has": "input, select",
+      "message": "riko-input-group 内需要 input 或 select"
+    },
+    {
+      "selector": "[data-riko=\"password-toggle\"]",
+      "attr": "aria-label",
+      "message": "password-toggle 按钮需要 aria-label"
+    }
+  ],
+  "related": [
+    "input",
+    "button",
+    "field"
+  ]
+}

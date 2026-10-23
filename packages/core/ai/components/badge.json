@@ -1,0 +1,97 @@
+{
+  "name": "badge",
+  "title": "徽标",
+  "titleEn": "Badge",
+  "category": "data",
+  "summary": "小小的数字或圆点，用于未读数、计数和状态提示，可挂在按钮或头像右上角。",
+  "when": "提示数量或「有新内容」。表示分类或属性用 tag。",
+  "root": "riko-badge",
+  "element": "span",
+  "parts": [
+    {
+      "class": "riko-badge-anchor",
+      "desc": "定位容器：把徽标挂到内部元素（按钮/头像）的右上角"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-badge--ice",
+      "desc": "冰蓝",
+      "group": "tone"
+    },
+    {
+      "class": "riko-badge--success",
+      "desc": "成功",
+      "group": "tone"
+    },
+    {
+      "class": "riko-badge--warning",
+      "desc": "警告",
+      "group": "tone"
+    },
+    {
+      "class": "riko-badge--danger",
+      "desc": "危险/未读",
+      "group": "tone"
+    },
+    {
+      "class": "riko-badge--neutral",
+      "desc": "中性灰棕",
+      "group": "tone"
+    },
+    {
+      "class": "riko-badge--sm",
+      "desc": "小号",
+      "group": "size"
+    },
+    {
+      "class": "riko-badge--lg",
+      "desc": "大号",
+      "group": "size"
+    },
+    {
+      "class": "riko-badge--dot",
+      "desc": "只显示小圆点",
+      "group": "shape"
+    },
+    {
+      "class": "riko-badge--pulse",
+      "desc": "脉冲光环（吸引注意）",
+      "group": "decor"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "挂在图标按钮上的徽标要有 aria-label（如「3 条未读」），或把数量写进按钮的 aria-label 并给徽标 aria-hidden=\"true\"。",
+    "--dot 没有文字，必须提供 aria-label 或 aria-hidden=\"true\"。"
+  ],
+  "rules": [
+    "挂角：<span class=\"riko-badge-anchor\">按钮或头像 + <span class=\"riko-badge\">3</span></span>。",
+    "数字超过 99 时显示 99+。"
+  ],
+  "avoid": [
+    "不要用徽标承载长文字，改用 tag。"
+  ],
+  "examples": [
+    {
+      "title": "基础用法",
+      "html": "<div class=\"riko-cluster\">\n  <span class=\"riko-badge\">12</span>\n  <span class=\"riko-badge riko-badge--ice\">新</span>\n  <span class=\"riko-badge riko-badge--success\">3</span>\n  <span class=\"riko-badge riko-badge--warning\">!</span>\n  <span class=\"riko-badge riko-badge--danger\">99+</span>\n  <span class=\"riko-badge riko-badge--neutral\">0</span>\n  <span class=\"riko-badge riko-badge--sm\">sm</span>\n  <span class=\"riko-badge riko-badge--lg\">76</span>\n</div>"
+    },
+    {
+      "title": "挂在按钮与头像上",
+      "html": "<div class=\"riko-cluster riko-cluster--lg\">\n  <span class=\"riko-badge-anchor\">\n    <button type=\"button\" class=\"riko-btn riko-btn--icon\" aria-label=\"消息，3 条未读\"><i data-lucide=\"bell\"></i></button>\n    <span class=\"riko-badge riko-badge--danger\" aria-hidden=\"true\">3</span>\n  </span>\n  <span class=\"riko-badge-anchor\">\n    <span class=\"riko-avatar riko-avatar--ring\"><img src=\"https://riko.land/assets/logo.jpg\" alt=\"络可\"></span>\n    <span class=\"riko-badge riko-badge--dot riko-badge--pulse\" aria-label=\"有新动态\"></span>\n  </span>\n  <span class=\"riko-badge-anchor\">\n    <button type=\"button\" class=\"riko-btn riko-btn--soft\">收件箱</button>\n    <span class=\"riko-badge riko-badge--ice\" aria-label=\"12 封新邮件\">12</span>\n  </span>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-badge--dot",
+      "attr": "aria-label|aria-hidden",
+      "message": "riko-badge--dot 没有文字，需要 aria-label 或 aria-hidden=\"true\""
+    }
+  ],
+  "related": [
+    "tag",
+    "avatar",
+    "button"
+  ]
+}

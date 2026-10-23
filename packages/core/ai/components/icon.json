@@ -1,0 +1,358 @@
+{
+  "name": "icon",
+  "title": "图标与星星",
+  "titleEn": "Icon & Star",
+  "category": "foundation",
+  "summary": "页面图标推荐 Lucide；框架内置 47 个 Lucide 图标可用 riko-icon--<名> 直接显示；品牌五角星 riko-star。",
+  "when": "任何图标位置。普通页面图标用 Lucide（<i data-lucide=\"名称\">），不想加载 Lucide 时用内置 riko-icon--*；装饰与强调用 riko-star。",
+  "root": "riko-icon",
+  "element": "span",
+  "parts": [
+    {
+      "class": "riko-star",
+      "desc": "品牌五角星（实心圆润），颜色默认橙色"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-icon--check",
+      "desc": "内置图标 check",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--x",
+      "desc": "内置图标 x",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--minus",
+      "desc": "内置图标 minus",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--plus",
+      "desc": "内置图标 plus",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--chevron-down",
+      "desc": "内置图标 chevron-down",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--chevron-up",
+      "desc": "内置图标 chevron-up",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--chevron-left",
+      "desc": "内置图标 chevron-left",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--chevron-right",
+      "desc": "内置图标 chevron-right",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--chevrons-up-down",
+      "desc": "内置图标 chevrons-up-down",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--arrow-up",
+      "desc": "内置图标 arrow-up",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--arrow-right",
+      "desc": "内置图标 arrow-right",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--arrow-left",
+      "desc": "内置图标 arrow-left",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--search",
+      "desc": "内置图标 search",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--info",
+      "desc": "内置图标 info",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--success",
+      "desc": "内置图标 success",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--warning",
+      "desc": "内置图标 warning",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--danger",
+      "desc": "内置图标 danger",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--help",
+      "desc": "内置图标 help",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--loader",
+      "desc": "内置图标 loader",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--upload",
+      "desc": "内置图标 upload",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--file",
+      "desc": "内置图标 file",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--calendar",
+      "desc": "内置图标 calendar",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--clock",
+      "desc": "内置图标 clock",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--eye",
+      "desc": "内置图标 eye",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--eye-off",
+      "desc": "内置图标 eye-off",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--copy",
+      "desc": "内置图标 copy",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--menu",
+      "desc": "内置图标 menu",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--more-horizontal",
+      "desc": "内置图标 more-horizontal",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--external-link",
+      "desc": "内置图标 external-link",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--sun",
+      "desc": "内置图标 sun",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--moon",
+      "desc": "内置图标 moon",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--monitor",
+      "desc": "内置图标 monitor",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--settings",
+      "desc": "内置图标 settings",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--inbox",
+      "desc": "内置图标 inbox",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--image",
+      "desc": "内置图标 image",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--user",
+      "desc": "内置图标 user",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--bell",
+      "desc": "内置图标 bell",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--grip-vertical",
+      "desc": "内置图标 grip-vertical",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--folder",
+      "desc": "内置图标 folder",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--folder-open",
+      "desc": "内置图标 folder-open",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--circle",
+      "desc": "内置图标 circle",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--dot",
+      "desc": "内置图标 dot",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--pencil",
+      "desc": "内置图标 pencil",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--feather",
+      "desc": "内置图标 feather",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--lock",
+      "desc": "内置图标 lock",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--send",
+      "desc": "内置图标 send",
+      "group": "variant"
+    },
+    {
+      "class": "riko-icon--spin",
+      "desc": "旋转（加载中）",
+      "group": "behavior"
+    },
+    {
+      "class": "riko-icon--sm",
+      "desc": "0.9em",
+      "group": "size"
+    },
+    {
+      "class": "riko-icon--lg",
+      "desc": "1.5em",
+      "group": "size"
+    },
+    {
+      "class": "riko-icon--xl",
+      "desc": "2em",
+      "group": "size"
+    },
+    {
+      "class": "riko-star--xs",
+      "desc": "星星 0.6em",
+      "group": "size"
+    },
+    {
+      "class": "riko-star--sm",
+      "desc": "星星 0.8em",
+      "group": "size"
+    },
+    {
+      "class": "riko-star--lg",
+      "desc": "星星 1.5em",
+      "group": "size"
+    },
+    {
+      "class": "riko-star--xl",
+      "desc": "星星 2.4em",
+      "group": "size"
+    },
+    {
+      "class": "riko-star--ice",
+      "desc": "冰蓝星星",
+      "group": "tone"
+    },
+    {
+      "class": "riko-star--muted",
+      "desc": "浅棕星星",
+      "group": "tone"
+    },
+    {
+      "class": "riko-star--twinkle",
+      "desc": "闪烁动画",
+      "group": "behavior"
+    },
+    {
+      "class": "riko-star--bob",
+      "desc": "上下漂浮动画",
+      "group": "behavior"
+    }
+  ],
+  "js": {
+    "attr": "",
+    "options": [],
+    "methods": [
+      {
+        "signature": "Riko.init(root)",
+        "desc": "页面已加载 lucide 时，会自动把 root 内的 <i data-lucide> 渲染为 svg"
+      }
+    ],
+    "events": []
+  },
+  "a11y": [
+    "纯装饰图标加 aria-hidden=\"true\"；有含义的独立图标加 role=\"img\" 与 aria-label。",
+    "仅含图标的按钮要在按钮上写 aria-label。"
+  ],
+  "rules": [
+    "Lucide：<i data-lucide=\"heart\"></i>，先引入 lucide 再引入 riko-ui.js，Riko 会自动渲染。",
+    "内置图标：<span class=\"riko-icon riko-icon--search\" aria-hidden=\"true\"></span>。",
+    "图标颜色继承 currentColor，尺寸默认 1.15em，可用 --riko-icon-size 覆盖。",
+    "星星颜色可用 --riko-star-color 覆盖，尺寸用 --riko-star-size。"
+  ],
+  "avoid": [
+    "不要混用多个图标库，统一 Lucide。",
+    "不要写 <span class=\"riko-icon--check\">（缺少根类 riko-icon）。"
+  ],
+  "examples": [
+    {
+      "title": "Lucide 图标",
+      "html": "<i data-lucide=\"book-open\"></i>"
+    },
+    {
+      "title": "内置图标",
+      "html": "<span class=\"riko-icon riko-icon--search\" aria-hidden=\"true\"></span>"
+    },
+    {
+      "title": "品牌星星",
+      "html": "<span class=\"riko-star riko-star--lg riko-star--twinkle\" aria-hidden=\"true\"></span>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-star:not([aria-hidden]):not([role])",
+      "attr": "aria-hidden|aria-label",
+      "message": "装饰星星请加 aria-hidden=\"true\"（或提供 role=\"img\" + aria-label）"
+    }
+  ],
+  "related": [
+    "button",
+    "typography"
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "name": "combobox",
+  "title": "可搜索选择",
+  "titleEn": "Combobox",
+  "category": "form",
+  "summary": "可输入关键字过滤的单选下拉（WAI-ARIA combobox + listbox），支持内联选项或增强原生 <select>；附带可复用的 riko-listbox 选项列表样式。",
+  "when": "选项较多（> 7 个）需要搜索时。选项很少用 riko-select（原生下拉）或 radio / segmented；可自由输入多个值用 tags-input。",
+  "root": "riko-combobox",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-combobox__input",
+      "desc": "文本输入框（role=combobox 等 ARIA 由 JS 补全）",
+      "required": true
+    },
+    {
+      "class": "riko-combobox__list",
+      "desc": "弹出的选项列表 <ul>，同时加 riko-listbox",
+      "required": true
+    },
+    {
+      "class": "riko-combobox__value",
+      "desc": "隐藏 input，保存选中值（写 data-riko-name 时自动生成）"
+    },
+    {
+      "class": "riko-listbox",
+      "desc": "选项列表容器（可脱离 combobox 单独用于菜单式列表）"
+    },
+    {
+      "class": "riko-listbox__option",
+      "desc": "选项 <li>，data-value 为提交值，文本为显示名"
+    },
+    {
+      "class": "riko-listbox__desc",
+      "desc": "选项内的次要说明"
+    },
+    {
+      "class": "riko-listbox__group",
+      "desc": "分组标题（role=presentation）"
+    },
+    {
+      "class": "riko-listbox__empty",
+      "desc": "无结果提示（JS 自动生成）"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-combobox--sm",
+      "desc": "小号",
+      "group": "size"
+    },
+    {
+      "class": "riko-combobox--lg",
+      "desc": "大号",
+      "group": "size"
+    },
+    {
+      "class": "riko-combobox--block",
+      "desc": "占满容器宽度",
+      "group": "shape"
+    }
+  ],
+  "states": [
+    {
+      "attr": "aria-expanded=\"true\"",
+      "on": "riko-combobox__input",
+      "desc": "列表展开（JS 维护）"
+    },
+    {
+      "attr": "aria-selected=\"true\"",
+      "on": "riko-listbox__option",
+      "desc": "已选中（可在 HTML 中预设初始值）"
+    },
+    {
+      "attr": "aria-disabled=\"true\"",
+      "on": "riko-listbox__option",
+      "desc": "不可选的选项"
+    },
+    {
+      "attr": "data-state=\"active\"",
+      "on": "riko-listbox__option",
+      "desc": "键盘高亮项（JS 维护）"
+    },
+    {
+      "attr": "disabled",
+      "on": "riko-combobox__input",
+      "desc": "禁用"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"combobox\"",
+    "options": [
+      {
+        "attr": "data-riko-name",
+        "values": "字符串",
+        "default": "",
+        "desc": "内联模式下生成隐藏 input 的 name"
+      },
+      {
+        "attr": "data-riko-empty",
+        "values": "字符串",
+        "default": "没有找到呢……换个关键词试试吧 ✦",
+        "desc": "无结果提示文案"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "el.riko.value",
+        "desc": "当前选中值"
+      },
+      {
+        "signature": "el.riko.setValue(value)",
+        "desc": "按 data-value 选中"
+      },
+      {
+        "signature": "el.riko.open()",
+        "desc": "打开列表"
+      },
+      {
+        "signature": "el.riko.close()",
+        "desc": "关闭列表"
+      },
+      {
+        "signature": "el.riko.refresh()",
+        "desc": "动态增删选项后重新扫描"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:combobox:change",
+        "detail": "{ value, label, option }",
+        "desc": "选中值改变"
+      },
+      {
+        "name": "riko:combobox:open",
+        "detail": "",
+        "desc": "列表打开"
+      },
+      {
+        "name": "riko:combobox:close",
+        "detail": "",
+        "desc": "列表关闭"
+      }
+    ]
+  },
+  "a11y": [
+    "输入框需要 aria-label 或 <label for>；增强 select 时会自动把 <label for> 转接到生成的输入框。",
+    "键盘：↓ 打开 / 下移，↑ 上移，Home / End 首尾，Enter 选中，Esc 关闭（再按清空）。"
+  ],
+  "rules": [
+    "只写结构，role / aria-* / id 全部交给 JS。",
+    "内联选项用 data-value 指定提交值；显示文本取选项的第一段文字（可用 data-label 覆盖）。",
+    "列表以 popover 顶层显示，放在弹窗、卡片里也不会被遮挡。"
+  ],
+  "avoid": [
+    "不要把 riko-listbox__option 写成 <button> 或 <a>。",
+    "不要给 combobox 输入框加 riko-input 类。"
+  ],
+  "examples": [
+    {
+      "title": "内联选项",
+      "html": "<div class=\"riko-combobox\" data-riko=\"combobox\" data-riko-name=\"character\">\n  <input class=\"riko-combobox__input\" type=\"text\" placeholder=\"选择一位角色…\" aria-label=\"角色\">\n  <ul class=\"riko-combobox__list riko-listbox\">\n    <li class=\"riko-listbox__option\" data-value=\"riko\">络可<span class=\"riko-listbox__desc\">沙滩上的小画家</span></li>\n    <li class=\"riko-listbox__option\" data-value=\"star\">Star<span class=\"riko-listbox__desc\">戴眼罩的少年</span></li>\n    <li class=\"riko-listbox__option\" data-value=\"111\">111<span class=\"riko-listbox__desc\">HV 的村长</span></li>\n    <li class=\"riko-listbox__option\" data-value=\"wuni\">无昵</li>\n    <li class=\"riko-listbox__option\" data-value=\"rhedar\">Rhedar</li>\n    <li class=\"riko-listbox__option\" data-value=\"mizu\" aria-disabled=\"true\">Mizu（暂未登场）</li>\n  </ul>\n</div>"
+    },
+    {
+      "title": "增强原生下拉",
+      "html": "<div class=\"riko-field\" style=\"max-width: 320px\">\n  <label class=\"riko-field__label\" for=\"act\">想从哪一幕开始读？</label>\n  <div class=\"riko-combobox riko-combobox--block\" data-riko=\"combobox\">\n    <select id=\"act\" name=\"act\">\n      <option value=\"\">搜索幕名…</option>\n      <optgroup label=\"序章\">\n        <option value=\"p1\">第一幕：沙滩上的画家</option>\n        <option value=\"p2\">第二幕：归途的微光</option>\n        <option value=\"p3\">第三幕：暗林深处</option>\n      </optgroup>\n      <optgroup label=\"第一章\">\n        <option value=\"c1\">第一幕：自晨曦中归来</option>\n        <option value=\"c2\">第二幕：于木石间相嬉</option>\n        <option value=\"c5\">第五幕：落星摇曳，清风回荡</option>\n      </optgroup>\n    </select>\n  </div>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-combobox:not(:has(select))",
+      "has": ".riko-combobox__input",
+      "message": "riko-combobox 需要 input.riko-combobox__input（或包裹一个 <select>）"
+    },
+    {
+      "selector": ".riko-combobox__list",
+      "has": ".riko-listbox__option",
+      "message": "riko-combobox__list 内需要 li.riko-listbox__option"
+    },
+    {
+      "selector": ".riko-listbox__option",
+      "parent": ".riko-listbox",
+      "message": "riko-listbox__option 必须位于 riko-listbox 内"
+    }
+  ],
+  "related": [
+    "select",
+    "search",
+    "tags-input",
+    "dropdown"
+  ]
+}

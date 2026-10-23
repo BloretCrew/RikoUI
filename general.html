@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>通用 · Riko UI</title>
+<meta name="theme-color" content="#FBF5EA">
+<script src="packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="packages/core/dist/riko-ui.css">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+
+<header class="docs-header">
+  <div class="docs-header__inner">
+    <button type="button" class="riko-btn riko-btn--icon riko-btn--ghost docs-menu-btn" aria-label="打开导航"><i data-lucide="menu"></i></button>
+    <a class="docs-brand" href="index.html">
+      <span class="docs-brand__mark"><span class="riko-star" aria-hidden="true"></span></span>
+      <span><span class="docs-brand__name">Riko UI</span><span class="docs-brand__sub">little star ui kit</span></span>
+    </a>
+    <span class="docs-header__spacer"></span>
+    <div class="riko-theme-picker riko-theme-picker--compact" data-riko="theme-picker"></div>
+  </div>
+</header>
+
+<div class="docs-layout">
+  <aside class="docs-sidebar" aria-label="文档导航"></aside>
+  <main class="docs-main">
+    <div class="docs-hero">
+      <h1>通用</h1>
+      <p>按钮、按钮组与链接——页面里最常被点到的小东西。纸白描边、底部实体阴影，悬停时轻轻浮起，按下时乖乖下沉。</p>
+    </div>
+
+    <section class="docs-section" id="button">
+      <h2>按钮 <small>Button</small></h2>
+      <p>触发操作的按钮：纸白描边 + 底部实体阴影，悬停上浮、按下下沉。</p>
+      <h3>外观</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster">
+          <button type="button" class="riko-btn">默认按钮</button>
+          <button type="button" class="riko-btn riko-btn--primary">开始阅读</button>
+          <button type="button" class="riko-btn riko-btn--accent">点亮星星</button>
+          <button type="button" class="riko-btn riko-btn--ice">冰蓝色</button>
+          <button type="button" class="riko-btn riko-btn--soft">柔和</button>
+          <button type="button" class="riko-btn riko-btn--outline">虚线描边</button>
+          <button type="button" class="riko-btn riko-btn--ghost">幽灵</button>
+          <button type="button" class="riko-btn riko-btn--link">文字链接</button>
+          <button type="button" class="riko-btn riko-btn--danger">删除画稿</button>
+        </div>
+      </div>
+      <h3>带图标</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster">
+          <button type="button" class="riko-btn riko-btn--primary"><i data-lucide="book-open"></i>开始阅读</button>
+          <a class="riko-btn" href="#button">下一节<i data-lucide="arrow-right"></i></a>
+          <button type="button" class="riko-btn riko-btn--soft"><span class="riko-star" aria-hidden="true"></span>收藏</button>
+          <button type="button" class="riko-btn">消息<span class="riko-btn__badge">3</span></button>
+        </div>
+      </div>
+      <h3>尺寸</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster">
+          <button type="button" class="riko-btn riko-btn--xs">超小</button>
+          <button type="button" class="riko-btn riko-btn--sm">小号</button>
+          <button type="button" class="riko-btn">默认</button>
+          <button type="button" class="riko-btn riko-btn--lg">大号</button>
+          <button type="button" class="riko-btn riko-btn--xl">超大</button>
+        </div>
+      </div>
+      <h3>仅图标与形状</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster">
+          <button type="button" class="riko-btn riko-btn--icon" aria-label="设置"><i data-lucide="settings"></i></button>
+          <button type="button" class="riko-btn riko-btn--icon riko-btn--ice" aria-label="搜索"><i data-lucide="search"></i></button>
+          <button type="button" class="riko-btn riko-btn--round riko-btn--accent" aria-label="点赞"><i data-lucide="heart"></i></button>
+          <button type="button" class="riko-btn riko-btn--square riko-btn--soft">方角按钮</button>
+          <button type="button" class="riko-btn riko-btn--ghost riko-btn--icon riko-btn--sm" aria-label="更多"><i data-lucide="ellipsis"></i></button>
+        </div>
+      </div>
+      <h3>状态</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster">
+          <button type="button" class="riko-btn" disabled>不可用</button>
+          <button type="button" class="riko-btn riko-btn--primary" aria-busy="true">保存中</button>
+          <button type="button" class="riko-btn" aria-pressed="true"><i data-lucide="bookmark"></i>已加书签</button>
+          <a class="riko-btn riko-btn--outline" aria-disabled="true">链接不可用</a>
+        </div>
+      </div>
+      <h3>占满宽度</h3>
+      <div class="docs-demo">
+        <button type="button" class="riko-btn riko-btn--primary riko-btn--lg riko-btn--block"><i data-lucide="sparkles"></i>踏入络的世界</button>
+      </div>
+    </section>
+    <section class="docs-section" id="button-group">
+      <h2>按钮组 <small>Button Group</small></h2>
+      <p>把相关按钮放在一起：默认带间距，--attached 拼接成一体。</p>
+      <h3>间隔排列</h3>
+      <div class="docs-demo">
+        <div class="riko-btn-group" role="group" aria-label="章节操作">
+          <button type="button" class="riko-btn riko-btn--sm"><i data-lucide="arrow-left"></i>上一节</button>
+          <button type="button" class="riko-btn riko-btn--sm">目录</button>
+          <button type="button" class="riko-btn riko-btn--sm">下一节<i data-lucide="arrow-right"></i></button>
+        </div>
+      </div>
+      <h3>拼接</h3>
+      <div class="docs-demo">
+        <div class="riko-btn-group riko-btn-group--attached" role="group" aria-label="对齐方式">
+          <button type="button" class="riko-btn" aria-pressed="true" aria-label="左对齐"><i data-lucide="align-left"></i></button>
+          <button type="button" class="riko-btn" aria-pressed="false" aria-label="居中"><i data-lucide="align-center"></i></button>
+          <button type="button" class="riko-btn" aria-pressed="false" aria-label="右对齐"><i data-lucide="align-right"></i></button>
+        </div>
+      </div>
+      <h3>纵向拼接</h3>
+      <div class="docs-demo">
+        <div class="riko-btn-group riko-btn-group--attached riko-btn-group--vertical" role="group" aria-label="排序">
+          <button type="button" class="riko-btn" aria-pressed="true">最新更新</button>
+          <button type="button" class="riko-btn" aria-pressed="false">最多收藏</button>
+          <button type="button" class="riko-btn" aria-pressed="false">章节顺序</button>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="link">
+      <h2>链接 <small>Link</small></h2>
+      <p>带波浪下划线的文字链接，适合正文中跳转。</p>
+      <h3>基础</h3>
+      <div class="docs-demo">
+        <p>跟随络可，<a class="riko-link" href="#link">从沙滩上的第一幅画</a>开始读起吧。</p>
+      </div>
+      <h3>变体</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--lg">
+          <a class="riko-link riko-link--muted" href="#link">低调链接</a>
+          <a class="riko-link riko-link--plain" href="#link">悬停才有下划线</a>
+          <a class="riko-link riko-link--external" href="https://riko.land" target="_blank" rel="noopener">络的世界官网</a>
+          <a class="riko-link" aria-current="page" href="#link">当前页面</a>
+          <a class="riko-link" aria-disabled="true">暂不可用</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="assets/manifest.js"></script>
+<script src="assets/docs.js"></script>
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="packages/core/dist/riko-ui.js"></script>
+</body>
+</html>

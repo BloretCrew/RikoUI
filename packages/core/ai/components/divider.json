@@ -1,0 +1,49 @@
+{
+  "name": "divider",
+  "title": "分割线",
+  "titleEn": "Divider",
+  "category": "layout",
+  "summary": "虚线、波浪线、带文字或星星的分割线，以及竖向分隔。",
+  "when": "分隔内容块；行内分隔用 --vertical。",
+  "root": "riko-divider",
+  "element": "div",
+  "modifiers": [
+    {
+      "class": "riko-divider--squiggle",
+      "desc": "橙色波浪线",
+      "group": "variant"
+    },
+    {
+      "class": "riko-divider--stars",
+      "desc": "中间放星星",
+      "group": "variant"
+    },
+    {
+      "class": "riko-divider--solid",
+      "desc": "实线",
+      "group": "variant"
+    },
+    {
+      "class": "riko-divider--vertical",
+      "desc": "竖向（行内）",
+      "group": "layout"
+    }
+  ],
+  "a11y": [
+    "纯装饰分割用 <div role=\"separator\">；带文字时文字会被读出。"
+  ],
+  "examples": [
+    {
+      "title": "带文字",
+      "html": "<div class=\"riko-divider\" role=\"separator\">或者</div>"
+    },
+    {
+      "title": "波浪线",
+      "html": "<div class=\"riko-divider riko-divider--squiggle\" role=\"separator\"></div>"
+    },
+    {
+      "title": "星星",
+      "html": "<div class=\"riko-divider riko-divider--stars\" role=\"separator\"><span class=\"riko-star\" aria-hidden=\"true\"></span></div>"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "tilt",
+  "title": "轻微倾斜",
+  "titleEn": "Tilt",
+  "category": "decor",
+  "summary": "让元素微微倾斜，悬停时回正。",
+  "when": "照片、卡片墙的错落感。",
+  "root": "riko-tilt",
+  "examples": [
+    {
+      "title": "错落的卡片",
+      "html": "<div class=\"riko-grid riko-grid--cols-2\">\n  <article class=\"riko-card riko-tilt\">\n    <h3 class=\"riko-card__title\">向右歪一点</h3>\n    <p class=\"riko-card__body\">悬停时会轻轻回正。</p>\n  </article>\n  <article class=\"riko-card riko-tilt riko-tilt--left\">\n    <h3 class=\"riko-card__title\">向左歪一点</h3>\n    <p class=\"riko-card__body\">像随手贴在墙上的卡片。</p>\n  </article>\n</div>"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-tilt--left",
+      "desc": "向左倾斜",
+      "group": "variant"
+    }
+  ],
+  "rules": [
+    "角度变量 --riko-tilt。"
+  ]
+}

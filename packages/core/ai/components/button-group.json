@@ -1,0 +1,69 @@
+{
+  "name": "button-group",
+  "title": "按钮组",
+  "titleEn": "Button Group",
+  "category": "general",
+  "summary": "把相关按钮放在一起：默认带间距，--attached 拼接成一体。",
+  "when": "一组并列操作或切换视图、对齐方式等互斥选项（互斥且需要表单值时用 segmented）。",
+  "root": "riko-btn-group",
+  "element": "div",
+  "modifiers": [
+    {
+      "class": "riko-btn-group--attached",
+      "desc": "按钮拼接成一体",
+      "group": "layout"
+    },
+    {
+      "class": "riko-btn-group--vertical",
+      "desc": "纵向排列",
+      "group": "behavior"
+    }
+  ],
+  "states": [
+    {
+      "attr": "aria-pressed=\"true\"",
+      "on": "riko-btn",
+      "desc": "组内当前选中的按钮"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "容器加 role=\"group\" 与 aria-label 说明这组按钮的用途。"
+  ],
+  "rules": [
+    "子元素直接放 .riko-btn，尺寸修饰写在每个按钮上。"
+  ],
+  "avoid": [
+    "不要在 --attached 组里混用不同尺寸的按钮。"
+  ],
+  "examples": [
+    {
+      "title": "间隔排列",
+      "html": "<div class=\"riko-btn-group\" role=\"group\" aria-label=\"章节操作\">\n  <button type=\"button\" class=\"riko-btn riko-btn--sm\"><i data-lucide=\"arrow-left\"></i>上一节</button>\n  <button type=\"button\" class=\"riko-btn riko-btn--sm\">目录</button>\n  <button type=\"button\" class=\"riko-btn riko-btn--sm\">下一节<i data-lucide=\"arrow-right\"></i></button>\n</div>"
+    },
+    {
+      "title": "拼接",
+      "html": "<div class=\"riko-btn-group riko-btn-group--attached\" role=\"group\" aria-label=\"对齐方式\">\n  <button type=\"button\" class=\"riko-btn\" aria-pressed=\"true\" aria-label=\"左对齐\"><i data-lucide=\"align-left\"></i></button>\n  <button type=\"button\" class=\"riko-btn\" aria-pressed=\"false\" aria-label=\"居中\"><i data-lucide=\"align-center\"></i></button>\n  <button type=\"button\" class=\"riko-btn\" aria-pressed=\"false\" aria-label=\"右对齐\"><i data-lucide=\"align-right\"></i></button>\n</div>"
+    },
+    {
+      "title": "纵向拼接",
+      "html": "<div class=\"riko-btn-group riko-btn-group--attached riko-btn-group--vertical\" role=\"group\" aria-label=\"排序\">\n  <button type=\"button\" class=\"riko-btn\" aria-pressed=\"true\">最新更新</button>\n  <button type=\"button\" class=\"riko-btn\" aria-pressed=\"false\">最多收藏</button>\n  <button type=\"button\" class=\"riko-btn\" aria-pressed=\"false\">章节顺序</button>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-btn-group",
+      "attr": "role",
+      "message": "riko-btn-group 需要 role=\"group\"（并配 aria-label）"
+    },
+    {
+      "selector": ".riko-btn-group",
+      "has": ".riko-btn",
+      "message": "riko-btn-group 内应放 .riko-btn"
+    }
+  ],
+  "related": [
+    "button",
+    "segmented"
+  ]
+}

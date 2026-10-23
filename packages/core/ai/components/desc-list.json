@@ -1,0 +1,81 @@
+{
+  "name": "desc-list",
+  "title": "描述列表",
+  "titleEn": "Description List",
+  "category": "data",
+  "summary": "「名称—内容」成对展示的信息列表，可竖排、横排、多列或带边框。",
+  "when": "角色资料、订单详情、设置摘要等键值信息。",
+  "root": "riko-desc-list",
+  "element": "dl",
+  "parts": [
+    {
+      "class": "riko-desc-list__row",
+      "desc": "一组（<div> 包住 dt + dd）"
+    },
+    {
+      "class": "riko-desc-list__term",
+      "desc": "名称（<dt>）"
+    },
+    {
+      "class": "riko-desc-list__detail",
+      "desc": "内容（<dd>）"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-desc-list--horizontal",
+      "desc": "名称与内容左右排列",
+      "group": "layout"
+    },
+    {
+      "class": "riko-desc-list--columns",
+      "desc": "多列自适应",
+      "group": "layout"
+    },
+    {
+      "class": "riko-desc-list--bordered",
+      "desc": "带边框与虚线分隔",
+      "group": "decor"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "使用语义化的 <dl>/<dt>/<dd>。"
+  ],
+  "rules": [
+    "名称列宽可用 style=\"--riko-desc-term-w: 6em\" 调整。"
+  ],
+  "avoid": [
+    "不要用表格或 div 模拟键值对。"
+  ],
+  "examples": [
+    {
+      "title": "角色资料",
+      "html": "<dl class=\"riko-desc-list riko-desc-list--horizontal riko-desc-list--bordered\" style=\"max-width: 480px\">\n  <div class=\"riko-desc-list__row\"><dt class=\"riko-desc-list__term\">姓名</dt><dd class=\"riko-desc-list__detail\">络可（Riko）</dd></div>\n  <div class=\"riko-desc-list__row\"><dt class=\"riko-desc-list__term\">年龄</dt><dd class=\"riko-desc-list__detail\">十二岁</dd></div>\n  <div class=\"riko-desc-list__row\"><dt class=\"riko-desc-list__term\">爱好</dt><dd class=\"riko-desc-list__detail\">画画、星星酥、在沙滩上发呆</dd></div>\n  <div class=\"riko-desc-list__row\"><dt class=\"riko-desc-list__term\">标志</dt><dd class=\"riko-desc-list__detail\"><span class=\"riko-tag riko-tag--accent riko-tag--sm\"><span class=\"riko-star\" aria-hidden=\"true\"></span>星星贝雷帽</span></dd></div>\n</dl>"
+    },
+    {
+      "title": "多列",
+      "html": "<dl class=\"riko-desc-list riko-desc-list--columns\">\n  <div class=\"riko-desc-list__row\"><dt class=\"riko-desc-list__term\">作者</dt><dd class=\"riko-desc-list__detail\">星星酥</dd></div>\n  <div class=\"riko-desc-list__row\"><dt class=\"riko-desc-list__term\">状态</dt><dd class=\"riko-desc-list__detail\">连载中</dd></div>\n  <div class=\"riko-desc-list__row\"><dt class=\"riko-desc-list__term\">最新</dt><dd class=\"riko-desc-list__detail\">076 风过围垣，落星回响</dd></div>\n  <div class=\"riko-desc-list__row\"><dt class=\"riko-desc-list__term\">字数</dt><dd class=\"riko-desc-list__detail\">约 9 万字</dd></div>\n</dl>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-desc-list",
+      "message": "riko-desc-list 必须是 <dl>",
+      "tag": "dl"
+    },
+    {
+      "selector": ".riko-desc-list__term",
+      "message": "riko-desc-list__term 必须是 <dt>",
+      "tag": "dt"
+    },
+    {
+      "selector": ".riko-desc-list__detail",
+      "message": "riko-desc-list__detail 必须是 <dd>",
+      "tag": "dd"
+    }
+  ],
+  "related": [
+    "table"
+  ]
+}

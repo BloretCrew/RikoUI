@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>反馈 · Riko UI</title>
+<meta name="theme-color" content="#FBF5EA">
+<script src="packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="packages/core/dist/riko-ui.css">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+
+<header class="docs-header">
+  <div class="docs-header__inner">
+    <button type="button" class="riko-btn riko-btn--icon riko-btn--ghost docs-menu-btn" aria-label="打开导航"><i data-lucide="menu"></i></button>
+    <a class="docs-brand" href="index.html">
+      <span class="docs-brand__mark"><span class="riko-star" aria-hidden="true"></span></span>
+      <span><span class="docs-brand__name">Riko UI</span><span class="docs-brand__sub">little star ui kit</span></span>
+    </a>
+    <span class="docs-header__spacer"></span>
+    <div class="riko-theme-picker riko-theme-picker--compact" data-riko="theme-picker"></div>
+  </div>
+</header>
+
+<div class="docs-layout">
+  <aside class="docs-sidebar" aria-label="文档导航"></aside>
+  <main class="docs-main">
+    <div class="docs-hero">
+      <h1>反馈</h1>
+      <p>提示条、横幅、轻提示、对话框、抽屉、骨架屏、加载、进度与结果页——用温柔的方式告诉用户「发生了什么」。</p>
+    </div>
+
+    <section class="docs-section" id="alert">
+      <h2>提示条 <small>Alert</small></h2>
+      <p>在内容中提示一条重要信息。默认按色调自动显示图标；带关闭按钮时点击即可淡出移除。</p>
+
+      <h3>色调</h3>
+      <div class="docs-demo">
+        <div class="riko-stack">
+          <div class="riko-alert" role="status">
+            <span class="riko-alert__icon" aria-hidden="true"></span>
+            <div class="riko-alert__content">
+              <p class="riko-alert__title">小提示</p>
+              <p class="riko-alert__body">阅读器会自动记住你上次读到的小节哦。</p>
+            </div>
+          </div>
+          <div class="riko-alert riko-alert--success" role="status">
+            <span class="riko-alert__icon" aria-hidden="true"></span>
+            <div class="riko-alert__content">
+              <p class="riko-alert__title">保存成功</p>
+              <p class="riko-alert__body">络可的画稿已经好好地收进笔记本啦。</p>
+            </div>
+          </div>
+          <div class="riko-alert riko-alert--warning" role="status">
+            <span class="riko-alert__icon" aria-hidden="true"></span>
+            <div class="riko-alert__content">
+              <p class="riko-alert__title">前方剧透</p>
+              <p class="riko-alert__body">建议先读完第一章，再来翻阅络可的笔记本。</p>
+            </div>
+          </div>
+          <div class="riko-alert riko-alert--danger" role="alert">
+            <span class="riko-alert__icon" aria-hidden="true"></span>
+            <div class="riko-alert__content">
+              <p class="riko-alert__title">连接失败</p>
+              <p class="riko-alert__body">信号被暗林挡住了，请稍后再试一次。</p>
+            </div>
+          </div>
+          <div class="riko-alert riko-alert--accent" role="status">
+            <span class="riko-alert__icon" aria-hidden="true"></span>
+            <div class="riko-alert__content">
+              <p class="riko-alert__body">第 76 节「风过围垣，落星回响」已经更新！</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>可关闭与操作按钮</h3>
+      <p>关闭按钮加 <code class="riko-code">data-riko-dismiss</code> 即可淡出移除，无需写 JS（与标签等组件共用同一套移除机制）。</p>
+      <div class="docs-demo">
+        <div class="riko-alert riko-alert--warning" role="status">
+          <span class="riko-alert__icon" aria-hidden="true"></span>
+          <div class="riko-alert__content">
+            <p class="riko-alert__title">还有 3 节没有读完</p>
+            <p class="riko-alert__body">要从「月下清辉，暗见净化」继续阅读吗？</p>
+            <div class="riko-alert__actions">
+              <button type="button" class="riko-btn riko-btn--sm riko-btn--primary">继续阅读</button>
+              <button type="button" class="riko-btn riko-btn--sm riko-btn--ghost" data-riko-dismiss>稍后再说</button>
+            </div>
+          </div>
+          <button type="button" class="riko-alert__close" data-riko-dismiss aria-label="关闭提示"></button>
+        </div>
+      </div>
+
+      <h3>描边与便签</h3>
+      <div class="docs-demo">
+        <div class="riko-stack">
+          <div class="riko-alert riko-alert--outline" role="note">
+            <span class="riko-alert__icon" aria-hidden="true"><i data-lucide="lightbulb"></i></span>
+            <div class="riko-alert__content">
+              <p class="riko-alert__body">按 <kbd class="riko-kbd">←</kbd> <kbd class="riko-kbd">→</kbd> 可以快速切换小节。</p>
+            </div>
+          </div>
+          <div class="riko-alert riko-alert--note riko-alert--accent" role="note">
+            <span class="riko-alert__icon" aria-hidden="true"></span>
+            <div class="riko-alert__content">
+              <p class="riko-alert__title">络可的小纸条</p>
+              <p class="riko-alert__body">今天也要记得画画、吃星星酥，还有——不要一个人跑去暗林！</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="banner">
+      <h2>公告横幅 <small>Banner</small></h2>
+      <p>页面顶部或内容区顶部的一条公告。加 <code class="riko-code">riko-banner--sticky</code> 可吸顶。</p>
+
+      <h3>基础用法</h3>
+      <div class="docs-demo">
+        <div class="riko-stack">
+          <div class="riko-banner" role="region" aria-label="公告">
+            <span class="riko-banner__icon riko-star" aria-hidden="true"></span>
+            <p class="riko-banner__text">第 76 节「风过围垣，落星回响」已更新！<a class="riko-banner__link" href="#">去看看</a></p>
+            <button type="button" class="riko-banner__close" data-riko-dismiss aria-label="关闭公告"></button>
+          </div>
+          <div class="riko-banner riko-banner--ice" role="region" aria-label="公告">
+            <span class="riko-banner__icon" aria-hidden="true"><i data-lucide="snowflake"></i></span>
+            <p class="riko-banner__text">冬日限定：深色模式下的夜晚更安静哦。</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>内容中的圆角横幅</h3>
+      <div class="docs-demo">
+        <div class="riko-banner riko-banner--inline riko-banner--warning" role="region" aria-label="维护通知">
+          <span class="riko-banner__icon" aria-hidden="true"><i data-lucide="wrench"></i></span>
+          <p class="riko-banner__text">今晚 23:00–23:30 维护，届时阅读器可能短暂不可用。<a class="riko-banner__link" href="#">了解详情</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="toast">
+      <h2>轻提示 <small>Toast</small></h2>
+      <p>由 JS 弹出、几秒后自动消失的小卡片。鼠标悬停或聚焦时暂停计时。</p>
+
+      <h3>声明式触发</h3>
+      <p>任意按钮加 <code class="riko-code">data-riko-toast="消息"</code>，可选 <code class="riko-code">data-riko-toast-tone</code> 与 <code class="riko-code">data-riko-toast-title</code>。</p>
+      <div class="docs-demo">
+        <div class="riko-cluster">
+          <button type="button" class="riko-btn" data-riko-toast="书签已经夹好啦～">普通</button>
+          <button type="button" class="riko-btn" data-riko-toast="笔记已保存" data-riko-toast-tone="success">成功</button>
+          <button type="button" class="riko-btn" data-riko-toast="还有内容没写完哦" data-riko-toast-tone="warning">警告</button>
+          <button type="button" class="riko-btn" data-riko-toast="网络开小差了，请重试" data-riko-toast-title="发送失败" data-riko-toast-tone="danger">错误</button>
+        </div>
+      </div>
+
+      <h3>JS 调用</h3>
+      <div class="docs-demo">
+        <button type="button" class="riko-btn riko-btn--primary" id="toast-demo-undo">删除这条书签</button>
+        <script>
+          document.getElementById('toast-demo-undo').addEventListener('click', () => {
+            Riko.toast({
+              title: '书签已删除',
+              message: '「月下清辉，暗见净化」',
+              tone: 'accent',
+              duration: 6000,
+              action: { label: '撤销', onClick: () => Riko.toast.success('已恢复书签') },
+            });
+          });
+        </script>
+      </div>
+
+      <h3>外观</h3>
+      <p>以下为静态预览；实际使用时由 <code class="riko-code">Riko.toast()</code> 自动创建。</p>
+      <div class="docs-demo" data-docs-nocode>
+        <div class="riko-stack" style="max-width: 380px">
+          <div class="riko-toast riko-toast--success" role="status">
+            <span class="riko-toast__icon" aria-hidden="true"></span>
+            <div class="riko-toast__content">
+              <p class="riko-toast__title">笔记已保存</p>
+              <p class="riko-toast__message">络可的笔记本又厚了一页。</p>
+            </div>
+            <button type="button" class="riko-toast__close" aria-label="关闭通知"></button>
+          </div>
+          <div class="riko-toast riko-toast--accent" role="status">
+            <span class="riko-toast__icon" aria-hidden="true"></span>
+            <div class="riko-toast__content">
+              <p class="riko-toast__title">书签已删除</p>
+              <p class="riko-toast__message">「月下清辉，暗见净化」</p>
+            </div>
+            <button type="button" class="riko-toast__action">撤销</button>
+            <button type="button" class="riko-toast__close" aria-label="关闭通知"></button>
+          </div>
+          <div class="riko-toast riko-toast--danger" role="status">
+            <span class="riko-toast__icon" aria-hidden="true"></span>
+            <div class="riko-toast__content">
+              <p class="riko-toast__message">网络开小差了，请重试。</p>
+            </div>
+            <button type="button" class="riko-toast__close" aria-label="关闭通知"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="dialog">
+      <h2>对话框 <small>Dialog</small></h2>
+      <p>基于原生 <code class="riko-code">&lt;dialog&gt;</code>：线性动画、遮罩模糊、焦点锁定、Esc 与点击遮罩关闭，关闭后焦点回到触发按钮。</p>
+
+      <h3>基础用法</h3>
+      <p>触发按钮写 <code class="riko-code">data-riko-open="对话框 id"</code>，对话框里任意按钮写 <code class="riko-code">data-riko-close</code>。</p>
+      <div class="docs-demo">
+        <button type="button" class="riko-btn riko-btn--primary" data-riko-open="settings-dialog"><i data-lucide="settings"></i>打开设置</button>
+        <dialog class="riko-dialog" id="settings-dialog" data-riko="dialog" aria-labelledby="settings-dialog-title">
+          <header class="riko-dialog__header">
+            <h2 class="riko-dialog__title" id="settings-dialog-title"><span class="riko-star" aria-hidden="true"></span>设置界面</h2>
+            <button type="button" class="riko-dialog__close" data-riko-close aria-label="关闭"></button>
+          </header>
+          <div class="riko-dialog__body">
+            <p class="riko-dialog__desc">选择你喜欢的阅读外观，设置会自动保存。</p>
+            <div class="riko-theme-picker" data-riko="theme-picker"></div>
+          </div>
+        </dialog>
+      </div>
+
+      <h3>带底部按钮</h3>
+      <p>底部按钮的 <code class="riko-code">data-riko-close</code> 可以带值，会成为 <code class="riko-code">returnValue</code>，并出现在 <code class="riko-code">riko:dialog:close</code> 事件的 detail 中。</p>
+      <div class="docs-demo">
+        <button type="button" class="riko-btn" data-riko-open="bookmark-dialog"><i data-lucide="bookmark"></i>添加书签</button>
+        <dialog class="riko-dialog riko-dialog--sm" id="bookmark-dialog" data-riko="dialog" aria-labelledby="bookmark-dialog-title" aria-describedby="bookmark-dialog-desc">
+          <header class="riko-dialog__header">
+            <h2 class="riko-dialog__title" id="bookmark-dialog-title">夹一枚书签</h2>
+            <button type="button" class="riko-dialog__close" data-riko-close aria-label="关闭"></button>
+          </header>
+          <div class="riko-dialog__body">
+            <p class="riko-dialog__desc" id="bookmark-dialog-desc">把「晓窗梦醒，初览疮痍」加入书签，下次打开时可以一键回到这里。</p>
+          </div>
+          <footer class="riko-dialog__footer">
+            <button type="button" class="riko-btn riko-btn--ghost" data-riko-close="cancel">取消</button>
+            <button type="button" class="riko-btn riko-btn--primary" data-riko-close="save" autofocus>夹好啦</button>
+          </footer>
+        </dialog>
+      </div>
+
+      <h3>尺寸与静态遮罩</h3>
+      <p><code class="riko-code">riko-dialog--sm / --lg / --full</code>（<code class="riko-code">--full</code> 在窄屏下全屏）。<code class="riko-code">data-riko-backdrop="static"</code> 时点击遮罩和 Esc 都不会关闭。</p>
+      <div class="docs-demo">
+        <div class="riko-cluster">
+          <button type="button" class="riko-btn" data-riko-open="story-dialog">大对话框</button>
+          <button type="button" class="riko-btn" data-riko-open="agree-dialog">静态遮罩</button>
+        </div>
+        <dialog class="riko-dialog riko-dialog--lg" id="story-dialog" data-riko="dialog" aria-labelledby="story-dialog-title">
+          <header class="riko-dialog__header">
+            <h2 class="riko-dialog__title" id="story-dialog-title">001 沙滩上的画家</h2>
+            <button type="button" class="riko-dialog__close" data-riko-close aria-label="关闭"></button>
+          </header>
+          <div class="riko-dialog__body riko-prose riko-prose--read">
+            <p>轻柔的海浪涌来，在微风的吹拂下散入金黄的沙滩。无垠的大海倒映着碧空，也消解了一部分太阳的热。</p>
+            <p>沙滩上，一个女孩哼着欢快的歌，挥动她的画笔，一道道鲜艳的色彩在画板上留下痕迹，逐渐勾勒出天空、大海、沙滩……</p>
+          </div>
+        </dialog>
+        <dialog class="riko-dialog riko-dialog--sm" id="agree-dialog" data-riko="dialog" data-riko-backdrop="static" aria-labelledby="agree-dialog-title">
+          <header class="riko-dialog__header">
+            <h2 class="riko-dialog__title" id="agree-dialog-title">阅读须知</h2>
+          </header>
+          <div class="riko-dialog__body">
+            <p class="riko-dialog__desc">本作品仍在连载中，设定可能随剧情调整。请点击下方按钮确认。</p>
+          </div>
+          <footer class="riko-dialog__footer">
+            <button type="button" class="riko-btn riko-btn--primary" data-riko-close="agree">我知道啦</button>
+          </footer>
+        </dialog>
+      </div>
+
+      <h3>确认框与提示框</h3>
+      <p><code class="riko-code">Riko.confirm()</code> 返回 <code class="riko-code">Promise&lt;boolean&gt;</code>，<code class="riko-code">Riko.alert()</code> 返回 <code class="riko-code">Promise&lt;void&gt;</code>。</p>
+      <div class="docs-demo">
+        <div class="riko-cluster">
+          <button type="button" class="riko-btn riko-btn--danger" id="confirm-demo">清空阅读记录</button>
+          <button type="button" class="riko-btn" id="alert-demo">显示提示</button>
+        </div>
+        <script>
+          document.getElementById('confirm-demo').addEventListener('click', async () => {
+            const ok = await Riko.confirm({
+              title: '要清空阅读记录吗？',
+              message: '已读标记和书签都会消失，这个操作不能撤销哦。',
+              confirmText: '清空',
+              tone: 'danger',
+            });
+            if (ok) Riko.toast.success('阅读记录已清空');
+          });
+          document.getElementById('alert-demo').addEventListener('click', () => {
+            Riko.alert({ title: '敬请期待', message: '第二章正在努力创作中，预计 2027 年继续更新！' });
+          });
+        </script>
+      </div>
+    </section>
+
+    <section class="docs-section" id="drawer">
+      <h2>抽屉 <small>Drawer</small></h2>
+      <p>从屏幕边缘滑出的面板，适合移动端目录、筛选与详情。用法与对话框完全一致。</p>
+
+      <h3>三个方向</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster">
+          <button type="button" class="riko-btn" data-riko-open="toc-drawer"><i data-lucide="list"></i>目录（左）</button>
+          <button type="button" class="riko-btn" data-riko-open="detail-drawer"><i data-lucide="panel-right"></i>详情（右）</button>
+          <button type="button" class="riko-btn" data-riko-open="share-drawer"><i data-lucide="share-2"></i>分享（底部）</button>
+        </div>
+        <dialog class="riko-drawer riko-drawer--left" id="toc-drawer" data-riko="drawer" aria-labelledby="toc-drawer-title">
+          <header class="riko-drawer__header">
+            <h2 class="riko-drawer__title" id="toc-drawer-title"><span class="riko-star" aria-hidden="true"></span>小说目录</h2>
+            <button type="button" class="riko-drawer__close" data-riko-close aria-label="关闭目录"></button>
+          </header>
+          <div class="riko-drawer__body">
+            <p>序章 · 第一幕：沙滩上的画家</p>
+            <p>序章 · 第二幕：归途的微光</p>
+            <p>序章 · 第三幕：暗林深处</p>
+          </div>
+        </dialog>
+        <dialog class="riko-drawer" id="detail-drawer" data-riko="drawer" aria-labelledby="detail-drawer-title">
+          <header class="riko-drawer__header">
+            <h2 class="riko-drawer__title" id="detail-drawer-title">角色卡 · 络可</h2>
+            <button type="button" class="riko-drawer__close" data-riko-close aria-label="关闭"></button>
+          </header>
+          <div class="riko-drawer__body">
+            <p>喜欢画画的小女孩，戴着缀有橙色星星的贝雷帽。最喜欢的点心是星星酥。</p>
+          </div>
+          <footer class="riko-drawer__footer">
+            <button type="button" class="riko-btn riko-btn--ghost" data-riko-close>关闭</button>
+            <button type="button" class="riko-btn riko-btn--primary">查看笔记本</button>
+          </footer>
+        </dialog>
+        <dialog class="riko-drawer riko-drawer--bottom" id="share-drawer" data-riko="drawer" aria-labelledby="share-drawer-title">
+          <header class="riko-drawer__header">
+            <h2 class="riko-drawer__title" id="share-drawer-title">分享这一节</h2>
+            <button type="button" class="riko-drawer__close" data-riko-close aria-label="关闭"></button>
+          </header>
+          <div class="riko-drawer__body">
+            <div class="riko-cluster">
+              <button type="button" class="riko-btn riko-btn--soft" data-riko-toast="链接已复制" data-riko-toast-tone="success"><i data-lucide="link"></i>复制链接</button>
+              <button type="button" class="riko-btn riko-btn--soft"><i data-lucide="image"></i>生成卡片</button>
+            </div>
+          </div>
+        </dialog>
+      </div>
+    </section>
+
+    <section class="docs-section" id="skeleton">
+      <h2>骨架屏 <small>Skeleton</small></h2>
+      <p>内容加载前的柔和占位。给外层加 <code class="riko-code">aria-busy="true"</code> 与 <code class="riko-code">aria-label</code>，加载完成后替换为真实内容。</p>
+
+      <h3>卡片占位</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--start" aria-busy="true" aria-label="正在加载章节">
+          <span class="riko-skeleton riko-skeleton--circle"></span>
+          <div class="riko-skeleton-group riko-u-flex-1">
+            <span class="riko-skeleton riko-skeleton--text"></span>
+            <span class="riko-skeleton riko-skeleton--text"></span>
+            <span class="riko-skeleton riko-skeleton--text"></span>
+          </div>
+        </div>
+      </div>
+
+      <h3>图片 + 文字</h3>
+      <div class="docs-demo">
+        <div class="riko-skeleton-group" style="max-width: 320px" aria-busy="true" aria-label="正在加载图片">
+          <span class="riko-skeleton riko-skeleton--rect"></span>
+          <span class="riko-skeleton riko-skeleton--text"></span>
+          <span class="riko-skeleton riko-skeleton--text"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="spinner">
+      <h2>加载中 <small>Spinner</small></h2>
+      <p>转圈圈的品牌星星。必须带 <code class="riko-code">role="status"</code> 和可读文字；只想显示图标时，给文字加 <code class="riko-code">riko-u-sr-only</code>。</p>
+
+      <h3>样式与尺寸</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--lg">
+          <span class="riko-spinner riko-spinner--sm" role="status"><span class="riko-spinner__label">加载中…</span></span>
+          <span class="riko-spinner" role="status"><span class="riko-spinner__label">正在翻页…</span></span>
+          <span class="riko-spinner riko-spinner--ice" role="status"><span class="riko-spinner__label riko-u-sr-only">加载中</span></span>
+          <span class="riko-spinner riko-spinner--dots" role="status">
+            <span class="riko-spinner__dot"></span><span class="riko-spinner__dot"></span><span class="riko-spinner__dot"></span>
+            <span class="riko-spinner__label">络可正在画画…</span>
+          </span>
+        </div>
+      </div>
+
+      <h3>大号（整块区域加载）</h3>
+      <div class="docs-demo docs-demo--center">
+        <span class="riko-spinner riko-spinner--lg" role="status"><span class="riko-spinner__label">正在打开笔记本…</span></span>
+      </div>
+    </section>
+
+    <section class="docs-section" id="progress">
+      <h2>进度 <small>Progress</small></h2>
+      <p>基于原生 <code class="riko-code">&lt;progress&gt;</code> 的进度条（橙色到冰蓝的渐变），以及顶端带小星星的环形进度。</p>
+
+      <h3>进度条</h3>
+      <div class="docs-demo">
+        <div class="riko-stack riko-stack--lg">
+          <div class="riko-progress">
+            <div class="riko-progress__head">
+              <span class="riko-progress__label" id="read-progress-label">阅读进度</span>
+              <span class="riko-progress__value">62%</span>
+            </div>
+            <progress class="riko-progress__bar" value="62" max="100" aria-labelledby="read-progress-label"></progress>
+          </div>
+          <div class="riko-progress riko-progress--sm riko-progress--success">
+            <div class="riko-progress__head">
+              <span class="riko-progress__label" id="upload-progress-label">画稿上传</span>
+              <span class="riko-progress__value">100%</span>
+            </div>
+            <progress class="riko-progress__bar" value="100" max="100" aria-labelledby="upload-progress-label"></progress>
+          </div>
+          <div class="riko-progress riko-progress--lg riko-progress--ice">
+            <progress class="riko-progress__bar" value="35" max="100" aria-label="下载进度"></progress>
+          </div>
+        </div>
+      </div>
+
+      <h3>不确定进度</h3>
+      <p>不写 <code class="riko-code">value</code> 即可。</p>
+      <div class="docs-demo">
+        <div class="riko-progress">
+          <div class="riko-progress__head">
+            <span class="riko-progress__label" id="sync-progress-label">正在同步书签…</span>
+          </div>
+          <progress class="riko-progress__bar" max="100" aria-labelledby="sync-progress-label"></progress>
+        </div>
+      </div>
+
+      <h3>环形进度</h3>
+      <p>用 <code class="riko-code">--riko-progress</code>（0–100）控制进度，同时更新 <code class="riko-code">aria-valuenow</code>。</p>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--lg">
+          <div class="riko-progress-ring riko-progress-ring--sm" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" aria-label="今日阅读" style="--riko-progress: 25"><span class="riko-progress-ring__value">25%</span></div>
+          <div class="riko-progress-ring" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" aria-label="序章进度" style="--riko-progress: 72"><span class="riko-progress-ring__value">72%</span></div>
+          <div class="riko-progress-ring riko-progress-ring--lg riko-progress-ring--ice" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" aria-label="第一章进度" style="--riko-progress: 90"><span class="riko-progress-ring__value">90%</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs-section" id="result">
+      <h2>结果页 <small>Result</small></h2>
+      <p>操作完成、出错或页面找不到时的整块反馈。<code class="riko-code">riko-result__art</code> 留空会显示对应色调的图标。</p>
+
+      <h3>成功</h3>
+      <div class="docs-demo docs-demo--surface">
+        <div class="riko-result riko-result--success">
+          <div class="riko-result__art" aria-hidden="true"></div>
+          <h2 class="riko-result__title">反馈提交成功</h2>
+          <p class="riko-result__desc">谢谢你的建议！络可会把它认真地抄进笔记本里。</p>
+          <div class="riko-result__actions">
+            <a class="riko-btn riko-btn--primary" href="#">回到主页</a>
+            <a class="riko-btn" href="#">继续阅读</a>
+          </div>
+        </div>
+      </div>
+
+      <h3>404</h3>
+      <div class="docs-demo docs-demo--surface">
+        <div class="riko-result riko-result--404">
+          <div class="riko-result__art" aria-hidden="true">404</div>
+          <h2 class="riko-result__title">这一页被海浪冲走啦</h2>
+          <p class="riko-result__desc">你要找的页面不在这片沙滩上，回主页看看别的故事吧。</p>
+          <div class="riko-result__actions">
+            <a class="riko-btn riko-btn--primary" href="#"><i data-lucide="house"></i>回到主页</a>
+          </div>
+        </div>
+      </div>
+
+      <h3>小号与其他色调</h3>
+      <div class="docs-demo docs-demo--surface">
+        <div class="riko-grid riko-grid--cols-2">
+          <div class="riko-result riko-result--sm riko-result--danger">
+            <div class="riko-result__art" aria-hidden="true"></div>
+            <h2 class="riko-result__title">加载失败</h2>
+            <p class="riko-result__desc">信号被暗林挡住了。</p>
+            <div class="riko-result__actions">
+              <button type="button" class="riko-btn riko-btn--sm">重试</button>
+            </div>
+          </div>
+          <div class="riko-result riko-result--sm">
+            <div class="riko-result__art" aria-hidden="true"><i data-lucide="palette"></i></div>
+            <h2 class="riko-result__title">敬请期待</h2>
+            <p class="riko-result__desc">第二章正在努力创作中～</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="assets/manifest.js"></script>
+<script src="assets/docs.js"></script>
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="packages/core/dist/riko-ui.js"></script>
+</body>
+</html>

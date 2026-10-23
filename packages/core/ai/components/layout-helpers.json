@@ -1,0 +1,22 @@
+{
+  "name": "layout-helpers",
+  "title": "居中与占位",
+  "titleEn": "Center & Spacer",
+  "category": "layout",
+  "summary": "riko-center 让内容水平垂直居中；riko-spacer 在 flex 容器中推开两侧。",
+  "when": "空状态居中、导航栏左右分布。",
+  "root": "riko-center",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-spacer",
+      "desc": "在 flex 行中占满剩余空间"
+    }
+  ],
+  "examples": [
+    {
+      "title": "推开两侧",
+      "html": "<div class=\"riko-cluster riko-cluster--nowrap\">\n  <strong>《络的世界》</strong>\n  <span class=\"riko-spacer\"></span>\n  <button type=\"button\" class=\"riko-btn riko-btn--sm\">设置</button>\n</div>"
+    }
+  ]
+}

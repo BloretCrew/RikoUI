@@ -1,0 +1,101 @@
+{
+  "name": "checkbox",
+  "title": "复选框",
+  "titleEn": "Checkbox",
+  "category": "form",
+  "summary": "原生 checkbox 美化：勾选时橙色小方块弹出对勾，支持半选与卡片样式。",
+  "when": "多选、同意条款、可独立开关的选项（立即生效的设置更适合 switch）。",
+  "root": "riko-checkbox",
+  "element": "label",
+  "parts": [
+    {
+      "class": "riko-checkbox__text",
+      "desc": "标题 + 说明的文字容器"
+    },
+    {
+      "class": "riko-checkbox__desc",
+      "desc": "说明小字（放在 __text 内）"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-checkbox--sm",
+      "desc": "小号",
+      "group": "size"
+    },
+    {
+      "class": "riko-checkbox--lg",
+      "desc": "大号",
+      "group": "size"
+    },
+    {
+      "class": "riko-checkbox--card",
+      "desc": "可选卡片",
+      "group": "variant"
+    }
+  ],
+  "states": [
+    {
+      "attr": "checked",
+      "on": "input",
+      "desc": "选中"
+    },
+    {
+      "attr": "disabled",
+      "on": "input",
+      "desc": "禁用"
+    },
+    {
+      "attr": "indeterminate（JS 属性）",
+      "on": "input",
+      "desc": "半选：input.indeterminate = true"
+    },
+    {
+      "attr": "aria-invalid=\"true\"",
+      "on": "input",
+      "desc": "校验失败"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "结构必须是 <label class=\"riko-checkbox\"><input type=\"checkbox\"> 文字</label>，点击文字即可勾选。",
+    "一组复选框放进 <fieldset class=\"riko-fieldset\"> 并写 legend。"
+  ],
+  "rules": [
+    "input 必须是 label 的直接子元素。"
+  ],
+  "avoid": [
+    "不要隐藏原生 input 后用 div 模拟。"
+  ],
+  "examples": [
+    {
+      "title": "基础",
+      "html": "<div class=\"riko-stack riko-stack--sm\">\n  <label class=\"riko-checkbox\"><input type=\"checkbox\" name=\"snack\" checked> 星星酥</label>\n  <label class=\"riko-checkbox\"><input type=\"checkbox\" name=\"snack\"> 橘子汽水</label>\n  <label class=\"riko-checkbox\"><input type=\"checkbox\" name=\"snack\" disabled> 神秘点心（售罄）</label>\n</div>"
+    },
+    {
+      "title": "带说明与半选",
+      "html": "<div class=\"riko-stack riko-stack--sm\">\n  <label class=\"riko-checkbox\"><input type=\"checkbox\" id=\"all-chapters\"><span class=\"riko-checkbox__text\">全部章节<span class=\"riko-checkbox__desc\">已选择部分章节（半选状态由 JS 设置 indeterminate）</span></span></label>\n  <label class=\"riko-checkbox riko-checkbox--sm\"><input type=\"checkbox\" checked> 小号复选框</label>\n  <label class=\"riko-checkbox riko-checkbox--lg\"><input type=\"checkbox\"> 大号复选框</label>\n</div>"
+    },
+    {
+      "title": "卡片",
+      "html": "<div class=\"riko-grid riko-grid--sm\">\n  <label class=\"riko-checkbox riko-checkbox--card\"><input type=\"checkbox\" checked><span class=\"riko-checkbox__text\">更新提醒<span class=\"riko-checkbox__desc\">新章节发布时通知我</span></span></label>\n  <label class=\"riko-checkbox riko-checkbox--card\"><input type=\"checkbox\"><span class=\"riko-checkbox__text\">设定集剧透<span class=\"riko-checkbox__desc\">显示尚未出现的设定</span></span></label>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-checkbox",
+      "has": "input[type=\"checkbox\"]",
+      "message": "riko-checkbox 内需要直接放 <input type=\"checkbox\">"
+    },
+    {
+      "selector": ".riko-checkbox",
+      "message": "riko-checkbox 必须用 <label> 元素",
+      "tag": "label"
+    }
+  ],
+  "related": [
+    "radio",
+    "switch",
+    "fieldset"
+  ]
+}

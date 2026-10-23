@@ -1,0 +1,190 @@
+{
+  "name": "command",
+  "title": "命令面板",
+  "titleEn": "Command Palette",
+  "category": "navigation",
+  "summary": "快捷键唤起的全局搜索/命令弹窗：输入即过滤、分组结果、↑↓ 选择、Enter 执行，线性动画开合。",
+  "when": "站点内容较多、需要快速跳转或执行操作时；也可作为全局搜索。只是表单里的可搜索选择请用 combobox。",
+  "root": "riko-command",
+  "element": "dialog",
+  "parts": [
+    {
+      "class": "riko-command__search",
+      "desc": "顶部搜索栏（放大镜由 CSS 绘制）",
+      "required": true
+    },
+    {
+      "class": "riko-command__input",
+      "desc": "搜索输入框（需 aria-label）",
+      "required": true
+    },
+    {
+      "class": "riko-command__esc",
+      "desc": "右侧 Esc 提示"
+    },
+    {
+      "class": "riko-command__list",
+      "desc": "结果列表（role=\"listbox\"）",
+      "required": true
+    },
+    {
+      "class": "riko-command__group",
+      "desc": "结果分组"
+    },
+    {
+      "class": "riko-command__group-label",
+      "desc": "分组标题"
+    },
+    {
+      "class": "riko-command__item",
+      "desc": "结果项（a 或 button，role=\"option\"）",
+      "required": true
+    },
+    {
+      "class": "riko-command__icon",
+      "desc": "项前图标方块"
+    },
+    {
+      "class": "riko-command__text",
+      "desc": "项标题（匹配文字会被 <mark> 高亮）"
+    },
+    {
+      "class": "riko-command__desc",
+      "desc": "项说明（放在 __text 内）"
+    },
+    {
+      "class": "riko-command__shortcut",
+      "desc": "项右侧快捷键"
+    },
+    {
+      "class": "riko-command__empty",
+      "desc": "无结果提示（初始 hidden）"
+    },
+    {
+      "class": "riko-command__footer",
+      "desc": "底部按键说明"
+    }
+  ],
+  "modifiers": [],
+  "states": [
+    {
+      "attr": "aria-selected=\"true\"",
+      "on": "riko-command__item",
+      "desc": "键盘当前项（JS 维护）"
+    },
+    {
+      "attr": "hidden",
+      "on": "riko-command__item",
+      "desc": "被过滤掉的项"
+    },
+    {
+      "attr": "data-state=\"closing\"",
+      "desc": "关闭动画进行中"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"command\"",
+    "options": [
+      {
+        "attr": "data-riko-hotkey",
+        "values": "单个字母",
+        "default": "",
+        "desc": "Ctrl/⌘ + 该字母开关面板，如 k"
+      },
+      {
+        "attr": "data-riko-open",
+        "values": "面板 id（写在任意按钮上）",
+        "default": "",
+        "desc": "点击该元素打开面板"
+      },
+      {
+        "attr": "data-riko-keywords",
+        "values": "空格分隔（写在条目上）",
+        "default": "",
+        "desc": "额外的搜索别名"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "el.riko.open() / close() / toggle()",
+        "desc": "开关面板"
+      },
+      {
+        "signature": "el.riko.filter(query)",
+        "desc": "以指定关键词过滤"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:command:open",
+        "desc": "打开"
+      },
+      {
+        "name": "riko:command:close",
+        "desc": "关闭"
+      },
+      {
+        "name": "riko:command:filter",
+        "detail": "{ query, count }",
+        "desc": "过滤后"
+      },
+      {
+        "name": "riko:command:select",
+        "detail": "{ item, value, query }",
+        "desc": "选择条目（可 preventDefault 阻止链接跳转）"
+      }
+    ]
+  },
+  "a11y": [
+    "必须使用原生 <dialog>，并有 aria-label。",
+    "输入框是 combobox，结果是 listbox；用 aria-activedescendant 指示当前项（JS 维护）。",
+    "关闭后焦点回到打开前的元素；Esc 关闭。"
+  ],
+  "rules": [
+    "链接型条目选择后会跳转；按钮型条目通过 riko:command:select 处理（读取 data-value）。",
+    "空格分隔的多个关键词需同时匹配。",
+    "打开时页面滚动被锁定。"
+  ],
+  "avoid": [
+    "不要用 <div> 代替 <dialog>。",
+    "不要自己写 Ctrl+K 监听，用 data-riko-hotkey。"
+  ],
+  "examples": [
+    {
+      "title": "命令面板",
+      "html": "<button type=\"button\" class=\"riko-btn riko-btn--soft\" data-riko-open=\"demo-command\"><i data-lucide=\"search\"></i>快速搜索 <kbd class=\"riko-kbd\">Ctrl K</kbd></button>\n<dialog class=\"riko-command\" id=\"demo-command\" data-riko=\"command\" data-riko-hotkey=\"k\" aria-label=\"快速搜索\">\n  <div class=\"riko-command__search\">\n    <input class=\"riko-command__input\" type=\"text\" placeholder=\"搜索章节、设定或操作…\" aria-label=\"搜索\">\n    <kbd class=\"riko-command__esc\">Esc</kbd>\n  </div>\n  <div class=\"riko-command__list\">\n    <div class=\"riko-command__group\">\n      <p class=\"riko-command__group-label\">章节</p>\n      <a class=\"riko-command__item\" href=\"#001\"><span class=\"riko-command__icon\"><i data-lucide=\"book-open\"></i></span><span class=\"riko-command__text\">沙滩上的画家<span class=\"riko-command__desc\">序章 · 第一幕 · 001</span></span></a>\n      <a class=\"riko-command__item\" href=\"#076\"><span class=\"riko-command__icon\"><i data-lucide=\"sparkles\"></i></span><span class=\"riko-command__text\">风过围垣，落星回响<span class=\"riko-command__desc\">第一章 · 第五幕 · 最新</span></span></a>\n    </div>\n    <div class=\"riko-command__group\">\n      <p class=\"riko-command__group-label\">设定</p>\n      <a class=\"riko-command__item\" href=\"#riko\" data-riko-keywords=\"主角 贝雷帽 画家\"><span class=\"riko-command__icon\"><i data-lucide=\"palette\"></i></span><span class=\"riko-command__text\">络可<span class=\"riko-command__desc\">喜欢画画的小女孩</span></span></a>\n      <a class=\"riko-command__item\" href=\"#hv\" data-riko-keywords=\"村庄 百络谷\"><span class=\"riko-command__icon\"><i data-lucide=\"house\"></i></span><span class=\"riko-command__text\">HV 村<span class=\"riko-command__desc\">大家的家</span></span></a>\n    </div>\n    <div class=\"riko-command__group\">\n      <p class=\"riko-command__group-label\">操作</p>\n      <button type=\"button\" class=\"riko-command__item\" data-value=\"theme\"><span class=\"riko-command__icon\"><i data-lucide=\"moon\"></i></span><span class=\"riko-command__text\">切换深浅色</span><kbd class=\"riko-command__shortcut\">T</kbd></button>\n    </div>\n  </div>\n  <p class=\"riko-command__empty\" hidden>没有找到呢……换个关键词试试吧 ✦</p>\n  <div class=\"riko-command__footer\"><span><kbd>↑</kbd><kbd>↓</kbd>选择</span><span><kbd>↵</kbd>打开</span><span><kbd>Esc</kbd>关闭</span></div>\n</dialog>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-command",
+      "tag": "dialog",
+      "message": "riko-command 必须使用 <dialog> 元素"
+    },
+    {
+      "selector": ".riko-command",
+      "has": ".riko-command__input",
+      "message": "riko-command 内需要 riko-command__input 输入框"
+    },
+    {
+      "selector": ".riko-command",
+      "has": ".riko-command__list",
+      "message": "riko-command 内需要 riko-command__list"
+    },
+    {
+      "selector": ".riko-command",
+      "attr": "aria-label|aria-labelledby",
+      "message": "riko-command 需要 aria-label"
+    },
+    {
+      "selector": ".riko-command__input",
+      "attr": "aria-label|aria-labelledby",
+      "message": "riko-command__input 需要 aria-label"
+    }
+  ],
+  "related": [
+    "dialog",
+    "search",
+    "combobox"
+  ]
+}

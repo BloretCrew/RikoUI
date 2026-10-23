@@ -1,0 +1,103 @@
+{
+  "name": "result",
+  "title": "结果页",
+  "titleEn": "Result",
+  "category": "feedback",
+  "summary": "操作完成、出错、空结果或 404 时的整块居中反馈：插画/图标、标题、说明与操作。",
+  "when": "提交成功页、错误页、404 页、功能未开放。列表为空用 empty（数据展示类）。",
+  "root": "riko-result",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-result__art",
+      "desc": "插画区：留空显示色调图标；可放 Lucide 图标、<img>，或 404 时写数字",
+      "required": true
+    },
+    {
+      "class": "riko-result__title",
+      "desc": "标题",
+      "required": true
+    },
+    {
+      "class": "riko-result__desc",
+      "desc": "说明"
+    },
+    {
+      "class": "riko-result__actions",
+      "desc": "操作按钮"
+    },
+    {
+      "class": "riko-result__extra",
+      "desc": "额外内容（如错误详情）"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-result--success",
+      "desc": "成功",
+      "group": "tone"
+    },
+    {
+      "class": "riko-result--info",
+      "desc": "信息",
+      "group": "tone"
+    },
+    {
+      "class": "riko-result--warning",
+      "desc": "警告",
+      "group": "tone"
+    },
+    {
+      "class": "riko-result--danger",
+      "desc": "错误",
+      "group": "tone"
+    },
+    {
+      "class": "riko-result--404",
+      "desc": "404：__art 内写「404」，显示为大号手写数字",
+      "group": "tone"
+    },
+    {
+      "class": "riko-result--sm",
+      "desc": "小号（卡片内使用）",
+      "group": "size"
+    }
+  ],
+  "states": [],
+  "js": null,
+  "a11y": [
+    "__art 为装饰，加 aria-hidden=\"true\"。",
+    "标题使用与页面层级相符的标题标签。"
+  ],
+  "rules": [
+    "默认（不加色调）为橙色星星。",
+    "操作按钮：主要操作 riko-btn--primary 在前。"
+  ],
+  "avoid": [
+    "不要在 __art 中放很长的文字。"
+  ],
+  "examples": [
+    {
+      "title": "成功",
+      "html": "<div class=\"riko-result riko-result--success\">\n  <div class=\"riko-result__art\" aria-hidden=\"true\"></div>\n  <h2 class=\"riko-result__title\">反馈提交成功</h2>\n  <p class=\"riko-result__desc\">谢谢你的建议！络可会把它认真地抄进笔记本里。</p>\n  <div class=\"riko-result__actions\">\n    <a class=\"riko-btn riko-btn--primary\" href=\"#\">回到主页</a>\n    <a class=\"riko-btn\" href=\"#\">继续阅读</a>\n  </div>\n</div>"
+    },
+    {
+      "title": "404",
+      "html": "<div class=\"riko-result riko-result--404\">\n  <div class=\"riko-result__art\" aria-hidden=\"true\">404</div>\n  <h2 class=\"riko-result__title\">这一页被海浪冲走啦</h2>\n  <p class=\"riko-result__desc\">你要找的页面不在这片沙滩上，回主页看看别的故事吧。</p>\n  <div class=\"riko-result__actions\">\n    <a class=\"riko-btn riko-btn--primary\" href=\"#\"><i data-lucide=\"house\"></i>回到主页</a>\n  </div>\n</div>"
+    },
+    {
+      "title": "小号与其他色调",
+      "html": "<div class=\"riko-grid riko-grid--cols-2\">\n  <div class=\"riko-result riko-result--sm riko-result--danger\">\n    <div class=\"riko-result__art\" aria-hidden=\"true\"></div>\n    <h2 class=\"riko-result__title\">加载失败</h2>\n    <p class=\"riko-result__desc\">信号被暗林挡住了。</p>\n    <div class=\"riko-result__actions\">\n      <button type=\"button\" class=\"riko-btn riko-btn--sm\">重试</button>\n    </div>\n  </div>\n  <div class=\"riko-result riko-result--sm\">\n    <div class=\"riko-result__art\" aria-hidden=\"true\"><i data-lucide=\"palette\"></i></div>\n    <h2 class=\"riko-result__title\">敬请期待</h2>\n    <p class=\"riko-result__desc\">第二章正在努力创作中～</p>\n  </div>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-result",
+      "has": ".riko-result__title",
+      "message": "riko-result 需要 riko-result__title"
+    }
+  ],
+  "related": [
+    "alert"
+  ]
+}

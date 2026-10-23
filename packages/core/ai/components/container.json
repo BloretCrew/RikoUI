@@ -1,0 +1,36 @@
+{
+  "name": "container",
+  "title": "容器",
+  "titleEn": "Container",
+  "category": "layout",
+  "summary": "水平居中、限制最大宽度并留出左右边距。",
+  "when": "包住每个版块的内容。阅读正文用 --narrow，后台/阅读器用 --wide。",
+  "root": "riko-container",
+  "element": "div",
+  "modifiers": [
+    {
+      "class": "riko-container--wide",
+      "desc": "1320px",
+      "group": "size"
+    },
+    {
+      "class": "riko-container--narrow",
+      "desc": "760px（阅读宽度）",
+      "group": "size"
+    },
+    {
+      "class": "riko-container--fluid",
+      "desc": "占满宽度（保留边距）",
+      "group": "size"
+    }
+  ],
+  "rules": [
+    "宽度变量：--riko-container / --riko-container-wide / --riko-container-narrow，可在 :root 覆盖。"
+  ],
+  "examples": [
+    {
+      "title": "基础",
+      "html": "<div class=\"riko-container\">…</div>"
+    }
+  ]
+}

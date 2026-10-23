@@ -1,0 +1,77 @@
+{
+  "name": "tooltip",
+  "title": "文字提示",
+  "titleEn": "Tooltip",
+  "category": "data",
+  "summary": "悬停或聚焦时出现的小提示气泡，可可色底、带小箭头。",
+  "when": "对按钮、图标做简短补充说明（一句话以内）。需要放链接、按钮或较长内容时改用 popover。",
+  "root": null,
+  "element": "任意可聚焦元素",
+  "parts": [
+    {
+      "class": "riko-tooltip",
+      "desc": "提示浮层（由 JS 生成，无需手写）"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"tooltip\"",
+    "options": [
+      {
+        "attr": "data-riko-tooltip",
+        "values": "文本",
+        "desc": "提示内容；缺省时使用 title 属性（并移除 title）"
+      },
+      {
+        "attr": "data-riko-placement",
+        "values": "top | bottom | left | right（可加 -start / -end）",
+        "default": "top",
+        "desc": "位置，空间不足时自动翻转"
+      },
+      {
+        "attr": "data-riko-delay",
+        "values": "毫秒",
+        "default": "150",
+        "desc": "悬停多久后显示"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "el.riko.show() / el.riko.hide()",
+        "desc": "手动显示 / 隐藏"
+      },
+      {
+        "signature": "el.riko.setText(text)",
+        "desc": "修改提示内容（也可直接改 data-riko-tooltip）"
+      }
+    ]
+  },
+  "a11y": [
+    "触发元素必须可聚焦（button、a 等），键盘聚焦时同样会显示。",
+    "自动建立 aria-describedby；按 Esc 隐藏。",
+    "提示只是补充：仅图标按钮仍然需要自己的 aria-label。"
+  ],
+  "rules": [
+    "写法：<button class=\"riko-btn\" data-riko=\"tooltip\" data-riko-tooltip=\"提示\">…</button>。",
+    "文字保持简短，一行为宜。"
+  ],
+  "avoid": [
+    "不要在 tooltip 里放可交互内容。",
+    "不要把 tooltip 加在不可聚焦的 <span> 上（键盘用户看不到）。"
+  ],
+  "examples": [
+    {
+      "title": "四个方向",
+      "html": "<div class=\"riko-cluster riko-cluster--center\">\n  <button type=\"button\" class=\"riko-btn\" data-riko=\"tooltip\" data-riko-tooltip=\"把这一节加入书签\">收藏</button>\n  <button type=\"button\" class=\"riko-btn\" data-riko=\"tooltip\" data-riko-tooltip=\"在下方出现\" data-riko-placement=\"bottom\">下方</button>\n  <button type=\"button\" class=\"riko-btn\" data-riko=\"tooltip\" data-riko-tooltip=\"在左侧出现\" data-riko-placement=\"left\">左侧</button>\n  <button type=\"button\" class=\"riko-btn\" data-riko=\"tooltip\" data-riko-tooltip=\"在右侧出现\" data-riko-placement=\"right\">右侧</button>\n  <button type=\"button\" class=\"riko-btn riko-btn--icon riko-btn--ghost\" aria-label=\"分享\" data-riko=\"tooltip\" data-riko-tooltip=\"分享给朋友\"><i data-lucide=\"share-2\"></i></button>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": "[data-riko=\"tooltip\"]",
+      "attr": "data-riko-tooltip|title",
+      "message": "tooltip 需要 data-riko-tooltip（或 title）作为提示文字"
+    }
+  ],
+  "related": [
+    "popover"
+  ]
+}

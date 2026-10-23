@@ -1,0 +1,108 @@
+{
+  "name": "toc",
+  "title": "页内目录",
+  "titleEn": "Table of Contents",
+  "category": "navigation",
+  "summary": "页内锚点目录，滚动时自动高亮当前小节（左侧橙色竖线 + 小星星）。",
+  "when": "长文章、文档页的右侧或顶部。多级可折叠目录用 sidenav。",
+  "root": "riko-toc",
+  "element": "nav",
+  "parts": [
+    {
+      "class": "riko-toc__title",
+      "desc": "标题（自带小星星）"
+    },
+    {
+      "class": "riko-toc__list",
+      "desc": "一级列表 <ul>",
+      "required": true
+    },
+    {
+      "class": "riko-toc__sublist",
+      "desc": "二级列表 <ul>（放在一级 li 内）"
+    },
+    {
+      "class": "riko-toc__link",
+      "desc": "锚点链接 href=\"#id\"",
+      "required": true
+    }
+  ],
+  "modifiers": [],
+  "states": [
+    {
+      "attr": "aria-current=\"true\"",
+      "on": "riko-toc__link",
+      "desc": "当前所在小节（JS 维护）"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"toc\"",
+    "options": [
+      {
+        "attr": "data-riko-source",
+        "values": "CSS 选择器",
+        "default": "",
+        "desc": "列表为空时，从该容器内带 id 的标题自动生成"
+      },
+      {
+        "attr": "data-riko-levels",
+        "values": "如 h2,h3",
+        "default": "h2,h3",
+        "desc": "自动生成时使用的标题级别（第一个为一级）"
+      },
+      {
+        "attr": "data-riko-offset",
+        "values": "像素",
+        "default": "导航栏高度 + 24",
+        "desc": "判定「当前」时顶部预留的距离"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "el.riko.update()",
+        "desc": "重新计算当前小节"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:toc:change",
+        "detail": "{ index, link, target }",
+        "desc": "当前小节变化"
+      }
+    ]
+  },
+  "a11y": [
+    "<nav aria-label=\"本页目录\">。",
+    "当前项用 aria-current=\"true\"（不是 page）。"
+  ],
+  "rules": [
+    "链接的 href 必须指向页面中存在的 id。",
+    "自动生成时标题可用 data-toc-title 指定更短的目录名。",
+    "常与 riko-split 搭配放在侧栏，并设 position: sticky。"
+  ],
+  "avoid": [
+    "不要给链接加 .active。"
+  ],
+  "examples": [
+    {
+      "title": "页内目录（试着滚动本页）",
+      "html": "<nav class=\"riko-toc\" data-riko=\"toc\" aria-label=\"本页目录\">\n  <p class=\"riko-toc__title\">本页目录</p>\n  <ul class=\"riko-toc__list\">\n    <li><a class=\"riko-toc__link\" href=\"#navbar\">导航栏</a></li>\n    <li><a class=\"riko-toc__link\" href=\"#sidenav\">侧边目录</a></li>\n    <li><a class=\"riko-toc__link\" href=\"#tabs\">标签页</a>\n      <ul class=\"riko-toc__sublist\">\n        <li><a class=\"riko-toc__link\" href=\"#pagination\">分页</a></li>\n        <li><a class=\"riko-toc__link\" href=\"#pager\">翻页</a></li>\n      </ul>\n    </li>\n    <li><a class=\"riko-toc__link\" href=\"#dropdown\">下拉菜单</a></li>\n    <li><a class=\"riko-toc__link\" href=\"#command\">命令面板</a></li>\n  </ul>\n</nav>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": "nav.riko-toc",
+      "attr": "aria-label|aria-labelledby",
+      "message": "<nav class=\"riko-toc\"> 需要 aria-label"
+    },
+    {
+      "selector": ".riko-toc:not([data-riko-source])",
+      "has": ".riko-toc__list",
+      "message": "riko-toc 需要 riko-toc__list（或用 data-riko-source 自动生成）"
+    }
+  ],
+  "related": [
+    "sidenav",
+    "backtop"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "name": "codeblock",
+  "title": "代码块",
+  "titleEn": "Code Block",
+  "category": "data",
+  "summary": "带标题栏与复制按钮的代码块，标题栏左侧是三颗彩色小圆点。",
+  "when": "展示多行代码或配置。行内代码用 riko-code。",
+  "root": "riko-codeblock",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-codeblock__header",
+      "desc": "标题栏"
+    },
+    {
+      "class": "riko-codeblock__lang",
+      "desc": "语言或文件名"
+    },
+    {
+      "class": "riko-codeblock__copy",
+      "desc": "复制按钮（配合 data-riko=\"copy\"）"
+    },
+    {
+      "class": "riko-codeblock__pre",
+      "desc": "<pre> 容器（内部放 <code>）"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "复制按钮是仅图标按钮，要写 aria-label=\"复制代码\"。"
+  ],
+  "rules": [
+    "复制按钮：data-riko=\"copy\" data-riko-target=\"#代码元素id\"。",
+    "代码中的 < 和 & 要转义。"
+  ],
+  "avoid": [
+    "不要把长代码放进 riko-code（行内代码）。"
+  ],
+  "examples": [
+    {
+      "title": "基础用法",
+      "html": "<div class=\"riko-codeblock\">\n  <div class=\"riko-codeblock__header\">\n    <span class=\"riko-codeblock__lang\">index.html</span>\n    <button type=\"button\" class=\"riko-codeblock__copy\" data-riko=\"copy\" data-riko-target=\"#code-hello\" aria-label=\"复制代码\"></button>\n  </div>\n  <pre class=\"riko-codeblock__pre\"><code id=\"code-hello\">&lt;link rel=\"stylesheet\" href=\"riko-ui.css\"&gt;\n&lt;script src=\"riko-ui.js\"&gt;&lt;/script&gt;\n&lt;button class=\"riko-btn riko-btn--primary\"&gt;你好，络可&lt;/button&gt;</code></pre>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-codeblock",
+      "has": "pre",
+      "message": "riko-codeblock 内需要 <pre>"
+    },
+    {
+      "selector": ".riko-codeblock__copy",
+      "attr": "aria-label",
+      "message": "riko-codeblock__copy 需要 aria-label"
+    }
+  ],
+  "related": [
+    "copy"
+  ]
+}

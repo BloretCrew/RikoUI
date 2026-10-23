@@ -1,0 +1,15 @@
+{
+  "name": "plaid",
+  "title": "格纹背景",
+  "titleEn": "Plaid",
+  "category": "decor",
+  "summary": "络可裙摆般的淡格纹背景。",
+  "when": "加在 <body> 或大面积背景块上。",
+  "root": "riko-plaid",
+  "examples": [
+    {
+      "title": "页面背景",
+      "html": "<body class=\"riko-plaid\">…</body>"
+    }
+  ]
+}

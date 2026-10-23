@@ -1,0 +1,94 @@
+{
+  "name": "copy",
+  "title": "复制",
+  "titleEn": "Copy",
+  "category": "data",
+  "summary": "给任意按钮加上「一键复制」：复制成功时图标变成勾，并告诉读屏「已复制」。",
+  "when": "邀请码、链接、代码等需要用户复制的内容。",
+  "root": null,
+  "element": "button",
+  "parts": [
+    {
+      "class": "riko-copy__icon",
+      "desc": "复制图标（按钮为空时自动生成；成功时变为勾）"
+    }
+  ],
+  "states": [
+    {
+      "attr": "data-state=\"copied\"",
+      "on": "按钮",
+      "desc": "复制成功后约 1.8 秒内（JS 维护）"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"copy\"",
+    "options": [
+      {
+        "attr": "data-riko-copy",
+        "values": "文本",
+        "desc": "要复制的文字"
+      },
+      {
+        "attr": "data-riko-target",
+        "values": "CSS 选择器",
+        "desc": "复制该元素的 value（输入框）或文字内容"
+      },
+      {
+        "attr": "data-riko-copied-text",
+        "values": "文本",
+        "default": "已复制",
+        "desc": "读屏播报的成功提示"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "Riko.copy(text)",
+        "desc": "复制任意文本，返回 Promise<boolean>"
+      },
+      {
+        "signature": "el.riko.copy()",
+        "desc": "触发该按钮的复制"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:copy:success",
+        "detail": "{ text }",
+        "desc": "复制成功"
+      },
+      {
+        "name": "riko:copy:error",
+        "detail": "{ text }",
+        "desc": "复制失败"
+      }
+    ]
+  },
+  "a11y": [
+    "仅图标的复制按钮必须有 aria-label（如「复制链接」）。",
+    "成功提示通过隐藏的 aria-live 区域播报。"
+  ],
+  "rules": [
+    "data-riko-copy 与 data-riko-target 二选一。",
+    "需要额外视觉反馈时可监听 riko:copy:success 弹出 toast。"
+  ],
+  "avoid": [
+    "不要自己调用 navigator.clipboard 再手动改图标，直接用 data-riko=\"copy\"。"
+  ],
+  "examples": [
+    {
+      "title": "基础用法",
+      "html": "<div class=\"riko-cluster\">\n  <code class=\"riko-code\" id=\"invite-code\">RIKO-2026</code>\n  <button type=\"button\" class=\"riko-btn riko-btn--soft riko-btn--sm\" data-riko=\"copy\" data-riko-target=\"#invite-code\"><span class=\"riko-copy__icon\" aria-hidden=\"true\"></span>复制邀请码</button>\n  <button type=\"button\" class=\"riko-btn riko-btn--icon riko-btn--ghost\" data-riko=\"copy\" data-riko-copy=\"https://riko.land\" aria-label=\"复制网站链接\"></button>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": "[data-riko=\"copy\"]",
+      "attr": "data-riko-copy|data-riko-target",
+      "message": "copy 需要 data-riko-copy（文本）或 data-riko-target（选择器）"
+    }
+  ],
+  "related": [
+    "codeblock",
+    "toast"
+  ]
+}

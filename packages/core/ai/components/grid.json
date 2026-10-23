@@ -1,0 +1,68 @@
+{
+  "name": "grid",
+  "title": "栅格",
+  "titleEn": "Grid",
+  "category": "layout",
+  "summary": "自适应栅格：按最小列宽自动排列，或固定 2/3/4/6 列（小屏自动减少）。",
+  "when": "卡片网格、统计面板、相册。",
+  "root": "riko-grid",
+  "element": "div",
+  "modifiers": [
+    {
+      "class": "riko-grid--cols-2",
+      "desc": "两列",
+      "group": "layout"
+    },
+    {
+      "class": "riko-grid--cols-3",
+      "desc": "三列",
+      "group": "layout"
+    },
+    {
+      "class": "riko-grid--cols-4",
+      "desc": "四列（≤1024px 两列，≤420px 一列）",
+      "group": "layout"
+    },
+    {
+      "class": "riko-grid--cols-6",
+      "desc": "六列",
+      "group": "layout"
+    },
+    {
+      "class": "riko-grid--sm",
+      "desc": "小间距",
+      "group": "size"
+    },
+    {
+      "class": "riko-grid--lg",
+      "desc": "大间距",
+      "group": "size"
+    }
+  ],
+  "rules": [
+    "默认自适应列：最小列宽 240px，可用 style=\"--riko-grid-min: 180px\" 调整。"
+  ],
+  "examples": [
+    {
+      "title": "自适应",
+      "html": "<div class=\"riko-grid\">\n  <article class=\"riko-card\">…</article>\n  <article class=\"riko-card\">…</article>\n  <article class=\"riko-card\">…</article>\n</div>"
+    }
+  ],
+  "parts": [
+    {
+      "class": "riko-grid__span-2",
+      "desc": "占 2 列（窄屏自动整行）"
+    },
+    {
+      "class": "riko-grid__span-3",
+      "desc": "占 3 列（窄屏自动整行）"
+    },
+    {
+      "class": "riko-grid__span-full",
+      "desc": "占满整行"
+    }
+  ],
+  "avoid": [
+    "不要写 style=\"grid-column: span 2\"，窄屏会撑出隐式列导致溢出，请用 riko-grid__span-2。"
+  ]
+}

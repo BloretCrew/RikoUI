@@ -1,0 +1,59 @@
+{
+  "name": "section-head",
+  "title": "版块标题",
+  "titleEn": "Section Head",
+  "category": "layout",
+  "summary": "版块大标题 + 手写副标 + 说明 + 右侧操作区。",
+  "when": "每个版块开头（如「小说目录」「其他内容」）。",
+  "root": "riko-section-head",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-section-head__text",
+      "desc": "左侧文字容器",
+      "required": true
+    },
+    {
+      "class": "riko-section-head__title",
+      "desc": "标题（h2），可在前面放 riko-star",
+      "required": true
+    },
+    {
+      "class": "riko-section-head__sub",
+      "desc": "手写英文副标"
+    },
+    {
+      "class": "riko-section-head__desc",
+      "desc": "说明文字"
+    },
+    {
+      "class": "riko-section-head__actions",
+      "desc": "右侧操作（按钮、搜索）"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-section-head--center",
+      "desc": "居中",
+      "group": "layout"
+    },
+    {
+      "class": "riko-section-head--sm",
+      "desc": "小号标题",
+      "group": "size"
+    }
+  ],
+  "examples": [
+    {
+      "title": "完整",
+      "html": "<div class=\"riko-section-head\">\n  <div class=\"riko-section-head__text\">\n    <h2 class=\"riko-section-head__title\"><span class=\"riko-star\" aria-hidden=\"true\"></span>小说目录</h2>\n    <span class=\"riko-section-head__sub\">table of contents</span>\n    <p class=\"riko-section-head__desc\">点击章节即可跳转到对应的剧情内容。</p>\n  </div>\n  <div class=\"riko-section-head__actions\">\n    <button type=\"button\" class=\"riko-btn riko-btn--sm\">全部展开</button>\n  </div>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-section-head",
+      "has": ".riko-section-head__title",
+      "message": "riko-section-head 需要 riko-section-head__title"
+    }
+  ]
+}

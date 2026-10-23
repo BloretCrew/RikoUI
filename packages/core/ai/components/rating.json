@@ -1,0 +1,103 @@
+{
+  "name": "rating",
+  "title": "星星评分",
+  "titleEn": "Rating",
+  "category": "form",
+  "summary": "品牌五角星评分：可选模式基于单选框（纯 CSS、可键盘操作），只读模式支持小数。",
+  "when": "打分、满意度、喜爱程度。只展示数值时用 --readonly。",
+  "root": "riko-rating",
+  "element": "fieldset",
+  "parts": [
+    {
+      "class": "riko-rating__legend",
+      "desc": "<legend> 标题（可选，但需要可访问名称）"
+    },
+    {
+      "class": "riko-rating__input",
+      "desc": "<input type=\"radio\">，同一组 name 相同，按 1→5 顺序",
+      "required": true
+    },
+    {
+      "class": "riko-rating__star",
+      "desc": "<label for> 星星，内含 riko-u-sr-only 文字如「3 星」",
+      "required": true
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-rating--readonly",
+      "desc": "只读展示（无子元素，用 style=\"--riko-rating-value: 3.5\"）",
+      "group": "variant"
+    },
+    {
+      "class": "riko-rating--sm",
+      "desc": "小号",
+      "group": "size"
+    },
+    {
+      "class": "riko-rating--lg",
+      "desc": "大号",
+      "group": "size"
+    }
+  ],
+  "states": [
+    {
+      "attr": "checked",
+      "on": "riko-rating__input",
+      "desc": "当前分数"
+    },
+    {
+      "attr": "disabled",
+      "desc": "禁用（加在 fieldset 上）"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "可选模式用 <fieldset> + <legend>（或 role=\"radiogroup\" + aria-label），每颗星的 label 内放 riko-u-sr-only 的「N 星」。",
+    "只读模式写 role=\"img\" 与 aria-label=\"评分 3.5 / 5\"。"
+  ],
+  "rules": [
+    "input 与 label 交替书写：input → label → input → label …，顺序为 1 到 5。",
+    "星星颜色可通过 --riko-rating-on 覆盖。"
+  ],
+  "avoid": [
+    "不要倒序书写或用 flex-direction: row-reverse。",
+    "不要用 5 个 <button> 加 JS 模拟。"
+  ],
+  "examples": [
+    {
+      "title": "可选评分",
+      "html": "<fieldset class=\"riko-rating\">\n  <legend class=\"riko-rating__legend\">给这一章打个分吧</legend>\n  <input class=\"riko-rating__input\" type=\"radio\" name=\"score\" id=\"score-1\" value=\"1\">\n  <label class=\"riko-rating__star\" for=\"score-1\"><span class=\"riko-u-sr-only\">1 星</span></label>\n  <input class=\"riko-rating__input\" type=\"radio\" name=\"score\" id=\"score-2\" value=\"2\">\n  <label class=\"riko-rating__star\" for=\"score-2\"><span class=\"riko-u-sr-only\">2 星</span></label>\n  <input class=\"riko-rating__input\" type=\"radio\" name=\"score\" id=\"score-3\" value=\"3\">\n  <label class=\"riko-rating__star\" for=\"score-3\"><span class=\"riko-u-sr-only\">3 星</span></label>\n  <input class=\"riko-rating__input\" type=\"radio\" name=\"score\" id=\"score-4\" value=\"4\" checked>\n  <label class=\"riko-rating__star\" for=\"score-4\"><span class=\"riko-u-sr-only\">4 星</span></label>\n  <input class=\"riko-rating__input\" type=\"radio\" name=\"score\" id=\"score-5\" value=\"5\">\n  <label class=\"riko-rating__star\" for=\"score-5\"><span class=\"riko-u-sr-only\">5 星</span></label>\n</fieldset>"
+    },
+    {
+      "title": "只读展示与尺寸",
+      "html": "<div class=\"riko-stack riko-stack--sm\">\n  <span class=\"riko-rating riko-rating--readonly riko-rating--sm\" style=\"--riko-rating-value: 4.5\" role=\"img\" aria-label=\"评分 4.5 / 5\"></span>\n  <span class=\"riko-rating riko-rating--readonly\" style=\"--riko-rating-value: 3.5\" role=\"img\" aria-label=\"评分 3.5 / 5\"></span>\n  <span class=\"riko-rating riko-rating--readonly riko-rating--lg\" style=\"--riko-rating-value: 2\" role=\"img\" aria-label=\"评分 2 / 5\"></span>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-rating:not(.riko-rating--readonly)",
+      "has": ".riko-rating__input",
+      "message": "可选评分需要 input.riko-rating__input + label.riko-rating__star"
+    },
+    {
+      "selector": ".riko-rating__star",
+      "tag": "label",
+      "message": "riko-rating__star 必须是 <label>"
+    },
+    {
+      "selector": ".riko-rating__star",
+      "attr": "for",
+      "message": "riko-rating__star 需要 for 指向对应的 radio"
+    },
+    {
+      "selector": ".riko-rating--readonly",
+      "attr": "aria-label",
+      "message": "只读评分需要 role=\"img\" 和 aria-label"
+    }
+  ],
+  "related": [
+    "radio",
+    "icon"
+  ]
+}

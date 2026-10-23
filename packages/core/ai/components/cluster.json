@@ -1,0 +1,58 @@
+{
+  "name": "cluster",
+  "title": "横向排列",
+  "titleEn": "Cluster",
+  "category": "layout",
+  "summary": "子元素横向排列、自动换行、垂直居中。",
+  "when": "按钮组、标签组、工具栏、页头左右分布。",
+  "root": "riko-cluster",
+  "element": "div",
+  "modifiers": [
+    {
+      "class": "riko-cluster--xs",
+      "desc": "4px",
+      "group": "size"
+    },
+    {
+      "class": "riko-cluster--sm",
+      "desc": "8px",
+      "group": "size"
+    },
+    {
+      "class": "riko-cluster--lg",
+      "desc": "24px",
+      "group": "size"
+    },
+    {
+      "class": "riko-cluster--between",
+      "desc": "两端对齐",
+      "group": "layout"
+    },
+    {
+      "class": "riko-cluster--center",
+      "desc": "居中",
+      "group": "layout"
+    },
+    {
+      "class": "riko-cluster--end",
+      "desc": "靠右",
+      "group": "layout"
+    },
+    {
+      "class": "riko-cluster--start",
+      "desc": "顶部对齐",
+      "group": "behavior"
+    },
+    {
+      "class": "riko-cluster--nowrap",
+      "desc": "不换行",
+      "group": "behavior"
+    }
+  ],
+  "examples": [
+    {
+      "title": "按钮组",
+      "html": "<div class=\"riko-cluster\">\n  <button type=\"button\" class=\"riko-btn riko-btn--primary\">保存</button>\n  <button type=\"button\" class=\"riko-btn\">取消</button>\n</div>"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "stitched",
+  "title": "缝线内框",
+  "titleEn": "Stitched",
+  "category": "decor",
+  "summary": "在有背景的块内画一圈虚线缝线（像布艺/裙摆的走线）。",
+  "when": "卡片、面板、引用框等需要手作感时。",
+  "root": "riko-stitched",
+  "examples": [
+    {
+      "title": "基础",
+      "html": "<div class=\"riko-stitched\" style=\"padding: var(--riko-space-6); background: var(--riko-color-surface); border-radius: var(--riko-radius-wobble);\">缝线内框</div>"
+    }
+  ],
+  "rules": [
+    "内缩距离 --riko-stitch-inset（默认 9px），圆角 --riko-stitch-radius。",
+    "会设置 position: relative 与 isolation，注意别再覆盖。"
+  ],
+  "avoid": [
+    "不要再给宿主元素写 position: static——缝线依赖宿主的定位，否则会铺满整个页面。"
+  ]
+}

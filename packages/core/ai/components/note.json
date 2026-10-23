@@ -1,0 +1,28 @@
+{
+  "name": "note",
+  "title": "便利贴",
+  "titleEn": "Note",
+  "category": "decor",
+  "summary": "略微倾斜、右下角折页的便利贴。",
+  "when": "温馨提示、作者的话、小贴士。",
+  "root": "riko-note",
+  "examples": [
+    {
+      "title": "基础",
+      "html": "<aside class=\"riko-note\">\n  记得先读完第一幕再翻笔记本哦～\n</aside>"
+    }
+  ],
+  "element": "aside",
+  "modifiers": [
+    {
+      "class": "riko-note--ice",
+      "desc": "冰蓝",
+      "group": "tone"
+    },
+    {
+      "class": "riko-note--accent",
+      "desc": "浅橙",
+      "group": "tone"
+    }
+  ]
+}

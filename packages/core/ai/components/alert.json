@@ -1,0 +1,155 @@
+{
+  "name": "alert",
+  "title": "提示条",
+  "titleEn": "Alert",
+  "category": "feedback",
+  "summary": "在内容中显示一条带色调图标的提示/标注，可带标题、操作按钮与关闭按钮。",
+  "when": "页面内持续存在的提示或说明。短暂的操作反馈改用 toast；整页公告用 banner；需要用户做决定用 dialog/confirm。",
+  "root": "riko-alert",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-alert__icon",
+      "desc": "图标；留空时按色调显示内置图标，也可放 Lucide 图标",
+      "required": false
+    },
+    {
+      "class": "riko-alert__content",
+      "desc": "文字容器",
+      "required": true
+    },
+    {
+      "class": "riko-alert__title",
+      "desc": "标题（可选）"
+    },
+    {
+      "class": "riko-alert__body",
+      "desc": "正文"
+    },
+    {
+      "class": "riko-alert__actions",
+      "desc": "操作按钮区（放在 __content 内）"
+    },
+    {
+      "class": "riko-alert__close",
+      "desc": "关闭按钮：空 <button>，必须带 data-riko-dismiss 与 aria-label"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-alert--info",
+      "desc": "信息（默认，可不写）",
+      "group": "tone"
+    },
+    {
+      "class": "riko-alert--success",
+      "desc": "成功",
+      "group": "tone"
+    },
+    {
+      "class": "riko-alert--warning",
+      "desc": "警告",
+      "group": "tone"
+    },
+    {
+      "class": "riko-alert--danger",
+      "desc": "错误/危险",
+      "group": "tone"
+    },
+    {
+      "class": "riko-alert--accent",
+      "desc": "橙色强调（星星图标）",
+      "group": "tone"
+    },
+    {
+      "class": "riko-alert--outline",
+      "desc": "白底虚线描边",
+      "group": "variant"
+    },
+    {
+      "class": "riko-alert--note",
+      "desc": "便签风：缝线内框 + 手写体标题 + 阴影",
+      "group": "variant"
+    }
+  ],
+  "states": [],
+  "js": {
+    "attr": "",
+    "options": [
+      {
+        "attr": "data-riko-dismiss",
+        "values": "（无值）",
+        "desc": "放在关闭按钮上：点击后淡出并移除所在 alert（通用移除机制，见 tag 组件）"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "Riko.dismiss(el)",
+        "desc": "用 JS 移除（带淡出）"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:dismiss",
+        "detail": "{ target, trigger }",
+        "desc": "移除前派发，可 preventDefault 阻止"
+      }
+    ]
+  },
+  "a11y": [
+    "普通提示用 role=\"status\"，错误等紧急信息用 role=\"alert\"，静态说明用 role=\"note\"。",
+    "图标为装饰：riko-alert__icon 加 aria-hidden=\"true\"。",
+    "关闭按钮没有文字，必须写 aria-label（如「关闭提示」）。"
+  ],
+  "rules": [
+    "色调用修饰类（riko-alert--success 等），图标会自动匹配，不需要自己找图标。",
+    "关闭只需在按钮上写 data-riko-dismiss，不要自己写 remove() 逻辑。",
+    "操作按钮放在 riko-alert__actions 中，使用 riko-btn riko-btn--sm。"
+  ],
+  "avoid": [
+    "不要用 alert 做几秒后自动消失的反馈（用 Riko.toast）。",
+    "不要把多个色调修饰写在同一个 alert 上。",
+    "不要省略 riko-alert__content 直接把文字放在根上。"
+  ],
+  "examples": [
+    {
+      "title": "色调",
+      "html": "<div class=\"riko-stack\">\n  <div class=\"riko-alert\" role=\"status\">\n    <span class=\"riko-alert__icon\" aria-hidden=\"true\"></span>\n    <div class=\"riko-alert__content\">\n      <p class=\"riko-alert__title\">小提示</p>\n      <p class=\"riko-alert__body\">阅读器会自动记住你上次读到的小节哦。</p>\n    </div>\n  </div>\n  <div class=\"riko-alert riko-alert--success\" role=\"status\">\n    <span class=\"riko-alert__icon\" aria-hidden=\"true\"></span>\n    <div class=\"riko-alert__content\">\n      <p class=\"riko-alert__title\">保存成功</p>\n      <p class=\"riko-alert__body\">络可的画稿已经好好地收进笔记本啦。</p>\n    </div>\n  </div>\n  <div class=\"riko-alert riko-alert--warning\" role=\"status\">\n    <span class=\"riko-alert__icon\" aria-hidden=\"true\"></span>\n    <div class=\"riko-alert__content\">\n      <p class=\"riko-alert__title\">前方剧透</p>\n      <p class=\"riko-alert__body\">建议先读完第一章，再来翻阅络可的笔记本。</p>\n    </div>\n  </div>\n  <div class=\"riko-alert riko-alert--danger\" role=\"alert\">\n    <span class=\"riko-alert__icon\" aria-hidden=\"true\"></span>\n    <div class=\"riko-alert__content\">\n      <p class=\"riko-alert__title\">连接失败</p>\n      <p class=\"riko-alert__body\">信号被暗林挡住了，请稍后再试一次。</p>\n    </div>\n  </div>\n  <div class=\"riko-alert riko-alert--accent\" role=\"status\">\n    <span class=\"riko-alert__icon\" aria-hidden=\"true\"></span>\n    <div class=\"riko-alert__content\">\n      <p class=\"riko-alert__body\">第 76 节「风过围垣，落星回响」已经更新！</p>\n    </div>\n  </div>\n</div>"
+    },
+    {
+      "title": "可关闭与操作按钮",
+      "html": "<div class=\"riko-alert riko-alert--warning\" role=\"status\">\n  <span class=\"riko-alert__icon\" aria-hidden=\"true\"></span>\n  <div class=\"riko-alert__content\">\n    <p class=\"riko-alert__title\">还有 3 节没有读完</p>\n    <p class=\"riko-alert__body\">要从「月下清辉，暗见净化」继续阅读吗？</p>\n    <div class=\"riko-alert__actions\">\n      <button type=\"button\" class=\"riko-btn riko-btn--sm riko-btn--primary\">继续阅读</button>\n      <button type=\"button\" class=\"riko-btn riko-btn--sm riko-btn--ghost\" data-riko-dismiss>稍后再说</button>\n    </div>\n  </div>\n  <button type=\"button\" class=\"riko-alert__close\" data-riko-dismiss aria-label=\"关闭提示\"></button>\n</div>"
+    },
+    {
+      "title": "描边与便签",
+      "html": "<div class=\"riko-stack\">\n  <div class=\"riko-alert riko-alert--outline\" role=\"note\">\n    <span class=\"riko-alert__icon\" aria-hidden=\"true\"><i data-lucide=\"lightbulb\"></i></span>\n    <div class=\"riko-alert__content\">\n      <p class=\"riko-alert__body\">按 <kbd class=\"riko-kbd\">←</kbd> <kbd class=\"riko-kbd\">→</kbd> 可以快速切换小节。</p>\n    </div>\n  </div>\n  <div class=\"riko-alert riko-alert--note riko-alert--accent\" role=\"note\">\n    <span class=\"riko-alert__icon\" aria-hidden=\"true\"></span>\n    <div class=\"riko-alert__content\">\n      <p class=\"riko-alert__title\">络可的小纸条</p>\n      <p class=\"riko-alert__body\">今天也要记得画画、吃星星酥，还有——不要一个人跑去暗林！</p>\n    </div>\n  </div>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-alert",
+      "has": ".riko-alert__content",
+      "message": "riko-alert 内需要 riko-alert__content 包裹文字"
+    },
+    {
+      "selector": ".riko-alert__close",
+      "attr": "data-riko-dismiss",
+      "message": "riko-alert__close 需要 data-riko-dismiss 才能关闭"
+    },
+    {
+      "selector": ".riko-alert__close",
+      "attr": "aria-label|aria-labelledby",
+      "message": "riko-alert__close 需要 aria-label"
+    },
+    {
+      "selector": ".riko-alert__actions",
+      "parent": ".riko-alert__content",
+      "message": "riko-alert__actions 应放在 riko-alert__content 内"
+    }
+  ],
+  "related": [
+    "banner",
+    "toast",
+    "dialog"
+  ]
+}

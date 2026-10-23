@@ -1,0 +1,101 @@
+{
+  "name": "steps",
+  "title": "步骤条",
+  "titleEn": "Steps",
+  "category": "navigation",
+  "summary": "展示流程进度：已完成显示勾，当前步骤是倾斜的橙色小方块，出错显示红叉。",
+  "when": "注册、下单、引导等多步流程；也可以表示故事进度。纯时间顺序的记录用 timeline。",
+  "root": "riko-steps",
+  "element": "ol",
+  "parts": [
+    {
+      "class": "riko-steps__item",
+      "desc": "一个步骤 <li>",
+      "required": true
+    },
+    {
+      "class": "riko-steps__marker",
+      "desc": "序号方块（完成/出错时序号被图标替换）",
+      "required": true
+    },
+    {
+      "class": "riko-steps__body",
+      "desc": "文字容器"
+    },
+    {
+      "class": "riko-steps__title",
+      "desc": "步骤名"
+    },
+    {
+      "class": "riko-steps__desc",
+      "desc": "说明（横向窄屏时隐藏）"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-steps--vertical",
+      "desc": "纵向排列",
+      "group": "layout"
+    },
+    {
+      "class": "riko-steps--sm",
+      "desc": "小号",
+      "group": "size"
+    }
+  ],
+  "states": [
+    {
+      "attr": "aria-current=\"step\"",
+      "on": "riko-steps__item",
+      "desc": "当前步骤"
+    },
+    {
+      "attr": "data-status=\"done\"",
+      "on": "riko-steps__item",
+      "desc": "已完成"
+    },
+    {
+      "attr": "data-status=\"error\"",
+      "on": "riko-steps__item",
+      "desc": "出错"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "用 <ol>，屏幕阅读器会读出「第几项，共几项」。",
+    "当前步骤写 aria-current=\"step\"。"
+  ],
+  "rules": [
+    "当前步骤之前的步骤写 data-status=\"done\"。",
+    "连接线颜色自动跟随完成状态。"
+  ],
+  "avoid": [
+    "不要用 class 表示状态（.done/.active），用 data-status 与 aria-current。"
+  ],
+  "examples": [
+    {
+      "title": "横向",
+      "html": "<ol class=\"riko-steps\">\n  <li class=\"riko-steps__item\" data-status=\"done\"><span class=\"riko-steps__marker\">1</span><span class=\"riko-steps__body\"><span class=\"riko-steps__title\">踏上沙滩</span><span class=\"riko-steps__desc\">第一幅画</span></span></li>\n  <li class=\"riko-steps__item\" data-status=\"done\"><span class=\"riko-steps__marker\">2</span><span class=\"riko-steps__body\"><span class=\"riko-steps__title\">世界边缘</span><span class=\"riko-steps__desc\">遇见屏障</span></span></li>\n  <li class=\"riko-steps__item\" aria-current=\"step\"><span class=\"riko-steps__marker\">3</span><span class=\"riko-steps__body\"><span class=\"riko-steps__title\">踏上归途</span><span class=\"riko-steps__desc\">进行中</span></span></li>\n  <li class=\"riko-steps__item\"><span class=\"riko-steps__marker\">4</span><span class=\"riko-steps__body\"><span class=\"riko-steps__title\">回到 HV</span><span class=\"riko-steps__desc\">敬请期待</span></span></li>\n</ol>"
+    },
+    {
+      "title": "纵向 + 出错状态",
+      "html": "<ol class=\"riko-steps riko-steps--vertical riko-steps--sm\">\n  <li class=\"riko-steps__item\" data-status=\"done\"><span class=\"riko-steps__marker\">1</span><span class=\"riko-steps__body\"><span class=\"riko-steps__title\">填写昵称</span><span class=\"riko-steps__desc\">好啦，你叫「小星星」</span></span></li>\n  <li class=\"riko-steps__item\" data-status=\"error\"><span class=\"riko-steps__marker\">2</span><span class=\"riko-steps__body\"><span class=\"riko-steps__title\">验证邮箱</span><span class=\"riko-steps__desc\">验证码过期了，再发一次吧</span></span></li>\n  <li class=\"riko-steps__item\" aria-current=\"step\"><span class=\"riko-steps__marker\">3</span><span class=\"riko-steps__body\"><span class=\"riko-steps__title\">选择头像</span></span></li>\n  <li class=\"riko-steps__item\"><span class=\"riko-steps__marker\">4</span><span class=\"riko-steps__body\"><span class=\"riko-steps__title\">完成</span></span></li>\n</ol>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-steps__item",
+      "has": ".riko-steps__marker",
+      "message": "每个 riko-steps__item 需要 riko-steps__marker"
+    },
+    {
+      "selector": ".riko-steps",
+      "tag": "ol|ul",
+      "message": "步骤条请使用 <ol>"
+    }
+  ],
+  "related": [
+    "timeline",
+    "progress"
+  ]
+}

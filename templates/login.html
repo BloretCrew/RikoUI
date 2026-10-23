@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>登录 · 《络的世界》</title>
+<meta name="theme-color" content="#FBF5EA">
+<script src="../packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="../packages/fonts/riko-fonts.css">
+<link rel="stylesheet" href="../packages/core/dist/riko-ui.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+<div class="riko-sky" aria-hidden="true">
+  <span class="riko-star"></span><span class="riko-star"></span><span class="riko-star"></span><span class="riko-star"></span><span class="riko-star"></span>
+</div>
+
+<div class="riko-page">
+  <header class="riko-navbar riko-navbar--transparent">
+    <div class="riko-navbar__inner">
+      <a class="riko-navbar__brand" href="landing.html">
+        <img class="riko-navbar__logo" src="https://riko.land/assets/logo.jpg" alt="">
+        <span class="riko-navbar__text">
+          <span class="riko-navbar__title">《络的世界》</span>
+          <span class="riko-navbar__sub">RikoLand · passport</span>
+        </span>
+      </a>
+      <div class="riko-navbar__actions">
+        <button type="button" class="riko-btn riko-btn--icon" data-riko="theme-toggle" aria-label="切换深浅色"></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="riko-page__main riko-container riko-section">
+    <div class="riko-grid riko-grid--cols-2 riko-grid--lg" style="align-items: center;">
+      <!-- 左：欢迎 -->
+      <div class="riko-stack riko-stack--lg riko-u-hide-md">
+        <p class="riko-eyebrow"><span class="riko-star riko-star--sm" aria-hidden="true"></span>WELCOME BACK</p>
+        <h1 class="riko-h1">欢迎回到百络谷</h1>
+        <span class="riko-squiggle" aria-hidden="true"></span>
+        <p class="riko-lead">登录后可以同步阅读进度、收藏喜欢的小节，还能在笔记本里留下自己的批注。</p>
+        <div class="riko-cluster riko-cluster--lg">
+          <figure class="riko-polaroid riko-polaroid--sm">
+            <span class="riko-tape" aria-hidden="true"></span>
+            <img src="https://riko.land/assets/logo.jpg" alt="《络的世界》封面插画">
+            <figcaption class="riko-polaroid__caption">see you again ✦</figcaption>
+          </figure>
+          <aside class="riko-note riko-note--ice" style="max-width: 220px;">今天的星星酥是特价，记得先登录领取阅读徽章哦！</aside>
+        </div>
+      </div>
+
+      <!-- 右：表单卡片 -->
+      <section class="riko-card riko-card--stitched" aria-label="登录与注册" style="padding: var(--riko-space-8) var(--riko-space-7);">
+        <div class="riko-tabs riko-tabs--pills riko-tabs--fill" data-riko="tabs">
+          <div class="riko-tabs__list" aria-label="登录或注册">
+            <button type="button" class="riko-tabs__tab" aria-selected="true">登录</button>
+            <button type="button" class="riko-tabs__tab">注册</button>
+          </div>
+
+          <!-- 登录 -->
+          <div class="riko-tabs__panel">
+            <form class="riko-form" data-riko="form-validate" id="login-form" novalidate>
+              <div class="riko-field" data-riko="field">
+                <label class="riko-field__label" for="login-mail">邮箱</label>
+                <div class="riko-input-group">
+                  <span class="riko-input-group__icon"><i data-lucide="mail"></i></span>
+                  <input class="riko-input" id="login-mail" name="email" type="email" required autocomplete="email" placeholder="riko@riko.land" data-riko-message-required="请填写邮箱哦">
+                </div>
+              </div>
+              <div class="riko-field" data-riko="field">
+                <label class="riko-field__label" for="login-pwd">密码</label>
+                <div class="riko-input-group">
+                  <span class="riko-input-group__icon"><i data-lucide="lock"></i></span>
+                  <input class="riko-input" id="login-pwd" name="password" type="password" required minlength="8" autocomplete="current-password" data-riko-message-required="请填写密码">
+                  <button type="button" class="riko-btn riko-btn--ghost riko-btn--icon" data-riko="password-toggle" aria-label="显示密码"></button>
+                </div>
+              </div>
+              <div class="riko-cluster riko-cluster--between">
+                <label class="riko-checkbox riko-checkbox--sm"><input type="checkbox" name="remember" checked> 记住我</label>
+                <a class="riko-link riko-text riko-text--sm" href="#forgot">忘记密码？</a>
+              </div>
+              <div class="riko-form__actions">
+                <button type="submit" class="riko-btn riko-btn--primary riko-btn--block riko-btn--lg"><i data-lucide="log-in"></i>登录</button>
+              </div>
+            </form>
+
+            <div class="riko-divider" role="separator">或者</div>
+
+            <div class="riko-stack riko-stack--sm">
+              <a class="riko-btn riko-btn--block" href="https://passport.infds.top">
+                <img src="https://online.infds.top/passport-icon.png" alt="" width="22" height="22">使用 INFDS 通行证登录
+              </a>
+              <button type="button" class="riko-btn riko-btn--soft riko-btn--block" data-riko-open="code-login"><i data-lucide="smartphone"></i>手机验证码登录</button>
+            </div>
+          </div>
+
+          <!-- 注册 -->
+          <div class="riko-tabs__panel" hidden>
+            <form class="riko-form" data-riko="form-validate" id="reg-form" novalidate>
+              <div class="riko-field" data-riko="field">
+                <label class="riko-field__label" for="reg-name">昵称<span class="riko-field__required" aria-hidden="true">*</span></label>
+                <input class="riko-input" id="reg-name" name="name" required minlength="2" maxlength="12" placeholder="小伙伴们会这样称呼你">
+                <p class="riko-field__counter"></p>
+              </div>
+              <div class="riko-field" data-riko="field">
+                <label class="riko-field__label" for="reg-mail">邮箱<span class="riko-field__required" aria-hidden="true">*</span></label>
+                <input class="riko-input" id="reg-mail" name="email" type="email" required autocomplete="email" placeholder="riko@riko.land">
+              </div>
+              <div class="riko-field" data-riko="field">
+                <label class="riko-field__label" for="reg-pwd">密码<span class="riko-field__required" aria-hidden="true">*</span></label>
+                <div class="riko-input-group">
+                  <input class="riko-input" id="reg-pwd" name="password" type="password" required minlength="8" autocomplete="new-password">
+                  <button type="button" class="riko-btn riko-btn--ghost riko-btn--icon" data-riko="password-toggle" aria-label="显示密码"></button>
+                </div>
+                <p class="riko-field__hint">至少 8 个字符</p>
+              </div>
+              <div class="riko-field" data-riko="field">
+                <label class="riko-field__label" for="reg-pwd2">确认密码<span class="riko-field__required" aria-hidden="true">*</span></label>
+                <input class="riko-input" id="reg-pwd2" name="password2" type="password" required data-riko-match="#reg-pwd" data-riko-message-match="两次输入的密码不一样哦" autocomplete="new-password">
+              </div>
+              <div class="riko-field">
+                <span class="riko-field__label" id="reg-code-label">邮箱验证码<span class="riko-field__required" aria-hidden="true">*</span></span>
+                <div class="riko-cluster riko-cluster--nowrap">
+                  <div class="riko-otp riko-otp--sm" data-riko="otp" data-riko-length="6" data-riko-required aria-labelledby="reg-code-label">
+                    <input class="riko-otp__value" type="hidden" name="code">
+                  </div>
+                  <button type="button" class="riko-btn riko-btn--sm riko-btn--soft" data-riko-toast="验证码已发送，请查收邮箱" data-riko-toast-tone="success">发送</button>
+                </div>
+              </div>
+              <div class="riko-field">
+                <label class="riko-checkbox"><input type="checkbox" name="agree" required data-riko-message-required="请先同意 HV 村规哦"> 我已阅读并同意 <a class="riko-link" href="#rules">HV 村规</a></label>
+              </div>
+              <div class="riko-form__actions">
+                <button type="submit" class="riko-btn riko-btn--primary riko-btn--block riko-btn--lg"><span class="riko-star" aria-hidden="true"></span>加入 HV</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="riko-footer riko-footer--flat">
+    <p class="riko-footer__copy">© 2021–2026 Bloret.All rights reserved.</p>
+    <p class="riko-footer__copy">《络的世界》项目组</p>
+  </footer>
+</div>
+
+<!-- 验证码登录 -->
+<dialog class="riko-dialog riko-dialog--sm" id="code-login" data-riko="dialog" aria-labelledby="code-login-title">
+  <header class="riko-dialog__header">
+    <h2 class="riko-dialog__title" id="code-login-title"><span class="riko-star" aria-hidden="true"></span>验证码登录</h2>
+    <button type="button" class="riko-dialog__close" data-riko-close aria-label="关闭"></button>
+  </header>
+  <div class="riko-dialog__body riko-stack">
+    <p class="riko-dialog__desc">验证码已发送到 138****2026，5 分钟内有效。</p>
+    <div class="riko-otp" data-riko="otp" data-riko-length="6" aria-label="短信验证码">
+      <input class="riko-otp__value" type="hidden" name="sms">
+    </div>
+  </div>
+  <footer class="riko-dialog__footer">
+    <button type="button" class="riko-btn riko-btn--ghost" data-riko-close>取消</button>
+    <button type="button" class="riko-btn riko-btn--primary" data-riko-close="ok">登录</button>
+  </footer>
+</dialog>
+
+<script src="../assets/vendor/lucide.min.js"></script>
+<script src="../packages/core/dist/riko-ui.js"></script>
+<script>
+  // 演示：表单通过校验后用 toast 反馈（真实项目里在这里发请求）
+  document.querySelectorAll('form[data-riko="form-validate"]').forEach(function (form) {
+    form.addEventListener('riko:form:submit', function (e) {
+      e.preventDefault();
+      Riko.toast.success(form.id === 'login-form' ? '登录成功，欢迎回来！' : '注册成功，欢迎加入 HV！');
+    });
+  });
+</script>
+</body>
+</html>

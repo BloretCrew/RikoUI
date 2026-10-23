@@ -1,0 +1,26 @@
+{
+  "name": "notebook",
+  "title": "笔记本纸",
+  "titleEn": "Notebook",
+  "category": "decor",
+  "summary": "左侧装订孔 + 橙色页边线，可选横线格。",
+  "when": "目录、笔记、设定集等面板。",
+  "root": "riko-notebook",
+  "examples": [
+    {
+      "title": "基础",
+      "html": "<div class=\"riko-notebook\">\n  <h3 class=\"riko-h4\">络可的笔记本</h3>\n  <p>这里记下了世界的设定。</p>\n</div>"
+    },
+    {
+      "title": "横线格",
+      "html": "<div class=\"riko-notebook riko-notebook--lined\">\n  <p>今天学会了画海豚。</p>\n  <p>明天想去村庄看看。</p>\n</div>"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-notebook--lined",
+      "desc": "横线格",
+      "group": "variant"
+    }
+  ]
+}

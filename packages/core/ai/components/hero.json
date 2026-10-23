@@ -1,0 +1,92 @@
+{
+  "name": "hero",
+  "title": "主视觉 / 页头",
+  "titleEn": "Hero",
+  "category": "layout",
+  "summary": "页面最上方的主视觉：手写引导语、大标题、手写副标、波浪线、导语、操作按钮，可在右侧放插画或拍立得。",
+  "when": "每个页面的标题区都用它：首页用 --split（左文右图）或 --center；内页标题用 --center --sm 或 --sm。页面内部的版块标题改用 section-head。",
+  "root": "riko-hero",
+  "element": "section",
+  "parts": [
+    {
+      "class": "riko-hero__text",
+      "desc": "文字列",
+      "required": true
+    },
+    {
+      "class": "riko-hero__eyebrow",
+      "desc": "标题上方的手写引导语（可带星星）"
+    },
+    {
+      "class": "riko-hero__title",
+      "desc": "主标题，用 <h1>（每页唯一）",
+      "required": true
+    },
+    {
+      "class": "riko-hero__sub",
+      "desc": "手写英文副标（冰蓝）"
+    },
+    {
+      "class": "riko-hero__desc",
+      "desc": "导语段落"
+    },
+    {
+      "class": "riko-hero__actions",
+      "desc": "按钮/标签区"
+    },
+    {
+      "class": "riko-hero__art",
+      "desc": "右侧插画区（--split 时），宽度用 --riko-hero-art 调整"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-hero--split",
+      "desc": "左文右图，窄屏自动变为上下居中",
+      "group": "layout"
+    },
+    {
+      "class": "riko-hero--center",
+      "desc": "居中",
+      "group": "layout"
+    },
+    {
+      "class": "riko-hero--sm",
+      "desc": "内页小号页头",
+      "group": "size"
+    }
+  ],
+  "a11y": [
+    "__title 用 <h1>，整页只有一个 h1。",
+    "装饰星星与波浪线加 aria-hidden=\"true\"。"
+  ],
+  "rules": [
+    "在 __text 中可放 <span class=\"riko-squiggle\" aria-hidden=\"true\"></span> 作为标题下的波浪线。",
+    "包在 riko-container 内使用。"
+  ],
+  "avoid": [
+    "不要把页面主标题写成 riko-section-head（那是版块内的 h2 标题）。"
+  ],
+  "examples": [
+    {
+      "title": "首页主视觉（左文右图）",
+      "html": "<section class=\"riko-hero riko-hero--split\">\n  <div class=\"riko-hero__text\">\n    <p class=\"riko-hero__eyebrow\"><span class=\"riko-star\" aria-hidden=\"true\"></span>a small star in ordinary days</p>\n    <h1 class=\"riko-hero__title\">《络的世界》</h1>\n    <p class=\"riko-hero__sub\">Welcome to RikoLand</p>\n    <span class=\"riko-squiggle\" aria-hidden=\"true\"></span>\n    <p class=\"riko-hero__desc\">欢迎来到络可的童话小镇呀！这里藏着好多五彩斑斓的画稿和奇思妙想。</p>\n    <div class=\"riko-hero__actions\">\n      <a class=\"riko-btn riko-btn--primary riko-btn--lg\" href=\"#read\"><i data-lucide=\"book-open\"></i>开始阅读</a>\n      <span class=\"riko-tag riko-tag--accent\">预计 2027 年继续更新！</span>\n    </div>\n  </div>\n  <div class=\"riko-hero__art\">\n    <figure class=\"riko-polaroid\">\n      <span class=\"riko-tape\" aria-hidden=\"true\"></span>\n      <img src=\"https://riko.land/assets/logo.jpg\" alt=\"《络的世界》封面插画\">\n      <figcaption class=\"riko-polaroid__caption\">Riko's World ✦</figcaption>\n    </figure>\n  </div>\n</section>"
+    },
+    {
+      "title": "内页页头",
+      "html": "<header class=\"riko-hero riko-hero--center riko-hero--sm\">\n  <div class=\"riko-hero__text\">\n    <h1 class=\"riko-hero__title\"><span class=\"riko-star\" aria-hidden=\"true\"></span> 角色设定集</h1>\n    <p class=\"riko-hero__sub\">who's who in riko's world</p>\n    <p class=\"riko-hero__desc\">《络的世界》中已登场的人物与地点整理。建议先读完已更新章节再翻阅哦。</p>\n  </div>\n</header>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-hero",
+      "has": ".riko-hero__title",
+      "message": "riko-hero 需要 riko-hero__title（h1）"
+    }
+  ],
+  "related": [
+    "section-head",
+    "polaroid",
+    "squiggle"
+  ]
+}

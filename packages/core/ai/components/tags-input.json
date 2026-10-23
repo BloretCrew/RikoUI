@@ -1,0 +1,150 @@
+{
+  "name": "tags-input",
+  "title": "标签输入",
+  "titleEn": "Tags Input",
+  "category": "form",
+  "summary": "输入后按回车 / 逗号生成标签，可删除、可粘贴批量添加，结果以逗号分隔同步到隐藏 input。",
+  "when": "关键词、标签、收件人等可自由输入的多个短值。只能从固定选项多选时用 checkbox（--card / chip 样式）。",
+  "root": "riko-tags-input",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-tags-input__input",
+      "desc": "文字输入框",
+      "required": true
+    },
+    {
+      "class": "riko-tags-input__tag",
+      "desc": "标签（JS 生成；也可预先写好作为初始值）"
+    },
+    {
+      "class": "riko-tags-input__label",
+      "desc": "标签文字"
+    },
+    {
+      "class": "riko-tags-input__remove",
+      "desc": "标签的删除按钮"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-tags-input--block",
+      "desc": "占满容器宽度",
+      "group": "shape"
+    }
+  ],
+  "states": [
+    {
+      "attr": "aria-invalid=\"true\"",
+      "desc": "错误状态"
+    },
+    {
+      "attr": "data-state=\"armed\"",
+      "on": "riko-tags-input__tag",
+      "desc": "按一次退格后待删除（JS 维护）"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"tags-input\"",
+    "options": [
+      {
+        "attr": "data-riko-name",
+        "values": "字符串",
+        "default": "",
+        "desc": "隐藏 input 的 name（随表单提交，逗号分隔）"
+      },
+      {
+        "attr": "data-riko-value",
+        "values": "逗号分隔",
+        "default": "",
+        "desc": "初始标签"
+      },
+      {
+        "attr": "data-riko-max",
+        "values": "数字",
+        "default": "不限",
+        "desc": "最多几个标签"
+      },
+      {
+        "attr": "data-riko-unique",
+        "values": "true | false",
+        "default": "true",
+        "desc": "是否去重（不区分大小写）"
+      },
+      {
+        "attr": "data-riko-add-on-blur",
+        "values": "true | false",
+        "default": "true",
+        "desc": "失焦时把未确认的文字加为标签"
+      },
+      {
+        "attr": "data-riko-required",
+        "values": "布尔属性",
+        "default": "",
+        "desc": "配合 form-validate：至少一个标签"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "el.riko.tags",
+        "desc": "标签数组"
+      },
+      {
+        "signature": "el.riko.add(text)",
+        "desc": "添加（可逗号分隔多个）"
+      },
+      {
+        "signature": "el.riko.remove(index)",
+        "desc": "删除第 index 个"
+      },
+      {
+        "signature": "el.riko.set(list)",
+        "desc": "整体替换"
+      },
+      {
+        "signature": "el.riko.clear()",
+        "desc": "清空"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:tags-input:change",
+        "detail": "{ tags, value }",
+        "desc": "标签变化"
+      }
+    ]
+  },
+  "a11y": [
+    "输入框需要 aria-label 或 <label for>；根元素自动设为 role=group。",
+    "每个删除按钮自动带「移除标签 X」的 aria-label，增删结果通过隐藏的 aria-live 区域播报。"
+  ],
+  "rules": [
+    "只写一个输入框，标签和隐藏 input 交给 JS。",
+    "分隔符：回车、英文逗号、中文逗号、顿号、换行。"
+  ],
+  "avoid": [
+    "不要把多个值写在一个普通 input 里让用户自己用逗号分隔。"
+  ],
+  "examples": [
+    {
+      "title": "基础用法",
+      "html": "<div class=\"riko-tags-input\" data-riko=\"tags-input\" data-riko-name=\"tags\" data-riko-value=\"络可,星星酥,百络谷\">\n  <input class=\"riko-tags-input__input\" type=\"text\" placeholder=\"输入后按回车添加\" aria-label=\"作品标签\">\n</div>"
+    },
+    {
+      "title": "限制数量",
+      "html": "<div class=\"riko-field\" style=\"max-width: 420px\">\n  <label class=\"riko-field__label\" for=\"fav\">最喜欢的三个角色</label>\n  <div class=\"riko-tags-input riko-tags-input--block\" data-riko=\"tags-input\" data-riko-name=\"favorites\" data-riko-max=\"3\">\n    <input class=\"riko-tags-input__input\" id=\"fav\" type=\"text\" placeholder=\"最多 3 个\">\n  </div>\n  <p class=\"riko-field__hint\">支持一次粘贴多个，用逗号分隔</p>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-tags-input",
+      "has": ".riko-tags-input__input",
+      "message": "riko-tags-input 内需要 input.riko-tags-input__input"
+    }
+  ],
+  "related": [
+    "combobox",
+    "tag",
+    "field"
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "name": "number",
+  "title": "数字输入",
+  "titleEn": "Number",
+  "category": "form",
+  "summary": "带减 / 加按钮的数字输入，支持范围、步长、长按连续增减与键盘微调。",
+  "when": "数量、页码、份数等小范围整数或固定步长的数值。大范围连续数值用 range（滑块）；只读数字展示用 stat。",
+  "root": "riko-number",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-number__input",
+      "desc": "原生 <input type=\"number\">，min / max / step 写在它上面",
+      "required": true
+    },
+    {
+      "class": "riko-number__btn",
+      "desc": "减 / 加按钮（data-step=\"down|up\"），JS 自动生成，无需手写"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-number--sm",
+      "desc": "小号",
+      "group": "size"
+    },
+    {
+      "class": "riko-number--lg",
+      "desc": "大号",
+      "group": "size"
+    },
+    {
+      "class": "riko-number--block",
+      "desc": "占满容器宽度",
+      "group": "shape"
+    }
+  ],
+  "states": [
+    {
+      "attr": "disabled",
+      "on": "riko-number__input",
+      "desc": "禁用整个控件"
+    },
+    {
+      "attr": "aria-invalid=\"true\"",
+      "on": "riko-number__input",
+      "desc": "错误状态（外框变红）"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"number\"",
+    "options": [],
+    "methods": [
+      {
+        "signature": "el.riko.stepUp()",
+        "desc": "按 step 增加一次"
+      },
+      {
+        "signature": "el.riko.stepDown()",
+        "desc": "按 step 减少一次"
+      },
+      {
+        "signature": "el.riko.set(value)",
+        "desc": "设置数值（自动夹在 min / max 之间）"
+      },
+      {
+        "signature": "el.riko.value",
+        "desc": "当前数值"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:number:change",
+        "detail": "{ value }",
+        "desc": "数值通过按钮或键盘改变时派发；同时会触发原生 input / change 事件"
+      }
+    ]
+  },
+  "a11y": [
+    "输入框需要可访问名称：用 riko-field__label 的 <label for>，或 aria-label。",
+    "加减按钮不进入 Tab 顺序，键盘用户在输入框内用 ↑↓ / PageUp / PageDown / Home / End 调整。"
+  ],
+  "rules": [
+    "只写一个 input.riko-number__input，按钮交给 JS 生成。",
+    "min / max / step / value 写在 input 上，小数步进（如 0.5）会自动保留小数位。"
+  ],
+  "avoid": [
+    "不要再给 input 加 riko-input 类（外框由 riko-number 提供）。",
+    "不要用 type=\"text\" 自己做数字校验。"
+  ],
+  "examples": [
+    {
+      "title": "基础用法",
+      "html": "<div class=\"riko-number\" data-riko=\"number\">\n  <input class=\"riko-number__input\" type=\"number\" min=\"1\" max=\"12\" step=\"1\" value=\"3\" aria-label=\"星星酥数量\">\n</div>"
+    },
+    {
+      "title": "尺寸与小数步进",
+      "html": "<div class=\"riko-cluster\">\n  <div class=\"riko-number riko-number--sm\" data-riko=\"number\">\n    <input class=\"riko-number__input\" type=\"number\" min=\"0\" max=\"5\" step=\"0.5\" value=\"2.5\" aria-label=\"评分\">\n  </div>\n  <div class=\"riko-number\" data-riko=\"number\">\n    <input class=\"riko-number__input\" type=\"number\" min=\"0\" max=\"99\" value=\"7\" aria-label=\"章节\">\n  </div>\n  <div class=\"riko-number riko-number--lg\" data-riko=\"number\">\n    <input class=\"riko-number__input\" type=\"number\" min=\"0\" step=\"10\" value=\"100\" aria-label=\"绿宝石\">\n  </div>\n</div>"
+    },
+    {
+      "title": "放在表单项中",
+      "html": "<div class=\"riko-field\" data-riko=\"field\" style=\"max-width: 280px\">\n  <label class=\"riko-field__label\" for=\"ticket\">船票张数</label>\n  <div class=\"riko-number riko-number--block\" data-riko=\"number\">\n    <input class=\"riko-number__input\" id=\"ticket\" type=\"number\" min=\"1\" max=\"6\" value=\"2\">\n  </div>\n  <p class=\"riko-field__hint\">白桦木船最多能坐 6 个人哦</p>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-number",
+      "has": "input[type=\"number\"]",
+      "message": "riko-number 内需要一个 <input type=\"number\" class=\"riko-number__input\">"
+    },
+    {
+      "selector": ".riko-number__input",
+      "attr": "aria-label|aria-labelledby|id",
+      "message": "数字输入框需要 aria-label，或通过 id 与 <label for> 关联"
+    }
+  ],
+  "related": [
+    "field",
+    "range",
+    "input"
+  ]
+}

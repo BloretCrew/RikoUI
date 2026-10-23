@@ -1,0 +1,25 @@
+{
+  "name": "scallop",
+  "title": "扇贝花边",
+  "titleEn": "Scallop",
+  "category": "decor",
+  "summary": "色块顶部（或底部）的圆弧花边。",
+  "when": "页脚顶边、分区色块。",
+  "root": "riko-scallop",
+  "examples": [
+    {
+      "title": "页脚顶边",
+      "html": "<footer class=\"riko-scallop\" style=\"background: var(--riko-color-surface-muted); padding: var(--riko-space-8);\">…</footer>"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-scallop--bottom",
+      "desc": "花边朝下（在底部）",
+      "group": "layout"
+    }
+  ],
+  "rules": [
+    "花边颜色默认 --riko-color-surface-muted，需与色块背景一致；可用 --riko-scallop-color 修改。"
+  ]
+}

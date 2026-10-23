@@ -1,0 +1,55 @@
+{
+  "name": "split",
+  "title": "侧栏布局",
+  "titleEn": "Split",
+  "category": "layout",
+  "summary": "左侧（或右侧）固定宽度侧栏 + 主区；侧栏吸顶；窄屏变为上下。",
+  "when": "阅读器、文档、后台、设置页。",
+  "root": "riko-split",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-split__aside",
+      "desc": "侧栏（sticky）",
+      "required": true
+    },
+    {
+      "class": "riko-split__main",
+      "desc": "主区",
+      "required": true
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-split--reverse",
+      "desc": "侧栏在右",
+      "group": "layout"
+    },
+    {
+      "class": "riko-split--wide-aside",
+      "desc": "侧栏 360px",
+      "group": "size"
+    },
+    {
+      "class": "riko-split--static",
+      "desc": "侧栏不吸顶（内容区的右侧栏、后台卡片栏）",
+      "group": "behavior"
+    }
+  ],
+  "rules": [
+    "侧栏宽度可用 --riko-split-aside 覆盖。"
+  ],
+  "examples": [
+    {
+      "title": "阅读器布局",
+      "html": "<div class=\"riko-split riko-container riko-container--wide\">\n  <aside class=\"riko-split__aside\">…目录…</aside>\n  <main class=\"riko-split__main\">…正文…</main>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-split",
+      "has": ".riko-split__main",
+      "message": "riko-split 需要包含 riko-split__main"
+    }
+  ]
+}

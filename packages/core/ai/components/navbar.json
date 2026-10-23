@@ -1,0 +1,158 @@
+{
+  "name": "navbar",
+  "title": "导航栏",
+  "titleEn": "Navbar",
+  "category": "navigation",
+  "summary": "吸顶毛玻璃导航栏：左侧 logo 与标题，中间主导航，右侧操作按钮；窄屏自动收起为菜单。",
+  "when": "每个页面顶部放一个。页面内的分区切换用 tabs，文档/阅读类的侧边目录用 sidenav。",
+  "root": "riko-navbar",
+  "element": "header",
+  "parts": [
+    {
+      "class": "riko-navbar__inner",
+      "desc": "内容容器（居中、限宽）",
+      "required": true
+    },
+    {
+      "class": "riko-navbar__brand",
+      "desc": "品牌区（通常是回首页的链接）"
+    },
+    {
+      "class": "riko-navbar__logo",
+      "desc": "圆形 logo：<img> 或包一颗 riko-star 的 <span>"
+    },
+    {
+      "class": "riko-navbar__text",
+      "desc": "标题文字容器"
+    },
+    {
+      "class": "riko-navbar__title",
+      "desc": "主标题"
+    },
+    {
+      "class": "riko-navbar__sub",
+      "desc": "手写体副标题（窄屏隐藏）"
+    },
+    {
+      "class": "riko-navbar__nav",
+      "desc": "主导航 <nav>（需 aria-label）"
+    },
+    {
+      "class": "riko-navbar__link",
+      "desc": "导航链接；当前页加 aria-current=\"page\""
+    },
+    {
+      "class": "riko-navbar__actions",
+      "desc": "右侧按钮区（设置、通行证、返回等）"
+    },
+    {
+      "class": "riko-navbar__toggle",
+      "desc": "窄屏菜单按钮（空按钮，图标由 CSS 绘制，需 aria-label）"
+    },
+    {
+      "class": "riko-navbar__center",
+      "desc": "中间区（搜索框等），自动占满剩余宽度并居中"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-navbar--transparent",
+      "desc": "不吸顶、无背景，适合首屏大图上方",
+      "group": "variant"
+    },
+    {
+      "class": "riko-navbar--wide",
+      "desc": "内容宽度改为 --riko-container-wide",
+      "group": "layout"
+    }
+  ],
+  "states": [
+    {
+      "attr": "aria-current=\"page\"",
+      "on": "riko-navbar__link",
+      "desc": "当前页面"
+    },
+    {
+      "attr": "aria-expanded=\"true\"",
+      "on": "riko-navbar__toggle",
+      "desc": "窄屏菜单展开（JS 维护）"
+    },
+    {
+      "attr": "data-state=\"open|closed\"",
+      "on": "riko-navbar__nav",
+      "desc": "窄屏下菜单面板状态（JS 维护）"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"navbar\"",
+    "options": [],
+    "methods": [
+      {
+        "signature": "el.riko.open() / close() / toggle()",
+        "desc": "控制窄屏菜单"
+      },
+      {
+        "signature": "el.riko.isOpen",
+        "desc": "窄屏菜单是否展开"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:navbar:open",
+        "desc": "窄屏菜单展开"
+      },
+      {
+        "name": "riko:navbar:close",
+        "desc": "窄屏菜单收起"
+      }
+    ]
+  },
+  "a11y": [
+    "__nav 用 <nav aria-label=\"主导航\">。",
+    "__toggle 是空按钮，必须写 aria-label（JS 默认补「打开菜单」）。",
+    "logo 图片在品牌链接里已有文字时用 alt=\"\"。"
+  ],
+  "rules": [
+    "只有带 __nav 和 __toggle 时才需要 data-riko=\"navbar\"。",
+    "右侧操作按钮直接用 riko-btn（如 riko-btn--icon + aria-label）。",
+    "页面只放一个吸顶导航栏；滚动锚点的偏移量由 --riko-header-h（72px）统一控制。",
+    "导航栏中间放搜索框：<div class=\"riko-navbar__center\"><div class=\"riko-search\" data-riko=\"search\">…</div></div>，放在 __brand 与 __actions 之间。"
+  ],
+  "avoid": [
+    "不要把 riko-navbar__link 写成 riko-btn。",
+    "不要给当前链接加 .active，改用 aria-current=\"page\"。"
+  ],
+  "examples": [
+    {
+      "title": "基础导航栏",
+      "html": "<header class=\"riko-navbar\" data-riko=\"navbar\">\n  <div class=\"riko-navbar__inner\">\n    <a class=\"riko-navbar__brand\" href=\"#\">\n      <img class=\"riko-navbar__logo\" src=\"https://riko.land/assets/logo.jpg\" alt=\"\">\n      <span class=\"riko-navbar__text\">\n        <span class=\"riko-navbar__title\">《络的世界》</span>\n        <span class=\"riko-navbar__sub\">RikoLand · little star</span>\n      </span>\n    </a>\n    <nav class=\"riko-navbar__nav\" aria-label=\"主导航\">\n      <a class=\"riko-navbar__link\" href=\"#\" aria-current=\"page\">首页</a>\n      <a class=\"riko-navbar__link\" href=\"#\">小说</a>\n      <a class=\"riko-navbar__link\" href=\"#\">设定集</a>\n      <a class=\"riko-navbar__link\" href=\"#\">关于</a>\n    </nav>\n    <div class=\"riko-navbar__actions\">\n      <button type=\"button\" class=\"riko-btn riko-btn--icon\" data-riko=\"theme-toggle\" aria-label=\"切换深浅色\"></button>\n      <a class=\"riko-btn riko-btn--primary riko-btn--sm\" href=\"#\">开始阅读</a>\n    </div>\n    <button type=\"button\" class=\"riko-navbar__toggle\" aria-label=\"打开菜单\"></button>\n  </div>\n</header>"
+    },
+    {
+      "title": "透明导航栏（不吸顶）",
+      "html": "<header class=\"riko-navbar riko-navbar--transparent\">\n  <div class=\"riko-navbar__inner\">\n    <a class=\"riko-navbar__brand\" href=\"#\">\n      <span class=\"riko-navbar__logo\"><span class=\"riko-star riko-star--lg\" aria-hidden=\"true\"></span></span>\n      <span class=\"riko-navbar__text\">\n        <span class=\"riko-navbar__title\">络可的笔记本</span>\n        <span class=\"riko-navbar__sub\">little notes</span>\n      </span>\n    </a>\n    <div class=\"riko-navbar__actions\">\n      <a class=\"riko-btn riko-btn--ghost riko-btn--sm\" href=\"#\"><i data-lucide=\"arrow-left\"></i>返回主页</a>\n    </div>\n  </div>\n</header>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-navbar",
+      "has": ".riko-navbar__inner",
+      "message": "riko-navbar 内需要 riko-navbar__inner 容器"
+    },
+    {
+      "selector": "nav.riko-navbar__nav",
+      "attr": "aria-label|aria-labelledby",
+      "message": "导航栏中的 <nav> 需要 aria-label"
+    },
+    {
+      "selector": ".riko-navbar__toggle",
+      "attr": "aria-label|aria-labelledby",
+      "message": "菜单按钮 riko-navbar__toggle 需要 aria-label"
+    }
+  ],
+  "related": [
+    "sidenav",
+    "footer",
+    "button",
+    "theme-picker"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "name": "footer",
+  "title": "页脚",
+  "titleEn": "Footer",
+  "category": "navigation",
+  "summary": "米色扇贝花边页脚：三颗星星、一行文字链接、两行版权信息。",
+  "when": "每个页面底部。",
+  "root": "riko-footer",
+  "element": "footer",
+  "parts": [
+    {
+      "class": "riko-footer__inner",
+      "desc": "可选限宽容器"
+    },
+    {
+      "class": "riko-footer__stars",
+      "desc": "三颗星星装饰（放 3 个带 aria-hidden 的 riko-star）"
+    },
+    {
+      "class": "riko-footer__brand",
+      "desc": "可选品牌名"
+    },
+    {
+      "class": "riko-footer__nav",
+      "desc": "链接导航 <nav>"
+    },
+    {
+      "class": "riko-footer__link",
+      "desc": "链接（之间自动出现「·」）"
+    },
+    {
+      "class": "riko-footer__copy",
+      "desc": "版权文字段落"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-footer--flat",
+      "desc": "去掉扇贝花边，改为顶部虚线",
+      "group": "decor"
+    }
+  ],
+  "states": [],
+  "js": null,
+  "a11y": [
+    "__nav 用 <nav aria-label=\"页脚导航\">。",
+    "每颗装饰星星加 aria-hidden=\"true\"。"
+  ],
+  "rules": [
+    "放在 <body> 末尾、页面主体之后；与 riko-page 一起使用可让页脚贴底。",
+    "扇贝花边颜色跟随 --riko-color-surface-muted。"
+  ],
+  "avoid": [
+    "不要手写分隔符「·」。"
+  ],
+  "examples": [
+    {
+      "title": "页脚",
+      "html": "<footer class=\"riko-footer\">\n  <div class=\"riko-footer__stars\"><span class=\"riko-star\" aria-hidden=\"true\"></span><span class=\"riko-star\" aria-hidden=\"true\"></span><span class=\"riko-star\" aria-hidden=\"true\"></span></div>\n  <nav class=\"riko-footer__nav\" aria-label=\"页脚导航\">\n    <a class=\"riko-footer__link\" href=\"https://read.riko.land\">小说阅读器</a>\n    <a class=\"riko-footer__link\" href=\"https://wiki.riko.land\">Wiki</a>\n    <a class=\"riko-footer__link\" href=\"https://contact.riko.land\">联系我们</a>\n  </nav>\n  <p class=\"riko-footer__copy\">© 2021–2026 Bloret.All rights reserved.</p>\n  <p class=\"riko-footer__copy\">《络的世界》项目组</p>\n</footer>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": "nav.riko-footer__nav",
+      "attr": "aria-label|aria-labelledby",
+      "message": "页脚 <nav> 需要 aria-label"
+    }
+  ],
+  "related": [
+    "navbar",
+    "page"
+  ]
+}

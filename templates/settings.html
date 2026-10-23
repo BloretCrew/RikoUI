@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>设置 · 《络的世界》</title>
+<meta name="theme-color" content="#FBF5EA">
+<script src="../packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="../packages/fonts/riko-fonts.css">
+<link rel="stylesheet" href="../packages/core/dist/riko-ui.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+
+<div class="riko-page">
+  <header class="riko-navbar">
+    <div class="riko-navbar__inner">
+      <a class="riko-navbar__brand" href="landing.html">
+        <img class="riko-navbar__logo" src="https://riko.land/assets/logo.jpg" alt="">
+        <span class="riko-navbar__text">
+          <span class="riko-navbar__title">《络的世界》</span>
+          <span class="riko-navbar__sub">settings</span>
+        </span>
+      </a>
+      <div class="riko-navbar__actions">
+        <a class="riko-btn" href="landing.html"><i data-lucide="arrow-left"></i><span class="riko-u-hide-sm">返回主页</span></a>
+      </div>
+    </div>
+  </header>
+
+  <div class="riko-page__main riko-container riko-section riko-section--sm">
+    <div class="riko-section-head">
+      <div class="riko-section-head__text">
+        <h1 class="riko-section-head__title"><span class="riko-star" aria-hidden="true"></span>设置</h1>
+        <span class="riko-section-head__sub">make it cozy</span>
+        <p class="riko-section-head__desc">调整你的个人资料与阅读偏好，修改会在点击「保存」后生效。</p>
+      </div>
+    </div>
+
+    <div class="riko-split" style="--riko-split-aside: 220px;">
+      <aside class="riko-split__aside riko-u-hide-md">
+        <nav class="riko-sidenav" data-riko="sidenav" aria-label="设置分类">
+          <ul class="riko-sidenav__list">
+            <li><a class="riko-sidenav__item" href="#profile" aria-current="page"><i data-lucide="user"></i><span class="riko-sidenav__text">个人资料</span></a></li>
+            <li><a class="riko-sidenav__item" href="#reading"><i data-lucide="book-open"></i><span class="riko-sidenav__text">阅读偏好</span></a></li>
+            <li><a class="riko-sidenav__item" href="#notify"><i data-lucide="bell"></i><span class="riko-sidenav__text">通知</span></a></li>
+            <li><a class="riko-sidenav__item" href="#danger"><i data-lucide="triangle-alert"></i><span class="riko-sidenav__text">危险区</span></a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="riko-split__main">
+        <form class="riko-form" data-riko="form-validate" id="settings-form" novalidate>
+          <fieldset class="riko-fieldset riko-fieldset--card" id="profile">
+            <legend class="riko-fieldset__legend">个人资料</legend>
+            <div class="riko-cluster riko-cluster--lg">
+              <span class="riko-avatar riko-avatar--xl riko-avatar--ring"><img src="https://riko.land/assets/logo.jpg" alt="当前头像"></span>
+              <div class="riko-stack riko-stack--sm">
+                <button type="button" class="riko-btn riko-btn--sm"><i data-lucide="image-up"></i>更换头像</button>
+                <p class="riko-text riko-text--xs riko-text--muted">支持 PNG / JPG，不超过 2MB</p>
+              </div>
+            </div>
+            <div class="riko-form riko-form--grid">
+              <div class="riko-field" data-riko="field">
+                <label class="riko-field__label" for="s-name">昵称<span class="riko-field__required" aria-hidden="true">*</span></label>
+                <input class="riko-input" id="s-name" name="name" required minlength="2" maxlength="12" value="星星酥">
+              </div>
+              <div class="riko-field" data-riko="field">
+                <label class="riko-field__label" for="s-mail">邮箱</label>
+                <input class="riko-input" id="s-mail" name="email" type="email" value="author@riko.land">
+              </div>
+              <div class="riko-field riko-form__full" data-riko="field">
+                <label class="riko-field__label" for="s-bio">一句话介绍</label>
+                <textarea class="riko-textarea" id="s-bio" name="bio" rows="2" maxlength="80" data-riko="autosize">在沙滩上画画，在星空下写故事。</textarea>
+                <p class="riko-field__counter"></p>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="riko-fieldset riko-fieldset--card" id="reading">
+            <legend class="riko-fieldset__legend">阅读偏好</legend>
+            <div class="riko-stack riko-stack--sm">
+              <p class="riko-text riko-text--sm riko-text--strong" id="theme-label">外观</p>
+              <div><div class="riko-theme-picker riko-theme-picker--compact" data-riko="theme-picker" aria-labelledby="theme-label"></div></div>
+            </div>
+            <div class="riko-field">
+              <span class="riko-field__label" id="font-label">正文字体</span>
+              <div class="riko-segmented" role="radiogroup" aria-labelledby="font-label">
+                <label class="riko-segmented__item"><input type="radio" name="font" value="serif" checked>宋体</label>
+                <label class="riko-segmented__item"><input type="radio" name="font" value="sans">黑体</label>
+                <label class="riko-segmented__item"><input type="radio" name="font" value="title">小薇体</label>
+              </div>
+            </div>
+            <div class="riko-field">
+              <div class="riko-cluster riko-cluster--between">
+                <label class="riko-field__label" for="s-size">正文字号</label>
+                <output class="riko-output" for="s-size">18px</output>
+              </div>
+              <input class="riko-range" id="s-size" name="size" type="range" min="15" max="24" value="18" data-riko="range" data-riko-suffix="px">
+            </div>
+            <div class="riko-grid riko-grid--sm" style="--riko-grid-min: 200px;" role="radiogroup" aria-label="阅读方式">
+              <label class="riko-radio riko-radio--card"><input type="radio" name="mode" value="scroll" checked><span class="riko-radio__text">连续滚动<span class="riko-radio__desc">像展开一卷长长的画</span></span></label>
+              <label class="riko-radio riko-radio--card"><input type="radio" name="mode" value="page"><span class="riko-radio__text">分页翻阅<span class="riko-radio__desc">一页一页慢慢看</span></span></label>
+            </div>
+            <div class="riko-field">
+              <span class="riko-field__label" id="color-label">强调色</span>
+              <div class="riko-swatches" role="radiogroup" aria-labelledby="color-label">
+                <label class="riko-swatches__item" style="--riko-swatch: var(--riko-color-accent)">
+                  <input class="riko-swatches__input" type="radio" name="color" value="star" checked>
+                  <span class="riko-swatches__color"></span>
+                  <span class="riko-swatches__label">星星橙</span>
+                </label>
+                <label class="riko-swatches__item" style="--riko-swatch: var(--riko-color-ice-strong)">
+                  <input class="riko-swatches__input" type="radio" name="color" value="ice">
+                  <span class="riko-swatches__color"></span>
+                  <span class="riko-swatches__label">冰蓝</span>
+                </label>
+                <label class="riko-swatches__item" style="--riko-swatch: var(--riko-color-success)">
+                  <input class="riko-swatches__input" type="radio" name="color" value="leaf">
+                  <span class="riko-swatches__color"></span>
+                  <span class="riko-swatches__label">嫩叶</span>
+                </label>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="riko-fieldset riko-fieldset--card" id="notify">
+            <legend class="riko-fieldset__legend">通知</legend>
+            <p class="riko-fieldset__desc">有新动静时，络可会第一时间告诉你。</p>
+            <label class="riko-switch"><input type="checkbox" role="switch" name="n-chapter" checked> 新章节提醒</label>
+            <label class="riko-switch"><input type="checkbox" role="switch" name="n-reply" checked> 留言回复</label>
+            <label class="riko-switch"><input type="checkbox" role="switch" name="n-mail"> 每周邮件摘要</label>
+          </fieldset>
+
+          <fieldset class="riko-fieldset riko-fieldset--card" id="danger">
+            <legend class="riko-fieldset__legend">危险区</legend>
+            <div class="riko-alert riko-alert--danger">
+              <span class="riko-alert__icon" aria-hidden="true"></span>
+              <div class="riko-alert__content">
+                <p class="riko-alert__title">清除全部阅读记录</p>
+                <p class="riko-alert__body">已读标记、书签与搜索历史都会被删除，且无法恢复。</p>
+                <div class="riko-alert__actions">
+                  <button type="button" class="riko-btn riko-btn--danger riko-btn--sm" id="clear-history"><i data-lucide="trash-2"></i>清除记录</button>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <div class="riko-form__actions">
+            <button type="reset" class="riko-btn riko-btn--ghost">撤销修改</button>
+            <button type="submit" class="riko-btn riko-btn--primary"><i data-lucide="save"></i>保存</button>
+          </div>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <footer class="riko-footer riko-footer--flat">
+    <p class="riko-footer__copy">© 2021–2026 Bloret.All rights reserved.</p>
+    <p class="riko-footer__copy">《络的世界》项目组</p>
+  </footer>
+</div>
+
+<script src="../assets/vendor/lucide.min.js"></script>
+<script src="../packages/core/dist/riko-ui.js"></script>
+<script>
+  document.getElementById('settings-form').addEventListener('riko:form:submit', function (e) {
+    e.preventDefault();
+    Riko.toast.success('设置已保存');
+  });
+  document.getElementById('clear-history').addEventListener('click', async function () {
+    var ok = await Riko.confirm({ title: '真的要清除吗？', message: '已读标记、书签与搜索历史都会被删除，且无法恢复。', confirmText: '清除', cancelText: '再想想', tone: 'danger' });
+    if (ok) Riko.toast({ message: '阅读记录已清除', tone: 'warning' });
+  });
+</script>
+</body>
+</html>

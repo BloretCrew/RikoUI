@@ -1,0 +1,83 @@
+{
+  "name": "breadcrumb",
+  "title": "面包屑",
+  "titleEn": "Breadcrumb",
+  "category": "navigation",
+  "summary": "显示当前页面在层级中的位置，分隔符为小箭头或小星星。",
+  "when": "层级 ≥ 3 的内容页（文档、设定集、商品分类）。两级以内用返回按钮即可。",
+  "root": "riko-breadcrumb",
+  "element": "nav",
+  "parts": [
+    {
+      "class": "riko-breadcrumb__list",
+      "desc": "有序列表 <ol>",
+      "required": true
+    },
+    {
+      "class": "riko-breadcrumb__item",
+      "desc": "列表项 <li>",
+      "required": true
+    },
+    {
+      "class": "riko-breadcrumb__link",
+      "desc": "链接；最后一项用 <span aria-current=\"page\">",
+      "required": true
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-breadcrumb--stars",
+      "desc": "分隔符改为橙色小星星",
+      "group": "variant"
+    }
+  ],
+  "states": [
+    {
+      "attr": "aria-current=\"page\"",
+      "on": "riko-breadcrumb__link",
+      "desc": "当前页面（最后一项）"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "<nav aria-label=\"面包屑\"> 包裹 <ol>。",
+    "最后一项不是链接，并带 aria-current=\"page\"。"
+  ],
+  "rules": [
+    "分隔符由 CSS 生成，不要手写「/」或「>」。",
+    "可在 __link 内放 Lucide 图标（如首页 house）。"
+  ],
+  "avoid": [
+    "不要用 <div> 代替 <ol>/<li>。"
+  ],
+  "examples": [
+    {
+      "title": "基础",
+      "html": "<nav class=\"riko-breadcrumb\" aria-label=\"面包屑\">\n  <ol class=\"riko-breadcrumb__list\">\n    <li class=\"riko-breadcrumb__item\"><a class=\"riko-breadcrumb__link\" href=\"#\"><i data-lucide=\"house\"></i>首页</a></li>\n    <li class=\"riko-breadcrumb__item\"><a class=\"riko-breadcrumb__link\" href=\"#\">小说</a></li>\n    <li class=\"riko-breadcrumb__item\"><span class=\"riko-breadcrumb__link\" aria-current=\"page\">沙滩上的画家</span></li>\n  </ol>\n</nav>"
+    },
+    {
+      "title": "星星分隔",
+      "html": "<nav class=\"riko-breadcrumb riko-breadcrumb--stars\" aria-label=\"面包屑\">\n  <ol class=\"riko-breadcrumb__list\">\n    <li class=\"riko-breadcrumb__item\"><a class=\"riko-breadcrumb__link\" href=\"#\">络可的笔记本</a></li>\n    <li class=\"riko-breadcrumb__item\"><a class=\"riko-breadcrumb__link\" href=\"#\">地点</a></li>\n    <li class=\"riko-breadcrumb__item\"><span class=\"riko-breadcrumb__link\" aria-current=\"page\">百络谷</span></li>\n  </ol>\n</nav>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-breadcrumb",
+      "has": ".riko-breadcrumb__list",
+      "message": "riko-breadcrumb 内需要 <ol class=\"riko-breadcrumb__list\">"
+    },
+    {
+      "selector": "nav.riko-breadcrumb",
+      "attr": "aria-label|aria-labelledby",
+      "message": "面包屑 <nav> 需要 aria-label"
+    },
+    {
+      "selector": ".riko-breadcrumb",
+      "has": "[aria-current=\"page\"]",
+      "message": "面包屑最后一项需要 aria-current=\"page\""
+    }
+  ],
+  "related": [
+    "navbar"
+  ]
+}

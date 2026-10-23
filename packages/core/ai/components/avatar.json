@@ -1,0 +1,107 @@
+{
+  "name": "avatar",
+  "title": "头像",
+  "titleEn": "Avatar",
+  "category": "data",
+  "summary": "圆形头像，支持图片、文字缩写、图标、在线状态与重叠头像组。",
+  "when": "代表一个人或角色。站点 Logo 也可用 --ring 风格。",
+  "root": "riko-avatar",
+  "element": "span",
+  "parts": [
+    {
+      "class": "riko-avatar__status",
+      "desc": "右下角状态点，配合 data-status=\"online|busy|away|offline\""
+    },
+    {
+      "class": "riko-avatar-group",
+      "desc": "头像组容器（重叠排列）"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-avatar--xs",
+      "desc": "24px",
+      "group": "size"
+    },
+    {
+      "class": "riko-avatar--sm",
+      "desc": "32px",
+      "group": "size"
+    },
+    {
+      "class": "riko-avatar--lg",
+      "desc": "64px",
+      "group": "size"
+    },
+    {
+      "class": "riko-avatar--xl",
+      "desc": "96px",
+      "group": "size"
+    },
+    {
+      "class": "riko-avatar--ring",
+      "desc": "纸白边 + 浅棕环（同站点 Logo）",
+      "group": "decor"
+    },
+    {
+      "class": "riko-avatar--square",
+      "desc": "手绘圆角方形",
+      "group": "shape"
+    },
+    {
+      "class": "riko-avatar--accent",
+      "desc": "浅橙底（文字/图标头像）",
+      "group": "tone"
+    },
+    {
+      "class": "riko-avatar--soft",
+      "desc": "米色底（文字/图标头像）",
+      "group": "tone"
+    }
+  ],
+  "states": [
+    {
+      "attr": "data-status=\"online|busy|away|offline\"",
+      "on": "riko-avatar__status",
+      "desc": "状态颜色：绿 / 红 / 黄 / 灰"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "图片头像：<img> 写 alt（人名）。",
+    "文字或图标头像：在 riko-avatar 上加 role=\"img\" 与 aria-label。",
+    "__status 要有 aria-label（如「在线」）或 aria-hidden=\"true\"。",
+    "旁边已有可见名字（如卡片标题）时，头像是装饰：图片 alt=\"\"，文字/图标头像加 aria-hidden=\"true\"，避免重复朗读。"
+  ],
+  "rules": [
+    "头像组用 <div class=\"riko-avatar-group\">，内部头像会自动加白边并重叠。"
+  ],
+  "avoid": [
+    "不要直接给 <img> 加 riko-avatar，应外包一层 <span class=\"riko-avatar\">。"
+  ],
+  "examples": [
+    {
+      "title": "尺寸与类型",
+      "html": "<div class=\"riko-cluster riko-cluster--lg\">\n  <span class=\"riko-avatar riko-avatar--xs\"><img src=\"https://riko.land/assets/logo.jpg\" alt=\"络可\"></span>\n  <span class=\"riko-avatar riko-avatar--sm\"><img src=\"https://riko.land/assets/logo.jpg\" alt=\"络可\"></span>\n  <span class=\"riko-avatar\"><img src=\"https://riko.land/assets/logo.jpg\" alt=\"络可\"></span>\n  <span class=\"riko-avatar riko-avatar--lg riko-avatar--ring\"><img src=\"https://riko.land/assets/logo.jpg\" alt=\"络可\"></span>\n  <span class=\"riko-avatar riko-avatar--xl riko-avatar--ring\"><img src=\"https://riko.land/assets/logo.jpg\" alt=\"络可\"></span>\n  <span class=\"riko-avatar riko-avatar--lg\" role=\"img\" aria-label=\"星星酥\">星</span>\n  <span class=\"riko-avatar riko-avatar--lg riko-avatar--accent\" role=\"img\" aria-label=\"Star\"><span class=\"riko-star\" aria-hidden=\"true\"></span></span>\n  <span class=\"riko-avatar riko-avatar--lg riko-avatar--soft riko-avatar--square\" role=\"img\" aria-label=\"访客\"><i data-lucide=\"user\"></i></span>\n</div>"
+    },
+    {
+      "title": "状态与头像组",
+      "html": "<div class=\"riko-cluster riko-cluster--lg\">\n  <span class=\"riko-avatar riko-avatar--lg\"><img src=\"https://riko.land/assets/logo.jpg\" alt=\"络可\"><span class=\"riko-avatar__status\" data-status=\"online\" aria-label=\"在线\"></span></span>\n  <span class=\"riko-avatar riko-avatar--lg riko-avatar--soft\" role=\"img\" aria-label=\"111\"><span aria-hidden=\"true\">111</span><span class=\"riko-avatar__status\" data-status=\"busy\" aria-label=\"忙碌\"></span></span>\n  <span class=\"riko-avatar riko-avatar--lg riko-avatar--accent\" role=\"img\" aria-label=\"无昵\">昵<span class=\"riko-avatar__status\" data-status=\"away\" aria-label=\"离开\"></span></span>\n  <div class=\"riko-avatar-group\">\n    <span class=\"riko-avatar\"><img src=\"https://riko.land/assets/logo.jpg\" alt=\"络可\"></span>\n    <span class=\"riko-avatar riko-avatar--accent\" role=\"img\" aria-label=\"Star\">S</span>\n    <span class=\"riko-avatar riko-avatar--soft\" role=\"img\" aria-label=\"111\">1</span>\n    <span class=\"riko-avatar\" role=\"img\" aria-label=\"还有 5 人\">+5</span>\n  </div>\n</div>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-avatar__status",
+      "attr": "aria-label|aria-hidden",
+      "message": "riko-avatar__status 需要 aria-label（如「在线」）或 aria-hidden=\"true\""
+    },
+    {
+      "selector": ".riko-avatar",
+      "message": "不要把 riko-avatar 加在 <img> 上，请用 <span class=\"riko-avatar\"><img alt></span>",
+      "tag": "span|div|a|button"
+    }
+  ],
+  "related": [
+    "badge"
+  ]
+}

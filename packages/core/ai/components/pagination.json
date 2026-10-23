@@ -1,0 +1,144 @@
+{
+  "name": "pagination",
+  "title": "分页",
+  "titleEn": "Pagination",
+  "category": "navigation",
+  "summary": "页码分页，当前页是一颗微微倾斜的橙色小方块；可由 JS 根据总页数自动渲染。",
+  "when": "列表数据分多页时用。上一篇/下一篇式的线性阅读用 pager；无限滚动则不需要分页。",
+  "root": "riko-pagination",
+  "element": "nav",
+  "parts": [
+    {
+      "class": "riko-pagination__item",
+      "desc": "页码（a / button / 当前页用 span aria-current=\"page\"）",
+      "required": true
+    },
+    {
+      "class": "riko-pagination__prev",
+      "desc": "上一页（与 __item 同用；留空只显示箭头，需 aria-label）"
+    },
+    {
+      "class": "riko-pagination__next",
+      "desc": "下一页（与 __item 同用）"
+    },
+    {
+      "class": "riko-pagination__ellipsis",
+      "desc": "省略号"
+    },
+    {
+      "class": "riko-pagination__info",
+      "desc": "右侧说明文字，如「共 76 节」"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-pagination--sm",
+      "desc": "小号",
+      "group": "size"
+    },
+    {
+      "class": "riko-pagination--center",
+      "desc": "居中对齐",
+      "group": "layout"
+    }
+  ],
+  "states": [
+    {
+      "attr": "aria-current=\"page\"",
+      "on": "riko-pagination__item",
+      "desc": "当前页"
+    },
+    {
+      "attr": "aria-disabled=\"true\"",
+      "on": "riko-pagination__item",
+      "desc": "不可用（如第一页的「上一页」）"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"pagination\"",
+    "options": [
+      {
+        "attr": "data-riko-total",
+        "values": "数字",
+        "default": "1",
+        "desc": "总页数"
+      },
+      {
+        "attr": "data-riko-current",
+        "values": "数字",
+        "default": "1",
+        "desc": "当前页"
+      },
+      {
+        "attr": "data-riko-siblings",
+        "values": "数字",
+        "default": "1",
+        "desc": "当前页两侧显示几个页码"
+      },
+      {
+        "attr": "data-riko-href",
+        "values": "含 {page} 的地址",
+        "default": "",
+        "desc": "设置后渲染为链接，否则渲染为按钮"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "el.riko.set(page)",
+        "desc": "跳到某页（按钮模式）"
+      },
+      {
+        "signature": "el.riko.setTotal(n)",
+        "desc": "修改总页数"
+      },
+      {
+        "signature": "el.riko.page / el.riko.total",
+        "desc": "当前页 / 总页数"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:pagination:change",
+        "detail": "{ page, total }",
+        "desc": "按钮模式下页码改变"
+      }
+    ]
+  },
+  "a11y": [
+    "<nav aria-label=\"分页\">。",
+    "只有箭头的上一页/下一页必须写 aria-label。",
+    "当前页用 aria-current=\"page\"。"
+  ],
+  "rules": [
+    "服务端渲染时直接手写结构，无需 data-riko。",
+    "前端分页用 data-riko=\"pagination\"，内容留空，监听 riko:pagination:change 加载数据。"
+  ],
+  "avoid": [
+    "不要用 .active 标记当前页。"
+  ],
+  "examples": [
+    {
+      "title": "自动渲染",
+      "html": "<nav class=\"riko-pagination\" data-riko=\"pagination\" data-riko-total=\"20\" data-riko-current=\"6\" aria-label=\"分页\"></nav>"
+    },
+    {
+      "title": "手写结构（服务端渲染）",
+      "html": "<nav class=\"riko-pagination riko-pagination--sm\" aria-label=\"分页\">\n  <a class=\"riko-pagination__item riko-pagination__prev\" href=\"?page=1\">上一页</a>\n  <a class=\"riko-pagination__item\" href=\"?page=1\">1</a>\n  <span class=\"riko-pagination__item\" aria-current=\"page\">2</span>\n  <a class=\"riko-pagination__item\" href=\"?page=3\">3</a>\n  <span class=\"riko-pagination__ellipsis\" aria-hidden=\"true\">…</span>\n  <a class=\"riko-pagination__item\" href=\"?page=9\">9</a>\n  <a class=\"riko-pagination__item riko-pagination__next\" href=\"?page=3\">下一页</a>\n  <span class=\"riko-pagination__info\">共 76 节</span>\n</nav>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": "nav.riko-pagination",
+      "attr": "aria-label|aria-labelledby",
+      "message": "分页 <nav> 需要 aria-label"
+    },
+    {
+      "selector": ".riko-pagination:not([data-riko])",
+      "has": "[aria-current=\"page\"]",
+      "message": "手写分页需要一个 aria-current=\"page\" 的当前页"
+    }
+  ],
+  "related": [
+    "pager"
+  ]
+}

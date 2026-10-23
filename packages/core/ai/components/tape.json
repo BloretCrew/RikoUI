@@ -1,0 +1,42 @@
+{
+  "name": "tape",
+  "title": "胶带",
+  "titleEn": "Tape",
+  "category": "decor",
+  "summary": "贴在卡片/照片顶部的半透明条纹胶带。",
+  "when": "拍立得、便签、阅读页纸张顶部。",
+  "root": "riko-tape",
+  "examples": [
+    {
+      "title": "贴在卡片上",
+      "html": "<div class=\"riko-card\" style=\"position: relative;\">\n  <span class=\"riko-tape\" aria-hidden=\"true\"></span>\n  …\n</div>"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-tape--left",
+      "desc": "左上角斜贴",
+      "group": "layout"
+    },
+    {
+      "class": "riko-tape--right",
+      "desc": "右上角斜贴",
+      "group": "layout"
+    },
+    {
+      "class": "riko-tape--accent",
+      "desc": "橙色胶带",
+      "group": "tone"
+    }
+  ],
+  "rules": [
+    "父元素需要 position: relative。"
+  ],
+  "requires": [
+    {
+      "selector": ".riko-tape",
+      "attr": "aria-hidden",
+      "message": "riko-tape 是装饰，请加 aria-hidden=\"true\""
+    }
+  ]
+}

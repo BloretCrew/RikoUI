@@ -1,0 +1,65 @@
+{
+  "name": "skeleton",
+  "title": "骨架屏",
+  "titleEn": "Skeleton",
+  "category": "feedback",
+  "summary": "内容加载前的柔和闪光占位块：文字行、圆形头像、矩形图片。",
+  "when": "已知布局的内容正在加载时。未知布局或很短的等待用 spinner。",
+  "root": "riko-skeleton",
+  "element": "span",
+  "parts": [
+    {
+      "class": "riko-skeleton-group",
+      "desc": "纵向排列多个占位块的容器（组内最后一行文字自动变短）"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-skeleton--text",
+      "desc": "一行文字",
+      "group": "shape"
+    },
+    {
+      "class": "riko-skeleton--circle",
+      "desc": "圆形（头像），尺寸用 --riko-skeleton-size",
+      "group": "shape"
+    },
+    {
+      "class": "riko-skeleton--rect",
+      "desc": "矩形（图片/卡片），高度用 --riko-skeleton-h",
+      "group": "shape"
+    }
+  ],
+  "states": [
+    {
+      "attr": "aria-busy=\"true\"",
+      "on": "外层容器",
+      "desc": "表示该区域正在加载"
+    }
+  ],
+  "js": null,
+  "a11y": [
+    "外层容器加 aria-busy=\"true\" 和 aria-label（如「正在加载章节」），加载完成后移除 aria-busy 并替换内容。"
+  ],
+  "rules": [
+    "占位块的大致形状应与真实内容一致。",
+    "尺寸用 --riko-skeleton-h / --riko-skeleton-size 变量调整。"
+  ],
+  "avoid": [
+    "不要在骨架屏里放文字。"
+  ],
+  "examples": [
+    {
+      "title": "卡片占位",
+      "html": "<div class=\"riko-cluster riko-cluster--start\" aria-busy=\"true\" aria-label=\"正在加载章节\">\n  <span class=\"riko-skeleton riko-skeleton--circle\"></span>\n  <div class=\"riko-skeleton-group riko-u-flex-1\">\n    <span class=\"riko-skeleton riko-skeleton--text\"></span>\n    <span class=\"riko-skeleton riko-skeleton--text\"></span>\n    <span class=\"riko-skeleton riko-skeleton--text\"></span>\n  </div>\n</div>"
+    },
+    {
+      "title": "图片 + 文字",
+      "html": "<div class=\"riko-skeleton-group\" style=\"max-width: 320px\" aria-busy=\"true\" aria-label=\"正在加载图片\">\n  <span class=\"riko-skeleton riko-skeleton--rect\"></span>\n  <span class=\"riko-skeleton riko-skeleton--text\"></span>\n  <span class=\"riko-skeleton riko-skeleton--text\"></span>\n</div>"
+    }
+  ],
+  "requires": [],
+  "related": [
+    "spinner"
+  ]
+}

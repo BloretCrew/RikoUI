@@ -1,0 +1,174 @@
+{
+  "name": "search",
+  "title": "搜索框",
+  "titleEn": "Search",
+  "category": "form",
+  "summary": "胶囊形搜索框：清除按钮、快捷键聚焦、防抖输入事件、可选结果计数与上一处 / 下一处；配合 Riko.highlight() 实现搜索并高亮。",
+  "when": "站内搜索、列表过滤、文章 / 小说内查找。需要从候选项中选择一个值时改用 combobox。",
+  "root": "riko-search",
+  "element": "div",
+  "parts": [
+    {
+      "class": "riko-search__input",
+      "desc": "<input type=\"search\">",
+      "required": true
+    },
+    {
+      "class": "riko-search__hint",
+      "desc": "快捷键提示（<kbd>），输入后自动隐藏"
+    },
+    {
+      "class": "riko-search__count",
+      "desc": "结果计数，内容由 el.riko.setResult() 写入"
+    },
+    {
+      "class": "riko-search__nav",
+      "desc": "上一处 / 下一处按钮容器（有结果时显示）"
+    },
+    {
+      "class": "riko-search__btn",
+      "desc": "导航按钮，data-step=\"prev|next\"，需要 aria-label"
+    },
+    {
+      "class": "riko-search__clear",
+      "desc": "清除按钮（JS 自动生成）"
+    }
+  ],
+  "modifiers": [
+    {
+      "class": "riko-search--sm",
+      "desc": "小号",
+      "group": "size"
+    },
+    {
+      "class": "riko-search--lg",
+      "desc": "大号",
+      "group": "size"
+    },
+    {
+      "class": "riko-search--block",
+      "desc": "占满容器宽度",
+      "group": "layout"
+    },
+    {
+      "class": "riko-search--square",
+      "desc": "圆角矩形（默认胶囊）",
+      "group": "shape"
+    }
+  ],
+  "states": [
+    {
+      "attr": "data-state=\"filled|empty\"",
+      "desc": "是否有内容（JS 维护）"
+    }
+  ],
+  "js": {
+    "attr": "data-riko=\"search\"",
+    "options": [
+      {
+        "attr": "data-riko-hotkey",
+        "values": "单个按键 | none",
+        "default": "/",
+        "desc": "聚焦快捷键；Ctrl/Cmd+K 始终可用（页面上只有第一个启用快捷键的搜索框生效）"
+      },
+      {
+        "attr": "data-riko-debounce",
+        "values": "毫秒",
+        "default": "160",
+        "desc": "riko:search:input 防抖时间"
+      }
+    ],
+    "methods": [
+      {
+        "signature": "el.riko.setResult(result)",
+        "desc": "显示结果计数与导航：{ current, total, label? }；传 null 清除"
+      },
+      {
+        "signature": "el.riko.clear()",
+        "desc": "清空"
+      },
+      {
+        "signature": "el.riko.focus()",
+        "desc": "聚焦输入框"
+      },
+      {
+        "signature": "el.riko.value",
+        "desc": "原始值"
+      },
+      {
+        "signature": "el.riko.query",
+        "desc": "去空格并转小写的查询词"
+      },
+      {
+        "signature": "Riko.highlight(root, query, opts)",
+        "desc": "在容器内用 <mark class=\"riko-mark\"> 高亮全部匹配，返回 { count, marks, index, next(), prev(), go(i), clear() }；options：caseSensitive、className、currentClass、exclude、scroll"
+      }
+    ],
+    "events": [
+      {
+        "name": "riko:search:input",
+        "detail": "{ value, query }",
+        "desc": "输入防抖后派发（清空时也会派发）"
+      },
+      {
+        "name": "riko:search:step",
+        "detail": "{ dir: 1 | -1, query }",
+        "desc": "Enter / Shift+Enter 或点击导航按钮"
+      },
+      {
+        "name": "riko:search:clear",
+        "detail": "",
+        "desc": "被清空时"
+      }
+    ]
+  },
+  "a11y": [
+    "输入框必须有 aria-label 或关联的 <label>。",
+    "导航按钮必须有 aria-label（如「上一处」「下一处」）；计数区自动设为 aria-live。"
+  ],
+  "rules": [
+    "放大镜图标由 CSS 绘制，不要再手写图标。",
+    "每次输入都重新调用 Riko.highlight(root, query)，它会先清除上一次的高亮。",
+    "页面上有多个搜索框时，只给主搜索框保留快捷键，其余写 data-riko-hotkey=\"none\"。"
+  ],
+  "avoid": [
+    "不要给 input 再加 riko-input 类。",
+    "不要自己用 innerHTML 替换文本来高亮（会破坏事件与结构），用 Riko.highlight()。"
+  ],
+  "examples": [
+    {
+      "title": "基础用法",
+      "html": "<div class=\"riko-search\" data-riko=\"search\">\n  <input class=\"riko-search__input\" type=\"search\" placeholder=\"搜索小说内容，例如：星星酥\" aria-label=\"搜索小说内容\">\n  <kbd class=\"riko-search__hint\">/</kbd>\n</div>"
+    },
+    {
+      "title": "尺寸",
+      "html": "<div class=\"riko-stack\">\n  <div class=\"riko-search riko-search--sm\" data-riko=\"search\" data-riko-hotkey=\"none\">\n    <input class=\"riko-search__input\" type=\"search\" placeholder=\"小号搜索\" aria-label=\"小号搜索\">\n  </div>\n  <div class=\"riko-search riko-search--lg riko-search--block\" data-riko=\"search\" data-riko-hotkey=\"none\">\n    <input class=\"riko-search__input\" type=\"search\" placeholder=\"占满一行的大号搜索\" aria-label=\"大号搜索\">\n  </div>\n</div>"
+    },
+    {
+      "title": "搜索并高亮",
+      "html": "<div class=\"riko-search\" data-riko=\"search\" data-riko-hotkey=\"none\" id=\"story-search\">\n  <input class=\"riko-search__input\" type=\"search\" placeholder=\"在下面的段落里搜索…\" aria-label=\"搜索段落\">\n  <span class=\"riko-search__count\"></span>\n  <span class=\"riko-search__nav\">\n    <button type=\"button\" class=\"riko-search__btn\" data-step=\"prev\" aria-label=\"上一处\"></button>\n    <button type=\"button\" class=\"riko-search__btn\" data-step=\"next\" aria-label=\"下一处\"></button>\n  </span>\n</div>\n<div class=\"riko-prose riko-prose--read\" id=\"story\">…正文…</div>\n\n<script>\n  const box = document.getElementById('story-search');\n  let hl = null;\n  box.addEventListener('riko:search:input', e => {\n    hl = Riko.highlight('#story', e.detail.query);\n    hl.next();\n    box.riko.setResult(e.detail.query ? { current: hl.index + 1, total: hl.count } : null);\n  });\n  box.addEventListener('riko:search:step', e => {\n    if (!hl || !hl.count) return;\n    e.detail.dir > 0 ? hl.next() : hl.prev();\n    box.riko.setResult({ current: hl.index + 1, total: hl.count });\n  });\n</script>"
+    }
+  ],
+  "requires": [
+    {
+      "selector": ".riko-search",
+      "has": ".riko-search__input",
+      "message": "riko-search 内需要 input.riko-search__input"
+    },
+    {
+      "selector": ".riko-search__input",
+      "attr": "aria-label|aria-labelledby|id",
+      "message": "搜索输入框需要 aria-label"
+    },
+    {
+      "selector": ".riko-search__btn",
+      "attr": "data-step",
+      "message": "riko-search__btn 需要 data-step=\"prev\" 或 \"next\""
+    }
+  ],
+  "related": [
+    "combobox",
+    "input",
+    "typography"
+  ]
+}

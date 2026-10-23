@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>表单 · Riko UI</title>
+<meta name="theme-color" content="#FBF5EA">
+<script src="packages/core/dist/riko-theme-init.js"></script>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="packages/core/dist/riko-ui.css">
+<link rel="stylesheet" href="assets/docs.css">
+</head>
+<body class="riko-plaid">
+<div class="riko-glow" aria-hidden="true"></div>
+
+<header class="docs-header">
+  <div class="docs-header__inner">
+    <button type="button" class="riko-btn riko-btn--icon riko-btn--ghost docs-menu-btn" aria-label="打开导航"><i data-lucide="menu"></i></button>
+    <a class="docs-brand" href="index.html">
+      <span class="docs-brand__mark"><span class="riko-star" aria-hidden="true"></span></span>
+      <span><span class="docs-brand__name">Riko UI</span><span class="docs-brand__sub">little star ui kit</span></span>
+    </a>
+    <span class="docs-header__spacer"></span>
+    <div class="riko-theme-picker riko-theme-picker--compact" data-riko="theme-picker"></div>
+  </div>
+</header>
+
+<div class="docs-layout">
+  <aside class="docs-sidebar" aria-label="文档导航"></aside>
+  <main class="docs-main">
+    <div class="docs-hero">
+      <h1>表单</h1>
+      <p>输入框、选择器、复选框、开关……全部基于原生控件美化，键盘与读屏开箱即用；配合 riko-field 自动处理标签、提示与错误。</p>
+    </div>
+
+    <section class="docs-section" id="input">
+      <h2>输入框 <small>Input</small></h2>
+      <p>单行文本输入，统一美化 text / email / password / number / date / time / color / file 等原生类型。</p>
+      <h3>基础</h3>
+      <div class="docs-demo">
+        <input class="riko-input" type="text" placeholder="给你的画起个名字吧…" aria-label="画作名称">
+      </div>
+      <h3>尺寸与形状</h3>
+      <div class="docs-demo">
+        <div class="riko-stack riko-stack--sm">
+          <input class="riko-input riko-input--sm" type="text" placeholder="小号输入框" aria-label="小号">
+          <input class="riko-input" type="text" placeholder="默认输入框" aria-label="默认">
+          <input class="riko-input riko-input--lg" type="text" placeholder="大号输入框" aria-label="大号">
+          <input class="riko-input riko-input--round" type="search" placeholder="胶囊搜索框" aria-label="搜索">
+        </div>
+      </div>
+      <h3>状态</h3>
+      <div class="docs-demo">
+        <div class="riko-stack riko-stack--sm">
+          <input class="riko-input" type="email" value="riko@bloret" aria-invalid="true" aria-label="邮箱">
+          <input class="riko-input" type="text" value="只读：百络谷" readonly aria-label="只读">
+          <input class="riko-input" type="text" placeholder="不可用" disabled aria-label="不可用">
+        </div>
+      </div>
+      <h3>原生类型</h3>
+      <div class="docs-demo">
+        <div class="riko-grid riko-grid--sm">
+          <input class="riko-input" type="date" aria-label="日期">
+          <input class="riko-input" type="time" value="08:00" aria-label="时间">
+          <input class="riko-input" type="number" value="76" min="1" aria-label="章节号">
+          <input class="riko-input" type="password" value="starcake" aria-label="密码">
+          <input class="riko-input" type="color" value="#F2994A" aria-label="颜色">
+          <input class="riko-input" type="file" aria-label="上传画稿">
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="textarea">
+      <h2>多行文本 <small>Textarea</small></h2>
+      <p>多行输入，可自动增高，也有横线信纸外观。 加 <code class="riko-code">data-riko="autosize"</code> 后随内容自动长高，可用 <code class="riko-code">data-riko-max-rows</code> 限制最大行数。</p>
+      <h3>基础</h3>
+      <div class="docs-demo">
+        <textarea class="riko-textarea" rows="3" placeholder="写下今天的冒险日记…" aria-label="日记"></textarea>
+      </div>
+      <h3>自动增高</h3>
+      <div class="docs-demo">
+        <textarea class="riko-textarea" data-riko="autosize" data-riko-max-rows="8" rows="2" placeholder="越写越长也没关系，会自己长高哦" aria-label="留言"></textarea>
+      </div>
+      <h3>信纸外观</h3>
+      <div class="docs-demo">
+        <textarea class="riko-textarea riko-textarea--notebook" rows="4" aria-label="信纸">亲爱的 Star：
+        今天的晚霞像橘子汽水一样。</textarea>
+      </div>
+    </section>
+    <section class="docs-section" id="select">
+      <h2>下拉选择 <small>Select</small></h2>
+      <p>美化后的原生 &lt;select&gt;，支持分组、多选列表。</p>
+      <h3>基础</h3>
+      <div class="docs-demo">
+        <select class="riko-select" aria-label="喜欢的角色">
+          <option>络可</option>
+          <option>Star</option>
+          <option>111</option>
+          <option disabled>神秘人（未解锁）</option>
+        </select>
+      </div>
+      <h3>分组与尺寸</h3>
+      <div class="docs-demo">
+        <div class="riko-stack riko-stack--sm">
+          <select class="riko-select riko-select--sm" aria-label="章节">
+            <optgroup label="序章">
+              <option>沙滩上的画家</option>
+              <option>世界的边缘</option>
+            </optgroup>
+            <optgroup label="第一章">
+              <option>晨会上的沉重决议</option>
+            </optgroup>
+          </select>
+          <select class="riko-select riko-select--lg" aria-label="字号">
+            <option>大字号阅读</option>
+          </select>
+        </div>
+      </div>
+      <h3>多选列表</h3>
+      <div class="docs-demo">
+        <select class="riko-select" multiple aria-label="标签">
+          <option selected>温馨</option>
+          <option>冒险</option>
+          <option selected>治愈</option>
+          <option>悬疑</option>
+        </select>
+      </div>
+    </section>
+    <section class="docs-section" id="field">
+      <h2>表单项 <small>Field</small></h2>
+      <p>标签 + 控件 + 提示 / 错误 / 字数计数的标准组合，JS 自动处理无障碍关联。 加 <code class="riko-code">data-riko="field"</code> 后，提示、错误和计数会自动用 aria-describedby 关联到控件；错误信息显示时控件自动标记为 aria-invalid。</p>
+      <h3>标签 + 提示</h3>
+      <div class="docs-demo">
+        <div class="riko-field" data-riko="field">
+          <label class="riko-field__label" for="nickname">昵称<span class="riko-field__required" aria-hidden="true">*</span></label>
+          <input class="riko-input" id="nickname" type="text" required placeholder="例如：小星星">
+          <p class="riko-field__hint">小伙伴们会这样称呼你</p>
+        </div>
+      </div>
+      <h3>错误信息</h3>
+      <div class="docs-demo">
+        <div class="riko-field" data-riko="field">
+          <label class="riko-field__label" for="email">邮箱</label>
+          <input class="riko-input" id="email" type="email" value="riko@">
+          <p class="riko-field__error">邮箱好像少了点什么，再检查一下吧</p>
+        </div>
+      </div>
+      <h3>字数计数</h3>
+      <div class="docs-demo">
+        <div class="riko-field" data-riko="field">
+          <label class="riko-field__label" for="motto">个性签名<span class="riko-field__optional">（选填）</span></label>
+          <textarea class="riko-textarea" id="motto" rows="2" maxlength="40">平凡日子里的一颗小星星</textarea>
+          <div class="riko-field__footer">
+            <p class="riko-field__hint">最多 40 个字</p>
+            <p class="riko-field__counter"></p>
+          </div>
+        </div>
+      </div>
+      <h3>横向标签</h3>
+      <div class="docs-demo">
+        <div class="riko-field riko-field--inline" data-riko="field">
+          <label class="riko-field__label" for="village">所在村庄</label>
+          <input class="riko-input" id="village" type="text" value="HV 村">
+          <p class="riko-field__hint">将显示在你的个人卡片上</p>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="input-group">
+      <h2>输入组 <small>Input Group</small></h2>
+      <p>给输入框加前后缀文字、图标或内嵌按钮，整体一个边框。</p>
+      <h3>前后缀</h3>
+      <div class="docs-demo">
+        <div class="riko-input-group">
+          <span class="riko-input-group__addon">https://</span>
+          <input class="riko-input" type="text" value="riko.land" aria-label="网址">
+          <span class="riko-input-group__addon">.com</span>
+        </div>
+      </div>
+      <h3>图标与按钮</h3>
+      <div class="docs-demo">
+        <div class="riko-input-group riko-input-group--round">
+          <span class="riko-input-group__icon"><i data-lucide="search"></i></span>
+          <input class="riko-input" type="search" placeholder="搜索小说内容…" aria-label="搜索小说内容">
+          <button type="button" class="riko-btn riko-btn--primary riko-btn--sm">搜索</button>
+        </div>
+      </div>
+      <h3>密码显示/隐藏</h3>
+      <div class="docs-demo">
+        <div class="riko-input-group">
+          <span class="riko-input-group__icon"><i data-lucide="lock"></i></span>
+          <input class="riko-input" id="password" type="password" value="star-cake-2026" aria-label="密码">
+          <button type="button" class="riko-btn riko-btn--ghost riko-btn--icon" data-riko="password-toggle" aria-label="显示密码"></button>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="checkbox">
+      <h2>复选框 <small>Checkbox</small></h2>
+      <p>原生 checkbox 美化：勾选时橙色小方块弹出对勾，支持半选与卡片样式。 半选状态只能用 JS 设置：<code class="riko-code">input.indeterminate = true</code>。</p>
+      <h3>基础</h3>
+      <div class="docs-demo">
+        <div class="riko-stack riko-stack--sm">
+          <label class="riko-checkbox"><input type="checkbox" name="snack" checked> 星星酥</label>
+          <label class="riko-checkbox"><input type="checkbox" name="snack"> 橘子汽水</label>
+          <label class="riko-checkbox"><input type="checkbox" name="snack" disabled> 神秘点心（售罄）</label>
+        </div>
+      </div>
+      <h3>带说明与半选</h3>
+      <div class="docs-demo">
+        <div class="riko-stack riko-stack--sm">
+          <label class="riko-checkbox"><input type="checkbox" id="all-chapters"><span class="riko-checkbox__text">全部章节<span class="riko-checkbox__desc">已选择部分章节（半选状态由 JS 设置 indeterminate）</span></span></label>
+          <label class="riko-checkbox riko-checkbox--sm"><input type="checkbox" checked> 小号复选框</label>
+          <label class="riko-checkbox riko-checkbox--lg"><input type="checkbox"> 大号复选框</label>
+        </div>
+      </div>
+      <h3>卡片</h3>
+      <div class="docs-demo">
+        <div class="riko-grid riko-grid--sm">
+          <label class="riko-checkbox riko-checkbox--card"><input type="checkbox" checked><span class="riko-checkbox__text">更新提醒<span class="riko-checkbox__desc">新章节发布时通知我</span></span></label>
+          <label class="riko-checkbox riko-checkbox--card"><input type="checkbox"><span class="riko-checkbox__text">设定集剧透<span class="riko-checkbox__desc">显示尚未出现的设定</span></span></label>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="radio">
+      <h2>单选框 <small>Radio</small></h2>
+      <p>原生 radio 美化：选中时中心弹出一颗橙色小星星，支持卡片样式。</p>
+      <h3>基础</h3>
+      <div class="docs-demo">
+        <fieldset class="riko-fieldset riko-fieldset--inline">
+          <legend class="riko-fieldset__legend">下午茶</legend>
+          <label class="riko-radio"><input type="radio" name="tea" value="black" checked> 热红茶</label>
+          <label class="riko-radio"><input type="radio" name="tea" value="milk"> 牛奶</label>
+          <label class="riko-radio"><input type="radio" name="tea" value="soda" disabled> 汽水（喝完啦）</label>
+        </fieldset>
+      </div>
+      <h3>卡片</h3>
+      <div class="docs-demo">
+        <fieldset class="riko-fieldset">
+          <legend class="riko-fieldset__legend">阅读方式</legend>
+          <div class="riko-grid riko-grid--sm">
+            <label class="riko-radio riko-radio--card"><input type="radio" name="read-mode" value="scroll" checked><span class="riko-radio__text">连续滚动<span class="riko-radio__desc">像展开一卷长长的画</span></span></label>
+            <label class="riko-radio riko-radio--card"><input type="radio" name="read-mode" value="page"><span class="riko-radio__text">分页翻阅<span class="riko-radio__desc">一页一页慢慢看</span></span></label>
+          </div>
+        </fieldset>
+      </div>
+    </section>
+    <section class="docs-section" id="switch">
+      <h2>开关 <small>Switch</small></h2>
+      <p>立即生效的开/关设置，打开时圆钮里出现一颗小星星。</p>
+      <h3>基础</h3>
+      <div class="docs-demo">
+        <div class="riko-stack riko-stack--sm">
+          <label class="riko-switch"><input type="checkbox" role="switch" checked> 新章节提醒</label>
+          <label class="riko-switch"><input type="checkbox" role="switch"> 夜间护眼</label>
+          <label class="riko-switch"><input type="checkbox" role="switch" disabled> 自动翻页（即将推出）</label>
+        </div>
+      </div>
+      <h3>尺寸</h3>
+      <div class="docs-demo">
+        <div class="riko-cluster riko-cluster--lg">
+          <label class="riko-switch riko-switch--sm"><input type="checkbox" role="switch" checked> 小号</label>
+          <label class="riko-switch"><input type="checkbox" role="switch" checked> 默认</label>
+          <label class="riko-switch riko-switch--lg"><input type="checkbox" role="switch" checked> 大号</label>
+        </div>
+      </div>
+      <h3>设置列表</h3>
+      <div class="docs-demo">
+        <div class="riko-stack">
+          <label class="riko-switch riko-switch--end"><input type="checkbox" role="switch" checked><span class="riko-switch__text">漂浮星星<span class="riko-switch__desc">在页面背景中显示闪烁的小星星</span></span></label>
+          <label class="riko-switch riko-switch--end"><input type="checkbox" role="switch"><span class="riko-switch__text">减少动画<span class="riko-switch__desc">关闭回弹与淡入效果</span></span></label>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="segmented">
+      <h2>分段选择 <small>Segmented Control</small></h2>
+      <p>胶囊形的单选按钮组，选中项橙色并带回弹动画。</p>
+      <h3>基础</h3>
+      <div class="docs-demo">
+        <div class="riko-segmented" role="radiogroup" aria-label="外观">
+          <label class="riko-segmented__item"><input type="radio" name="look" value="day" checked><i data-lucide="sun"></i>白天</label>
+          <label class="riko-segmented__item"><input type="radio" name="look" value="dusk"><i data-lucide="sunset"></i>黄昏</label>
+          <label class="riko-segmented__item"><input type="radio" name="look" value="night"><i data-lucide="moon"></i>夜晚</label>
+        </div>
+      </div>
+      <h3>尺寸与色调</h3>
+      <div class="docs-demo">
+        <div class="riko-stack riko-stack--sm">
+          <div class="riko-segmented riko-segmented--sm riko-segmented--ice" role="radiogroup" aria-label="字号">
+            <label class="riko-segmented__item"><input type="radio" name="size" value="s">小</label>
+            <label class="riko-segmented__item"><input type="radio" name="size" value="m" checked>中</label>
+            <label class="riko-segmented__item"><input type="radio" name="size" value="l">大</label>
+          </div>
+          <div class="riko-segmented riko-segmented--block" role="radiogroup" aria-label="排序">
+            <label class="riko-segmented__item"><input type="radio" name="order" value="new" checked>最新</label>
+            <label class="riko-segmented__item"><input type="radio" name="order" value="hot">最热</label>
+            <label class="riko-segmented__item"><input type="radio" name="order" value="old" disabled>最早</label>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="range">
+      <h2>滑块 <small>Range</small></h2>
+      <p>美化的原生滑块：已选段为暖橙色，可同步显示数值。</p>
+      <h3>基础</h3>
+      <div class="docs-demo">
+        <input class="riko-range" type="range" min="0" max="100" value="40" data-riko="range" aria-label="背景音乐音量">
+      </div>
+      <h3>显示数值</h3>
+      <div class="docs-demo">
+        <div class="riko-field">
+          <div class="riko-cluster riko-cluster--between">
+            <label class="riko-field__label" for="font-size">正文字号</label>
+            <output class="riko-output" for="font-size">18px</output>
+          </div>
+          <input class="riko-range" id="font-size" type="range" min="14" max="26" value="18" data-riko="range" data-riko-suffix="px">
+        </div>
+      </div>
+      <h3>小号与冰蓝</h3>
+      <div class="docs-demo">
+        <div class="riko-stack">
+          <input class="riko-range riko-range--sm" type="range" value="70" data-riko="range" aria-label="亮度">
+          <input class="riko-range riko-range--ice" type="range" value="25" data-riko="range" aria-label="海浪声">
+          <input class="riko-range" type="range" value="50" disabled data-riko="range" aria-label="不可调节">
+        </div>
+      </div>
+    </section>
+    <section class="docs-section" id="fieldset">
+      <h2>字段组 <small>Fieldset</small></h2>
+      <p>用 legend 给一组相关控件起标题，可做成缝线卡片。</p>
+      <h3>基础</h3>
+      <div class="docs-demo">
+        <fieldset class="riko-fieldset">
+          <legend class="riko-fieldset__legend">喜欢的点心</legend>
+          <p class="riko-fieldset__desc">可以多选哦</p>
+          <label class="riko-checkbox"><input type="checkbox" checked> 星星酥</label>
+          <label class="riko-checkbox"><input type="checkbox"> 海盐饼干</label>
+        </fieldset>
+      </div>
+      <h3>卡片</h3>
+      <div class="docs-demo">
+        <fieldset class="riko-fieldset riko-fieldset--card">
+          <legend class="riko-fieldset__legend"><span class="riko-star" aria-hidden="true"></span>通知设置</legend>
+          <label class="riko-switch riko-switch--end"><input type="checkbox" role="switch" checked> 新章节更新</label>
+          <label class="riko-switch riko-switch--end"><input type="checkbox" role="switch"> 设定集更新</label>
+        </fieldset>
+      </div>
+    </section>
+    <section class="docs-section" id="form">
+      <h2>表单布局 <small>Form</small></h2>
+      <p>表单整体排版：纵向或两列栅格，底部操作区。</p>
+      <h3>完整表单</h3>
+      <div class="docs-demo">
+        <form class="riko-form riko-form--grid">
+          <div class="riko-field" data-riko="field">
+            <label class="riko-field__label" for="f-name">昵称<span class="riko-field__required" aria-hidden="true">*</span></label>
+            <input class="riko-input" id="f-name" type="text" required placeholder="小星星">
+          </div>
+          <div class="riko-field" data-riko="field">
+            <label class="riko-field__label" for="f-role">最喜欢的角色</label>
+            <select class="riko-select" id="f-role">
+              <option>络可</option>
+              <option>Star</option>
+            </select>
+          </div>
+          <div class="riko-field riko-form__full" data-riko="field">
+            <label class="riko-field__label" for="f-msg">想对作者说的话</label>
+            <textarea class="riko-textarea" id="f-msg" rows="3" maxlength="200" data-riko="autosize"></textarea>
+            <p class="riko-field__counter"></p>
+          </div>
+          <fieldset class="riko-fieldset riko-fieldset--inline">
+            <legend class="riko-fieldset__legend">订阅</legend>
+            <label class="riko-checkbox"><input type="checkbox" checked> 章节更新</label>
+            <label class="riko-checkbox"><input type="checkbox"> 设定集</label>
+          </fieldset>
+          <div class="riko-form__actions">
+            <button type="reset" class="riko-btn riko-btn--ghost">重置</button>
+            <button type="submit" class="riko-btn riko-btn--primary"><i data-lucide="send"></i>寄出信件</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="assets/manifest.js"></script>
+<script src="assets/docs.js"></script>
+<script src="assets/vendor/lucide.min.js"></script>
+<script src="packages/core/dist/riko-ui.js"></script>
+<script>document.getElementById('all-chapters').indeterminate = true;</script>
+</body>
+</html>
