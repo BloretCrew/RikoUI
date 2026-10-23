@@ -14,6 +14,14 @@ const FONTS = [
   ['caveat', [500, 600, 700], '手写点缀 --riko-font-hand'],
 ];
 
+// 官方版权声明（来源：https://github.com/google/fonts/tree/main/ofl/<字体>/OFL.txt）
+const COPYRIGHT = {
+  'noto-sans-sc': "Copyright 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'",
+  'noto-serif-sc': 'Copyright 2012 Google Inc. All Rights Reserved.',
+  'zcool-xiaowei': 'Copyright 2018 The ZCOOL XiaoWei Project Authors (https://www.github.com/googlefonts/xiaowei)',
+  caveat: 'Copyright 2014 The Caveat Project Authors (https://github.com/googlefonts/caveat)',
+};
+
 rmSync(join(OUT, 'files'), { recursive: true, force: true });
 mkdirSync(join(OUT, 'files'), { recursive: true });
 mkdirSync(join(OUT, 'LICENSES'), { recursive: true });
@@ -36,8 +44,13 @@ for (const [name, weights, use] of FONTS) {
       css += block.replace(/src:[^;]+;/, `src: url(./files/${woff2}) format('woff2');`) + '\n';
     }
   }
+  // 许可证：OFL 要求再分发时附带原始版权声明。Fontsource 的 LICENSE 可能只有 OFL 正文，缺失时按 google/fonts 官方 OFL.txt 补上。
   const lic = join(dir, 'LICENSE');
-  if (existsSync(lic)) copyFileSync(lic, join(OUT, 'LICENSES', `${name}.txt`));
+  if (existsSync(lic)) {
+    let text = readFileSync(lic, 'utf8');
+    if (!/^Copyright/m.test(text.split('This Font Software is licensed')[0]) && COPYRIGHT[name]) text = COPYRIGHT[name] + '\n\n' + text.trimStart();
+    writeFileSync(join(OUT, 'LICENSES', `${name}.txt`), text);
+  }
 }
 writeFileSync(join(OUT, 'riko-fonts.css'), css);
 

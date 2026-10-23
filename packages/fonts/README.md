@@ -23,4 +23,15 @@ import '@bloret-crew/riko-ui-fonts/riko-fonts.css';
 
 **修正说明**：ZCOOL XiaoWei 原版有轮廓方向缺陷，浏览器中「回」「圄」「圃」等字会显示为实心方块。本包已修正这些字形（未改动设计），详见 `LICENSES/MODIFICATIONS.txt`。
 
-许可：各字体均为 SIL Open Font License 1.1，见 `LICENSES/`。
+## 许可
+
+所有字体均为 **SIL Open Font License 1.1**：可免费商用、嵌入网页与应用、再分发和修改；唯一限制是不能单独出售字体本身，修改版需继续使用 OFL，且不得使用保留字体名。
+
+| 字体 | 版权方 | 保留字体名 | 本包是否修改 |
+|---|---|---|---|
+| ZCOOL XiaoWei | The ZCOOL XiaoWei Project Authors | 无 | 是：修正部分字形轮廓方向（见 `LICENSES/MODIFICATIONS.txt`），未改名称与设计 |
+| Noto Sans SC | Adobe | Source | 否（仅转为 woff2 分片） |
+| Noto Serif SC | Google | 无 | 否（仅转为 woff2 分片） |
+| Caveat | The Caveat Project Authors | 无 | 否（仅转为 woff2 分片） |
+
+完整许可证与版权声明见 `LICENSES/`。
